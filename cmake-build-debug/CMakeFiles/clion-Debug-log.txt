@@ -1,0 +1,5 @@
+"E:\programm\CLion 2022.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=E:/programm/CLion 2022.3/bin/ninja/win/x64/ninja.exe" -G Ninja -S E:\C++\Game\GameEngine_Brought -B E:\C++\Game\GameEngine_Brought\cmake-build-debug
+-- Found SFML 2.5.1 in E:/programm/SFML-2.5.1/lib/cmake/SFML
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/C++/Game/GameEngine_Brought/cmake-build-debug

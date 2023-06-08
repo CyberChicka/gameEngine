@@ -1,0 +1,11 @@
+
+#ifndef GAMEENGINE_BROUGHT_OBJECT_H
+#define GAMEENGINE_BROUGHT_OBJECT_H
+
+
+class Object {
+
+};
+
+
+#endif //GAMEENGINE_BROUGHT_OBJECT_H
