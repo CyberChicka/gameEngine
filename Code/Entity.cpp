@@ -18,8 +18,8 @@ Entity::Entity(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std
     name = Name;
 }
 Entity::~Entity() {
+    cout << "============== removed from entity ============"<< endl;
     delete gameLvL;
     delete s;
     delete e_Radius; //
-    cout << "============== removed from entity ============"<< endl;
 }

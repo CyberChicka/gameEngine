@@ -7,7 +7,7 @@
 
 class Player: public Entity{
 public:
-    bool isAttack, isBlock, isSprint, isRun;
+    bool isAttack, isBlock, isSprint, isRun, isJump;
     int lvl_player;
     int SprintTime;
     enum class AnimationIndex{RunL, RunR,

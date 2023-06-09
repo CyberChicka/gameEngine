@@ -16,9 +16,9 @@ m_Music::m_Music(string f) {
     setVolume();
 }
 m_Music::~m_Music() {
+    cout << "============== removed from music ============"<< endl;
     delete music;
     delete fin;
-    cout << "============== removed from music ============"<< endl;
 }
 
 void m_Music::play() {

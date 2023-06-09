@@ -9,6 +9,7 @@ CreateImage::CreateImage(string f) {
     Load();
 }
 CreateImage::~CreateImage() {
+    cout << "============== removed from Image ============"<< endl;
     delete s;
     delete t;
 }

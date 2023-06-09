@@ -10,6 +10,7 @@ Enemy::Enemy(Sprite *sprite, GameLvL *LvL,  float X, float Y, int W, int H, stri
     initAnim();
 }
 Enemy::~Enemy() {
+    cout << "============== removed from enemy ============"<< endl;
     delete this->gameLvL;
     delete this->s;
     delete this->e_Radius;

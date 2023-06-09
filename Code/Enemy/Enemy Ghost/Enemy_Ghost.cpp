@@ -12,10 +12,10 @@ Enemy_Ghost::Enemy_Ghost(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, 
     this->initAnim();
 }
 Enemy_Ghost::~Enemy_Ghost() {
+    cout << "============== removed from enemy_ghost ============"<< endl;
     delete this->gameLvL;
     delete this->s;
     delete this->e_Radius;
-    cout << "============== removed from enemy_ghost ============"<< endl;
 }
 
 FloatRect Enemy_Ghost::getRect(){ return FloatRect (this->position.x, this->position.y, this->w, this->h); }

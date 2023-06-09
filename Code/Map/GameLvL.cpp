@@ -10,9 +10,9 @@ GameLvL::GameLvL(sf::Sprite *sprite, int GameLvL) {
     this->initMap();
 }
 GameLvL::~GameLvL() {
+    cout << "============== removed from map lvl ============"<< endl;
     delete this->s;
     delete this->MapLvL;
-    cout << "============== removed from map lvl ============"<< endl;
 }
 
 void GameLvL::initMap() {

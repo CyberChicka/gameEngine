@@ -9,6 +9,7 @@ Enemy_Skeleton::Enemy_Skeleton(Sprite *sprite, GameLvL *LvL, float X, float Y, i
     initAnim();
 }
 Enemy_Skeleton::~Enemy_Skeleton() {
+    cout << "============== removed from enemy_skeleton ============"<< endl;
     delete this->gameLvL;
     delete s;
 }

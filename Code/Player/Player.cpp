@@ -13,10 +13,10 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->initAnim();
 }
 Player::~Player() {
+    cout << "============== removed from player ============"<< endl;
     delete this->gameLvL;
     delete this->s;
     delete this->e_Radius;
-    cout << "============== removed from player ============"<< endl;
 }
 FloatRect Player::getRect() {
     return FloatRect(this->position.x, this->position.y, this->w, this->h);
@@ -45,6 +45,11 @@ void Player::animation(float time) {
             else if(this->state == left) this->curAnimation = AnimationIndex::WalkingL;
             else this->curAnimation = AnimationIndex::WalkingR;
         }
+//        if(this->isJump){
+//            if(this->state == right) this->curAnimation = AnimationIndex::JumpR;
+//            else if(this->state == left) this->curAnimation = AnimationIndex::JumpL;
+//            else this->curAnimation = AnimationIndex::JumpR;
+//        }
         if(!this->onGround && !this->isAttack){
             if(this->state == right) this->curAnimation = AnimationIndex::JumpR;
             else if(this->state == left) this->curAnimation = AnimationIndex::JumpL;
@@ -75,6 +80,7 @@ void Player::initAnim() {
 void Player::ControlMove() {
     if(this->life){
         this->stop = true; this->isBlock = false; this->isAttack = false; this->isRun = false; //this->isJump = false;
+        this->isJump = false;
         if(Mouse::isButtonPressed(Mouse::Right)){ this->isBlock = true; this->stop = false; this->speed = 0; }
         else{
             if(Mouse::isButtonPressed(Mouse::Left)){ isAttack = true; stop = false; speed = 0;}
@@ -86,9 +92,15 @@ void Player::ControlMove() {
                     this->state = SLeft;  this->stop = false; this->SprintTime = 0;
                 }
                 else{
-                    if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){ this->state = left; this->speed = 0.26; this->isRun = true; this->stop = false; }
-                    if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){ this->state = right; this->speed = 0.26; this->isRun = true; this->stop = false; }
-                    if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){ this->state = jump; this->dy -= 0.65; this->onGround = false; this->stop = false; }
+                    if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
+                        this->state = left; this->speed = 0.26; this->isRun = true; this->stop = false;
+                    }
+                    if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
+                        this->state = right; this->speed = 0.26; this->isRun = true; this->stop = false;
+                    }
+                    if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
+                        this->isJump = true; this->dy -= 0.65; this->onGround = false; this->stop = false;
+                    }
                 }
             }
         }
@@ -103,7 +115,6 @@ void Player::move() {
             case right: this->dx = this->speed; break;
             case SLeft: this->position.x -= 150; break;
             case SRight: this->position.x += 150; break;
-            case jump: this->speed = 0;break;
             case stay: this->dx = 0; this->dy = 0; this->speed = 0;break;
         }
         this->speed = 0;

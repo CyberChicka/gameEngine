@@ -15,9 +15,6 @@ GameEngine::~GameEngine() {
     delete Config::getInstance(); // очищаем память
     delete player; // очищаем память
     delete gameLvL; // очищаем память
-    for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
-        enemyLvL1.erase(itEnemy); // очищаем память
-    }
 }
 bool GameEngine::isRunning(){
     if (window == nullptr){cout << "\n Error Windows \n"; return false;}

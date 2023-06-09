@@ -16,10 +16,10 @@ s_Sound::s_Sound(string f){
     setVolume();
 }
 s_Sound::~s_Sound() {
+    cout << "============== removed from sound ============"<< endl;
     delete s_buffer;
     delete sound;
     delete fin;
-    cout << "============== removed from sound ============"<< endl;
 }
 
 void s_Sound::setVolume() {
