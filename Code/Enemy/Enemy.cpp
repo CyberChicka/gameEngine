@@ -22,9 +22,7 @@ void Enemy::ControlMove() { }
 void Enemy::ControlEnemy(float pX, float pY, float time) {
 
 }
-void Enemy::move() {
-
-}
+void Enemy::move() { }
 
 void Enemy::update(float time, Player *p) {}
 

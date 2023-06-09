@@ -6,5 +6,5 @@ int main()
 //    mainMenu.show();
     GameEngine game;
     game.run();
-    return -2;
+    return 0;
 }

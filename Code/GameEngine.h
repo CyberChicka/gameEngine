@@ -21,7 +21,6 @@ public:
 private:
     RenderWindow *window;
     //Game
-    bool isGame;
     float game_time = 0;
     Clock clock;
     Config *config = Config::getInstance();

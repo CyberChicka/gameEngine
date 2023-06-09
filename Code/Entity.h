@@ -20,9 +20,6 @@ public:
     Entity(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~Entity();
     virtual FloatRect getRect() = 0;
-    void move();
-    void ControlMove();
-    void update(float time);
     virtual void animation(float time) = 0;
     virtual void initAnim() = 0;
     virtual void draw(RenderWindow &window) = 0;

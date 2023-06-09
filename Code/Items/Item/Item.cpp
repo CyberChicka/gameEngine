@@ -42,6 +42,7 @@ bool Item::isTake(Player &player){
         if(this->name == "SilverKey"){ player.k_Silver++; return true; }
         if(this->name == "GoldKey"){ player.k_Gold++; return true; }
     }
+    return false;
 }
 
 void Item::update(float time) {

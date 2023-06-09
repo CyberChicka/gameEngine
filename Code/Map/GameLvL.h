@@ -16,7 +16,6 @@ public:
     void setSprite(Sprite *sprite);
     void RenderDraw(RenderWindow &window);
     void initMap();
-
     static const int h_Block = 32;
     static const int w_Block = 32;
     static const int WitchMap = 343;

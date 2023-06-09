@@ -1,6 +1,6 @@
 //
 // Created by Doni on 15.05.2023.
-//
+
 #include "GameEngine.h"
 
 GameEngine::GameEngine() {
@@ -132,7 +132,7 @@ void GameEngine::initText() {
 
 void GameEngine::run() {
     while (isRunning()){
-        render();
         update();
+        render();
     }
 }
