@@ -8,6 +8,7 @@
 #include "Enemy/Enemy Ghost/Enemy_Ghost.h"
 #include "Enemy/Enemy Scelet/Enemy_Scelet.h"
 #include "Map/GameLvL.h"
+#include "Items/Item.h"
 
 using namespace sf;
 using namespace std;
@@ -20,7 +21,7 @@ public:
     void run();
 private:
     RenderWindow *window;
-    //Game
+    //Gam
     float game_time = 0;
     Clock clock;
     Config *config = Config::getInstance();
@@ -30,6 +31,11 @@ private:
     // Class Enemy
     list<Enemy*>::iterator itEnemy;
     list<Enemy*> enemyLvL1;
+    //Class Item
+    list<Item*>::iterator itItem;
+    list<Item*> itemLvL1;
+    //Class Object
+
     // Map
     GameLvL *gameLvL;
     void update();
