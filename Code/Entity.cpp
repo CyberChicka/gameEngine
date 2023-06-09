@@ -8,7 +8,8 @@ Entity::Entity(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std
     position.y = Y;
     dy = 0; dx = 0;
     w = W; h = H;
-    s = sprite;
+    s = new Sprite(*sprite);
+    e_Radius = new RectangleShape;
     gameLvL = new GameLvL(*LvL);
     s->setTextureRect(IntRect(0, 0, w, h));
     life = true;
