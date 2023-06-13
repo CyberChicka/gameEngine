@@ -83,6 +83,7 @@ void GameEngine::pollEvents() {
         if(game_event.type == Event::KeyPressed){
             if(game_event.key.code == Keyboard::P){
                 gameLvL = new GameLvL(config->s_LvL1->s, 2);
+                player->gameLvL = gameLvL;
             }
         }
     }

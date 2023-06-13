@@ -140,8 +140,8 @@ void GameLvL::RenderDraw(sf::RenderWindow &window, View view) {
     if(this->gameLvL == 1){
         for (int i = 0; i < this->HeightMap; i++)
             for (int j = 0; j < this->WitchMap; j++) {
-                this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
                 this->s->setPosition(j * 32, i * 32);
+                this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
                 if(this->dist < window.getSize().x){
                     switch (this->MapLvL[i][j]) {
                         case ' ':this->s->setTextureRect(IntRect(270, 0, w_Block, h_Block)); break;
@@ -160,18 +160,22 @@ void GameLvL::RenderDraw(sf::RenderWindow &window, View view) {
     else if(this->gameLvL == 2){
         for (int i = 0; i < this->HeightMap2; i++)
             for (int j = 0; j < this->WitchMap2; j++) {
-                switch (this->MapLvL[i][j]) {
-                    case ' ':this->s->setTextureRect(IntRect(270, 0, w_Block, h_Block)); break;
-                    case '=':this->s->setTextureRect(IntRect(68, 0, w_Block, h_Block));break;
-                    case '}':this->s->setTextureRect(IntRect(101, 0, w_Block, h_Block)); break;
-                    case '{':this->s->setTextureRect(IntRect(34, 0, w_Block, h_Block)); break;
-                    case '<':this->s->setTextureRect(IntRect(133, 0, w_Block, h_Block)); break;
-                    case '.':this->s->setTextureRect(IntRect(164, 0, w_Block, h_Block)); break;
-                    case '>':this->s->setTextureRect(IntRect(196, 0, w_Block, h_Block));break;
-                    case '-':this->s->setTextureRect(IntRect(230, 0, w_Block, h_Block));break;
-                }
+                this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
                 this->s->setPosition(j * 32, i * 32);
-                window.draw(*this->s);
+                if(this->dist < window.getSize().x){
+
+                    switch (this->MapLvL[i][j]) {
+                        case ' ':this->s->setTextureRect(IntRect(270, 0, w_Block, h_Block)); break;
+                        case '=':this->s->setTextureRect(IntRect(68, 0, w_Block, h_Block));break;
+                        case '}':this->s->setTextureRect(IntRect(101, 0, w_Block, h_Block)); break;
+                        case '{':this->s->setTextureRect(IntRect(34, 0, w_Block, h_Block)); break;
+                        case '<':this->s->setTextureRect(IntRect(133, 0, w_Block, h_Block)); break;
+                        case '.':this->s->setTextureRect(IntRect(164, 0, w_Block, h_Block)); break;
+                        case '>':this->s->setTextureRect(IntRect(196, 0, w_Block, h_Block));break;
+                        case '-':this->s->setTextureRect(IntRect(230, 0, w_Block, h_Block));break;
+                    }
+                    window.draw(*this->s);
+                }
             }
     }
     else if(this->gameLvL == 3){
