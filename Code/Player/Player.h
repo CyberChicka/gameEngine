@@ -3,6 +3,7 @@
 #include "../Entity.h"
 #include "../Map/GameLvL.h"
 #include "../ Animation/Animation.h"
+#include "../Utils.h"
 
 
 class Player: public Entity{
@@ -10,6 +11,7 @@ public:
     bool isAttack, isBlock, isSprint, isRun, isJump;
     int lvl_player;
     int SprintTime;
+    char cell;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,
             AttackL, AttackR,
@@ -26,7 +28,7 @@ public:
     void animation(float time)override;
     void initAnim()override;
     void checkCollisionMap(float dX, float dY)override;
-    void setPositon(float x, float y);
+    void setPosition(float x, float y);
     float GetX()override;
     float GetY()override;
 private:

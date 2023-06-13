@@ -1,0 +1,14 @@
+//
+// Created by Doni on 09.06.2023.
+//
+
+#ifndef GAMEENGINE_BROUGHT_EQUIPMENT_ITEM_H
+#define GAMEENGINE_BROUGHT_EQUIPMENT_ITEM_H
+
+
+class equipment_item {
+
+};
+
+
+#endif //GAMEENGINE_BROUGHT_EQUIPMENT_ITEM_H

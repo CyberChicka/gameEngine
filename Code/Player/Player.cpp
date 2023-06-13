@@ -124,7 +124,7 @@ void Player::move() {
 float Player::GetX() { return this->position.x; }
 float Player::GetY() { return this->position.y; }
 
-void Player::setPositon(float x, float y) {
+void Player::setPosition(float x, float y) {
     this->position.x = x;
     this->position.y = y;
 }
@@ -139,8 +139,12 @@ void Player::update(float time) {
     if(this->SprintTime > 3500)this->isSprint = true;
     else this->isSprint = false;
     //position
-    this->position.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time; this->checkCollisionMap(0.f, this->dy);
+    this->position.x += this->dx * time;
+    this->checkCollisionMap(this->dx, 0.f);
+
+    this->position.y += this->dy * time;
+    this->checkCollisionMap(0.f, this->dy);
+
     this->dy+=0.0015*time;
     if(!this->isAttack)this->s->setPosition(this->position);
     // life
@@ -152,10 +156,14 @@ void Player::draw(sf::RenderWindow &window){
 void Player::checkCollisionMap(float dX, float dY) {
     for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++)
         for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++){
-            if(this->gameLvL->MapLvL[i][j] == '=' || this->gameLvL->MapLvL[i][j] == '.' || this->gameLvL->MapLvL[i][j] == '-' || this->gameLvL->MapLvL[i][j] == '<' ||
-            this->gameLvL->MapLvL[i][j] == '>' || this->gameLvL->MapLvL[i][j] == '{' || this->gameLvL->MapLvL[i][j] == '}')
+            cell = this->gameLvL->MapLvL[i][j];
+            if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
-                if (dY>0){ this->position.y = i * 32 - h;  this->dy = 0; this->onGround = true;}
+                if (dY>0){
+                    this->position.y = i * 32 - h;
+                    this->dy = 0;
+                    this->onGround = true;
+                }
                 if (dY<0){ this->position.y = i * 32 + 32;  this->dy = 0;}
                 if (dX>0){ this->position.x = j * 32 - w; }
                 if (dX<0){ this->position.x = j * 32 + 32;}

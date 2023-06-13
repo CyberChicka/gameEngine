@@ -40,7 +40,7 @@ void GameEngine::update() {
 void GameEngine::render(){ // Рендер изображения
     window->clear(Color::Cyan); // очищаем окно
     window->setView(config->view); // привязываем окно к камере
-    gameLvL->RenderDraw(*window); // Рисуем карту
+    gameLvL->RenderDraw(*window, config->view); // Рисуем карту
 
     player->draw(*window); // Выводим картинку игрока
     for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){ (*itEnemy)->draw(*window); }

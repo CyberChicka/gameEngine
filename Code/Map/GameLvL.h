@@ -10,11 +10,11 @@ class GameLvL {
 private:
 public:
     Sprite *s;
-    int gameLvL;
+    int gameLvL, dist;
     GameLvL(Sprite *sprite, int GameLvL);
     ~GameLvL();
     void setSprite(Sprite *sprite);
-    void RenderDraw(RenderWindow &window);
+    void RenderDraw(RenderWindow &window, View view);
     void initMap();
     static const int h_Block = 32;
     static const int w_Block = 32;
