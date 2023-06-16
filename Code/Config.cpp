@@ -19,7 +19,8 @@ Config::~Config() {
     delete m_lvl3;
 
     delete so_player_attack;
-    delete so_enemy_attack;
+    delete so_enemy_Ghost_attack;
+    delete so_enemy_Scelet_attack;
     cout << "============== removed from config ============"<< endl;
 }
 
@@ -45,18 +46,17 @@ void Config::LoadImage() {
 }
 
 void Config::LoadText() {
-
+    text_nps_history = new CreateText(" ", 20, "I, player");
 }
 
 void Config::LoadMusic() {
     m_lvl1 = new m_Music(" ");
     m_lvl2 = new m_Music(" ");
     m_lvl3 = new m_Music(" ");
-
-    so_player_attack = new s_Sound(" ");
-    so_enemy_attack = new s_Sound(" ");
 }
 
 void Config::LoadSound() {
-
+    so_player_attack = new s_Sound(" ");
+    so_enemy_Ghost_attack = new s_Sound(" ");
+    so_enemy_Scelet_attack = new s_Sound(" ");
 }
