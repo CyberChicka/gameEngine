@@ -51,3 +51,12 @@
 1018	2436	7083691151594052	GameEngine_Brought.exe	f3e4672ddfec61a3
 5	1034	7083692398353067	CMakeFiles/GameEngine_Brought.dir/Code/GameEngine.cpp.obj	1e5b897d964084
 1034	2449	7083692412445622	GameEngine_Brought.exe	f3e4672ddfec61a3
+54	1141	7086210479780304	CMakeFiles/GameEngine_Brought.dir/Code/Player/Player.cpp.obj	ede14cf482f66b24
+50	1152	7086210479899981	CMakeFiles/GameEngine_Brought.dir/main.cpp.obj	f7d542b65050f541
+6	1265	7086210481016986	CMakeFiles/GameEngine_Brought.dir/Code/GameEngine.cpp.obj	1e5b897d964084
+1142	1827	7086210486641938	CMakeFiles/GameEngine_Brought.dir/Code/Enemy/Enemy.cpp.obj	ba030144875b49e1
+1152	1833	7086210486721735	CMakeFiles/GameEngine_Brought.dir/Code/Enemy/Enemy_Ghost/Enemy_Ghost.cpp.obj	fc59e0c252eca0ca
+1265	1941	7086210487788872	CMakeFiles/GameEngine_Brought.dir/Code/Enemy/Enemy_Scelet/Enemy_Scelet.cpp.obj	efb1941820ae3c09
+1834	2465	7086210493034879	CMakeFiles/GameEngine_Brought.dir/Code/Items/Item.cpp.obj	9627541f4fd16fde
+1827	2485	7086210493234306	CMakeFiles/GameEngine_Brought.dir/Code/Config.cpp.obj	d700a3bdb54bc24a
+2485	4441	7086210512692647	GameEngine_Brought.exe	f3e4672ddfec61a3
