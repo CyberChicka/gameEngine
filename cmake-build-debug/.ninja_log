@@ -1,7 +1,11 @@
 # ninja log v5
 1152	1833	7086210486721735	CMakeFiles/GameEngine_Brought.dir/Code/Enemy/Enemy_Ghost/Enemy_Ghost.cpp.obj	fc59e0c252eca0ca
 3174	3247	7080411187278383	CMakeFiles/GameEngine_Brought.dir/Code/Items/Health/health_item.cpp.obj	3cc2e40e5e677fbb
+<<<<<<< HEAD
 1	227	7086254342382599	build.ninja	63f2dbd15b7cbbd2
+=======
+1	227	7086253456508264	build.ninja	63f2dbd15b7cbbd2
+>>>>>>> master
 625	1212	7061309221790594	CMakeFiles/GameEngine_Brought.dir/Code/Enemy.cpp.obj	456a3bfa553c174
 1142	1827	7086210486641938	CMakeFiles/GameEngine_Brought.dir/Code/Enemy/Enemy.cpp.obj	ba030144875b49e1
 50	1152	7086210479899981	CMakeFiles/GameEngine_Brought.dir/main.cpp.obj	f7d542b65050f541
