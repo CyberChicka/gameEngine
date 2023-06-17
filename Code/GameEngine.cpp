@@ -91,10 +91,41 @@ void GameEngine::pollEvents() {
             if(game_event.key.code == sf::Keyboard::Tab){
                 cout << "X - " << player->position.x <<"\n"<< "Y - " <<  player->position.y << "\n" << endl;
             }
-            if(game_event.key.code == Keyboard::P){
+            if(game_event.key.code == Keyboard::Num1){
+                gameLvL = new GameLvL(config->s_LvL1->s, 1);
+                player->setPosition(1000, 1800);
+                player->gameLvL = gameLvL;
+                cout << "LvL: 1" << endl;
+            }
+            if(game_event.key.code == Keyboard::Num2){
                 gameLvL = new GameLvL(config->s_LvL1->s, 2);
                 player->setPosition(1000, 700);
                 player->gameLvL = gameLvL;
+                cout << "LvL: 2" << endl;
+            }
+            if(game_event.key.code == Keyboard::Num3){
+                gameLvL = new GameLvL(config->s_LvL1->s, 3);
+                player->setPosition(1000, 1800);
+                player->gameLvL = gameLvL;
+                cout << "LvL: 3" << endl;
+            }
+            if(game_event.key.code == Keyboard::Num4){
+                gameLvL = new GameLvL(config->s_LvL1->s, 4);
+                player->setPosition(1000, 1800);
+                player->gameLvL = gameLvL;
+                cout << "LvL: 4" << endl;
+            }
+            if(game_event.key.code == Keyboard::Num5){
+                gameLvL = new GameLvL(config->s_LvL1->s, 5);
+                player->setPosition(1000, 1800);
+                player->gameLvL = gameLvL;
+                cout << "LvL: 5" << endl;
+            }
+            if(game_event.key.code == Keyboard::Num6){
+                gameLvL = new GameLvL(config->s_LvL1->s, 3);
+                player->setPosition(1000, 1800);
+                player->gameLvL = gameLvL;
+                cout << "LvL: 6" << endl;
             }
         }
     }

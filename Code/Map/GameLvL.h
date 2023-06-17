@@ -24,6 +24,12 @@ public:
     static const int HeightMap2 = 80;
     static const int WitchMap3 = 500;
     static const int HeightMap3 = 100;
+    static const int WitchMap4 = 320;
+    static const int HeightMap4 = 80;
+    static const int WitchMap5 = 320;
+    static const int HeightMap5 = 80;
+    static const int WitchMap6 = 320;
+    static const int HeightMap6 = 80;
     String *MapLvL = new String;
 };
 
