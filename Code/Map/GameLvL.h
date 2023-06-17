@@ -19,11 +19,11 @@ public:
     static const int h_Block = 32;
     static const int w_Block = 32;
     static const int WitchMap = 343;
-    static const int HeightMap = 30;
+    static const int HeightMap = 80;
     static const int WitchMap2 = 320;
-    static const int HeightMap2 = 50;
-    static const int WitchMap3 = 320;
-    static const int HeightMap3 = 30;
+    static const int HeightMap2 = 80;
+    static const int WitchMap3 = 500;
+    static const int HeightMap3 = 100;
     String *MapLvL = new String;
 };
 

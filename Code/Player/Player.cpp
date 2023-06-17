@@ -93,13 +93,22 @@ void Player::ControlMove() {
                 }
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
-                        this->state = left; this->speed = 0.26; this->isRun = true; this->stop = false;
+                        this->state = left;
+                        this->speed = 0.5; // speed 0.20
+                        this->isRun = true;
+                        this->stop = false;
                     }
                     if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                        this->state = right; this->speed = 0.26; this->isRun = true; this->stop = false;
+                        this->state = right;
+                        this->speed = 0.5; // speed 20
+                        this->isRun = true;
+                        this->stop = false;
                     }
                     if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
-                        this->isJump = true; this->dy -= 0.65; this->onGround = false; this->stop = false;
+                        this->isJump = true;
+                        this->dy -= 0.8; // jump 0.65
+                        this->onGround = false;
+                        this->stop = false;
                     }
                 }
             }

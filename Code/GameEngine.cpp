@@ -28,10 +28,13 @@ void GameEngine::update() {
     game_time = game_time / 800;
     // View
     config->getPlayerCoordinateForView(player->GetX(), player->GetY());
+
     // update class
     player->update(game_time);
-    for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
-        (*itEnemy)->update(game_time, player);
+    if(gameLvL->gameLvL == 1){
+        for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
+            (*itEnemy)->update(game_time, player);
+        }
     }
     // Evnet
     pollEvents();
@@ -39,11 +42,15 @@ void GameEngine::update() {
 
 void GameEngine::render(){ // Рендер изображения
     window->clear(Color::Cyan); // очищаем окно
-    window->setView(config->view); // привязываем окно к камере
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
+    window->setView(config->view); // привязываем окно к камере
 
     player->draw(*window); // Выводим картинку игрока
-    for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){ (*itEnemy)->draw(*window); }
+    if(gameLvL->gameLvL == 1){
+        for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
+            (*itEnemy)->draw(*window);
+        }
+    }
     window->display(); // создаём дисплей
 }
 
@@ -66,10 +73,10 @@ void GameEngine::initWindow() {
 void GameEngine::initClass() {
     gameLvL = new GameLvL(config->s_LvL1->s, 1);
 
-    player = new Player(config->s_player->s, gameLvL ,600, 600, 56, 60, "player");
+    player = new Player(config->s_player->s, gameLvL ,857, 1800, 56, 60, "player");
     //LvL1
     //Enemy
-    enemyLvL1.push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 700, 400, 40, 88, "Ghost"));
+    enemyLvL1.push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 700, 1800, 40, 88, "Ghost"));
 
     //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
 }
@@ -81,8 +88,12 @@ void GameEngine::pollEvents() {
             window->close();
         }
         if(game_event.type == Event::KeyPressed){
+            if(game_event.key.code == sf::Keyboard::Tab){
+                cout << "X - " << player->position.x <<"\n"<< "Y - " <<  player->position.y << "\n" << endl;
+            }
             if(game_event.key.code == Keyboard::P){
                 gameLvL = new GameLvL(config->s_LvL1->s, 2);
+                player->setPosition(1000, 700);
                 player->gameLvL = gameLvL;
             }
         }

@@ -19,9 +19,10 @@ CreateText::CreateText(string File, int Size_Text, string Name_Text) {
     else cout << "Error!: -- load text --" << endl;
 }
 CreateText CreateText::operator+(const CreateText &other) { // Перегрузка оператора сложения
-    CreateText result();
-    result().name_text = name_text + other.name_text;
-    return result();
+//    CreateText *result;
+//    result->name_text = name_text + other.name_text;
+//    delete result;
+//    return *result;
 }
 CreateText::~CreateText(){
     cout << "============== removed from text ============"<< endl;
