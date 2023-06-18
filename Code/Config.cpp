@@ -46,7 +46,7 @@ void Config::LoadImage() {
 }
 
 void Config::LoadText() {
-    text_nps_history = new CreateText(" ", 20, "I, player");
+    text_nps_history = new CreateText(" ", 50, "I, player");
 }
 
 void Config::LoadMusic() {

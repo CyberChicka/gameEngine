@@ -1,4 +1,5 @@
 
+#include <valarray>
 #include "Enemy_Scelet.h"
 
 Enemy_Skeleton::Enemy_Skeleton(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std::string Name): Enemy(sprite, LvL,  X, Y, W, H, Name) {
@@ -54,8 +55,11 @@ void Enemy_Skeleton::checkCollisionMap(float dX, float dY){
 
 }
 
-void Enemy_Skeleton::draw(sf::RenderWindow &window) {
-    window.draw(*this->s);
+void Enemy_Skeleton::draw(RenderWindow &window, View view) {
+    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
+    if(dist < window.getSize().x){
+        window.draw(*this->s);
+    }
 }
 
 void Enemy_Skeleton::Attack(Player &p) {

@@ -27,7 +27,7 @@ public:
     void initAnim()override;
     virtual void Attack(Player &p) = 0;
     virtual void TakingDamage(Player &p) = 0;
-    void draw(RenderWindow &window)override;
+    void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     void State();
     float GetX()override;

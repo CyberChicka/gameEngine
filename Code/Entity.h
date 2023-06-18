@@ -11,7 +11,7 @@ public:
     GameLvL *gameLvL;
     Vector2f position;
     float dx, dy, CurrentFrame, speed;
-    int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold;
+    int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist;
     bool life, onGround, isMove, stop;
     string name;
     RectangleShape *e_Radius;//e_Radius -> entity radius
@@ -22,7 +22,7 @@ public:
     virtual FloatRect getRect() = 0;
     virtual void animation(float time) = 0;
     virtual void initAnim() = 0;
-    virtual void draw(RenderWindow &window) = 0;
+    virtual void draw(RenderWindow &window, View view) = 0;
     virtual void checkCollisionMap(float dX, float dY) = 0;
     virtual float GetX() = 0;
     virtual float GetY() = 0;

@@ -159,7 +159,7 @@ void Player::update(float time) {
     // life
     if(this->is_health <= 0)this->life = false;
 }
-void Player::draw(sf::RenderWindow &window){
+void Player::draw(RenderWindow &window, View view){
     window.draw(*this->s);
 }
 void Player::checkCollisionMap(float dX, float dY) {

@@ -19,7 +19,7 @@ public:
     void initAnim()override;
     void Attack(Player &p)override;
     void TakingDamage(Player &p)override;
-    void draw(RenderWindow &window)override;
+    void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     float GetX()override;
     float GetY()override;

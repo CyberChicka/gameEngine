@@ -21,6 +21,7 @@ public:
     CreateText operator+(const CreateText &other);
     ~CreateText();
     void setString(string Name_Text);
+    void setColor(Color &color) const;
 };
 
 

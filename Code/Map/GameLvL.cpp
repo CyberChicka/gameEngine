@@ -572,7 +572,6 @@ void GameLvL::RenderDraw(sf::RenderWindow &window, View view) {
                 this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
                 this->s->setPosition(j * 32, i * 32);
                 if(this->dist < window.getSize().x){
-
                     switch (this->MapLvL[i][j]) {
                         case ' ':this->s->setTextureRect(IntRect(270, 0, w_Block, h_Block)); break;
                         case '=':this->s->setTextureRect(IntRect(68, 0, w_Block, h_Block));break;

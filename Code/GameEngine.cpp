@@ -45,10 +45,10 @@ void GameEngine::render(){ // Рендер изображения
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
 
-    player->draw(*window); // Выводим картинку игрока
+    player->draw(*window, config->view); // Выводим картинку игрока
     if(gameLvL->gameLvL == 1){
         for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
-            (*itEnemy)->draw(*window);
+            (*itEnemy)->draw(*window, config->view);
         }
     }
     window->display(); // создаём дисплей

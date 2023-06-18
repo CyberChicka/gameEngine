@@ -33,3 +33,7 @@ void CreateText::setString(string Name_Text) {
     this->name_text = Name_Text;
     this->text->setString(this->name_text);
 }
+
+void CreateText::setColor(sf::Color &color) const {
+    this->text->setFillColor(color);
+}

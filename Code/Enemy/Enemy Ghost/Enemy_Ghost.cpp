@@ -1,6 +1,7 @@
 //
 // Created by Doni on 15.05.2023.
 //
+#include <valarray>
 #include "Enemy_Ghost.h"
 #include "../../Map/GameLvL.h"
 Enemy_Ghost::Enemy_Ghost(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Enemy(sprite, LvL, X, Y, W, H, Name) {
@@ -86,8 +87,11 @@ void Enemy_Ghost::checkCollisionMap(float dX, float dY){
         }
 }
 
-void Enemy_Ghost::draw(sf::RenderWindow &window){
-    window.draw(*this->s);
+void Enemy_Ghost::draw(sf::RenderWindow &window, View view){
+    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
+    if(dist < window.getSize().x){
+        window.draw(*this->s);
+    }
 }
 
 void Enemy_Ghost::Attack(Player &p) {

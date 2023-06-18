@@ -54,7 +54,9 @@ void Enemy::checkCollisionMap(float dX, float dY) {
         }
 }
 
-void Enemy::draw(RenderWindow &window) { }
+void Enemy::draw(RenderWindow &window, View view) {
+
+}
 
 void Enemy::Attack(Player &p) { }
 

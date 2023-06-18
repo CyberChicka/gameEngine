@@ -24,7 +24,7 @@ public:
     void move();
     void ControlMove();
     void update(float time);
-    void draw(RenderWindow &window)override;
+    void draw(RenderWindow &window, View view)override;
     void animation(float time)override;
     void initAnim()override;
     void checkCollisionMap(float dX, float dY)override;

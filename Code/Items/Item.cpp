@@ -63,4 +63,6 @@ void Item::checkCollisionMap(float dX, float dY) {
 
 }
 
-void Item::draw(sf::RenderWindow &window){ window.draw(*this->s); }
+void Item::draw(RenderWindow &window, View view){
+    window.draw(*this->s);
+}

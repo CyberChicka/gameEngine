@@ -11,7 +11,7 @@ class Item : public Entity{
     void animation(float time)override;
     bool isTake(Player &player);
     void update(float time);
-    void draw(RenderWindow &window)override;
+    void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     float GetX()override;
     float GetY()override;
