@@ -51,6 +51,11 @@ void GameEngine::render(){ // Рендер изображения
             (*itEnemy)->draw(*window, config->view);
         }
     }
+    else if(gameLvL->gameLvL == 2){
+        for(itEnemy == enemyLvL2.begin(); itEnemy != enemyLvL2.end(); itEnemy++){
+            (*itEnemy)->draw(*window, config->view);
+        }
+    }
     window->display(); // создаём дисплей
 }
 
@@ -80,7 +85,6 @@ void GameEngine::initClass() {
 
     //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
 }
-
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){
         EventFunc();
@@ -99,31 +103,31 @@ void GameEngine::pollEvents() {
                 cout << "LvL: 1" << endl;
             }
             if(game_event.key.code == Keyboard::Num2){
-                gameLvL = new GameLvL(config->s_LvL1->s, 2);
+                gameLvL = new GameLvL(config->s_LvL2->s, 2);
                 player->setPosition(1000, 700);
                 player->gameLvL = gameLvL;
                 cout << "LvL: 2" << endl;
             }
             if(game_event.key.code == Keyboard::Num3){
-                gameLvL = new GameLvL(config->s_LvL1->s, 3);
+                gameLvL = new GameLvL(config->s_LvL3->s, 3);
                 player->setPosition(1000, 1500);
                 player->gameLvL = gameLvL;
                 cout << "LvL: 3" << endl;
             }
             if(game_event.key.code == Keyboard::Num4){
-                gameLvL = new GameLvL(config->s_LvL1->s, 4);
+                gameLvL = new GameLvL(config->s_LvL4->s, 4);
                 player->setPosition(1000, 1500);
                 player->gameLvL = gameLvL;
                 cout << "LvL: 4" << endl;
             }
             if(game_event.key.code == Keyboard::Num5){
-                gameLvL = new GameLvL(config->s_LvL1->s, 5);
+                gameLvL = new GameLvL(config->s_LvL5->s, 5);
                 player->setPosition(1000, 1500);
                 player->gameLvL = gameLvL;
                 cout << "LvL: 5" << endl;
             }
             if(game_event.key.code == Keyboard::Num6){
-                gameLvL = new GameLvL(config->s_LvL1->s, 3);
+                gameLvL = new GameLvL(config->s_LvL6->s, 6);
                 player->setPosition(1000, 1500);
                 player->gameLvL = gameLvL;
                 cout << "LvL: 6" << endl;

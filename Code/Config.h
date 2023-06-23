@@ -34,7 +34,7 @@ public:
     // Sprite
     CreateImage *s_player;
     CreateImage *s_EnemyGhost, *s_EnemySkeleton;
-    CreateImage *s_LvL1, *s_LvL2, *s_LvL3;
+    CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
     // Text
     CreateText *text_nps_history;
     // Music & sound

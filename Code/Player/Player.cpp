@@ -120,7 +120,7 @@ void Player::move() {
     this->ControlMove();
     if(this->life){
         switch (this->state) {
-            case left: this->dx= -this->speed; break;
+            case left: this->dx = -this->speed; break;
             case right: this->dx = this->speed; break;
             case SLeft: this->position.x -= 150; break;
             case SRight: this->position.x += 150; break;

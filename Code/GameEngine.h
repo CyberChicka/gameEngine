@@ -30,10 +30,10 @@ private:
     Player *player;
     // Class Enemy
     list<Enemy*>::iterator itEnemy;
-    list<Enemy*> enemyLvL1;
+    list<Enemy*> enemyLvL1, enemyLvL2, enemyLvL3, enemyLvL4, enemyLvL5, enemyLvL6;
     //Class Item
     list<Item*>::iterator itItem;
-    list<Item*> itemLvL1;
+    list<Item*> itemLvL1, itemLvL2, itemLvL3, itemLvL4, itemLvL5, itemLvL6;
     //Class Object
 
     // Map
@@ -50,6 +50,7 @@ private:
     void TakeEnemy();
     void TakeEquipment();
     void TakeNps();
+    
     //
     bool isRunning();
     // intialize the RenderWindow.

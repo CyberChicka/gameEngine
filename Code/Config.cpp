@@ -13,6 +13,11 @@ Config::~Config() {
     delete s_EnemyGhost;
     delete s_EnemySkeleton;
     delete s_LvL1;
+    delete s_LvL2;
+    delete s_LvL3;
+    delete s_LvL4;
+    delete s_LvL5;
+    delete s_LvL6;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
@@ -43,6 +48,11 @@ void Config::LoadImage() {
     s_EnemySkeleton = new CreateImage("SpriteEntity/Enemy/");
     //Sprite LvL Map
     s_LvL1 = new CreateImage("MapTexture/LvL1.png");
+    s_LvL2 = new CreateImage("MapTexture/LvL1.png");
+    s_LvL3 = new CreateImage("MapTexture/LvL1.png");
+    s_LvL4 = new CreateImage("MapTexture/LvL1.png");
+    s_LvL5 = new CreateImage("MapTexture/LvL1.png");
+    s_LvL6 = new CreateImage("MapTexture/LvL1.png");
 }
 
 void Config::LoadText() {
