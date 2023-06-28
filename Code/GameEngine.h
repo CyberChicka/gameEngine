@@ -40,7 +40,7 @@ private:
     list<Object*>::iterator itObject;
     list<Object*> objLvL1, objLvL2, objLvL3, objLvL4, objLvL5, objLvL6;
     list<FonGame*>::iterator itFon;
-    list<FonGame*> fonLvL1, fonLvL2, fonLvL3, fonLvL4, fonLvL5, fonLvL6;
+    list<FonGame*> fonLvL;
     // Map
     GameLvL *gameLvL;
     void update();

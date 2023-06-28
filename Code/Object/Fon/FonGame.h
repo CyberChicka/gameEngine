@@ -13,7 +13,7 @@ public:
     FloatRect getRect()override;
     void animation(float time)override;
     void initAnim()override;
-    void update(float time);
+    void update(float time, int);
     void draw(RenderWindow &window, View view)override;
     float GetX()override;
     float GetY()override;

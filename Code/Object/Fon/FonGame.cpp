@@ -31,7 +31,8 @@ float FonGame::GetX() {
     return this->position.x;
 }
 
-void FonGame::update(float time) {
+void FonGame::update(float time, int numLvL) {
+    this->numLvL = numLvL;
     this->animation(time);
     this->s->setPosition(this->position);
 }
@@ -39,6 +40,11 @@ void FonGame::draw(sf::RenderWindow &window, sf::View view) {
     this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
                       (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
     if(this->dist < 5800){
-        window.draw(*this->s);
+        if(this->numLvL == 1 && this->name == "Fon_LvL_1"){ window.draw(*this->s); }
+        if(this->numLvL == 2 && this->name == "Fon_LvL_2"){ window.draw(*this->s); }
+        if(this->numLvL == 3 && this->name == "Fon_LvL_3"){ window.draw(*this->s); }
+        if(this->numLvL == 4 && this->name == "Fon_LvL_4"){ window.draw(*this->s); }
+        if(this->numLvL == 5 && this->name == "Fon_LvL_5"){ window.draw(*this->s); }
+        if(this->numLvL == 6 && this->name == "Fon_LvL_6"){ window.draw(*this->s); }
     }
 }

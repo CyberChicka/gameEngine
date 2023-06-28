@@ -29,12 +29,10 @@ void GameEngine::update() {
     // View
     config->getPlayerCoordinateForView(player->GetX(), player->GetY());
 
+    for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){ (*itFon)->update(game_time, gameLvL->gameLvL); } // update fon
     // update class
     player->update(game_time);
     if(gameLvL->gameLvL == 1){
-        for(itFon = fonLvL1.begin(); itFon != fonLvL1.end(); itFon++){
-            (*itFon)->update(game_time);
-        }
         for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
             (*itEnemy)->update(game_time, player);
         }
@@ -48,11 +46,15 @@ void GameEngine::update() {
 
 void GameEngine::render(){ // Рендер изображения
     window->clear(Color::Cyan); // очищаем окно
-    for(itFon = fonLvL1.begin(); itFon != fonLvL1.end(); itFon++){ (*itFon)->draw(*window, config->view); }
+    // render fon
+    for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
+        (*itFon)->draw(*window, config->view);
+    }
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
 
     player->draw(*window, config->view); // Выводим картинку игрока
+
     if(gameLvL->gameLvL == 1){
         for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
             (*itEnemy)->draw(*window, config->view);
@@ -92,12 +94,22 @@ void GameEngine::initClass() {
     //LvL1
     //Enemy
     enemyLvL1.push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 700, 1800, 40, 88, "Ghost"));
+    //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
     // Object
 
     //Fon
-    fonLvL1.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_1"));
-
-    //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
+    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_1"));
+    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_1"));
+    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_2"));
+    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_2"));
+    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_3"));
+    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_3"));
+    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_4"));
+    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_4"));
+    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_5"));
+    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_5"));
+    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_6"));
+    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_6"));
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){

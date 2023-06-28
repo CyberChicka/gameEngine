@@ -9,6 +9,7 @@ using namespace sf;
 class Entity {
 public:
     GameLvL *gameLvL;
+    int numLvL;
     Vector2f position;
     float dx, dy, CurrentFrame, speed;
     char cell;
