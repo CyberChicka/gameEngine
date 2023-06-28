@@ -15,7 +15,7 @@ public:
     float dx, dy, CurrentFrame, speed;
     char cell;
     int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist;
-    bool life, onGround, isMove, stop;
+    bool life, onGround, isMove, stop, isNpsDialogue;
     string name;
     RectangleShape *e_Radius;//e_Radius -> entity radius
     Sprite *s;

@@ -8,6 +8,8 @@
 
 #include "../Entity.h"
 #include "../ Animation/Animation.h"
+#include "../Player/Player.h"
+#include <sstream>
 
 class Nps: public Entity{
 public:
@@ -20,6 +22,7 @@ public:
     void update(float time);
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
+    virtual void Dialogue(Event event, Player player) = 0;
     float GetX()override;
     float GetY()override;
     Animation animations[int(AnimationIndex::Walking)];

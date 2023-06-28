@@ -25,6 +25,9 @@ void Nps::initAnim() {
 
 }
 
+void Nps::Dialogue(sf::Event event, Player player) {
+
+}
 void Nps::update(float time) {
     this->animation(time);
     this->position.x = this->dx *time;
