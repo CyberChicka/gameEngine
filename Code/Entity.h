@@ -2,6 +2,7 @@
 #define GAMEENGINE_ENTITY_H
 #include <SFML/Graphics.hpp>
 #include "Map/GameLvL.h"
+#include <valarray>
 
 using namespace std;
 using namespace sf;

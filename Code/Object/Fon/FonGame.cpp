@@ -9,6 +9,9 @@ FonGame::FonGame(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int 
 }
 FonGame::~FonGame() {
     cout << "============== removed from fon ============"<< endl;
+    delete this->gameLvL;
+    delete this->s;
+    delete this->e_Radius;
 }
 
 FloatRect FonGame::getRect() {

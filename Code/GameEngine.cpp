@@ -45,7 +45,7 @@ void GameEngine::update() {
 }
 
 void GameEngine::render(){ // Рендер изображения
-    window->clear(Color::Cyan); // очищаем окно
+    window->clear(Color(173, 208, 207)); // очищаем окно
     // render fon
     for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
         (*itFon)->draw(*window, config->view);
