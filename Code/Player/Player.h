@@ -11,7 +11,6 @@ public:
     bool isAttack, isBlock, isSprint, isRun, isJump;
     int lvl_player;
     int SprintTime;
-    char cell;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,
             AttackL, AttackR,

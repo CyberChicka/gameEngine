@@ -74,10 +74,22 @@ void Enemy_Ghost::checkCollisionMap(float dX, float dY){
             if(this->gameLvL->MapLvL[i][j] == '=' || this->gameLvL->MapLvL[i][j] == '.' || this->gameLvL->MapLvL[i][j] == '-' || this->gameLvL->MapLvL[i][j] == '<' ||
             this->gameLvL->MapLvL[i][j] == '>' || this->gameLvL->MapLvL[i][j] == '{' || this->gameLvL->MapLvL[i][j] == '}')
             {
-                if (dY>0){ this->position.y = i * 32 - h;  this->dy = 0; this->onGround = true;}
-                if (dY<0){ this->position.y = i * 32 + 32;  this->dy = 0;}
-                if (dX>0){ this->position.x = j * 32 - w; dx = -0.1;}
-                if (dX<0){ this->position.x = j * 32 + 32; dx = 0.1;}
+                if (dY>0){
+                    this->position.y = i * 32 - h;
+                    this->dy = 0;
+                    this->onGround = true;
+                }
+                if (dY<0){
+                    this->position.y = i * 32 + 32;
+                    this->dy = 0;
+                }
+                if (dX>0){
+                    this->position.x = j * 32 - w;
+                    dx = -0.1;
+                }
+                if (dX<0){
+                    this->position.x = j * 32 + 32; dx = 0.1;
+                }
             }
             if(this->position.x < 1){ this->position.x = this->position.x + 1; }
             if(this->position.y < 1){ this->position.y = this->position.y + 1; }

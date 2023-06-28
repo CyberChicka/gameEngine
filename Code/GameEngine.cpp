@@ -32,8 +32,14 @@ void GameEngine::update() {
     // update class
     player->update(game_time);
     if(gameLvL->gameLvL == 1){
+        for(itFon = fonLvL1.begin(); itFon != fonLvL1.end(); itFon++){
+            (*itFon)->update(game_time);
+        }
         for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
             (*itEnemy)->update(game_time, player);
+        }
+        for(itObject = objLvL1.begin(); itObject != objLvL1.end(); itObject++){
+            (*itObject)->update(game_time);
         }
     }
     // Evnet
@@ -42,6 +48,7 @@ void GameEngine::update() {
 
 void GameEngine::render(){ // Рендер изображения
     window->clear(Color::Cyan); // очищаем окно
+    for(itFon = fonLvL1.begin(); itFon != fonLvL1.end(); itFon++){ (*itFon)->draw(*window, config->view); }
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
 
@@ -49,6 +56,9 @@ void GameEngine::render(){ // Рендер изображения
     if(gameLvL->gameLvL == 1){
         for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
             (*itEnemy)->draw(*window, config->view);
+        }
+        for(itObject = objLvL1.begin(); itObject != objLvL1.end(); itObject++){
+            (*itObject)->draw(*window, config->view);
         }
     }
     else if(gameLvL->gameLvL == 2){
@@ -82,6 +92,10 @@ void GameEngine::initClass() {
     //LvL1
     //Enemy
     enemyLvL1.push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 700, 1800, 40, 88, "Ghost"));
+    // Object
+
+    //Fon
+    fonLvL1.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_1"));
 
     //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
 }
@@ -92,9 +106,13 @@ void GameEngine::pollEvents() {
             window->close();
         }
         if(game_event.type == Event::KeyPressed){
+            if(game_event.key.code == Keyboard::P){
+                if(player->is_health > 0)
+                    player->is_health -= 20;
+            }
             if(game_event.key.code == sf::Keyboard::Tab){
                 cout << "X - " << player->position.x <<"\n"<< "Y - " <<  player->position.y << "\n"
-                << "Health - " <<  player->is_health << endl;
+                << "Health: " <<  player->is_health << " / " << player->f_health << endl;
             }
             if(game_event.key.code == Keyboard::Num1){
                 gameLvL = new GameLvL(config->s_LvL1->s, 1);
@@ -104,7 +122,7 @@ void GameEngine::pollEvents() {
             }
             if(game_event.key.code == Keyboard::Num2){
                 gameLvL = new GameLvL(config->s_LvL2->s, 2);
-                player->setPosition(1000, 700);
+                player->setPosition(1000, 600);
                 player->gameLvL = gameLvL;
                 cout << "LvL: 2" << endl;
             }

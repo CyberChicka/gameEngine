@@ -11,6 +11,7 @@ public:
     GameLvL *gameLvL;
     Vector2f position;
     float dx, dy, CurrentFrame, speed;
+    char cell;
     int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist;
     bool life, onGround, isMove, stop;
     string name;

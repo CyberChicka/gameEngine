@@ -9,6 +9,8 @@
 #include "Enemy/Enemy Scelet/Enemy_Scelet.h"
 #include "Map/GameLvL.h"
 #include "Items/Item.h"
+#include "Object/Object.h"
+#include "Object/Fon/FonGame.h"
 
 using namespace sf;
 using namespace std;
@@ -35,7 +37,10 @@ private:
     list<Item*>::iterator itItem;
     list<Item*> itemLvL1, itemLvL2, itemLvL3, itemLvL4, itemLvL5, itemLvL6;
     //Class Object
-
+    list<Object*>::iterator itObject;
+    list<Object*> objLvL1, objLvL2, objLvL3, objLvL4, objLvL5, objLvL6;
+    list<FonGame*>::iterator itFon;
+    list<FonGame*> fonLvL1, fonLvL2, fonLvL3, fonLvL4, fonLvL5, fonLvL6;
     // Map
     GameLvL *gameLvL;
     void update();

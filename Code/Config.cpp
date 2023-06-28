@@ -18,6 +18,13 @@ Config::~Config() {
     delete s_LvL4;
     delete s_LvL5;
     delete s_LvL6;
+    // delete fon lvl
+    delete s_LvL1_Fon;
+    delete s_LvL2_Fon;
+    delete s_LvL3_Fon;
+    delete s_LvL4_Fon;
+    delete s_LvL5_Fon;
+    delete s_LvL6_Fon;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
@@ -48,11 +55,18 @@ void Config::LoadImage() {
     s_EnemySkeleton = new CreateImage("SpriteEntity/Enemy/");
     //Sprite LvL Map
     s_LvL1 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL2 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL3 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL4 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL5 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL6 = new CreateImage("MapTexture/LvL1.png");
+    s_LvL2 = new CreateImage("MapTexture/LvL2.png");
+    s_LvL3 = new CreateImage("MapTexture/LvL3.png");
+    s_LvL4 = new CreateImage("MapTexture/LvL4.png");
+    s_LvL5 = new CreateImage("MapTexture/LvL5.png");
+    s_LvL6 = new CreateImage("MapTexture/LvL6.png");
+    // Sprite LvL Fon
+    s_LvL1_Fon = new CreateImage("SpriteMapObject/FonLvL1_.png");
+    s_LvL2_Fon = new CreateImage("SpriteMapObject/FonLvL2_.png");
+    s_LvL3_Fon = new CreateImage("SpriteMapObject/FonLvL3_.png");
+    s_LvL4_Fon = new CreateImage("SpriteMapObject/FonLvL4_.png");
+    s_LvL5_Fon = new CreateImage("SpriteMapObject/FonLvL5_.png");
+    s_LvL6_Fon = new CreateImage("SpriteMapObject/FonLvL6_.png");
 }
 
 void Config::LoadText() {

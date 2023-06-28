@@ -35,6 +35,7 @@ public:
     CreateImage *s_player;
     CreateImage *s_EnemyGhost, *s_EnemySkeleton;
     CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
+    CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon;
     // Text
     CreateText *text_nps_history;
     // Music & sound

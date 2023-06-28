@@ -165,7 +165,7 @@ void Player::draw(RenderWindow &window, View view){
 void Player::checkCollisionMap(float dX, float dY) {
     for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++)
         for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++){
-            cell = this->gameLvL->MapLvL[i][j];
+            this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
@@ -173,9 +173,16 @@ void Player::checkCollisionMap(float dX, float dY) {
                     this->dy = 0;
                     this->onGround = true;
                 }
-                if (dY<0){ this->position.y = i * 32 + 32;  this->dy = 0;}
-                if (dX>0){ this->position.x = j * 32 - w; }
-                if (dX<0){ this->position.x = j * 32 + 32;}
+                if (dY<0){
+                    this->position.y = i * 32 + 32;
+                    this->dy = 0;
+                }
+                if (dX>0){
+                    this->position.x = j * 32 - w;
+                }
+                if (dX<0){
+                    this->position.x = j * 32 + 32;
+                }
             }
             if(this->gameLvL->gameLvL == 1){
                 if(this->position.x < 1){ this->position.x = this->position.x + 1; }
