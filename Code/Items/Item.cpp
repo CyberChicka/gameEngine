@@ -12,7 +12,8 @@ Item::Item(sf::Sprite *sprite, GameLvL *LvL,  float X, float Y, int W, int H, st
 }
 Item::~Item() {
     cout << "============== removed from item ============" << endl;
-    delete s;
+    delete this->s;
+    delete this->gameLvL;
 }
 
 void Item::animation(float time) {

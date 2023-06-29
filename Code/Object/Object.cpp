@@ -11,7 +11,6 @@ Object::~Object() {
     cout << "============== removed from object ============"<< endl;
     delete s;
     delete gameLvL;
-    delete e_Radius;
 }
 
 FloatRect Object::getRect() {

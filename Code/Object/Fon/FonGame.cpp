@@ -11,7 +11,6 @@ FonGame::~FonGame() {
     cout << "============== removed from fon ============"<< endl;
     delete this->gameLvL;
     delete this->s;
-    delete this->e_Radius;
 }
 
 FloatRect FonGame::getRect() {

@@ -17,6 +17,7 @@ public:
             BlockL, BlockR,
             JumpL, JumpR,
             Count};
+    CircleShape *e_Radius;//e_Radius -> entity radius
     Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~Player();
     FloatRect getRect()override;

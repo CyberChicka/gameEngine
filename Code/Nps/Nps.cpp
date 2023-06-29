@@ -3,14 +3,15 @@
 //
 #include "Nps.h"
 
-Nps::Nps(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
+Nps::Nps(Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
+    this->t_Nps = new CreateText(T_NPS);
     this->initAnim();
 }
 Nps::~Nps() {
     cout << "============== removed from nps ============"<< endl;
+    delete this->t_Nps;
     delete this->gameLvL;
     delete this->s;
-    delete this->e_Radius;
 }
 
 FloatRect Nps::getRect() {
@@ -43,6 +44,9 @@ void Nps::draw(sf::RenderWindow &window, sf::View view) {
                       (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
     if(this->dist < window.getSize().x){
         window.draw(*this->s);
+        if(this->isNpsDialogue){
+            window.draw(*this->t_Nps->text);
+        }
     }
 }
 

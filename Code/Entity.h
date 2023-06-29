@@ -17,7 +17,6 @@ public:
     int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist;
     bool life, onGround, isMove, stop, isNpsDialogue;
     string name;
-    RectangleShape *e_Radius;//e_Radius -> entity radius
     Sprite *s;
     enum {left, right, up, down, jump, stay, SLeft, SRight} state;
     Entity(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);

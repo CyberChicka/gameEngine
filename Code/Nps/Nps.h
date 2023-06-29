@@ -10,11 +10,15 @@
 #include "../ Animation/Animation.h"
 #include "../Player/Player.h"
 #include <sstream>
+#include "NpsMessage/getNpsMessage.h"
+#include "../Text/CreateText.h"
 
 class Nps: public Entity{
 public:
+    int ClickNps = 0;
+    CreateText *t_Nps;
     enum class AnimationIndex{ Walking };
-    Nps(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
+    Nps(Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, string Name);
     ~Nps();
     FloatRect getRect()override;
     void animation(float time)override;

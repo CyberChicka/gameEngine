@@ -6,6 +6,7 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->s->setOrigin(this->w/2,this->h/2);
     this->is_health = 120; this->f_health = 120;
     this->life = true;
+    this->e_Radius = new CircleShape(120.f);
     this->gameLvL = new GameLvL(*LvL);
     this->money = 0;
     this->lvl_player = 1;
@@ -19,6 +20,7 @@ Player::~Player() {
     delete this->e_Radius;
 }
 FloatRect Player::getRect() {
+
     return FloatRect(this->position.x, this->position.y, this->w, this->h);
 }
 
@@ -156,6 +158,7 @@ void Player::update(float time) {
 
     this->dy+=0.0015*time;
     if(!this->isAttack)this->s->setPosition(this->position);
+    this->e_Radius->setPosition(position);
     // life
     if(this->is_health <= 0)this->life = false;
 }

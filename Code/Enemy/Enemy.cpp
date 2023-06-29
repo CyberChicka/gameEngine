@@ -13,7 +13,6 @@ Enemy::~Enemy() {
     cout << "============== removed from enemy ============"<< endl;
     delete this->gameLvL;
     delete this->s;
-    delete this->e_Radius;
 }
 
 FloatRect Enemy::getRect() { return FloatRect(this->position.x, this->position.y, this->w, this->h); }

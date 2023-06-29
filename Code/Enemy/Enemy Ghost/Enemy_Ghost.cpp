@@ -16,7 +16,6 @@ Enemy_Ghost::~Enemy_Ghost() {
     cout << "============== removed from enemy_ghost ============"<< endl;
     delete this->gameLvL;
     delete this->s;
-    delete this->e_Radius;
 }
 
 FloatRect Enemy_Ghost::getRect(){ return FloatRect (this->position.x, this->position.y, this->w, this->h); }
@@ -25,7 +24,7 @@ void Enemy_Ghost::ControlEnemy(float time, float pX, float pY) {
     distance = ((position.x - pX) * (position.x - pX) + (position.y - pY) * (position.y - pY));
     if(this->name == "Ghost"){
         if(distance > 10){
-            dx =0.03 * time * (pX - position.x) / distance;
+            dx = 0.40 * time * (pX - position.x) / distance;
         }
     }
 }
@@ -70,9 +69,8 @@ float Enemy_Ghost::GetY() { return this->position.y; }
 void Enemy_Ghost::checkCollisionMap(float dX, float dY){
     for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++)
         for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++){
-            if(this->gameLvL->gameLvL == 1){ }
-            if(this->gameLvL->MapLvL[i][j] == '=' || this->gameLvL->MapLvL[i][j] == '.' || this->gameLvL->MapLvL[i][j] == '-' || this->gameLvL->MapLvL[i][j] == '<' ||
-            this->gameLvL->MapLvL[i][j] == '>' || this->gameLvL->MapLvL[i][j] == '{' || this->gameLvL->MapLvL[i][j] == '}')
+            this->cell = this->gameLvL->MapLvL[i][j];
+            if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
                     this->position.y = i * 32 - h;
@@ -91,6 +89,10 @@ void Enemy_Ghost::checkCollisionMap(float dX, float dY){
                     this->position.x = j * 32 + 32; dx = 0.1;
                 }
             }
+            if(cell == '{')
+                if(dY > 0){ dx = 0.1; }
+            if(cell == '}')
+                if(dY > 0){ dx = 0.1; }
             if(this->position.x < 1){ this->position.x = this->position.x + 1; }
             if(this->position.y < 1){ this->position.y = this->position.y + 1; }
 //                if(this->position.y > 900){ this->position.y = this->position.y - 0.5;}

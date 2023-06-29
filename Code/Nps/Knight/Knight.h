@@ -9,7 +9,13 @@
 #include "../Nps.h"
 
 class Knight: public Nps{
-
+public:
+    Knight(Sprite *sprite, GameLvL *LvL, CreateText T_NPS,  float X, float Y, int W, int H, string Name);
+    ~Knight();
+    void animation(float time)override;
+    void Dialogue(Event event, Player player)override;
+    void initAnim()override;
+    void update(float time);
 };
 
 
