@@ -64,7 +64,7 @@ void GameEngine::render(){ // Рендер изображения
         }
     }
     else if(gameLvL->gameLvL == 2){
-        for(itEnemy == enemyLvL2.begin(); itEnemy != enemyLvL2.end(); itEnemy++){
+        for(itEnemy = enemyLvL2.begin(); itEnemy != enemyLvL2.end(); itEnemy++){
             (*itEnemy)->draw(*window, config->view);
         }
     }
