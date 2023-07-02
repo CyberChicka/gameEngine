@@ -17,7 +17,7 @@ GameEngine::~GameEngine() {
     delete gameLvL; // очищаем память
 }
 bool GameEngine::isRunning(){
-    if (window == nullptr){cout << "\n Error Windows \n"; return false;}
+    if (window == nullptr){ cout << "\n Error Windows \n"; return false; }
     else return window->isOpen();
 }
 
@@ -28,24 +28,48 @@ void GameEngine::update() {
     game_time = game_time / 800;
     // View
     config->getPlayerCoordinateForView(player->GetX(), player->GetY());
-
-    for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){ (*itFon)->update(game_time, gameLvL->gameLvL); } // update fon
-    // update class
-    player->update(game_time);
-    if(gameLvL->gameLvL == 1){
-        for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
-            (*itEnemy)->update(game_time, player);
-        }
-        for(itObject = objLvL1.begin(); itObject != objLvL1.end(); itObject++){
-            (*itObject)->update(game_time);
-        }
+    // Fon update
+    for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
+        (*itFon)->update(game_time, gameLvL->gameLvL);
+    }
+    player->update(game_time, gameLvL); // player update
+    // Nps update
+    for(itNps = npsLvL.begin(); itNps != npsLvL.end(); itNps++){
+        (*itNps)->update(game_time, gameLvL);
+    }
+    // Enemy update
+    for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
+        (*itEnemy)->update(game_time, gameLvL,  player);
+    }
+    // Object update
+    for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
+        (*itObject)->update(game_time, gameLvL);
+    }
+    // Item update
+    for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
+        (*itItem)->update(game_time, gameLvL);
     }
     // Evnet
     pollEvents();
 }
 
 void GameEngine::render(){ // Рендер изображения
-    window->clear(Color(173, 208, 207)); // очищаем окно
+    if(gameLvL->gameLvL == 1){ window->clear(Color(173, 208, 207)); }
+    else if(gameLvL->gameLvL == 2){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 3){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 4){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 5){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 6){
+        window->clear(Color(173, 208, 207));
+    }
     // render fon
     for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
         (*itFon)->draw(*window, config->view);
@@ -53,20 +77,22 @@ void GameEngine::render(){ // Рендер изображения
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
 
-    player->draw(*window, config->view); // Выводим картинку игрока
-
-    if(gameLvL->gameLvL == 1){
-        for(itEnemy = enemyLvL1.begin(); itEnemy != enemyLvL1.end(); itEnemy++){
-            (*itEnemy)->draw(*window, config->view);
-        }
-        for(itObject = objLvL1.begin(); itObject != objLvL1.end(); itObject++){
-            (*itObject)->draw(*window, config->view);
-        }
+    player->draw(*window, config->view); // render player
+    // Nps render
+    for(itNps = npsLvL.begin(); itNps != npsLvL.end(); itNps++){
+        (*itNps)->draw(*window, config->view);
     }
-    else if(gameLvL->gameLvL == 2){
-        for(itEnemy = enemyLvL2.begin(); itEnemy != enemyLvL2.end(); itEnemy++){
-            (*itEnemy)->draw(*window, config->view);
-        }
+    // Enemy render
+    for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
+        (*itEnemy)->draw(*window, config->view);
+    }
+    // Object render
+    for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
+        (*itObject)->draw(*window, config->view);
+    }
+    // Item render
+    for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
+        (*itItem)->draw(*window, config->view);
     }
     window->display(); // создаём дисплей
 }
@@ -93,23 +119,26 @@ void GameEngine::initClass() {
     player = new Player(config->s_player->s, gameLvL ,857, 1800, 56, 60, "player");
     //LvL1
     //Enemy
-    enemyLvL1.push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 700, 1800, 40, 88, "Ghost"));
+    enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1500, 1720, 40, 88, "Ghost"));
+    enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
     //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
     // Object
 
+    //Nps
+
     //Fon
-    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_1"));
-    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_1"));
-    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_2"));
-    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_2"));
-    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_3"));
-    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_3"));
-    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_4"));
-    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_4"));
-    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_5"));
-    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_5"));
-    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_6"));
-    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_6"));
+//    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 0, 0, "Fon_LvL_1"));
+//    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 0, 0, "Fon_LvL_1"));
+//    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_2"));
+//    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_2"));
+//    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_3"));
+//    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_3"));
+//    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_4"));
+//    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_4"));
+//    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_5"));
+//    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_5"));
+//    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_6"));
+//    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_6"));
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){
@@ -129,37 +158,31 @@ void GameEngine::pollEvents() {
             if(game_event.key.code == Keyboard::Num1){
                 gameLvL = new GameLvL(config->s_LvL1->s, 1);
                 player->setPosition(1000, 1600);
-                player->gameLvL = gameLvL;
                 cout << "LvL: 1" << endl;
             }
             if(game_event.key.code == Keyboard::Num2){
                 gameLvL = new GameLvL(config->s_LvL2->s, 2);
                 player->setPosition(1000, 600);
-                player->gameLvL = gameLvL;
                 cout << "LvL: 2" << endl;
             }
             if(game_event.key.code == Keyboard::Num3){
                 gameLvL = new GameLvL(config->s_LvL3->s, 3);
                 player->setPosition(1000, 1500);
-                player->gameLvL = gameLvL;
                 cout << "LvL: 3" << endl;
             }
             if(game_event.key.code == Keyboard::Num4){
                 gameLvL = new GameLvL(config->s_LvL4->s, 4);
                 player->setPosition(1000, 1500);
-                player->gameLvL = gameLvL;
                 cout << "LvL: 4" << endl;
             }
             if(game_event.key.code == Keyboard::Num5){
                 gameLvL = new GameLvL(config->s_LvL5->s, 5);
                 player->setPosition(1000, 1500);
-                player->gameLvL = gameLvL;
                 cout << "LvL: 5" << endl;
             }
             if(game_event.key.code == Keyboard::Num6){
                 gameLvL = new GameLvL(config->s_LvL6->s, 6);
                 player->setPosition(1000, 1500);
-                player->gameLvL = gameLvL;
                 cout << "LvL: 6" << endl;
             }
         }

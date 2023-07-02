@@ -22,7 +22,8 @@ void Supreme_Wizard::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
 }
 
-void Supreme_Wizard::update(float time) {
+void Supreme_Wizard::update(float time, GameLvL *gLvL){
+    this->gameLvL = gLvL;
     this->animation(time);
     this->position.x = this->dx *time;
     this->checkCollisionMap(this->dx, 0);

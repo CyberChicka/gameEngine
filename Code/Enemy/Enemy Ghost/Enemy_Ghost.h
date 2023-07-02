@@ -14,7 +14,7 @@ public:
     ~Enemy_Ghost();
     FloatRect getRect() override;
     void ControlEnemy(float , float , float )override;
-    void update(float time, Player *p)override;
+    void update(float time, GameLvL *gLvL, Player *p)override;
     void animation(float time)override;
     void initAnim()override;
     void Attack(Player &p)override;

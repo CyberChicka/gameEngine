@@ -23,13 +23,14 @@ FloatRect Enemy_Ghost::getRect(){ return FloatRect (this->position.x, this->posi
 void Enemy_Ghost::ControlEnemy(float time, float pX, float pY) {
     distance = ((position.x - pX) * (position.x - pX) + (position.y - pY) * (position.y - pY));
     if(this->name == "Ghost"){
-        if(distance > 10){
-            dx = 0.40 * time * (pX - position.x) / distance;
+        if(distance > 50){
+            dx = 0.80 * time * (pX - position.x) / distance;
         }
     }
 }
 
-void Enemy_Ghost::update(float time, Player *p) {
+void Enemy_Ghost::update(float time, GameLvL *gLvL, Player *p) {
+    this->gameLvL = gLvL;
     this->State();
     ControlEnemy(time, p->position.x, p->position.y);
     this->animation(time);

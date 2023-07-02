@@ -28,7 +28,8 @@ void Enemy_Skeleton::move() {
     }
 }
 
-void Enemy_Skeleton::update(float time) {
+void Enemy_Skeleton::update(float time, GameLvL *gLvL, Player *p){
+    this->gameLvL = gLvL;
     this->s->setPosition(position);
     if(this->life){
 

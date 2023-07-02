@@ -22,7 +22,8 @@ void Witcher::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
 }
 
-void Witcher::update(float time) {
+void Witcher::update(float time, GameLvL *gLvL){
+    this->gameLvL = gLvL;
     this->animation(time);
     this->position.x = this->dx *time;
     this->checkCollisionMap(this->dx, 0);

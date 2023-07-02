@@ -140,7 +140,8 @@ void Player::setPosition(float x, float y) {
     this->position.y = y;
 }
 
-void Player::update(float time) {
+void Player::update(float time, GameLvL *gLvL){
+    this->gameLvL = gLvL;
     // Move
     this->move();
     //Anim

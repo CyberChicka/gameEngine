@@ -3,7 +3,6 @@
 #include "../Entity.h"
 #include "../Map/GameLvL.h"
 #include "../ Animation/Animation.h"
-#include "../Utils.h"
 
 
 class Player: public Entity{
@@ -23,7 +22,7 @@ public:
     FloatRect getRect()override;
     void move();
     void ControlMove();
-    void update(float time);
+    void update(float time, GameLvL *gLvL);
     void draw(RenderWindow &window, View view)override;
     void animation(float time)override;
     void initAnim()override;

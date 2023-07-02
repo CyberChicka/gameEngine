@@ -23,7 +23,7 @@ public:
     FloatRect getRect()override;
     void animation(float time)override;
     void initAnim()override;
-    void update(float time);
+    virtual void update(float time, GameLvL *gLvL) = 0;
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     virtual void Dialogue(Event event, Player player) = 0;

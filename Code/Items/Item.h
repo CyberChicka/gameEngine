@@ -6,11 +6,12 @@
 #include "../Player/Player.h"
 
 class Item : public Entity{
+public:
     Item(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~Item();
     void animation(float time)override;
     bool isTake(Player &player);
-    void update(float time);
+    void update(float time, GameLvL *gLvL);
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     float GetX()override;

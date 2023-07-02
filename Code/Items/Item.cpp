@@ -47,7 +47,7 @@ bool Item::isTake(Player &player){
     return false;
 }
 
-void Item::update(float time) {
+void Item::update(float time, GameLvL *gLvL) {
     animation(time);
     this->position.x += this->dx*time;
     checkCollisionMap(this->dx, 0);

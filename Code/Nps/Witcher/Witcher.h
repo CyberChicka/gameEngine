@@ -15,7 +15,7 @@ public:
     void animation(float time)override;
     void Dialogue(Event event, Player player)override;
     void initAnim()override;
-    void update(float time);
+    void update(float time, GameLvL *gLvL)override;
 };
 
 

@@ -24,7 +24,7 @@ void Enemy::ControlEnemy(float pX, float pY, float time) {
 }
 void Enemy::move() { }
 
-void Enemy::update(float time, Player *p) {}
+void Enemy::update(float time, GameLvL *gLvL, Player *p) {}
 
 void Enemy::animation(float time) { }
 

@@ -50,7 +50,8 @@ float Object::GetX(){
     return this->position.x;
 }
 
-void Object::update(float time) {
+void Object::update(float time, GameLvL *gLvL){
+    this->gameLvL = gLvL;
     this->animation(time);
     this->position.x = time*this->dx;
     this->checkCollisionMap(this->dx, 0); // Касание с картой по x

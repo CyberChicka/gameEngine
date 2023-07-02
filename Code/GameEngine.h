@@ -11,6 +11,7 @@
 #include "Items/Item.h"
 #include "Object/Object.h"
 #include "Object/Fon/FonGame.h"
+#include "Nps/Nps.h"
 
 using namespace sf;
 using namespace std;
@@ -32,15 +33,19 @@ private:
     Player *player;
     // Class Enemy
     list<Enemy*>::iterator itEnemy;
-    list<Enemy*> enemyLvL1, enemyLvL2, enemyLvL3, enemyLvL4, enemyLvL5, enemyLvL6;
+    list<Enemy*> enemyLvL[6];
     //Class Item
     list<Item*>::iterator itItem;
-    list<Item*> itemLvL1, itemLvL2, itemLvL3, itemLvL4, itemLvL5, itemLvL6;
+    list<Item*> itemLvL[6];
     //Class Object
     list<Object*>::iterator itObject;
-    list<Object*> objLvL1, objLvL2, objLvL3, objLvL4, objLvL5, objLvL6;
+    list<Object*> objLvL[6];
+//    //Class Fon
     list<FonGame*>::iterator itFon;
     list<FonGame*> fonLvL;
+//    //Class Nps
+    list<Nps*>::iterator itNps;
+    list<Nps*> npsLvL;
     // Map
     GameLvL *gameLvL;
     void update();

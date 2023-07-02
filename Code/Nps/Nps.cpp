@@ -29,7 +29,8 @@ void Nps::initAnim() {
 void Nps::Dialogue(sf::Event event, Player player) {
 
 }
-void Nps::update(float time) {
+void Nps::update(float time, GameLvL *gLvL){
+    this->gameLvL = gLvL;
     this->animation(time);
     this->position.x = this->dx *time;
     this->checkCollisionMap(this->dx, 0);

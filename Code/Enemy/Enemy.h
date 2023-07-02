@@ -22,7 +22,7 @@ public:
     virtual void ControlEnemy(float, float, float) = 0;
     void ControlMove();
     void move();
-    virtual void update(float time, Player *p) = 0;
+    virtual void update(float time, GameLvL *gLvL, Player *p) = 0;
     void animation(float time)override;
     void initAnim()override;
     virtual void Attack(Player &p) = 0;

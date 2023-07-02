@@ -11,7 +11,7 @@ public:
     FloatRect getRect();
     void ControlMove();
     void move();
-    void update(float time);
+    void update(float time, GameLvL *gLvL, Player *p)override;
     void animation(float time)override;
     void Attack(Player &p)override;
     void TakingDamage(Player &p)override;
