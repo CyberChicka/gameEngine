@@ -6,8 +6,6 @@
 GameEngine::GameEngine() {
     initClass();
     initWindow();
-    initSounds();
-    initText();
 }
 GameEngine::~GameEngine() {
     cout << "========== removed from memory ========" << endl;
@@ -24,15 +22,17 @@ bool GameEngine::isRunning(){
 void GameEngine::update() {
     // Time
     game_time = clock.getElapsedTime().asMicroseconds();
-    clock.restart();
+    elapsed = clock.restart();
     game_time = game_time / 800;
     // View
     config->getPlayerCoordinateForView(player->GetX(), player->GetY());
     // Fon update
     for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
-        (*itFon)->update(game_time, gameLvL->gameLvL);
+        (*itFon)->update(game_time, gameLvL);
     }
     player->update(game_time, gameLvL); // player update
+    player->particles->update(elapsed);
+    player->particles->setEmitter(player->position.x + 28, player->position.y + 30);
     // Nps update
     for(itNps = npsLvL.begin(); itNps != npsLvL.end(); itNps++){
         (*itNps)->update(game_time, gameLvL);
@@ -54,22 +54,7 @@ void GameEngine::update() {
 }
 
 void GameEngine::render(){ // Рендер изображения
-    if(gameLvL->gameLvL == 1){ window->clear(Color(173, 208, 207)); }
-    else if(gameLvL->gameLvL == 2){
-        window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 3){
-        window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 4){
-        window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 5){
-        window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 6){
-        window->clear(Color(173, 208, 207));
-    }
+    renderClear();
     // render fon
     for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
         (*itFon)->draw(*window, config->view);
@@ -104,7 +89,7 @@ void GameEngine::initWindow() {
     config->view_size.x = config->window_size.x;
     config->view_size.y = config->window_size.y;
     const VideoMode videoMode = VideoMode(config->window_size.x, config->window_size.y);
-    const Uint32 style = sf::Style::Close | sf::Style::Titlebar;
+    const Uint32 style = sf::Style::Close;
 
     // Создание окна и камеру, вертикальное синхронизация
     window = new sf::RenderWindow(videoMode, config->window_title, style);
@@ -115,7 +100,6 @@ void GameEngine::initWindow() {
 
 void GameEngine::initClass() {
     gameLvL = new GameLvL(config->s_LvL1->s, 1);
-
     player = new Player(config->s_player->s, gameLvL ,857, 1800, 56, 60, "player");
     //LvL1
     //Enemy
@@ -219,13 +203,29 @@ void GameEngine::TakeDoor() {
 void GameEngine::TakeEnemy() {
 
 }
-// Sound
-void GameEngine::initSounds() {
+// clear color
+void GameEngine::renderClear(){
+    if(gameLvL->gameLvL == 1){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 2){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 3){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 4){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 5){
+        window->clear(Color(173, 208, 207));
+    }
+    else if(gameLvL->gameLvL == 6){
+        window->clear(Color(173, 208, 207));
+    }
+    else{
 
-}
-// Text
-void GameEngine::initText() {
-
+    }
 }
 
 void GameEngine::run() {

@@ -7,6 +7,7 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->is_health = 120; this->f_health = 120;
     this->life = true;
     this->e_Radius = new CircleShape(120.f);
+    this->particles = new ParticleSystem(10);
     this->gameLvL = new GameLvL(*LvL);
     this->money = 0;
     this->lvl_player = 1;
@@ -17,6 +18,7 @@ Player::~Player() {
     cout << "============== removed from player ============"<< endl;
     delete this->gameLvL;
     delete this->s;
+    delete this->particles;
     delete this->e_Radius;
 }
 FloatRect Player::getRect() {
@@ -164,6 +166,7 @@ void Player::update(float time, GameLvL *gLvL){
     if(this->is_health <= 0)this->life = false;
 }
 void Player::draw(RenderWindow &window, View view){
+    window.draw(*this->particles);
     window.draw(*this->s);
 }
 void Player::checkCollisionMap(float dX, float dY) {

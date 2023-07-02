@@ -26,6 +26,7 @@ private:
     RenderWindow *window;
     //Gam
     float game_time = 0;
+    Time elapsed;
     Clock clock;
     Config *config = Config::getInstance();
     Event game_event; // создаём переменную типа Event
@@ -33,13 +34,13 @@ private:
     Player *player;
     // Class Enemy
     list<Enemy*>::iterator itEnemy;
-    list<Enemy*> enemyLvL[6];
+    list<Enemy*> enemyLvL[7];
     //Class Item
     list<Item*>::iterator itItem;
-    list<Item*> itemLvL[6];
+    list<Item*> itemLvL[7];
     //Class Object
     list<Object*>::iterator itObject;
-    list<Object*> objLvL[6];
+    list<Object*> objLvL[7];
 //    //Class Fon
     list<FonGame*>::iterator itFon;
     list<FonGame*> fonLvL;
@@ -66,8 +67,7 @@ private:
     // intialize the RenderWindow.
     void initClass();
     void initWindow();
-    void initText();
-    void initSounds();
+    void renderClear();
     //
 
 };

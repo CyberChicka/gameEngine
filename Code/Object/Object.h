@@ -16,7 +16,7 @@ public:
     FloatRect getRect()override;
     void animation(float time)override;
     void initAnim()override;
-    void update(float time, GameLvL *gLvL);
+    virtual void update(float time, GameLvL *gLvL) = 0;
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     float GetX()override;

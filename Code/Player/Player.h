@@ -3,6 +3,7 @@
 #include "../Entity.h"
 #include "../Map/GameLvL.h"
 #include "../ Animation/Animation.h"
+#include "../Particle/ParticleSystem.h"
 
 
 class Player: public Entity{
@@ -10,6 +11,7 @@ public:
     bool isAttack, isBlock, isSprint, isRun, isJump;
     int lvl_player;
     int SprintTime;
+    ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,
             AttackL, AttackR,
