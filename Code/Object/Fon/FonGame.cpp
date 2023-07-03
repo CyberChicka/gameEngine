@@ -6,7 +6,7 @@
 
 #include <utility>
 
-FonGame::FonGame(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Object(sprite, LvL, X, Y, W, H, std::move(Name)){
+FonGame::FonGame(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
     this->initAnim();
 }
 FonGame::~FonGame() {
@@ -32,3 +32,17 @@ void FonGame::update(float time, GameLvL *gLvL){
 void FonGame::draw(sf::RenderWindow &window, sf::View view) {
     window.draw(*this->s);
 }
+
+void FonGame::checkCollisionMap(float dX, float dY) {
+
+}
+
+void FonGame::setPosition(float x, float y) {
+    this->position.x = x;
+    this->position.y = y;
+}
+
+FloatRect FonGame::getRect() {
+    return FloatRect(this->position.x, this->position.y, this->w, this->h);
+}
+

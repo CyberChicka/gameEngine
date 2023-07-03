@@ -6,6 +6,7 @@
 
 Historian::Historian(sf::Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
     this->initAnim();
+    s->setScale(0.6f, 0.6f);
 }
 Historian::~Historian() {
     cout << "============== removed from nps historian ============"<< endl;

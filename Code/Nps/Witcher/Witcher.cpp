@@ -6,6 +6,7 @@
 
 Witcher::Witcher(sf::Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
     this->initAnim();
+    s->setScale(0.7f, 0.7f);
 }
 Witcher::~Witcher() {
     cout << "============== removed from nps historian ============"<< endl;

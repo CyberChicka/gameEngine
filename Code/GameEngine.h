@@ -20,6 +20,9 @@
 #include "Nps/Supreme_Wizard/Supreme_Wizard.h"
 #include "Nps/Swordsman/Swordsman.h"
 #include "Nps/Witcher/Witcher.h"
+#include "Items/Health/health_item.h"
+#include "Items/Key/key_item.h"
+#include "Items/Money/money_item.h"
 
 using namespace sf;
 using namespace std;

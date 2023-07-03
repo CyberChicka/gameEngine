@@ -6,6 +6,7 @@
 
 Swordsman::Swordsman(sf::Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
     this->initAnim();
+    s->setScale(1.0f, 1.0f);
 }
 Swordsman::~Swordsman() {
     cout << "============== removed from nps historian ============"<< endl;

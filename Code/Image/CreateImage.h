@@ -16,7 +16,7 @@ public:
     CreateImage(string f);
     ~CreateImage();
     void Load();
-    bool isToch(float X, float  Y);
+    bool isToch(float X, float  Y) const;
 };
 
 

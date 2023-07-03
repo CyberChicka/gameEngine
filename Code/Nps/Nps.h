@@ -23,10 +23,10 @@ public:
     FloatRect getRect()override;
     void animation(float time)override;
     void initAnim()override;
-    virtual void update(float time, GameLvL *gLvL) = 0;
+    virtual void update(float time, GameLvL *gLvL);
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
-    virtual void Dialogue(Event event, Player player) = 0;
+    virtual void Dialogue(Event event, Player player);
     float GetX()override;
     float GetY()override;
     Animation animations[int(AnimationIndex::Walking)];

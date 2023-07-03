@@ -25,7 +25,7 @@ void CreateImage::Load() {
     }
 }
 
-bool CreateImage::isToch(float X, float Y){
+bool CreateImage::isToch(float X, float Y) const{
     if(this->s->getGlobalBounds().contains(X, Y))return true;
     if(!this->s->getGlobalBounds().contains(X, Y))return false;
 }

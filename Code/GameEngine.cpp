@@ -4,8 +4,8 @@
 #include "GameEngine.h"
 
 GameEngine::GameEngine() {
-    initClass();
     initWindow();
+    initClass();
 }
 GameEngine::~GameEngine() {
     cout << "========== removed from memory ========" << endl;
@@ -32,17 +32,17 @@ void GameEngine::update() {
     }
     player->update(game_time, gameLvL); // player update
     player->particles->update(elapsed);
-    // Nps update
-    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
-        (*itNps)->update(game_time, gameLvL);
+    // Object update
+    for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
+        (*itObject)->update(game_time, gameLvL);
     }
     // Enemy update
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
         (*itEnemy)->update(game_time, gameLvL,  player);
     }
-    // Object update
-    for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
-        (*itObject)->update(game_time, gameLvL);
+    // Nps update
+    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
+        (*itNps)->update(game_time, gameLvL);
     }
     // Item update
     for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
@@ -101,38 +101,39 @@ void GameEngine::initClass() {
     player = new Player(config->s_player->s, gameLvL ,857, 1800, 56, 60, "player");
     //LvL1
     //Enemy
-    enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1500, 1720, 40, 88, "Ghost"));
+    enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
     enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
     //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
     //Item
+    //itemLvL[1].push_back(new health_item(config->s_Item_Health->s, gameLvL, 1400, 1290, 40, 40, "health"));
 
     // Object
-
+    //objLvL[1].push_back(new Object(config->s_Item_Health->s, gameLvL, 1400, 1290, 40, 40, "health"));
     //Nps
 //    npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, *config->text_nps, 1500, 1620, 56, 60, "Historian"));
 //    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, *config->text_nps, 1500, 1620, 122, 152, "Blacksmith"));
 //    npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, *config->text_nps, 1500, 1620, 50, 50, "Knight"));
 
-    npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, *config->text_nps, 1500, 1620, 145, 220, "Aiden"));
+    //npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, *config->text_nps, 1500, 1620, 145, 220, "Aiden"));
     //Fon
-//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10, "Fon_LvL_1"));
-//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10, "Fon_LvL_1"));
-//    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_2"));
-//    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_2"));
-//    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_3"));
-//    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_3"));
-//    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_4"));
-//    fonLvL.push_back(new FonGame(config->s_LvL4_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_4"));
-//    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_5"));
-//    fonLvL.push_back(new FonGame(config->s_LvL5_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_5"));
-//    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_6"));
-//    fonLvL.push_back(new FonGame(config->s_LvL6_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_6"));
+    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10, " "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10, " "));
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){
         EventFunc();
         if(game_event.type == Event::Closed || game_event.key.code == Keyboard::Escape){
             window->close();
+        }
+        // масштабирования камеры
+        if(game_event.type == Event::MouseWheelScrolled){
+            if (game_event.type == sf::Event::MouseWheelScrolled)
+            {
+                if (game_event.mouseWheelScroll.delta < 0)
+                    config->view.zoom(1.1f);
+                else if (game_event.mouseWheelScroll.delta > 0)
+                    config->view.zoom(0.9f);
+            }
         }
         if(game_event.type == Event::KeyPressed){
             if(game_event.key.code == Keyboard::P){
@@ -141,7 +142,7 @@ void GameEngine::pollEvents() {
             }
             if(game_event.key.code == sf::Keyboard::Tab){
                 cout << "X - " << player->position.x <<"\n"<< "Y - " <<  player->position.y << "\n"
-                << "Health: " <<  player->is_health << " / " << player->f_health << endl;
+                     << "Health: " <<  player->is_health << " / " << player->f_health << endl;
             }
             if(game_event.key.code == Keyboard::Num1){
                 gameLvL = new GameLvL(config->s_LvL1->s, 1);
