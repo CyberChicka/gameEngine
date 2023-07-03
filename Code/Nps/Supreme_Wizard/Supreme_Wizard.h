@@ -10,12 +10,11 @@
 
 class Supreme_Wizard: public Nps{
 public:
-    Supreme_Wizard(Sprite *sprite, GameLvL *LvL, CreateText T_NPS,  float X, float Y, int W, int H, string Name);
+    Supreme_Wizard(Sprite *sprite, GameLvL *LvL, CreateText *T_NPS,  float X, float Y, int W, int H, string Name);
     ~Supreme_Wizard();
     void animation(float time)override;
     void Dialogue(Event event, Player player)override;
     void initAnim()override;
-    void update(float time, GameLvL *gLvL)override;
 };
 
 

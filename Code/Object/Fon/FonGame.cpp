@@ -27,6 +27,8 @@ float FonGame::GetX() { return this->position.x; }
 void FonGame::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
     this->animation(time);
+    this->position.y += time*this->dy;
+    this->position.x += time*this->dx;
     this->s->setPosition(this->position);
 }
 void FonGame::draw(sf::RenderWindow &window, sf::View view) {

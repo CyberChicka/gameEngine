@@ -44,9 +44,9 @@ float Object::GetX(){
 void Object::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
     this->animation(time);
-    this->position.x = time*this->dx;
+    this->position.x += time*this->dx;
     this->checkCollisionMap(this->dx, 0.f); // Касание с картой по x
-    this->position.y = time*this->dy;
+    this->position.y += time*this->dy;
     this->checkCollisionMap(0.f, this->dy); // Касание с картой по y
     this->dy+=0.0015*time; // Притяжение к земле
     this->s->setPosition(this->position);

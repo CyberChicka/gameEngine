@@ -15,22 +15,22 @@
 
 class Nps: public Entity{
 public:
-    int ClickNps = 0;
+    int ClickNps;
     CreateText *t_Nps;
-    enum class AnimationIndex{ Walking };
-    Nps(Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, string Name);
+    enum class AnimationIndex{ Walking, Count };
+    Nps(Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, string Name);
     ~Nps();
     FloatRect getRect()override;
     void animation(float time)override;
     void initAnim()override;
-    virtual void update(float time, GameLvL *gLvL);
+    void update(float time, GameLvL *gLvL);
+    virtual void Dialogue(Event event, Player player) = 0;
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
-    virtual void Dialogue(Event event, Player player);
     float GetX()override;
     float GetY()override;
-    Animation animations[int(AnimationIndex::Walking)];
-    AnimationIndex curAnimation = AnimationIndex::Walking;
+    Animation animations[int(AnimationIndex::Count)];
+    AnimationIndex curAnimation = AnimationIndex::Count;
 };
 
 

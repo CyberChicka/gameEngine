@@ -4,7 +4,7 @@
 
 #include "Blacksmith.h"
 
-Blacksmith::Blacksmith(sf::Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name){
+Blacksmith::Blacksmith(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name){
     s->setScale(1.0f, 1.0f);
     this->initAnim();
 }
@@ -15,24 +15,13 @@ Blacksmith::~Blacksmith() {
 }
 
 void Blacksmith::animation(float time) {
+    this->curAnimation = AnimationIndex::Walking;
     this->animations[int(this->curAnimation)].Update(*s, time);
 }
 
 void Blacksmith::initAnim() {
-    this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
+    this->animations[int(AnimationIndex::Walking)] = Animation(16, 0.008, 143, 0, 140, 152, 0);
 }
-
-void Blacksmith::update(float time, GameLvL *gLvL){
-    this->gameLvL = gLvL;
-    this->animation(time);
-    this->position.x = this->dx *time;
-    this->checkCollisionMap(this->dx, 0);
-    this->position.y = this->dy * time;
-    checkCollisionMap(0, this->dy);
-    this->dy += 0.0015 * time;
-    this->s->setPosition(position);
-}
-
 void Blacksmith::Dialogue(sf::Event event, Player player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
@@ -62,7 +51,6 @@ void Blacksmith::Dialogue(sf::Event event, Player player) {
         }
     }
 }
-
 void Blacksmith::Interaction(sf::Event event, Player &player) {
     if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
         if(this->ClickNps == 7){

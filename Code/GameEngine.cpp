@@ -61,10 +61,6 @@ void GameEngine::render(){ // Рендер изображения
     window->setView(config->view); // привязываем окно к камере
 
     player->draw(*window, config->view); // render player
-    // Nps render
-    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
-        (*itNps)->draw(*window, config->view);
-    }
     // Enemy render
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
         (*itEnemy)->draw(*window, config->view);
@@ -76,6 +72,10 @@ void GameEngine::render(){ // Рендер изображения
     // Item render
     for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
         (*itItem)->draw(*window, config->view);
+    }
+    // Nps render
+    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
+        (*itNps)->draw(*window, config->view);
     }
     window->display(); // создаём дисплей
 }
@@ -98,7 +98,7 @@ void GameEngine::initWindow() {
 
 void GameEngine::initClass() {
     gameLvL = new GameLvL(config->s_LvL1->s, 1);
-    player = new Player(config->s_player->s, gameLvL ,857, 1800, 56, 60, "player");
+    player = new Player(config->s_player->s, gameLvL ,9500, 1800, 56, 60, "player");
     //LvL1
     //Enemy
     enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
@@ -110,14 +110,24 @@ void GameEngine::initClass() {
     // Object
     //objLvL[1].push_back(new Object(config->s_Item_Health->s, gameLvL, 1400, 1290, 40, 40, "health"));
     //Nps
-//    npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, *config->text_nps, 1500, 1620, 56, 60, "Historian"));
-//    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, *config->text_nps, 1500, 1620, 122, 152, "Blacksmith"));
-//    npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, *config->text_nps, 1500, 1620, 50, 50, "Knight"));
-
-    //npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, *config->text_nps, 1500, 1620, 145, 220, "Aiden"));
+    //Nps nps_1(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1600, 1520, 56, 60, "Historian");
+    npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps, 9500, 586, 56, 138, "Knight"));
+    npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1100, 1520, 56, 150, "Historian"));
+    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps, 5750, 1620, 122, 152, "Blacksmith"));
+    //
+    npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps, 4300, 1620, 50, 50, "Aiden"));
+    npsLvL[2].push_back(new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps, 800, 1620, 50, 190, "Witcher"));
+    npsLvL[2].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps, 1200, 1620, 122, 152, "Blacksmith"));
+    //
+    npsLvL[3].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps, 1100, 1620, 122, 152, "Blacksmith"));
+    npsLvL[3].push_back(new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps, 1250, 1620, 122, 152, "Supreme_Wizard"));
+    npsLvL[3].push_back(new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps, 2000, 1620, 122, 152, "Soothsayer"));
+    npsLvL[3].push_back(new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps, 5280, 1620, 122, 152, "Swordsman"));
     //Fon
-    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10, " "));
-    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10, " "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){

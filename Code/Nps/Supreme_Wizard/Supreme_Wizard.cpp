@@ -4,7 +4,7 @@
 
 #include "Supreme_Wizard.h"
 
-Supreme_Wizard::Supreme_Wizard(sf::Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
+Supreme_Wizard::Supreme_Wizard(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
     this->initAnim();
     s->setScale(1.0f, 1.0f);
 }
@@ -16,23 +16,24 @@ Supreme_Wizard::~Supreme_Wizard() {
 }
 
 void Supreme_Wizard::animation(float time) {
+    this->curAnimation = AnimationIndex::Walking;
     this->animations[int(this->curAnimation)].Update(*s, time);
 }
 
 void Supreme_Wizard::initAnim() {
-    this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
+    this->animations[int(AnimationIndex::Walking)] = Animation(11, 0.008, 163, 0, 148, 180, 0);
 }
-
-void Supreme_Wizard::update(float time, GameLvL *gLvL){
-    this->gameLvL = gLvL;
-    this->animation(time);
-    this->position.x = this->dx *time;
-    this->checkCollisionMap(this->dx, 0);
-    this->position.y = this->dy * time;
-    checkCollisionMap(0, this->dy);
-    this->dy += 0.0015 * time;
-    this->s->setPosition(position);
-}
+//
+//void Supreme_Wizard::update(float time, GameLvL *gLvL){
+//    this->gameLvL = gLvL;
+//    this->animation(time);
+//    this->position.x += this->dx *time;
+//    this->checkCollisionMap(this->dx, 0);
+//    this->position.y += this->dy * time;
+//    checkCollisionMap(0, this->dy);
+//    this->dy += 0.0015 * time;
+//    this->s->setPosition(position);
+//}
 
 void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
@@ -62,3 +63,13 @@ void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
         }
     }
 }
+//void Supreme_Wizard::draw(sf::RenderWindow &window, sf::View view) {
+//    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
+//                      (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
+//    if(this->dist < window.getSize().x){
+//        window.draw(*this->s);
+//        if(this->isNpsDialogue){
+//            window.draw(*this->t_Nps->text);
+//        }
+//    }
+//}

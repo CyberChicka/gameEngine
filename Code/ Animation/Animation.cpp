@@ -15,7 +15,13 @@ void Animation::Update(Sprite &s, float time) {
     if(l_r == 0){
         s.setTextureRect(IntRect(this->rect_l * int(this->cur_Frame), this->rect_t, this->w, this->h));
     }
-    if(l_r == 1){
+    else if(l_r == 1){
         s.setTextureRect(IntRect(this->rect_l * int(this->cur_Frame)+this->w, this->rect_t, -this->w, this->h));
+    }
+    else if(l_r == 2){
+        s.setTextureRect(IntRect(this->rect_l, this->rect_t * int(this->cur_Frame), this->w, this->h));
+    }
+    else if(l_r == 3){
+        s.setTextureRect(IntRect(this->rect_l, this->rect_t * int(this->cur_Frame) + this->h, this->w, -this->h));
     }
 }

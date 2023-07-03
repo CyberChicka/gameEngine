@@ -4,7 +4,7 @@
 
 #include "Historian.h"
 
-Historian::Historian(sf::Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
+Historian::Historian(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
     this->initAnim();
     s->setScale(0.6f, 0.6f);
 }
@@ -16,24 +16,13 @@ Historian::~Historian() {
 }
 
 void Historian::animation(float time) {
+    this->curAnimation = AnimationIndex::Walking;
     this->animations[int(this->curAnimation)].Update(*s, time);
 }
 
 void Historian::initAnim() {
-    this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
+    this->animations[int(AnimationIndex::Walking)] = Animation(26, 0.008, 0, 367, 400, 340, 2);
 }
-
-void Historian::update(float time, GameLvL *gLvL){
-    this->gameLvL = gLvL;
-    this->animation(time);
-    this->position.x = this->dx *time;
-    this->checkCollisionMap(this->dx, 0);
-    this->position.y = this->dy * time;
-    checkCollisionMap(0, this->dy);
-    this->dy += 0.0015 * time;
-    this->s->setPosition(position);
-}
-
 void Historian::Dialogue(sf::Event event, Player player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;

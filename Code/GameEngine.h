@@ -34,12 +34,13 @@ public:
 
     void run();
 private:
+    Config *config = Config::getInstance();
+    // render
     RenderWindow *window;
     //Gam
     float game_time = 0;
     Time elapsed;
     Clock clock;
-    Config *config = Config::getInstance();
     Event game_event; // создаём переменную типа Event
     // Class player
     Player *player;
