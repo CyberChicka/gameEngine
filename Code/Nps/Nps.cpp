@@ -5,6 +5,7 @@
 
 Nps::Nps(Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
     this->t_Nps = new CreateText(T_NPS);
+    this->s->setTextureRect(IntRect(0, 0, w, h));
     this->initAnim();
 }
 Nps::~Nps() {
@@ -19,15 +20,41 @@ FloatRect Nps::getRect() {
 }
 
 void Nps::animation(float time) {
-
+    this->curAnimation = AnimationIndex::Walking;
+    this->animations[int(this->curAnimation)].Update(*s, time);
 }
 
 void Nps::initAnim() {
-
+    this->animations[int(AnimationIndex::Walking)] = Animation(0, 0, 0, 0, 0, 0, 0);
 }
 
 void Nps::Dialogue(sf::Event event, Player player) {
+    this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
+    ostringstream  d_Nps;
+    if(event.type == Event::KeyPressed){
+        if(event.key.code == Keyboard::F){
+            if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
+                switch (this->isNpsDialogue){
+                    case true:
+                        this->ClickNps++;
+                        this->isNpsDialogue = false;
+                        d_Nps << getNpsMessage(this->ClickNps, this->gameLvL->gameLvL, this->name);
+                        this->t_Nps->text->setString(d_Nps.str());
+                        if(this->gameLvL->gameLvL == 1){
+                            if(this->ClickNps >= 3){this->ClickNps = 0;}
+                        }
+                        else if(this->gameLvL->gameLvL == 2){
+                            if(this->ClickNps >= 3){this->ClickNps = 0;}
+                        }
+                        break;
+                    case false:
+                        this->isNpsDialogue = true;
+                        break;
+                }
 
+            }
+        }
+    }
 }
 void Nps::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
@@ -76,10 +103,6 @@ void Nps::checkCollisionMap(float dX, float dY) {
         }
 }
 
-float Nps::GetX() {
-    return position.x;
-}
+float Nps::GetX() { return position.x; }
 
-float Nps::GetY() {
-    return position.y;
-}
+float Nps::GetY() { return position.y; }

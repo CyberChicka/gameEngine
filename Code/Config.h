@@ -34,10 +34,13 @@ public:
     // Sprite
     CreateImage *s_player;
     CreateImage *s_EnemyGhost, *s_EnemySkeleton;
+    CreateImage *s_Nps_Aiden, *s_Nps_Blacksmith, *s_Nps_Historian, *s_Nps_Knight,
+    *s_Nps_Soothsayer, *s_Nps_SupremeWizard, *s_Nps_Swordsman, *s_Nps_Witcher;
+    CreateImage *s_Item_Health, *s_Item_KeySilver, *s_Item_KeyGold, *s_Item_Money, *s_Item_Diamond;
     CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
     CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon;
     // Text
-    CreateText *text_nps_history;
+    CreateText *text_nps;
     // Music & sound
     m_Music *m_lvl1;
     m_Music *m_lvl2;

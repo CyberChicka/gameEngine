@@ -4,7 +4,7 @@
 
 #include "Object.h"
 
-Object::Object(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std::string Name):Entity(sprite, LvL, X, Y, W, H, Name){
+Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
     this->initAnim();
 }
 Object::~Object() {
@@ -17,21 +17,12 @@ FloatRect Object::getRect() {
     return FloatRect(this->position.x, this->position.y, this->w, this->h);
 }
 void Object::animation(float time) {
+    this->curAnimation = AnimationIndex::Walking;
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void Object::initAnim() {
-    // Idle
-    if(this->name == " "){
+    if(this->name == "ide"){
         this->animations[int(AnimationIndex::Walking)] = Animation(1, 0.008, 0, 0, 5000, 500, 0);
-    }
-    else if(this->name == "House"){
-        this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
-    }
-    else if(this->name == " "){
-        this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
-    }
-    else{
-        this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
     }
 }
 
@@ -54,9 +45,9 @@ void Object::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
     this->animation(time);
     this->position.x = time*this->dx;
-    this->checkCollisionMap(this->dx, 0); // Касание с картой по x
+    this->checkCollisionMap(this->dx, 0.f); // Касание с картой по x
     this->position.y = time*this->dy;
-    this->checkCollisionMap(0, this->dy); // Касание с картой по y
+    this->checkCollisionMap(0.f, this->dy); // Касание с картой по y
     this->dy+=0.0015*time; // Притяжение к земле
     this->s->setPosition(this->position);
 }
@@ -86,20 +77,53 @@ void Object::checkCollisionMap(float dX, float dY) // Работа с карто
                 }
             }
             if(this->gameLvL->gameLvL == 1){
-                if(this->position.x < 1){
-                    this->position.x = this->position.x + 1;
-                }
-                if(this->position.y < 1){
-                    this->position.y = this->position.y + 1;
-                }
-            }
-            else if(this->gameLvL->gameLvL == 2){
-                if(this->position.x < 1){
-                    this->position.x = this->position.x + 1;
-                }
-                if(this->position.y < 1){
-                    this->position.y = this->position.y + 1;
-                }
+                if(this->position.x < 1){ this->position.x = this->position.x + 1; }
+                if(this->position.y < 1){ this->position.y = this->position.y + 1; }
             }
         }
 }
+
+void Object::setPosition(float x, float y) {
+    this->position.x = x;
+    this->position.y = y;
+}
+//Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
+//
+//}
+//Object::~Object() {
+//
+//}
+//
+//FloatRect Object::getRect() {
+//
+//}
+//void Object::animation(float time) {
+//
+//}
+//void Object::initAnim() {
+//
+//}
+//
+//void Object::draw(RenderWindow &window, View view) {
+//
+//}
+//
+//float Object::GetY() {
+//
+//}
+//float Object::GetX(){
+//
+//}
+//
+//void Object::update(float time, GameLvL *gLvL){
+//
+//}
+//
+//void Object::checkCollisionMap(float dX, float dY) // Работа с картой
+//{
+//
+//}
+//
+//void Object::setPosition(float x, float y) {
+//
+//}

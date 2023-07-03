@@ -22,7 +22,6 @@ Player::~Player() {
     delete this->e_Radius;
 }
 FloatRect Player::getRect() {
-
     return FloatRect(this->position.x, this->position.y, this->w, this->h);
 }
 
@@ -143,6 +142,7 @@ void Player::setPosition(float x, float y) {
 }
 
 void Player::update(float time, GameLvL *gLvL){
+    this->particles->setEmitter(this->position.x + 28, this->position.y + 30);
     this->gameLvL = gLvL;
     // Move
     this->move();

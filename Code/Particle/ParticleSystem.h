@@ -36,7 +36,7 @@ public:
     {
         for (std::size_t i = 0; i < m_particles.size(); ++i)
         {
-            // update the particle lifetime
+            // обновляем время жизни частицы
             Particle& p = m_particles[i];
             p.lifetime -= elapsed;
 
@@ -47,24 +47,22 @@ public:
             // update the position of the corresponding vertex
             m_vertices[i].position += p.velocity * elapsed.asSeconds();
 
-            // update the alpha (transparency) of the particle according to its lifetime
+            // обновляем альфу (прозрачность) частицы в соответствии с ее временем жизни
             float ratio = p.lifetime.asSeconds() / m_lifetime.asSeconds();
             m_vertices[i].color.a = 255;
             m_vertices[i].color.b = 155;
-            m_vertices[i].color.g = 155;
-           // m_vertices[i].color.a = static_cast<sf::Uint8>(ratio * 255);
-        }
+            m_vertices[i].color.g = 155;}
     }
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
-        // apply the transform
+        // применяем трансформацию
         states.transform *= getTransform();
 
-        // our particles don't use a texture
+        // наши частицы не используют текстуру
         states.texture = NULL;
 
-        // draw the vertex array
+        // рисуем массив вершин
         target.draw(m_vertices, states);
     }
 
@@ -76,13 +74,13 @@ private:
 
     void resetParticle(std::size_t index)
     {
-        // give a random velocity and lifetime to the particle
+        // придаем случайную скорость и время жизни частице
         float angle = (std::rand() % 360) * 3.14f / 260.f;
         float speed = (std::rand() % 40) + 40.f; // Высота частиц
         m_particles[index].velocity = sf::Vector2f(std::cos(angle) * speed, std::sin(angle) * speed); // если выключить, то можно
         m_particles[index].lifetime = sf::milliseconds((std::rand() % 1000) + 500);
 
-        // reset the position of the corresponding vertex
+        // сбрасываем позицию соответствующей вершины
         m_vertices[index].position = m_emitter;
     }
 

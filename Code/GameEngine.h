@@ -12,6 +12,14 @@
 #include "Object/Object.h"
 #include "Object/Fon/FonGame.h"
 #include "Nps/Nps.h"
+#include "Nps/Aiden/Aiden.h"
+#include "Nps/Historian/Historian.h"
+#include "Nps/Blacksmith/Blacksmith.h"
+#include "Nps/Knight/Knight.h"
+#include "Nps/Soothsayer/Soothsayer.h"
+#include "Nps/Supreme_Wizard/Supreme_Wizard.h"
+#include "Nps/Swordsman/Swordsman.h"
+#include "Nps/Witcher/Witcher.h"
 
 using namespace sf;
 using namespace std;
@@ -43,10 +51,10 @@ private:
     list<Object*> objLvL[7];
 //    //Class Fon
     list<FonGame*>::iterator itFon;
-    list<FonGame*> fonLvL;
+    list<FonGame*>fonLvL[7];
 //    //Class Nps
     list<Nps*>::iterator itNps;
-    list<Nps*> npsLvL;
+    list<Nps*> npsLvL[7];
     // Map
     GameLvL *gameLvL;
     void update();

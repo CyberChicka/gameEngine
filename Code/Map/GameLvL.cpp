@@ -6,7 +6,7 @@
 #include "GameLvL.h"
 
 GameLvL::GameLvL(sf::Sprite *sprite, int GameLvL) {
-    this->s = sprite;
+    this->s = new Sprite(*sprite);
     this->gameLvL = GameLvL;
     this->initMap();
 }

@@ -4,6 +4,9 @@
 #include "Aiden.h"
 
 Aiden::Aiden(Sprite *sprite, GameLvL *LvL, CreateText T_NPS, float X, float Y, int W, int H, string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name){
+    this->life = true;
+    this->onGround = false;
+    if(this->name == "Aiden"){ is_health = 60; }
     this->initAnim();
 }
 Aiden::~Aiden() {
@@ -14,11 +17,12 @@ Aiden::~Aiden() {
 }
 
 void Aiden::animation(float time) {
+    this->curAnimation = AnimationIndex::Walking;
     this->animations[int(this->curAnimation)].Update(*s, time);
 }
 
 void Aiden::initAnim() {
-    this->animations[int(AnimationIndex::Walking)] = Animation(0, 0.008, 0, 0, 0, 0, 0);
+    this->animations[int(AnimationIndex::Walking)] = Animation(10, 0.008, 161, 0, 145, 220, 0);
 }
 
 void Aiden::update(float time, GameLvL *gLvL) {

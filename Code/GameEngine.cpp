@@ -27,14 +27,13 @@ void GameEngine::update() {
     // View
     config->getPlayerCoordinateForView(player->GetX(), player->GetY());
     // Fon update
-    for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
+    for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
         (*itFon)->update(game_time, gameLvL);
     }
     player->update(game_time, gameLvL); // player update
     player->particles->update(elapsed);
-    player->particles->setEmitter(player->position.x + 28, player->position.y + 30);
     // Nps update
-    for(itNps = npsLvL.begin(); itNps != npsLvL.end(); itNps++){
+    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
         (*itNps)->update(game_time, gameLvL);
     }
     // Enemy update
@@ -56,15 +55,14 @@ void GameEngine::update() {
 void GameEngine::render(){ // Рендер изображения
     renderClear();
     // render fon
-    for(itFon = fonLvL.begin(); itFon != fonLvL.end(); itFon++){
-        (*itFon)->draw(*window, config->view);
-    }
+
+    for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){ (*itFon)->draw(*window, config->view); }
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
 
     player->draw(*window, config->view); // render player
     // Nps render
-    for(itNps = npsLvL.begin(); itNps != npsLvL.end(); itNps++){
+    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
         (*itNps)->draw(*window, config->view);
     }
     // Enemy render
@@ -106,13 +104,19 @@ void GameEngine::initClass() {
     enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1500, 1720, 40, 88, "Ghost"));
     enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
     //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
+    //Item
+
     // Object
 
     //Nps
+//    npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, *config->text_nps, 1500, 1620, 56, 60, "Historian"));
+//    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, *config->text_nps, 1500, 1620, 122, 152, "Blacksmith"));
+//    npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, *config->text_nps, 1500, 1620, 50, 50, "Knight"));
 
+    npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, *config->text_nps, 1500, 1620, 145, 220, "Aiden"));
     //Fon
-//    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 0, 0, "Fon_LvL_1"));
-//    fonLvL.push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 0, 0, "Fon_LvL_1"));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10, "Fon_LvL_1"));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10, "Fon_LvL_1"));
 //    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_2"));
 //    fonLvL.push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 5000, 50, "Fon_LvL_2"));
 //    fonLvL.push_back(new FonGame(config->s_LvL3_Fon->s, gameLvL, 0, 1360, 5000, 50, "Fon_LvL_3"));
@@ -212,7 +216,7 @@ void GameEngine::renderClear(){
         window->clear(Color(173, 208, 207));
     }
     else if(gameLvL->gameLvL == 3){
-        window->clear(Color(173, 208, 207));
+        window->clear(Color(10, 10, 10));
     }
     else if(gameLvL->gameLvL == 4){
         window->clear(Color(173, 208, 207));

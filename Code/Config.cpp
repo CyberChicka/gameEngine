@@ -25,11 +25,28 @@ Config::~Config() {
     delete s_LvL4_Fon;
     delete s_LvL5_Fon;
     delete s_LvL6_Fon;
+    // delete Nps sprite
+    delete s_Nps_Witcher;
+    delete s_Nps_Swordsman;
+    delete s_Nps_SupremeWizard;
+    delete s_Nps_Soothsayer;
+    delete s_Nps_Knight;
+    delete s_Nps_Historian;
+    delete s_Nps_Blacksmith;
+    delete s_Nps_Aiden;
+    // delete item sprite
+    delete s_Item_Money;
+    delete s_Item_KeySilver;
+    delete s_Item_KeyGold;
+    delete s_Item_Diamond;
+    delete s_Item_Health;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
     delete m_lvl3;
-
+    // Text
+    delete text_nps;
+    //
     delete so_player_attack;
     delete so_enemy_Ghost_attack;
     delete so_enemy_Scelet_attack;
@@ -67,10 +84,25 @@ void Config::LoadImage() {
     s_LvL4_Fon = new CreateImage("SpriteMapObject/FonLvL4_.png");
     s_LvL5_Fon = new CreateImage("SpriteMapObject/FonLvL5_.png");
     s_LvL6_Fon = new CreateImage("SpriteMapObject/FonLvL6_.png");
+    // Sprite Nps
+    s_Nps_Aiden = new CreateImage("SpriteEntity/Nps/Nps_Aiden.png");
+    s_Nps_Blacksmith = new CreateImage("SpriteEntity/Nps/Blacksmith.png");
+    s_Nps_Historian = new CreateImage("SpriteEntity/Nps/Nps_Historian.png");
+    s_Nps_Knight = new CreateImage("SpriteEntity/Nps/Nps_Knight.png");
+    s_Nps_Soothsayer = new CreateImage("SpriteEntity/Nps/Nps_Soothsayer.png");
+    s_Nps_SupremeWizard = new CreateImage("SpriteEntity/Nps/Supreme_Wizard.png");
+    s_Nps_Swordsman = new CreateImage("SpriteEntity/Nps/Nps_Swordsman.png");
+    s_Nps_Witcher = new CreateImage("SpriteEntity/Nps/Witcher.png");
+    // Sprite Item
+    s_Item_Health = new CreateImage("SpriteItems/HealthLife.png");
+    s_Item_KeySilver = new CreateImage("SpriteItems/KeySilver.png");
+    s_Item_KeyGold = new CreateImage("SpriteItems/KeyGold.png");
+    s_Item_Money = new CreateImage("SpriteItems/Money.png");
+    s_Item_Diamond = new CreateImage("SpriteItems/Diamond.png");
 }
 
 void Config::LoadText() {
-    text_nps_history = new CreateText(" ", 50, "I, player");
+    text_nps = new CreateText("MaredivRegular.ttf", 50, " ");
 }
 
 void Config::LoadMusic() {

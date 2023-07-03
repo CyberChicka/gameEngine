@@ -65,5 +65,9 @@ void Item::checkCollisionMap(float dX, float dY) {
 }
 
 void Item::draw(RenderWindow &window, View view){
-    window.draw(*this->s);
+    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
+                      (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
+    if(this->dist < window.getSize().x){
+        window.draw(*this->s);
+    }
 }
