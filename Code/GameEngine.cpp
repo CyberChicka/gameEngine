@@ -98,8 +98,8 @@ void GameEngine::initWindow() {
 
 void GameEngine::initClass() {
     gameLvL = new GameLvL(config->s_LvL1->s, 1);
-    player = new Player(config->s_player->s, gameLvL ,9500, 1800, 56, 60, "player");
     //LvL1
+    player = new Player(config->s_player->s, gameLvL ,1000, 1800, 56, 60, "player");
     //Enemy
     enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
     enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
