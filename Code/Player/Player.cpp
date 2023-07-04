@@ -172,7 +172,7 @@ void Player::update(float time, GameLvL *gLvL){
 
     this->dy+=0.0015*time;
     if(!this->isAttack)this->s->setPosition(this->position);
-    this->e_Radius->setPosition(position);
+    this->e_Radius->setPosition(this->position);
     // life
     if(this->is_health <= 0)this->life = false;
 }

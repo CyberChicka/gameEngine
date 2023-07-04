@@ -42,6 +42,10 @@ Config::~Config() {
     delete s_Item_Health;
     // delete object
     delete s_Object_HomeDrov;
+    delete s_Object_FlyingObelisk;
+    delete s_Object_DarkBush;
+    delete s_Object_DarkBush2;
+    delete s_Object_DarkStone;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
@@ -103,7 +107,10 @@ void Config::LoadImage() {
     s_Item_Diamond = new CreateImage("SpriteItems/Diamond.png");
     // Sprite Object
     s_Object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
-
+    s_Object_FlyingObelisk = new CreateImage("SpriteMapObject/Object/FlyingObelisk.png");
+    s_Object_DarkBush = new CreateImage("SpriteMapObject/Object/Dark-bush.png");
+    s_Object_DarkBush2 = new CreateImage("SpriteMapObject/Object/Dark-bush-2.png");
+    s_Object_DarkStone = new CreateImage("SpriteMapObject/Object/Dark-stone.png");
 }
 
 void Config::LoadText() {

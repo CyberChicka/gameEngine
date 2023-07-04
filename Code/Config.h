@@ -40,7 +40,7 @@ public:
     CreateImage *s_Item_Health, *s_Item_KeySilver, *s_Item_KeyGold, *s_Item_Money, *s_Item_Diamond;
     CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
     CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon;
-    CreateImage *s_Object_HomeDrov;
+    CreateImage *s_Object_HomeDrov, *s_Object_FlyingObelisk, *s_Object_DarkBush, *s_Object_DarkBush2, *s_Object_DarkStone;
     // Text
     CreateText *text_nps;
     // Music & sound

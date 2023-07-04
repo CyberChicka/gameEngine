@@ -8,6 +8,15 @@ Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     if(this->name == "Home"){
         this->s->setScale(1.2f, 1.2f);
     }
+    if(this->name == "DarkBush"){
+        this->s->setScale(2.0f, 2.0f);
+    }
+    if(this->name == "DarkBush_2"){
+        this->s->setScale(2.0f, 2.0f);
+    }
+    if(this->name == "DarkStone"){
+        this->s->setScale(2.0f, 2.0f);
+    }
     this->initAnim();
 }
 Object::~Object() {
@@ -26,6 +35,18 @@ void Object::animation(float time) {
 void Object::initAnim() {
     if(this->name == "Home"){
         this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 450, 280, 0);
+    }
+    if(this->name == "FlyingObelisk"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(13, 0.008, 200, 0, 145, 390, 0);
+    }
+    if(this->name == "DarkBush"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 50, 25, 0);
+    }
+    if(this->name == "DarkBush_2"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 70, 25, 0);
+    }
+    if(this->name == "DarkStone"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 50, 25, 0);
     }
 }
 

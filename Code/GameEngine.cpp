@@ -102,9 +102,15 @@ void GameEngine::initClass() {
     //Enemy
     enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
     enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
-    // Object
+    // Object LvL 1
     objLvL[1].push_back(new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"));
-    //objLvL[1].push_back(new Object(config->s_Item_Health->s, gameLvL, 1400, 1290, 40, 40, "health"));
+    // Object LvL 2
+
+    // Object LvL 3
+    objLvL[1].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1200, 1600, 145, 390,"FlyingObelisk"));
+    objLvL[1].push_back(new Object(config->s_Object_DarkBush->s, gameLvL, 1250, 1600, 50, 46,"DarkBush"));
+    objLvL[1].push_back(new Object(config->s_Object_DarkBush2->s, gameLvL, 1300, 1600, 70, 46,"DarkBush_2"));
+    objLvL[1].push_back(new Object(config->s_Object_DarkStone->s, gameLvL, 1350, 1600, 50, 46,"DarkStone"));
     //Nps
     //Nps nps_1(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1600, 1520, 56, 60, "Historian");
     npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps, 9500, 586, 56, 138, "Knight"));
