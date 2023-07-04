@@ -6,7 +6,7 @@
 
 #include <utility>
 
-FonGame::FonGame(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
+FonGame::FonGame(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Object(sprite, LvL, X, Y, W, H, Name){
     this->initAnim();
 }
 FonGame::~FonGame() {
@@ -19,11 +19,8 @@ void FonGame::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void FonGame::initAnim() {
-    this->animations[int(AnimationIndex::Walking)] = Animation(1, 0.f, 0, 0, 5000, 500, 0);
+    this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 5000, 500, 0);
 }
-
-float FonGame::GetY() { return this->position.y; }
-float FonGame::GetX() { return this->position.x; }
 void FonGame::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
     this->animation(time);
@@ -32,13 +29,12 @@ void FonGame::update(float time, GameLvL *gLvL){
     this->s->setPosition(this->position);
 }
 void FonGame::draw(sf::RenderWindow &window, sf::View view) {
-    window.draw(*this->s);
+    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
+                      (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
+    if(this->dist < 5000){
+        window.draw(*this->s);
+    }
 }
-
-void FonGame::checkCollisionMap(float dX, float dY) {
-
-}
-
 void FonGame::setPosition(float x, float y) {
     this->position.x = x;
     this->position.y = y;

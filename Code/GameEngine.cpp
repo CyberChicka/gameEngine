@@ -55,27 +55,26 @@ void GameEngine::update() {
 void GameEngine::render(){ // Рендер изображения
     renderClear();
     // render fon
-
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){ (*itFon)->draw(*window, config->view); }
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
-
-    player->draw(*window, config->view); // render player
-    // Enemy render
-    for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
-        (*itEnemy)->draw(*window, config->view);
-    }
-    // Object render
-    for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
-        (*itObject)->draw(*window, config->view);
+    // Nps render
+    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
+        (*itNps)->draw(*window, config->view);
     }
     // Item render
     for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
         (*itItem)->draw(*window, config->view);
     }
-    // Nps render
-    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
-        (*itNps)->draw(*window, config->view);
+    // Object render
+    for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
+        (*itObject)->draw(*window, config->view);
+    }
+    // render player
+    player->draw(*window, config->view);
+    // Enemy render
+    for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
+        (*itEnemy)->draw(*window, config->view);
     }
     window->display(); // создаём дисплей
 }
@@ -87,7 +86,7 @@ void GameEngine::initWindow() {
     config->view_size.x = config->window_size.x;
     config->view_size.y = config->window_size.y;
     const VideoMode videoMode = VideoMode(config->window_size.x, config->window_size.y);
-    const Uint32 style = sf::Style::Close;
+    const Uint32 style = sf::Style::Close| sf::Style::Titlebar;
 
     // Создание окна и камеру, вертикальное синхронизация
     window = new sf::RenderWindow(videoMode, config->window_title, style);
@@ -103,11 +102,8 @@ void GameEngine::initClass() {
     //Enemy
     enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
     enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
-    //enemyLvL1.push_back(new Enemy_Skeleton(config->s_EnemySkeleton->s, gameLvL,0, 0, 0, 0, "EnemySkeleton1"));
-    //Item
-    //itemLvL[1].push_back(new health_item(config->s_Item_Health->s, gameLvL, 1400, 1290, 40, 40, "health"));
-
     // Object
+    objLvL[1].push_back(new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"));
     //objLvL[1].push_back(new Object(config->s_Item_Health->s, gameLvL, 1400, 1290, 40, 40, "health"));
     //Nps
     //Nps nps_1(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1600, 1520, 56, 60, "Historian");
@@ -123,6 +119,12 @@ void GameEngine::initClass() {
     npsLvL[3].push_back(new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps, 1250, 1620, 122, 152, "Supreme_Wizard"));
     npsLvL[3].push_back(new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps, 2000, 1620, 122, 152, "Soothsayer"));
     npsLvL[3].push_back(new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps, 5280, 1620, 122, 152, "Swordsman"));
+    // Item
+    itemLvL[1].push_back(new health_item(config->s_Item_Health->s, gameLvL, 4800, 1600, 40, 45, "Health"));
+    itemLvL[1].push_back(new money_item(config->s_Item_Money->s, gameLvL, 300, 1600, 30, 40, "Money"));
+    itemLvL[1].push_back(new money_item(config->s_Item_Diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"));
+    itemLvL[1].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"));
+    itemLvL[1].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"));
     //Fon
     fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
     fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));

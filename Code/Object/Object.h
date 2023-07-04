@@ -13,12 +13,14 @@ public:
     Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~Object();
     FloatRect getRect()override;
-    void update(float time, GameLvL *gLvL);
+
+    virtual void update(float time, GameLvL *gLvL);
     void draw(RenderWindow &window, View view)override;
     void animation(float time)override;
     void initAnim()override;
     void checkCollisionMap(float dX, float dY)override;
-    void setPosition(float x, float y);
+
+    virtual void setPosition(float x, float y);
     float GetX()override;
     float GetY()override;
 private:

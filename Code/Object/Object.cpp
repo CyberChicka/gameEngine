@@ -5,6 +5,9 @@
 #include "Object.h"
 
 Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
+    if(this->name == "Home"){
+        this->s->setScale(1.2f, 1.2f);
+    }
     this->initAnim();
 }
 Object::~Object() {
@@ -21,8 +24,8 @@ void Object::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void Object::initAnim() {
-    if(this->name == "ide"){
-        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0.008, 0, 0, 5000, 500, 0);
+    if(this->name == "Home"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 450, 280, 0);
     }
 }
 

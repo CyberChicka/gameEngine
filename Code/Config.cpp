@@ -40,6 +40,8 @@ Config::~Config() {
     delete s_Item_KeyGold;
     delete s_Item_Diamond;
     delete s_Item_Health;
+    // delete object
+    delete s_Object_HomeDrov;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
@@ -99,6 +101,9 @@ void Config::LoadImage() {
     s_Item_KeyGold = new CreateImage("SpriteItems/KeyGold.png");
     s_Item_Money = new CreateImage("SpriteItems/Money.png");
     s_Item_Diamond = new CreateImage("SpriteItems/Diamond.png");
+    // Sprite Object
+    s_Object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
+
 }
 
 void Config::LoadText() {

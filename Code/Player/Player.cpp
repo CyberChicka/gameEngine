@@ -28,36 +28,44 @@ FloatRect Player::getRect() {
 void Player::animation(float time) {
     if(this->life){
         if(this->isBlock){
+            this->s->setPosition(position);
             if(this->state == right) this->curAnimation = AnimationIndex::BlockR;
             else if(this->state == left) this->curAnimation = AnimationIndex::BlockL;
             else this->curAnimation = AnimationIndex::BlockR;
         }
-        if(this->isAttack){
-            s->setPosition(position.x, position.y - 40);
-            if(this->state == right) this->curAnimation = AnimationIndex::AttackR;
-            else if(this->state == left) this->curAnimation = AnimationIndex::AttackL;
-            else this->curAnimation = AnimationIndex::AttackR;
+        if(this->isAttack && !this->isBlock){
+            this->stop = false;
+            this->s->setPosition(position.x, position.y - 40);
+            if(this->state == right){
+                this->curAnimation = AnimationIndex::AttackR;
+                if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){ this->isAttack = false; }
+            }
+            else if(this->state == left){
+                this->curAnimation = AnimationIndex::AttackL;
+                if(this->animations[int(AnimationIndex::AttackL)].cur_Frame > 6){ this->isAttack = false; }
+            }
+            else{
+                this->curAnimation = AnimationIndex::AttackR;
+                if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){ this->isAttack = false; }
+            }
         }
-        if(this->isRun){
+        if(this->isRun && !this->isAttack){
+            this->s->setPosition(this->position);
             if(this->state == right) this->curAnimation = AnimationIndex::RunR;
             else if(this->state == left) this->curAnimation = AnimationIndex::RunL;
             else this->curAnimation = AnimationIndex::RunR;
         }
-        if(this->stop){
+        if(this->stop && !this->isAttack){
+            this->s->setPosition(this->position);
             if(this->state == right) this->curAnimation = AnimationIndex::WalkingR;
             else if(this->state == left) this->curAnimation = AnimationIndex::WalkingL;
             else this->curAnimation = AnimationIndex::WalkingR;
         }
-//        if(this->isJump){
-//            if(this->state == right) this->curAnimation = AnimationIndex::JumpR;
-//            else if(this->state == left) this->curAnimation = AnimationIndex::JumpL;
-//            else this->curAnimation = AnimationIndex::JumpR;
-//        }
-        if(!this->onGround && !this->isAttack){
-            if(this->state == right) this->curAnimation = AnimationIndex::JumpR;
-            else if(this->state == left) this->curAnimation = AnimationIndex::JumpL;
-            else this->curAnimation = AnimationIndex::JumpR;
-        }
+    }
+    else{
+        if(this->state == right) this->curAnimation = AnimationIndex::DeadR;
+        else if(this->state == left) this->curAnimation = AnimationIndex::DeadL;
+        else this->curAnimation = AnimationIndex::DeadR;
     }
     this->animations[int(this->curAnimation)].Update(*s, time);
 }
@@ -78,15 +86,18 @@ void Player::initAnim() {
     this->animations[int(AnimationIndex::JumpL)] = Animation(8, 0.009, 155, 200, 155, 150, 1);
     this->animations[int(AnimationIndex::JumpR)] = Animation(8, 0.009, 155, 200, 155, 150, 0);
 
+    this->animations[int(AnimationIndex::DeadL)] = Animation(8, 0.009, 155, 0, 155, 150, 1);
+    this->animations[int(AnimationIndex::DeadR)] = Animation(8, 0.009, 155, 0, 155, 150, 0);
+
 }
 
 void Player::ControlMove() {
     if(this->life){
-        this->stop = true; this->isBlock = false; this->isAttack = false; this->isRun = false; //this->isJump = false;
-        this->isJump = false;
+        this->stop = true; this->isBlock = false; this->isRun = false; //this->isJump = false;
+        this->isJump = false; //this->isAttack = false;
         if(Mouse::isButtonPressed(Mouse::Right)){ this->isBlock = true; this->stop = false; this->speed = 0; }
         else{
-            if(Mouse::isButtonPressed(Mouse::Left)){ isAttack = true; stop = false; speed = 0;}
+            if(Mouse::isButtonPressed(Mouse::Left)){ isAttack = true; stop = false; speed = 0; }
             else{
                 if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::D)) && this->isSprint){
                     this->state = SRight; this->stop = false; this->SprintTime = 0;
@@ -164,6 +175,10 @@ void Player::update(float time, GameLvL *gLvL){
     this->e_Radius->setPosition(position);
     // life
     if(this->is_health <= 0)this->life = false;
+}
+
+void Player::setPlayerCoordinateForView(sf::View &view) {
+    view.setCenter(this->position.x, this->position.y);
 }
 void Player::draw(RenderWindow &window, View view){
     window.draw(*this->particles);

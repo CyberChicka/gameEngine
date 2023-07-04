@@ -18,7 +18,7 @@ public:
         Count};
     Enemy(Sprite *sprite,GameLvL *LvL,  float X, float Y, int W, int H, string Name);
     ~Enemy();
-    FloatRect getRect();
+    FloatRect getRect() override;
     virtual void ControlEnemy(float, float, float) = 0;
     void ControlMove();
     void move();

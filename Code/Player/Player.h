@@ -17,6 +17,7 @@ public:
             AttackL, AttackR,
             BlockL, BlockR,
             JumpL, JumpR,
+            DeadL, DeadR,
             Count};
     CircleShape *e_Radius;//e_Radius -> entity radius
     Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
@@ -25,6 +26,7 @@ public:
     void move();
     void ControlMove();
     void update(float time, GameLvL *gLvL);
+    void setPlayerCoordinateForView(View &view);
     void draw(RenderWindow &window, View view)override;
     void animation(float time)override;
     void initAnim()override;

@@ -6,8 +6,15 @@
 #define GAMEENGINE_BROUGHT_KEY_ITEM_H
 
 
-class key_item {
+#include "../Item.h"
 
+class key_item: public Item {
+public:
+    key_item(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
+    ~key_item();
+    bool isTake(Player &player)override;
+    void initAnim() override;
+    void animation(float time)override;
 };
 
 
