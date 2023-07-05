@@ -43,6 +43,7 @@ void Blacksmith::Dialogue(sf::Event event, Player player) {
                         }
                         break;
                         case false:
+                            this->t_Nps->text->setString(" ");
                             this->isNpsDialogue = true;
                         break;
                     }

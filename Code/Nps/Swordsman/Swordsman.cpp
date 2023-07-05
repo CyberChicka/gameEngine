@@ -23,18 +23,6 @@ void Swordsman::animation(float time) {
 void Swordsman::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(4, 0.008, 229, 0, 220, 266 , 0);
 }
-
-//void Swordsman::update(float time, GameLvL *gLvL){
-//    this->gameLvL = gLvL;
-//    this->animation(time);
-//    this->position.x += this->dx *time;
-//    this->checkCollisionMap(this->dx, 0);
-//    this->position.y += this->dy * time;
-//    checkCollisionMap(0, this->dy);
-//    this->dy += 0.0015 * time;
-//    this->s->setPosition(position);
-//}
-
 void Swordsman::Dialogue(sf::Event event, Player player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
@@ -57,6 +45,7 @@ void Swordsman::Dialogue(sf::Event event, Player player) {
                         }
                         break;
                     case false:
+                        this->t_Nps->text->setString(" ");
                         this->isNpsDialogue = true;
                         break;
                 }
@@ -76,13 +65,3 @@ void Swordsman::Interaction(sf::Event event, Player &player){
         }
     }
 }
-//void Swordsman::draw(sf::RenderWindow &window, sf::View view) {
-//    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
-//                      (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
-//    if(this->dist < window.getSize().x){
-//        window.draw(*this->s);
-//        if(this->isNpsDialogue){
-//            window.draw(*this->t_Nps->text);
-//        }
-//    }
-//}

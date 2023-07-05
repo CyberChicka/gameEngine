@@ -30,7 +30,7 @@ public:
     static const int HeightMap5 = 80;
     static const int WitchMap6 = 320;
     static const int HeightMap6 = 80;
-    String *MapLvL = new String;
+    String *MapLvL;
 };
 
 #endif //GAMEENGINE_BROUGHT_GAMELVL_H

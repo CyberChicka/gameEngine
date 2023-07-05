@@ -91,8 +91,8 @@ void GameEngine::initWindow() {
     // Создание окна и камеру, вертикальное синхронизация
     window = new sf::RenderWindow(videoMode, config->window_title, style);
     config->view.reset(FloatRect(0, 0, config->view_size.x, config->view_size.y));
-    window->setFramerateLimit(config->window_frame);
-    window->setVerticalSyncEnabled(true);
+    //window->setFramerateLimit(config->window_frame);
+    //window->setVerticalSyncEnabled(true);
 }
 
 void GameEngine::initClass() {
@@ -107,10 +107,10 @@ void GameEngine::initClass() {
     // Object LvL 2
 
     // Object LvL 3
-    objLvL[1].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1200, 1600, 145, 390,"FlyingObelisk"));
-    objLvL[1].push_back(new Object(config->s_Object_DarkBush->s, gameLvL, 1250, 1600, 50, 46,"DarkBush"));
-    objLvL[1].push_back(new Object(config->s_Object_DarkBush2->s, gameLvL, 1300, 1600, 70, 46,"DarkBush_2"));
-    objLvL[1].push_back(new Object(config->s_Object_DarkStone->s, gameLvL, 1350, 1600, 50, 46,"DarkStone"));
+    objLvL[3].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"));
+
+    objLvL[3].push_back(new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"));
+    objLvL[3].push_back(new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"));
     //Nps
     //Nps nps_1(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1600, 1520, 56, 60, "Historian");
     npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps, 9500, 586, 56, 138, "Knight"));
@@ -132,10 +132,10 @@ void GameEngine::initClass() {
     itemLvL[1].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"));
     itemLvL[1].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"));
     //Fon
-    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
-    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
-    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
-    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+//    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+//    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){
@@ -205,7 +205,13 @@ void GameEngine::EventFunc() {
 }
 
 void GameEngine::TakeItems() {
+    for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
+        if ((*itItem)->isTake(*player)) {
+            itemLvL[gameLvL->gameLvL].erase(itItem);
+        } else {
 
+        }
+    }
 }
 
 void GameEngine::TakeEquipment() {
@@ -217,7 +223,12 @@ void GameEngine::TakeChest() {
 }
 
 void GameEngine::TakeNps() {
-
+    for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
+//        if((*itNps)->name == " "){
+//            (*itNps)->Dialogue(game_event, *player);
+//            (*itNps)->Interaction(game_event, *player);
+//        } // Пока не работает
+    }
 }
 
 void GameEngine::TakeDoor() {

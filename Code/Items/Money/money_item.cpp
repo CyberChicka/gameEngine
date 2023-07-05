@@ -32,5 +32,5 @@ bool money_item::isTake(Player &player) {
         if(this->name == "Money"){ player.money += 1; return true; }
         if(this->name == "Diamond"){ player.money += 5; return true; }
     }
-    else return false;
+    return false;
 }

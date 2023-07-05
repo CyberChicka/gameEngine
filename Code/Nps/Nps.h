@@ -29,6 +29,7 @@ public:
     void checkCollisionMap(float dX, float dY)override;
     float GetX()override;
     float GetY()override;
+    void Interaction(Event event, Player &player);
     Animation animations[int(AnimationIndex::Count)];
     AnimationIndex curAnimation = AnimationIndex::Count;
 };

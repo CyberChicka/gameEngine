@@ -23,18 +23,6 @@ void Supreme_Wizard::animation(float time) {
 void Supreme_Wizard::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(11, 0.008, 163, 0, 148, 180, 0);
 }
-//
-//void Supreme_Wizard::update(float time, GameLvL *gLvL){
-//    this->gameLvL = gLvL;
-//    this->animation(time);
-//    this->position.x += this->dx *time;
-//    this->checkCollisionMap(this->dx, 0);
-//    this->position.y += this->dy * time;
-//    checkCollisionMap(0, this->dy);
-//    this->dy += 0.0015 * time;
-//    this->s->setPosition(position);
-//}
-
 void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
@@ -55,6 +43,7 @@ void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
                         }
                         break;
                     case false:
+                        this->t_Nps->text->setString(" ");
                         this->isNpsDialogue = true;
                         break;
                 }
@@ -63,13 +52,3 @@ void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
         }
     }
 }
-//void Supreme_Wizard::draw(sf::RenderWindow &window, sf::View view) {
-//    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
-//                      (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
-//    if(this->dist < window.getSize().x){
-//        window.draw(*this->s);
-//        if(this->isNpsDialogue){
-//            window.draw(*this->t_Nps->text);
-//        }
-//    }
-//}

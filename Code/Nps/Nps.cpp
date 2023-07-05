@@ -36,9 +36,8 @@ void Nps::draw(sf::RenderWindow &window, sf::View view) {
                       (this->s->getPosition().y - view.getCenter().y)*(this->s->getPosition().y - view.getCenter().y));
     if(this->dist < window.getSize().x){
         window.draw(*this->s);
-        if(this->isNpsDialogue){
+        if(this->isNpsDialogue)
             window.draw(*this->t_Nps->text);
-        }
     }
 }
 
@@ -69,3 +68,7 @@ void Nps::checkCollisionMap(float dX, float dY) {
 
 float Nps::GetX() { return this->position.x; }
 float Nps::GetY() { return this->position.y; }
+
+void Nps::Interaction(sf::Event event, Player &player) {
+
+}

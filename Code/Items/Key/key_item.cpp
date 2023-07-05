@@ -29,8 +29,8 @@ void key_item::animation(float time) {
 
 bool key_item::isTake(Player &player) {
     if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
-        if(this->name == "SilverKey"){ player.k_Silver++; return true; }
-        if(this->name == "GoldKey"){ player.k_Gold++; return true; }
+        if(this->name == "KeySilver"){ player.k_Silver += 1; return true; }
+        if(this->name == "KeyGold"){ player.k_Gold += 1; return true; }
     }
-    else return false;
+    return false;
 }

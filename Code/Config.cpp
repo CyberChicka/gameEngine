@@ -46,6 +46,8 @@ Config::~Config() {
     delete s_Object_DarkBush;
     delete s_Object_DarkBush2;
     delete s_Object_DarkStone;
+    delete s_Object_DarkTreeBig;
+    delete s_Object_DarkTreeSmall;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
@@ -78,8 +80,8 @@ void Config::LoadImage() {
     s_EnemySkeleton = new CreateImage("SpriteEntity/Enemy/");
     //Sprite LvL Map
     s_LvL1 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL2 = new CreateImage("MapTexture/LvL2.png");
-    s_LvL3 = new CreateImage("MapTexture/LvL3.png");
+    s_LvL2 = new CreateImage("MapTexture/LvL2-up.png");
+    s_LvL3 = new CreateImage("MapTexture/LvL3-up.png");
     s_LvL4 = new CreateImage("MapTexture/LvL4.png");
     s_LvL5 = new CreateImage("MapTexture/LvL5.png");
     s_LvL6 = new CreateImage("MapTexture/LvL6.png");
@@ -111,6 +113,8 @@ void Config::LoadImage() {
     s_Object_DarkBush = new CreateImage("SpriteMapObject/Object/Dark-bush.png");
     s_Object_DarkBush2 = new CreateImage("SpriteMapObject/Object/Dark-bush-2.png");
     s_Object_DarkStone = new CreateImage("SpriteMapObject/Object/Dark-stone.png");
+    s_Object_DarkTreeBig = new CreateImage("SpriteMapObject/Object/Dark-tree-Big.png");
+    s_Object_DarkTreeSmall = new CreateImage("SpriteMapObject/Object/Dark-tree-Small.png");
 }
 
 void Config::LoadText() {
