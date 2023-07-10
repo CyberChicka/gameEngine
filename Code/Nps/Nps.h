@@ -24,12 +24,12 @@ public:
     void animation(float time)override;
     void initAnim()override;
     void update(float time, GameLvL *gLvL);
-    virtual void Dialogue(Event event, Player player) = 0;
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     float GetX()override;
     float GetY()override;
-    void Interaction(Event event, Player &player);
+    virtual void Dialogue(Event event, Player *player) = 0;
+    virtual void Interaction(Event event, Player &player) = 0;
     Animation animations[int(AnimationIndex::Count)];
     AnimationIndex curAnimation = AnimationIndex::Count;
 };

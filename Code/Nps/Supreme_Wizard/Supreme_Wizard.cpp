@@ -5,8 +5,8 @@
 #include "Supreme_Wizard.h"
 
 Supreme_Wizard::Supreme_Wizard(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
+    this->s->setScale(1.0f, 1.0f);
     this->initAnim();
-    s->setScale(1.0f, 1.0f);
 }
 Supreme_Wizard::~Supreme_Wizard() {
     cout << "============== removed from nps historian ============"<< endl;
@@ -23,12 +23,12 @@ void Supreme_Wizard::animation(float time) {
 void Supreme_Wizard::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(11, 0.008, 163, 0, 148, 180, 0);
 }
-void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
+void Supreme_Wizard::Dialogue(sf::Event event, Player *player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
-            if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
+            if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
                 switch (this->isNpsDialogue){
                     case true:
                         this->ClickNps++;
@@ -51,4 +51,8 @@ void Supreme_Wizard::Dialogue(sf::Event event, Player player) {
             }
         }
     }
+}
+
+void Supreme_Wizard::Interaction(sf::Event event, Player &player) {
+
 }

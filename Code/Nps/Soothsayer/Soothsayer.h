@@ -13,7 +13,8 @@ public:
     Soothsayer(Sprite *sprite, GameLvL *LvL, CreateText *T_NPS,  float X, float Y, int W, int H, string Name);
     ~Soothsayer();
     void animation(float time)override;
-    void Dialogue(Event event, Player player)override;
+    void Dialogue(Event event, Player *player)override;
+    void Interaction(Event event, Player &player)override;
     void initAnim()override;
 };
 

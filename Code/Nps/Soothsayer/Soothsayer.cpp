@@ -5,8 +5,8 @@
 #include "Soothsayer.h"
 
 Soothsayer::Soothsayer(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
+    this->s->setScale(1.0f, 1.0f);
     this->initAnim();
-    s->setScale(1.0f, 1.0f);
 }
 Soothsayer::~Soothsayer() {
     cout << "============== removed from nps historian ============"<< endl;
@@ -23,12 +23,12 @@ void Soothsayer::animation(float time) {
 void Soothsayer::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(16, 0.008, 216, 0, 170, 238, 0);
 }
-void Soothsayer::Dialogue(sf::Event event, Player player) {
+void Soothsayer::Dialogue(sf::Event event, Player *player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
-            if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
+            if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
                 switch (this->isNpsDialogue){
                     case true:
                         this->ClickNps++;
@@ -51,4 +51,8 @@ void Soothsayer::Dialogue(sf::Event event, Player player) {
             }
         }
     }
+}
+
+void Soothsayer::Interaction(sf::Event event, Player &player) {
+
 }

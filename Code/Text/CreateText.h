@@ -15,13 +15,14 @@ public:
     int size_text;
     string name_text;
     string file;
+    Color color;
     Text *text;
     Font *font;
-    CreateText(string File, int Size_Text, string Name_text);
+    CreateText(string File, int Size_Text, string Name_text, Color Color);
     CreateText operator+(const CreateText &other);
     ~CreateText();
     void setString(string Name_Text);
-    void setColor(Color &color) const;
+    void setColor(Color color) const;
 };
 
 

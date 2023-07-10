@@ -11,4 +11,5 @@ using namespace std;
 
 string getNpsMessage(int Click, int numLvL, string Name);
 
+
 #endif //GAMEENGINE_BROUGHT_GETNPSMESSAGE_H

@@ -18,28 +18,7 @@ FloatRect Item::getRect() {
 }
 void Item::animation(float time) { }
 void Item::initAnim() { }
-bool Item::isTake(Player &player){
-    if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
-        if(this->name == "Health"){
-            if(player.is_health < player.f_health){
-                if(player.f_health - player.is_health <= 10){
-                    player.is_health+=player.f_health - player.is_health;
-                    return true;
-                }
-                else {
-                    player.is_health += 10;
-                    return true;
-                }
-            } else return false;
-        }
-        if(this->name == "Money"){ player.money += 1; return true; }
-        if(this->name == "Diamond"){ player.money += 5; return true; }
-        if(this->name == "SilverKey"){ player.k_Silver++; return true; }
-        if(this->name == "GoldKey"){ player.k_Gold++; return true; }
-    }
-    return false;
-}
-
+bool Item::isTake(Player &player){ return false; }
 void Item::update(float time, GameLvL *gLvL) {
     this->gameLvL = gLvL;
     animation(time);

@@ -39,11 +39,19 @@ public:
     *s_Nps_Soothsayer, *s_Nps_SupremeWizard, *s_Nps_Swordsman, *s_Nps_Witcher;
     CreateImage *s_Item_Health, *s_Item_KeySilver, *s_Item_KeyGold, *s_Item_Money, *s_Item_Diamond;
     CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
-    CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon;
+    CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon,
+    *s_LvL_1_FonBack, *s_LvL_2_FonBack, *s_LvL_3_FonBack, *s_LvL_4_FonBack, *s_LvL_5_FonBack, *s_LvL_6_FonBack;
     CreateImage *s_Object_HomeDrov, *s_Object_FlyingObelisk, *s_Object_DarkBush,
     *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall;
     // Text
-    CreateText *text_nps;
+    CreateText *text_nps_blacksmith;
+    CreateText *text_nps_historian;
+    CreateText *text_nps_knight;
+    CreateText *text_nps_aiden;
+    CreateText *text_nps_witcher;
+    CreateText *text_nps_supreme_wizard;
+    CreateText *text_nps_soothsayer;
+    CreateText *text_nps_swordsman;
     // Music & sound
     m_Music *m_lvl1;
     m_Music *m_lvl2;

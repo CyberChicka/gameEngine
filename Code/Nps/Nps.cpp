@@ -6,7 +6,6 @@
 Nps::Nps(Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
     this->ClickNps = 0;
     this->t_Nps = new CreateText(*T_NPS);
-    this->s->setTextureRect(IntRect(0, 0, w, h));
     this->initAnim();
 }
 Nps::~Nps() {
@@ -19,7 +18,6 @@ Nps::~Nps() {
 FloatRect Nps::getRect() { return FloatRect(this->position.x, this->position.y, this->w, this->h); }
 void Nps::animation(float time) { }
 void Nps::initAnim() { }
-void Nps::Dialogue(sf::Event event, Player player) { }
 void Nps::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
     this->animation(time);
@@ -36,8 +34,9 @@ void Nps::draw(sf::RenderWindow &window, sf::View view) {
                       (this->s->getPosition().y - view.getCenter().y)*(this->s->getPosition().y - view.getCenter().y));
     if(this->dist < window.getSize().x){
         window.draw(*this->s);
-        if(this->isNpsDialogue)
+        if(!this->isNpsDialogue){
             window.draw(*this->t_Nps->text);
+        }
     }
 }
 
@@ -69,6 +68,5 @@ void Nps::checkCollisionMap(float dX, float dY) {
 float Nps::GetX() { return this->position.x; }
 float Nps::GetY() { return this->position.y; }
 
-void Nps::Interaction(sf::Event event, Player &player) {
-
-}
+void Nps::Interaction(Event event, Player &player){ }
+void Nps::Dialogue(Event event, Player *player){ }

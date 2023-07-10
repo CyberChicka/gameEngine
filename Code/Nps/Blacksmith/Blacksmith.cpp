@@ -5,7 +5,7 @@
 #include "Blacksmith.h"
 
 Blacksmith::Blacksmith(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name){
-    s->setScale(1.0f, 1.0f);
+    this->s->setScale(1.0f, 1.0f);
     this->initAnim();
 }
 Blacksmith::~Blacksmith() {
@@ -22,29 +22,29 @@ void Blacksmith::animation(float time) {
 void Blacksmith::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(16, 0.008, 143, 0, 140, 152, 0);
 }
-void Blacksmith::Dialogue(sf::Event event, Player player) {
+void Blacksmith::Dialogue(sf::Event event, Player *player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
-            if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
+            if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
                 switch (this->isNpsDialogue){
                     case true:
-                        this->isNpsDialogue = false;
-                        d_Nps << getNpsMessage(this->ClickNps, this->gameLvL->gameLvL, this->name);
-                        this->t_Nps->text->setString(d_Nps.str());
                         if(this->gameLvL->gameLvL == 1){
                             if(this->ClickNps<=7) this->ClickNps++;
                             if(this->ClickNps==8)this->ClickNps--;
                         }
                         else if(this->gameLvL->gameLvL == 2){
-                            if(this->ClickNps<=7) this->ClickNps++;
-                            if(this->ClickNps==8)this->ClickNps--;
+                            if(this->ClickNps<=3) this->ClickNps++;
+                            if(this->ClickNps==4)this->ClickNps--;
                         }
+                        this->isNpsDialogue = false;
+                        d_Nps << getNpsMessage(this->ClickNps, this->gameLvL->gameLvL, this->name);
+                        this->t_Nps->text->setString(d_Nps.str());
                         break;
-                        case false:
-                            this->t_Nps->text->setString(" ");
-                            this->isNpsDialogue = true;
+                    case false:
+                        this->t_Nps->text->setString(" ");
+                        this->isNpsDialogue = true;
                         break;
                     }
 

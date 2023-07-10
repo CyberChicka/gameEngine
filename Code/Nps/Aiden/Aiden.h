@@ -12,10 +12,10 @@ class Aiden: public Nps{
 public:
     Aiden(Sprite *sprite, GameLvL *LvL, CreateText *T_NPS,  float X, float Y, int W, int H, string Name);
     ~Aiden();
-//    FloatRect getRect()override;
     void animation(float time)override;
     void initAnim()override;
-    void Dialogue(Event event, Player player)override;
+    void Dialogue(Event event, Player *player)override;
+    void Interaction(Event event, Player &player)override;
     Animation animations[int(AnimationIndex::Count)];
     AnimationIndex curAnimation = AnimationIndex::Count;
 };

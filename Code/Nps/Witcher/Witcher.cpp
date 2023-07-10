@@ -5,8 +5,8 @@
 #include "Witcher.h"
 
 Witcher::Witcher(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
+    this->s->setScale(0.7f, 0.7f);
     this->initAnim();
-    s->setScale(0.7f, 0.7f);
 }
 Witcher::~Witcher() {
     cout << "============== removed from nps historian ============"<< endl;
@@ -23,12 +23,12 @@ void Witcher::animation(float time) {
 void Witcher::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(23, 0.008, 347, 0, 320, 300, 0);
 }
-void Witcher::Dialogue(sf::Event event, Player player) {
+void Witcher::Dialogue(sf::Event event, Player *player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
-            if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
+            if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
                 switch (this->isNpsDialogue){
                     case true:
                         this->ClickNps++;
@@ -51,4 +51,8 @@ void Witcher::Dialogue(sf::Event event, Player player) {
             }
         }
     }
+}
+
+void Witcher::Interaction(sf::Event event, Player &player) {
+
 }

@@ -25,6 +25,12 @@ Config::~Config() {
     delete s_LvL4_Fon;
     delete s_LvL5_Fon;
     delete s_LvL6_Fon;
+    delete s_LvL_1_FonBack;
+    delete s_LvL_2_FonBack;
+    delete s_LvL_3_FonBack;
+    delete s_LvL_4_FonBack;
+    delete s_LvL_5_FonBack;
+    delete s_LvL_6_FonBack;
     // delete Nps sprite
     delete s_Nps_Witcher;
     delete s_Nps_Swordsman;
@@ -53,7 +59,14 @@ Config::~Config() {
     delete m_lvl2;
     delete m_lvl3;
     // Text
-    delete text_nps;
+    delete text_nps_knight;
+    delete text_nps_swordsman;
+    delete text_nps_supreme_wizard;
+    delete text_nps_soothsayer;
+    delete text_nps_historian;
+    delete text_nps_aiden;
+    delete text_nps_historian;
+    delete text_nps_witcher;
     //
     delete so_player_attack;
     delete so_enemy_Ghost_attack;
@@ -92,6 +105,12 @@ void Config::LoadImage() {
     s_LvL4_Fon = new CreateImage("SpriteMapObject/FonLvL4_.png");
     s_LvL5_Fon = new CreateImage("SpriteMapObject/FonLvL5_.png");
     s_LvL6_Fon = new CreateImage("SpriteMapObject/FonLvL6_.png");
+    s_LvL_1_FonBack = new CreateImage("SpriteMapObject/FonLvL1_Back.png");
+    s_LvL_2_FonBack = new CreateImage("SpriteMapObject/FonLvL2_Back.png");
+    s_LvL_3_FonBack = new CreateImage("SpriteMapObject/FonLvL3_Back.png");
+    s_LvL_4_FonBack = new CreateImage("SpriteMapObject/FonLvL4_Back.png");
+    s_LvL_5_FonBack = new CreateImage("SpriteMapObject/FonLvL5_Back.png");
+    s_LvL_6_FonBack = new CreateImage("SpriteMapObject/FonLvL6_Back.png");
     // Sprite Nps
     s_Nps_Aiden = new CreateImage("SpriteEntity/Nps/Nps_Aiden.png");
     s_Nps_Blacksmith = new CreateImage("SpriteEntity/Nps/Blacksmith.png");
@@ -118,7 +137,14 @@ void Config::LoadImage() {
 }
 
 void Config::LoadText() {
-    text_nps = new CreateText("MaredivRegular.ttf", 50, " ");
+    text_nps_blacksmith = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_historian = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_aiden = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_soothsayer = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_supreme_wizard = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_swordsman = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_knight = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
+    text_nps_witcher = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
 }
 
 void Config::LoadMusic() {

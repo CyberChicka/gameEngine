@@ -5,8 +5,8 @@
 #include "Swordsman.h"
 
 Swordsman::Swordsman(sf::Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, std::string Name): Nps(sprite, LvL, T_NPS, X, Y, W, H, Name) {
+    this->s->setScale(1.0f, 1.0f);
     this->initAnim();
-    s->setScale(1.0f, 1.0f);
 }
 Swordsman::~Swordsman() {
     cout << "============== removed from nps historian ============"<< endl;
@@ -23,12 +23,12 @@ void Swordsman::animation(float time) {
 void Swordsman::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(4, 0.008, 229, 0, 220, 266 , 0);
 }
-void Swordsman::Dialogue(sf::Event event, Player player) {
+void Swordsman::Dialogue(sf::Event event, Player *player) {
     this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
-            if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
+            if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
                 switch (this->isNpsDialogue){
                     case true:
                         this->ClickNps++;

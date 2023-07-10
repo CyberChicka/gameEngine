@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "../Map/GameLvL.h"
 
 Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
     this->s->setScale(0.5f, 0.5f);
@@ -77,15 +76,15 @@ void Player::initAnim() {
     this->animations[int(AnimationIndex::RunL)] = Animation(8, 0.009, 155, 200, 155, 150, 1);
     this->animations[int(AnimationIndex::RunR)] = Animation(8, 0.009, 155, 200, 155, 150, 0);
     // Attack
-    this->animations[int(AnimationIndex::AttackL)] = Animation(7, 0.015, 288, 630, 280,300, 1);
-    this->animations[int(AnimationIndex::AttackR)] = Animation(7, 0.015, 288, 630, 280,300, 0);
+    this->animations[int(AnimationIndex::AttackL)] = Animation(7, 0.011, 288, 630, 280,300, 1);
+    this->animations[int(AnimationIndex::AttackR)] = Animation(7, 0.011, 288, 630, 280,300, 0);
     //Block
     this->animations[int(AnimationIndex::BlockL)] = Animation(8, 0.009, 202, 384, 190,150, 1);
     this->animations[int(AnimationIndex::BlockR)] = Animation(8, 0.009, 202, 384, 190,150, 0);
     // Jump
     this->animations[int(AnimationIndex::JumpL)] = Animation(8, 0.009, 155, 200, 155, 150, 1);
     this->animations[int(AnimationIndex::JumpR)] = Animation(8, 0.009, 155, 200, 155, 150, 0);
-
+    //Dead
     this->animations[int(AnimationIndex::DeadL)] = Animation(8, 0.009, 155, 0, 155, 150, 1);
     this->animations[int(AnimationIndex::DeadR)] = Animation(8, 0.009, 155, 0, 155, 150, 0);
 

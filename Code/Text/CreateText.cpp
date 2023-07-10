@@ -4,7 +4,8 @@
 
 #include "CreateText.h"
 
-CreateText::CreateText(string File, int Size_Text, string Name_Text) {
+CreateText::CreateText(string File, int Size_Text, string Name_Text, Color Color) {
+    this->color = Color;
     this->file = File;
     this->size_text = Size_Text;
     this->name_text = Name_Text;
@@ -14,6 +15,7 @@ CreateText::CreateText(string File, int Size_Text, string Name_Text) {
         this->text->setFont(*this->font);
         this->text->setCharacterSize(this->size_text);
         this->text->setString(this->name_text);
+        this->text->setFillColor(this->color);
         cout << "Is load text" << endl;
     }
     else cout << "Error!: -- load text --" << endl;
@@ -34,6 +36,6 @@ void CreateText::setString(string Name_Text) {
     this->text->setString(this->name_text);
 }
 
-void CreateText::setColor(sf::Color &color) const {
+void CreateText::setColor(sf::Color color) const {
     this->text->setFillColor(color);
 }
