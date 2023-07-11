@@ -169,7 +169,7 @@ void Player::update(float time, GameLvL *gLvL){
     this->position.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
 
-    this->dy+=0.0015*time;
+    this->dy = this->dy + 0.0015*time; // Притяжение к земле
     if(!this->isAttack)this->s->setPosition(this->position);
     this->e_Radius->setPosition(this->position);
     // life

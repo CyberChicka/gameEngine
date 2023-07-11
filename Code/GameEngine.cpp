@@ -40,6 +40,9 @@ void GameEngine::update() {
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
         (*itEnemy)->update(game_time, gameLvL,  player);
     }
+    for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
+        (*itChest)->update(game_time, gameLvL);
+    }
     // Nps update
     for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
         (*itNps)->update(game_time, gameLvL);
@@ -58,10 +61,6 @@ void GameEngine::render(){ // Рендер изображения
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){ (*itFon)->draw(*window, config->view); }
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
     window->setView(config->view); // привязываем окно к камере
-    // Item render
-    for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
-        (*itItem)->draw(*window, config->view);
-    }
     // Object render
     for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
         (*itObject)->draw(*window, config->view);
@@ -69,6 +68,14 @@ void GameEngine::render(){ // Рендер изображения
     // Nps render
     for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
         (*itNps)->draw(*window, config->view);
+    }
+    // Chest render
+    for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
+        (*itChest)->draw(*window, config->view);
+    }
+    // Item render
+    for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
+        (*itItem)->draw(*window, config->view);
     }
     // render player
     player->draw(*window, config->view);
@@ -111,6 +118,11 @@ void GameEngine::initClass() {
 
     objLvL[3].push_back(new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"));
     objLvL[3].push_back(new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"));
+    //Chest
+    chestLvL[1].push_back(new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"));
+    chestLvL[1].push_back(new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"));
+    chestLvL[1].push_back(new Chest(config->s_Chest_Middle->s, gameLvL, 582, 1600, 65, 82, "MiddleChest"));
+    chestLvL[1].push_back(new Chest(config->s_Chest_Big->s, gameLvL, 3410, 1600, 65, 90, "BigChest"));
     //Nps
     //Nps nps_1(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1600, 1520, 56, 60, "Historian");
     npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"));
@@ -132,12 +144,12 @@ void GameEngine::initClass() {
     itemLvL[1].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"));
     itemLvL[1].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"));
     //Fon
-//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
-//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
-//    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 0, 1860, 0, 0, " "));
-//    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 4900, 1860, 0, 0, " "));
-//    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
-//    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 0, 1860, 0, 0, " "));
+    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 4900, 1860, 0, 0, " "));
+    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){
@@ -161,7 +173,10 @@ void GameEngine::pollEvents() {
             if(game_event.key.code == sf::Keyboard::Tab){
                 cout << "X - " << player->position.x <<"\n"<< "Y - " <<  player->position.y << "\n"
                      << "Health: " <<  player->is_health << " / " << player->f_health << "\n"
-                     << "level: " << player->lvl_player<< endl;
+                     << "level: " << player->lvl_player<<"\n"
+                     << "k_silver: " << player->k_Silver << "\n"
+                     << "k_gold: " << player->k_Gold << "\n"
+                     << "money: " << player->money <<endl;
             }
             if(game_event.key.code == Keyboard::F1){
                 gameLvL = new GameLvL(config->s_LvL1->s, 1);
@@ -218,26 +233,32 @@ void GameEngine::TakeEquipment() {
 }
 
 void GameEngine::TakeChest() {
-    if(game_event.type == Event::KeyPressed){
-        if(game_event.key.code == Keyboard::F){
-            for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
-                if(player->e_Radius->getGlobalBounds().intersects((*itChest)->getRect())){
-                    if((*itChest)->name == "SmallChest"){
-                        if((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->position.x + 20, (*itChest)->position.y, 40, 45, "KeySilver")); }
-                        if((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_Health->s, gameLvL, (*itChest)->position.x + 20, (*itChest)->position.y, 40, 45, "Health"));}
-                        if((*itChest)->OpenChest() == 3){ }
+    if (game_event.type == Event::KeyPressed) {
+        if (game_event.key.code == Keyboard::F) {
+            for (itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++) {
+                if (player->e_Radius->getGlobalBounds().intersects((*itChest)->getRect())) {
+                    if ((*itChest)->name == "SmallChest") {
+                        if (!(*itChest)->is_open) {
+                            if ((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "KeySilver")); }
+                            if ((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_Item_Health->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "Health")); }
+                            if ((*itChest)->OpenChest() == 3){}
+                        }
                     }
-                    if((*itChest)->name == "MiddleChest" && player->k_Silver > 0){
-                        if((*itChest)->OpenChest() == 1){ }
-                        if((*itChest)->OpenChest() == 2){ }
-                        if((*itChest)->OpenChest() == 3){ }
-                        player->k_Silver--;
+                    if ((*itChest)->name == "MiddleChest" && player->k_Silver > 0) {
+                        if ((!(*itChest)->is_open)) {
+                            if ((*itChest)->OpenChest() == 1){itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "KeyGold"));}
+                            if ((*itChest)->OpenChest() == 2){itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_Item_Money->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "Money"));}
+                            if ((*itChest)->OpenChest() == 3){itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_Item_Health->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "Health"));}
+                            player->k_Silver--;
+                        }
                     }
-                    if((*itChest)->name == "BigChest" && player->k_Gold > 0){
-                        if((*itChest)->OpenChest() == 1){ }
-                        if((*itChest)->OpenChest() == 2){ }
-                        if((*itChest)->OpenChest() == 3){ }
-                        player->k_Gold--;
+                    if ((*itChest)->name == "BigChest" && player->k_Gold > 0) {
+                        if ((!(*itChest)->is_open)) {
+                            if ((*itChest)->OpenChest() == 1){itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_Item_Diamond->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "Diamond"));}
+                            if ((*itChest)->OpenChest() == 2){itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "KeyGold"));}
+                            if ((*itChest)->OpenChest() == 3){itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "KeySilver"));}
+                            player->k_Gold--;
+                        }
                     }
                 }
             }

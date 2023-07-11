@@ -25,7 +25,7 @@ void Nps::update(float time, GameLvL *gLvL){
     this->checkCollisionMap(this->dx, 0);
     this->position.y += this->dy * time;
     checkCollisionMap(0, this->dy);
-    if(!this->onGround)this->dy+=0.0015*time;
+    if(!this->onGround)this->dy = dy + 0.0015*time; // Притяжение к земле
     this->s->setPosition(this->position);
 }
 

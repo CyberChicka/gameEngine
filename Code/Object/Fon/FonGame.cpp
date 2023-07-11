@@ -29,11 +29,7 @@ void FonGame::update(float time, GameLvL *gLvL){
     this->s->setPosition(this->position);
 }
 void FonGame::draw(sf::RenderWindow &window, sf::View view) {
-    this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
-                      (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
-    if(this->dist < 5000){
-        window.draw(*this->s);
-    }
+    window.draw(*this->s);
 }
 void FonGame::setPosition(float x, float y) {
     this->position.x = x;

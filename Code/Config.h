@@ -43,6 +43,7 @@ public:
     *s_LvL_1_FonBack, *s_LvL_2_FonBack, *s_LvL_3_FonBack, *s_LvL_4_FonBack, *s_LvL_5_FonBack, *s_LvL_6_FonBack;
     CreateImage *s_Object_HomeDrov, *s_Object_FlyingObelisk, *s_Object_DarkBush,
     *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall;
+    CreateImage *s_Chest_Small, *s_Chest_Middle, *s_Chest_Big;
     // Text
     CreateText *text_nps_blacksmith;
     CreateText *text_nps_historian;

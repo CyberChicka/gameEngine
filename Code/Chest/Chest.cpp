@@ -6,10 +6,11 @@
 
 Chest::Chest(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
     this->is_open = false;
-    if(this->name == "SmallChest"){ s->setScale(1.0f, 1.0f); }
-    if(this->name == "MiddleChest"){ s->setScale(1.0f, 1.0f); }
-    if(this->name == "BigChest"){ s->setScale(1.0f, 1.0f); }
-    initAnim();
+    //s = new Sprite(*sprite);
+//    if(this->name == "SmallChest"){ s->setScale(1.0f, 1.0f); }
+//    if(this->name == "MiddleChest"){ s->setScale(1.0f, 1.0f); }
+//    if(this->name == "BigChest"){ s->setScale(1.0f, 1.0f); }
+    this->initAnim();
 }
 Chest::~Chest() {
     cout << "============== removed from chest ============"<< endl;
@@ -19,24 +20,30 @@ Chest::~Chest() {
 
 void Chest::initAnim() {
     if(this->name == "SmallChest"){
-        this->animations[int(AnimationIndex::WalkingOpen)] = Animation(8, 0.008, 194, 0, 160, 150, 1);
-        this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0, 194, 0, 160, 150, 1);
+        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 80, 0, 65, 75, 1);
+        this->animations[int(AnimationIndex::WalkingOpen)] = Animation(1, 0.0, 728, 0, 65, 75, 4);
+        this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0.0, 0, 0, 65, 75, 4);
     }
     if(this->name == "MiddleChest"){
-        this->animations[int(AnimationIndex::WalkingOpen)] = Animation(8, 0.008, 194, 0, 160, 150, 1);
-        this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0, 194, 0, 160, 150, 1);
+        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 90, 0, 70, 88, 1);
+        this->animations[int(AnimationIndex::WalkingOpen)] = Animation(1, 0.0, 810, 0, 70, 88, 4);
+        this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0.0, 0, 0, 70, 88, 4);
     }
     if(this->name == "BigChest"){
-        this->animations[int(AnimationIndex::WalkingOpen)] = Animation(8, 0.008, 194, 0, 160, 150, 1);
-        this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0, 194, 0, 160, 150, 1);
+        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 108, 0, 88, 95, 1);
+        this->animations[int(AnimationIndex::WalkingOpen)] = Animation(1, 0.0, 968, 0, 85, 95, 4);
+        this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0.0, 0, 0, 85, 95, 4);
     }
 }
 
 void Chest::animation(float time) {
     if(is_open){
-        this->curAnimation = AnimationIndex::WalkingOpen;
+        if(this->animations[int(AnimationIndex::WalkingOpening)].cur_Frame < 8)
+            this->curAnimation = AnimationIndex::WalkingOpening;
+        else
+            this->curAnimation = AnimationIndex::WalkingOpen;
     }
-    else {
+    else{
         this->curAnimation = AnimationIndex::WalkingClose;
     }
     this->animations[int(this->curAnimation)].Update(*this->s, time);
@@ -53,7 +60,7 @@ void Chest::update(float time, GameLvL *gLvL) {
     this->checkCollisionMap(this->dx, 0.f); // Касание с картой по x
     this->position.y += time*this->dy;
     this->checkCollisionMap(0.f, this->dy); // Касание с картой по y
-    this->dy+=0.0015*time; // Притяжение к земле
+    this->dy = dy + 0.0015*time; // Притяжение к земле
     this->s->setPosition(this->position);
 }
 
@@ -95,7 +102,7 @@ void Chest::checkCollisionMap(float dX, float dY) {
         }
 }
 
-void Chest::draw(sf::RenderWindow &window, sf::View view) {
+void Chest::draw(RenderWindow &window, View view) {
     this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) +
                       (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
     if(this->dist < window.getSize().x){

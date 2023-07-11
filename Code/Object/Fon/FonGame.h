@@ -8,7 +8,7 @@
 
 class FonGame: public Object{
 public:
-    enum class AnimationIndex{ Walking };
+    enum class AnimationIndex{ Walking, Count };
     FonGame(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~FonGame();
     FloatRect getRect()override;
@@ -18,8 +18,8 @@ public:
     void initAnim()override;
     void setPosition(float x, float y)override;
 private:
-    Animation animations[int(AnimationIndex::Walking)];
-    AnimationIndex curAnimation = AnimationIndex::Walking;
+    Animation animations[int(AnimationIndex::Count)];
+    AnimationIndex curAnimation = AnimationIndex::Count;
 };
 
 
