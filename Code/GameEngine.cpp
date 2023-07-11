@@ -218,7 +218,31 @@ void GameEngine::TakeEquipment() {
 }
 
 void GameEngine::TakeChest() {
-
+    if(game_event.type == Event::KeyPressed){
+        if(game_event.key.code == Keyboard::F){
+            for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
+                if(player->e_Radius->getGlobalBounds().intersects((*itChest)->getRect())){
+                    if((*itChest)->name == "SmallChest"){
+                        if((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->position.x + 20, (*itChest)->position.y, 40, 45, "KeySilver")); }
+                        if((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_Health->s, gameLvL, (*itChest)->position.x + 20, (*itChest)->position.y, 40, 45, "Health"));}
+                        if((*itChest)->OpenChest() == 3){ }
+                    }
+                    if((*itChest)->name == "MiddleChest" && player->k_Silver > 0){
+                        if((*itChest)->OpenChest() == 1){ }
+                        if((*itChest)->OpenChest() == 2){ }
+                        if((*itChest)->OpenChest() == 3){ }
+                        player->k_Silver--;
+                    }
+                    if((*itChest)->name == "BigChest" && player->k_Gold > 0){
+                        if((*itChest)->OpenChest() == 1){ }
+                        if((*itChest)->OpenChest() == 2){ }
+                        if((*itChest)->OpenChest() == 3){ }
+                        player->k_Gold--;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void GameEngine::TakeNps() {

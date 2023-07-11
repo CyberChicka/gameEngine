@@ -23,6 +23,7 @@
 #include "Items/Health/health_item.h"
 #include "Items/Key/key_item.h"
 #include "Items/Money/money_item.h"
+#include "Chest/Chest.h"
 
 using namespace sf;
 using namespace std;
@@ -59,6 +60,9 @@ private:
 //    //Class Nps
     list<Nps*>::iterator itNps;
     list<Nps*> npsLvL[7];
+    // Class Chest
+    list<Chest*>::iterator itChest;
+    list<Chest*> chestLvL[7];
     // Map
     GameLvL *gameLvL;
     void update();
