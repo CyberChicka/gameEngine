@@ -160,8 +160,11 @@ void Player::update(float time, GameLvL *gLvL){
     this->animation(time);
     // sprint
     this->SprintTime += time;
+    this->BulletTime += time;
     if(this->SprintTime > 3500)this->isSprint = true;
     else this->isSprint = false;
+    if(this->BulletTime > 5000)this->isShoot = true;
+    else this->isShoot = false;
     //position
     this->position.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);

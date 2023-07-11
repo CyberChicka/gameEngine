@@ -44,6 +44,7 @@ public:
     CreateImage *s_Object_HomeDrov, *s_Object_FlyingObelisk, *s_Object_DarkBush,
     *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall;
     CreateImage *s_Chest_Small, *s_Chest_Middle, *s_Chest_Big;
+    CreateImage *s_Bullet;
     // Text
     CreateText *text_nps_blacksmith;
     CreateText *text_nps_historian;

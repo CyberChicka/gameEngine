@@ -58,6 +58,8 @@ Config::~Config() {
     delete s_Chest_Small;
     delete s_Chest_Middle;
     delete s_Chest_Big;
+    //delete bullet sprite
+    delete s_Bullet;
     //music & sound
     delete m_lvl1;
     delete m_lvl2;
@@ -138,10 +140,12 @@ void Config::LoadImage() {
     s_Object_DarkStone = new CreateImage("SpriteMapObject/Object/Dark-stone.png");
     s_Object_DarkTreeBig = new CreateImage("SpriteMapObject/Object/Dark-tree-Big.png");
     s_Object_DarkTreeSmall = new CreateImage("SpriteMapObject/Object/Dark-tree-Small.png");
-    // class
+    // class chest
     s_Chest_Small = new CreateImage("SpriteObject/Chest/SmallChest.png");
     s_Chest_Middle = new CreateImage("SpriteObject/Chest/MiddleChest.png");
     s_Chest_Big = new CreateImage("SpriteObject/Chest/BigChest.png");
+    // class bullet
+    s_Bullet = new CreateImage("SpriteEntity/Player/AttacPlaz1.png");
 }
 
 void Config::LoadText() {

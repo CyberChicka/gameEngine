@@ -18,7 +18,7 @@ add_executable(GameEngine_Brought main.cpp Code/GameEngine.cpp Code/GameEngine.h
         Code/Nps/Soothsayer/Soothsayer.cpp Code/Nps/Soothsayer/Soothsayer.h Code/Nps/Supreme_Wizard/Supreme_Wizard.cpp Code/Nps/Supreme_Wizard/Supreme_Wizard.h
         Code/Nps/Swordsman/Swordsman.cpp Code/Nps/Swordsman/Swordsman.h Code/Nps/Witcher/Witcher.cpp Code/Nps/Witcher/Witcher.h
         Code/Nps/NpsMessage/getNpsMessage.cpp Code/Nps/NpsMessage/getNpsMessage.h Code/Player/LifeBar/LifeBar.cpp Code/Player/LifeBar/LifeBar.h
-        Code/Particle/ParticleSystem.h Code/Chest/Chest.cpp Code/Chest/Chest.h)
+        Code/Particle/ParticleSystem.h Code/Chest/Chest.cpp Code/Chest/Chest.h Code/Player/Bullet/Bullet.cpp Code/Player/Bullet/Bullet.h)
 
 set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc ")
 

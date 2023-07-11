@@ -51,6 +51,10 @@ void GameEngine::update() {
     for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
         (*itItem)->update(game_time, gameLvL);
     }
+    // Bullet update
+    for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
+        (*itBullet)->upadte(game_time);
+    }
     // Evnet
     pollEvents();
 }
@@ -83,6 +87,10 @@ void GameEngine::render(){ // Рендер изображения
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
         (*itEnemy)->draw(*window, config->view);
     }
+    // Bullet Render
+    for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
+        (*itBullet)->draw(*window, config->view);
+    }
     window->display(); // создаём дисплей
 }
 
@@ -94,12 +102,11 @@ void GameEngine::initWindow() {
     config->view_size.y = config->window_size.y;
     const VideoMode videoMode = VideoMode(1280, 720);
     const Uint32 style = sf::Style::Close| sf::Style::Titlebar;
-
     // Создание окна и камеру, вертикальное синхронизация
     window = new sf::RenderWindow(videoMode, config->window_title, style);
     config->view.reset(FloatRect(0, 0, config->view_size.x, config->view_size.y));
-    //window->setFramerateLimit(config->window_frame);
-    //window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(config->window_frame);
+    window->setVerticalSyncEnabled(true);
 }
 
 void GameEngine::initClass() {
@@ -108,14 +115,14 @@ void GameEngine::initClass() {
     player = new Player(config->s_player->s, gameLvL ,1000, 1800, 56, 60, "player");
     //Enemy
     //enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
+    //enemy lvl 2
     enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
+    // enemy lvl 3
     // Object LvL 1
     objLvL[1].push_back(new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"));
     // Object LvL 2
-
     // Object LvL 3
     objLvL[3].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"));
-
     objLvL[3].push_back(new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"));
     objLvL[3].push_back(new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"));
     //Chest
@@ -128,11 +135,11 @@ void GameEngine::initClass() {
     npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"));
     npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"));
     npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"));
-    //
+    // nps lvl 2
     npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4300, 1620, 50, 50, "Aiden"));
     npsLvL[2].push_back(new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher"));
     npsLvL[2].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1200, 1620, 122, 152, "Blacksmith"));
-    //
+    // nps lvl 3
     npsLvL[3].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1620, 122, 152, "Blacksmith"));
     npsLvL[3].push_back(new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"));
     npsLvL[3].push_back(new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1620, 122, 152, "Soothsayer"));
@@ -143,13 +150,20 @@ void GameEngine::initClass() {
     itemLvL[1].push_back(new money_item(config->s_Item_Diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"));
     itemLvL[1].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"));
     itemLvL[1].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"));
+    // item lvl 2
+
+    // item lvl 3
+
     //Fon
     fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
     fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
     fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 0, 1860, 0, 0, " "));
     fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 4900, 1860, 0, 0, " "));
+    //
     fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
     fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+    //
+
 }
 void GameEngine::pollEvents() {
     while (window->pollEvent(game_event)){
@@ -213,6 +227,7 @@ void GameEngine::pollEvents() {
 }
 
 void GameEngine::EventFunc() {
+    ShootBullet();
     TakeItems();
     TakeEquipment();
     TakeChest();
@@ -278,6 +293,17 @@ void GameEngine::TakeDoor() {
 }
 void GameEngine::TakeEnemy() {
 
+}
+
+void GameEngine::ShootBullet() {
+    if(game_event.type == Event::KeyPressed){
+        if(game_event.key.code == Keyboard::LControl){
+            if(player->life && player->isShoot){
+                bulletLvL.push_back(new Bullet(config->s_Bullet->s,gameLvL, player->position.x, player->position.y, 500, 370, "Bullet", player->state));
+                player->BulletTime = 0;
+            }
+        }
+    }
 }
 // clear color
 void GameEngine::renderClear(){

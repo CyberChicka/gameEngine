@@ -24,6 +24,7 @@
 #include "Items/Key/key_item.h"
 #include "Items/Money/money_item.h"
 #include "Chest/Chest.h"
+#include "Player/Bullet/Bullet.h"
 
 using namespace sf;
 using namespace std;
@@ -63,6 +64,9 @@ private:
     // Class Chest
     list<Chest*>::iterator itChest;
     list<Chest*> chestLvL[7];
+    // class Bullet
+    list<Bullet*>::iterator itBullet;
+    list<Bullet*> bulletLvL;
     // Map
     GameLvL *gameLvL;
     void update();
@@ -77,6 +81,7 @@ private:
     void TakeEnemy();
     void TakeEquipment();
     void TakeNps();
+    void ShootBullet();
     
     //
     bool isRunning();
