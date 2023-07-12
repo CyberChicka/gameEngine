@@ -26,7 +26,7 @@ public:
     void move();
     void ControlMove();
     void update(float time, GameLvL *gLvL);
-    void setPlayerCoordinateForView(View &view);
+    View setPlayerCoordinateForView(View &view);
     void draw(RenderWindow &window, View view)override;
     void animation(float time)override;
     void initAnim()override;

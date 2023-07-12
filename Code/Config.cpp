@@ -54,6 +54,9 @@ Config::~Config() {
     delete s_Object_DarkStone;
     delete s_Object_DarkTreeBig;
     delete s_Object_DarkTreeSmall;
+    delete s_Object_BushHouse;
+    delete s_Object_RemainsSkeleton;
+    delete s_Object_BonfireHouse;
     // delete chest sprite
     delete s_Chest_Small;
     delete s_Chest_Middle;
@@ -87,8 +90,8 @@ Config *Config::getInstance() {
 
 View Config::getPlayerCoordinateForView(float x, float y) {
     float tempX = x; float tempY = y;
-    view.setCenter(tempX, tempY - 100); // Следим за игроком передавая его координаты
-    return view;
+    this->view.setCenter(tempX, tempY - 100); // Следим за игроком передавая его координаты
+    return this->view;
 }
 
 void Config::LoadImage() {
@@ -134,12 +137,15 @@ void Config::LoadImage() {
     s_Item_Diamond = new CreateImage("SpriteItems/Diamond.png");
     // Sprite Object
     s_Object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
+    s_Object_BushHouse = new CreateImage("SpriteMapObject/House/Bush_House.png");
+    s_Object_BonfireHouse = new CreateImage("SpriteMapObject/House/Bonfire_House.png");
     s_Object_FlyingObelisk = new CreateImage("SpriteMapObject/Object/FlyingObelisk.png");
     s_Object_DarkBush = new CreateImage("SpriteMapObject/Object/Dark-bush.png");
     s_Object_DarkBush2 = new CreateImage("SpriteMapObject/Object/Dark-bush-2.png");
     s_Object_DarkStone = new CreateImage("SpriteMapObject/Object/Dark-stone.png");
     s_Object_DarkTreeBig = new CreateImage("SpriteMapObject/Object/Dark-tree-Big.png");
     s_Object_DarkTreeSmall = new CreateImage("SpriteMapObject/Object/Dark-tree-Small.png");
+    s_Object_RemainsSkeleton = new CreateImage("SpriteMapObject/miniObject/RemainsSkeleton.png");
     // class chest
     s_Chest_Small = new CreateImage("SpriteObject/Chest/SmallChest.png");
     s_Chest_Middle = new CreateImage("SpriteObject/Chest/MiddleChest.png");

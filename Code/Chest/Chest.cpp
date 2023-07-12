@@ -16,7 +16,7 @@ Chest::~Chest() {
 
 void Chest::initAnim() {
     if(this->name == "SmallChest"){
-        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 80, 0, 65, 75, 1);
+        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 80, 0, 50, 75, 1);
         this->animations[int(AnimationIndex::WalkingOpen)] = Animation(1, 0.0, 728, 0, 65, 75, 4);
         this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0.0, 0, 0, 65, 75, 4);
     }

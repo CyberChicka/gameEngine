@@ -24,6 +24,15 @@ void Object::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void Object::initAnim() {
+    if(this->name == "RemainsSkeleton"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(5, 0.008, 106, 0, 95, 80, 0);
+    }
+    if(this->name == "BonfireHouse"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(4, 0, 0, 807, 1230, 730, 2);
+    }
+    if(this->name == "BushHouse"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 500, 300, 0);
+    }
     if(this->name == "Home"){
         this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 450, 280, 0);
     }
@@ -99,43 +108,3 @@ void Object::setPosition(float x, float y) {
     this->position.x = x;
     this->position.y = y;
 }
-//Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
-//
-//}
-//Object::~Object() {
-//
-//}
-//
-//FloatRect Object::getRect() {
-//
-//}
-//void Object::animation(float time) {
-//
-//}
-//void Object::initAnim() {
-//
-//}
-//
-//void Object::draw(RenderWindow &window, View view) {
-//
-//}
-//
-//float Object::GetY() {
-//
-//}
-//float Object::GetX(){
-//
-//}
-//
-//void Object::update(float time, GameLvL *gLvL){
-//
-//}
-//
-//void Object::checkCollisionMap(float dX, float dY) // Работа с картой
-//{
-//
-//}
-//
-//void Object::setPosition(float x, float y) {
-//
-//}

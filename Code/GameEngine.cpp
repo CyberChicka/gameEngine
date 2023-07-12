@@ -62,9 +62,10 @@ void GameEngine::update() {
 void GameEngine::render(){ // Рендер изображения
     renderClear();
     // render fon
-    for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){ (*itFon)->draw(*window, config->view); }
+    for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
+        (*itFon)->draw(*window, config->view);
+    }
     gameLvL->RenderDraw(*window, config->view); // Рисуем карту
-    window->setView(config->view); // привязываем окно к камере
     // Object render
     for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
         (*itObject)->draw(*window, config->view);
@@ -91,6 +92,7 @@ void GameEngine::render(){ // Рендер изображения
     for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
         (*itBullet)->draw(*window, config->view);
     }
+    window->setView(config->view); // привязываем окно к камере
     window->display(); // создаём дисплей
 }
 
@@ -134,19 +136,31 @@ void GameEngine::initClass() {
     //objLvL[1].push_back(new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"));
     // Object LvL 2
     objLvL[2] = {
-
+            new Object(config->s_Object_BushHouse->s, gameLvL, 3400, 1600, 500, 300, "BushHouse"),
+            new Object(config->s_Object_BonfireHouse->s, gameLvL, 4500, 1600, 1230, 730, "BonfireHouse"),
     };
     // Object LvL 3
     objLvL[3] = {
             new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"),
             new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"),
-            new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall")
+            new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"),
+            //RemainsSkeleton
+            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 500, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 1500, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 2400, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3300, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3500, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3700, 1600, 95, 72, "RemainsSkeleton"),
     };
 //    objLvL[3].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"));
 //    objLvL[3].push_back(new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"));
 //    objLvL[3].push_back(new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"));
     //Chest
     chestLvL[1] = {
+            new Chest(config->s_Chest_Small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_Chest_Middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
+            new Chest(config->s_Chest_Big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
+            //
             new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_Chest_Middle->s, gameLvL, 582, 1600, 65, 82, "MiddleChest"),
@@ -168,7 +182,7 @@ void GameEngine::initClass() {
 //    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"));
     // nps lvl 2
     npsLvL[2] = {
-            new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4300, 1620, 50, 50, "Aiden"),
+            new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4300, 1620, 50, 105, "Aiden"),
             new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1000, 1620, 50, 152, "Blacksmith"),
             new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher")
     };
@@ -304,9 +318,13 @@ void GameEngine::EventFunc() {
 }
 
 void GameEngine::TakeItems() {
-    for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
-        if ((*itItem)->isTake(*player)) {
-            itemLvL[gameLvL->gameLvL].erase(itItem);
+    if (game_event.type == Event::KeyPressed){
+        if (game_event.key.code == Keyboard::F){
+            for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
+                if ((*itItem)->isTake(*player)) {
+                    itemLvL[gameLvL->gameLvL].erase(itItem);
+                }
+            }
         }
     }
 }

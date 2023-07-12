@@ -34,16 +34,24 @@ public:
     // Sprite
     //SmartPointer<CreateImage>*s_player;
     CreateImage *s_player;
+    // Enemy
     CreateImage *s_EnemyGhost, *s_EnemySkeleton;
+    // Nps
     CreateImage *s_Nps_Aiden, *s_Nps_Blacksmith, *s_Nps_Historian, *s_Nps_Knight,
     *s_Nps_Soothsayer, *s_Nps_SupremeWizard, *s_Nps_Swordsman, *s_Nps_Witcher;
+    // Item
     CreateImage *s_Item_Health, *s_Item_KeySilver, *s_Item_KeyGold, *s_Item_Money, *s_Item_Diamond;
+    // LvL
     CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
+    // LvL Fon
     CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon,
     *s_LvL_1_FonBack, *s_LvL_2_FonBack, *s_LvL_3_FonBack, *s_LvL_4_FonBack, *s_LvL_5_FonBack, *s_LvL_6_FonBack;
-    CreateImage *s_Object_HomeDrov, *s_Object_FlyingObelisk, *s_Object_DarkBush,
-    *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall;
+    // Object
+    CreateImage *s_Object_HomeDrov, *s_Object_BushHouse, *s_Object_BonfireHouse, *s_Object_FlyingObelisk, *s_Object_DarkBush,
+    *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall, *s_Object_RemainsSkeleton;
+    // Chest
     CreateImage *s_Chest_Small, *s_Chest_Middle, *s_Chest_Big;
+    // Bullet
     CreateImage *s_Bullet;
     // Text
     CreateText *text_nps_blacksmith;

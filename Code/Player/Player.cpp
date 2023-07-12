@@ -181,8 +181,9 @@ void Player::update(float time, GameLvL *gLvL){
     if(this->is_health <= 0)this->life = false;
 }
 
-void Player::setPlayerCoordinateForView(sf::View &view) {
-    view.setCenter(this->position.x, this->position.y);
+View Player::setPlayerCoordinateForView(sf::View &view) {
+    view.setCenter(this->position.x, this->position.y - 100);
+    return view;
 }
 void Player::draw(RenderWindow &window, View view){
     window.draw(*this->particles);
