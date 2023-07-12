@@ -5,6 +5,10 @@
 #include "MainMenu.h"
 #include "Player/Player.h"
 #include "Enemy/Enemy.h"
+#include "Enemy/Enemy BigGhost/Enemy_BigGhost.h"
+#include "Enemy/Enemy Boom/Enemy_Boom.h"
+#include "Enemy/Enemy Mag/Enemy_Mag.h"
+#include "Enemy/Enemy Bat/Enemy_Bat.h"
 #include "Enemy/Enemy Ghost/Enemy_Ghost.h"
 #include "Enemy/Enemy Scelet/Enemy_Scelet.h"
 #include "Map/GameLvL.h"
@@ -58,6 +62,7 @@ private:
 //    //Class Fon
     list<FonGame*>::iterator itFon;
     list<FonGame*>fonLvL[7];
+    FonGame *enemyMagDamage;
 //    //Class Nps
     list<Nps*>::iterator itNps;
     list<Nps*> npsLvL[7];

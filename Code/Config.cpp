@@ -10,8 +10,15 @@ Config::Config() {
 }
 Config::~Config() {
     delete s_player;
+    // Delete enemy sprite
     delete s_EnemyGhost;
     delete s_EnemySkeleton;
+    delete s_Enemy_Bat;
+    delete s_Enemy_Boom;
+    delete s_Enemy_Mag;
+    delete s_Enemy_BigGhost;
+    delete s_Enemy_MagDamage;
+    // delete sprite lvl
     delete s_LvL1;
     delete s_LvL2;
     delete s_LvL3;
@@ -101,6 +108,11 @@ void Config::LoadImage() {
     //Sprite Enemy
     s_EnemyGhost = new CreateImage("SpriteEntity/Enemy/EnemyGhost.png");
     s_EnemySkeleton = new CreateImage("SpriteEntity/Enemy/");
+    s_Enemy_BigGhost = new CreateImage("SpriteEntity/Enemy/EnemyBigGhost.png");
+    s_Enemy_Boom = new CreateImage("SpriteEntity/Enemy/EnemyBoom.png");
+    s_Enemy_Bat = new CreateImage("SpriteEntity/Enemy/EnemyBat.png");
+    s_Enemy_Mag = new CreateImage("SpriteEntity/Enemy/EnemyMag.png");
+    s_Enemy_MagDamage = new CreateImage("SpriteObject/DamageEnemy/DamageMag.png");
     //Sprite LvL Map
     s_LvL1 = new CreateImage("MapTexture/LvL1.png");
     s_LvL2 = new CreateImage("MapTexture/LvL2-up.png");

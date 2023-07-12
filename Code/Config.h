@@ -35,7 +35,7 @@ public:
     //SmartPointer<CreateImage>*s_player;
     CreateImage *s_player;
     // Enemy
-    CreateImage *s_EnemyGhost, *s_EnemySkeleton;
+    CreateImage *s_EnemyGhost, *s_EnemySkeleton, *s_Enemy_Bat, *s_Enemy_BigGhost, *s_Enemy_Boom, *s_Enemy_Mag, *s_Enemy_MagDamage;
     // Nps
     CreateImage *s_Nps_Aiden, *s_Nps_Blacksmith, *s_Nps_Historian, *s_Nps_Knight,
     *s_Nps_Soothsayer, *s_Nps_SupremeWizard, *s_Nps_Swordsman, *s_Nps_Witcher;

@@ -22,7 +22,7 @@ void Animation::Update(Sprite &s, float time) {
         s.setTextureRect(IntRect(this->rect_l, this->rect_t * int(this->cur_Frame), this->w, this->h));
     }
     else if(l_r == 3){
-        s.setTextureRect(IntRect(this->rect_l, this->rect_t * int(this->cur_Frame) + this->h, this->w, -this->h));
+        s.setTextureRect(IntRect(this->rect_l + this->w, this->rect_t * int(this->cur_Frame), -this->w, this->h));
     }
     else{
         s.setTextureRect(IntRect(this->rect_l, this->rect_t, this->w, this->h));

@@ -112,12 +112,18 @@ void GameEngine::initWindow() {
 }
 
 void GameEngine::initClass() {
+    // gameLvL
     gameLvL = new GameLvL(config->s_LvL1->s, 1);
-    //LvL1
+    //Player
     player = new Player(config->s_player->s, gameLvL ,1000, 1800, 56, 60, "player");
+    // Attack Enemy
+    enemyMagDamage = new FonGame(config->s_Enemy_MagDamage->s, gameLvL, 0, 0, 0, 0,"MagDamage");
     //Enemy
     enemyLvL[1] = {
-
+            new Enemy_Bat(config->s_Enemy_Bat->s, gameLvL, 800, 1236, 65, 55, "Bat"),
+            new Enemy_Boom(config->s_Enemy_Boom->s, gameLvL, 800, 1236, 50, 50, "Boom"),
+            new Enemy_BigGhost(config->s_Enemy_BigGhost->s, gameLvL, 800, 1236, 65, 125, "BigGhost"),
+            new Enemy_Mag(config->s_Enemy_Mag->s,enemyMagDamage, gameLvL, 800, 1236, 40, 100, "Mag"),
     };
     //enemy lvl 2
     enemyLvL[2] = {

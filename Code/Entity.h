@@ -14,7 +14,7 @@ public:
     Vector2f position;
     float dx, dy, CurrentFrame, speed;
     char cell;
-    int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist;
+    int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist, randomNumber;
     bool life, onGround, isMove, stop, isNpsDialogue, is_open;
     string name;
     Sprite *s;

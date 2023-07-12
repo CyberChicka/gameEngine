@@ -19,7 +19,15 @@ void FonGame::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void FonGame::initAnim() {
-    this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 5000, 500, 0);
+    if(this->name == "Fon"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 5000, 500, 0);
+    }
+    if(this->name == "Back"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 5000, 500, 0);
+    }
+    if(this->name == "MagDamage"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(3, 0.008, 0, 90, 65, 400, 2);
+    }
 }
 void FonGame::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;

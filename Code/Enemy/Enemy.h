@@ -10,12 +10,12 @@ class Enemy: public Entity{
 public:
     bool isAttack, isStop;
     float distance;
-    int Time;
+    int Time, timeAttack;
     GameLvL *gameLvL;
     enum class AnimationIndex{RunL, RunR,
-        WalkingL, WalkingR,
-        AttackL, AttackR,
-        Count};
+            Walking, WalkingL, WalkingR,
+            AttackL, AttackR,
+            Boom, Count};
     Enemy(Sprite *sprite,GameLvL *LvL,  float X, float Y, int W, int H, string Name);
     ~Enemy();
     FloatRect getRect() override;
