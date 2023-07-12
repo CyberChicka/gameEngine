@@ -47,8 +47,9 @@ public:
     CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon,
     *s_LvL_1_FonBack, *s_LvL_2_FonBack, *s_LvL_3_FonBack, *s_LvL_4_FonBack, *s_LvL_5_FonBack, *s_LvL_6_FonBack;
     // Object
-    CreateImage *s_Object_HomeDrov, *s_Object_BushHouse, *s_Object_BonfireHouse, *s_Object_FlyingObelisk, *s_Object_DarkBush,
-    *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall, *s_Object_RemainsSkeleton;
+    CreateImage *s_Object_HomeDrov, *s_Object_BushHouse, *s_Object_BonfireHouse, *s_Object_TableHouse, *s_Object_FlyingObelisk,
+    *s_Object_DarkBush, *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall,
+    *s_Object_RemainsSkeleton;
     // Chest
     CreateImage *s_Chest_Small, *s_Chest_Middle, *s_Chest_Big;
     // Bullet

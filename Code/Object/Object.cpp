@@ -24,6 +24,9 @@ void Object::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void Object::initAnim() {
+    if(this->name == "TableHouse"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 400, 300, 0);
+    }
     if(this->name == "RemainsSkeleton"){
         this->animations[int(AnimationIndex::Walking)] = Animation(5, 0.008, 106, 0, 95, 80, 0);
     }

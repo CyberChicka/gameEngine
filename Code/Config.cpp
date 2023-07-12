@@ -57,6 +57,7 @@ Config::~Config() {
     delete s_Object_BushHouse;
     delete s_Object_RemainsSkeleton;
     delete s_Object_BonfireHouse;
+    delete s_Object_TableHouse;
     // delete chest sprite
     delete s_Chest_Small;
     delete s_Chest_Middle;
@@ -146,6 +147,7 @@ void Config::LoadImage() {
     s_Object_DarkTreeBig = new CreateImage("SpriteMapObject/Object/Dark-tree-Big.png");
     s_Object_DarkTreeSmall = new CreateImage("SpriteMapObject/Object/Dark-tree-Small.png");
     s_Object_RemainsSkeleton = new CreateImage("SpriteMapObject/miniObject/RemainsSkeleton.png");
+    s_Object_TableHouse = new CreateImage("SpriteMapObject/House/Table_House.png");
     // class chest
     s_Chest_Small = new CreateImage("SpriteObject/Chest/SmallChest.png");
     s_Chest_Middle = new CreateImage("SpriteObject/Chest/MiddleChest.png");
