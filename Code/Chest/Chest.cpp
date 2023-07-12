@@ -6,10 +6,6 @@
 
 Chest::Chest(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
     this->is_open = false;
-    //s = new Sprite(*sprite);
-//    if(this->name == "SmallChest"){ s->setScale(1.0f, 1.0f); }
-//    if(this->name == "MiddleChest"){ s->setScale(1.0f, 1.0f); }
-//    if(this->name == "BigChest"){ s->setScale(1.0f, 1.0f); }
     this->initAnim();
 }
 Chest::~Chest() {
@@ -30,7 +26,7 @@ void Chest::initAnim() {
         this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0.0, 0, 0, 70, 88, 4);
     }
     if(this->name == "BigChest"){
-        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 108, 0, 88, 95, 1);
+        this->animations[int(AnimationIndex::WalkingOpening)] = Animation(10, 0.008, 109, 0, 88, 95, 1);
         this->animations[int(AnimationIndex::WalkingOpen)] = Animation(1, 0.0, 968, 0, 85, 95, 4);
         this->animations[int(AnimationIndex::WalkingClose)] = Animation(1, 0.0, 0, 0, 85, 95, 4);
     }

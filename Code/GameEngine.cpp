@@ -114,55 +114,123 @@ void GameEngine::initClass() {
     //LvL1
     player = new Player(config->s_player->s, gameLvL ,1000, 1800, 56, 60, "player");
     //Enemy
+    enemyLvL[1] = {
+
+    };
     //enemyLvL[1].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 1400, 1390, 40, 88, "Ghost"));
     //enemy lvl 2
-    enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
+    enemyLvL[2] = {
+            new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost")
+    };
+    //enemyLvL[2].push_back(new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"));
     // enemy lvl 3
+    enemyLvL[3] = {
+
+    };
     // Object LvL 1
-    objLvL[1].push_back(new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"));
+    objLvL[1] = {
+            new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home")
+    };
+    //objLvL[1].push_back(new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"));
     // Object LvL 2
+    objLvL[2] = {
+
+    };
     // Object LvL 3
-    objLvL[3].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"));
-    objLvL[3].push_back(new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"));
-    objLvL[3].push_back(new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"));
+    objLvL[3] = {
+            new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"),
+            new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"),
+            new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall")
+    };
+//    objLvL[3].push_back(new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"));
+//    objLvL[3].push_back(new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"));
+//    objLvL[3].push_back(new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"));
     //Chest
-    chestLvL[1].push_back(new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"));
-    chestLvL[1].push_back(new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"));
-    chestLvL[1].push_back(new Chest(config->s_Chest_Middle->s, gameLvL, 582, 1600, 65, 82, "MiddleChest"));
-    chestLvL[1].push_back(new Chest(config->s_Chest_Big->s, gameLvL, 3410, 1600, 65, 90, "BigChest"));
+    chestLvL[1] = {
+            new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_Chest_Middle->s, gameLvL, 582, 1600, 65, 82, "MiddleChest"),
+            new Chest(config->s_Chest_Big->s, gameLvL, 3410, 1600, 65, 90, "BigChest")
+    };
+//    chestLvL[1].push_back(new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"));
+//    chestLvL[1].push_back(new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"));
+//    chestLvL[1].push_back(new Chest(config->s_Chest_Middle->s, gameLvL, 582, 1600, 65, 82, "MiddleChest"));
+//    chestLvL[1].push_back(new Chest(config->s_Chest_Big->s, gameLvL, 3410, 1600, 65, 90, "BigChest"));
     //Nps
     //Nps nps_1(config->s_Nps_Historian->s, gameLvL, config->text_nps, 1600, 1520, 56, 60, "Historian");
-    npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"));
-    npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"));
-    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"));
+    npsLvL[1] = {
+            new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"),
+            new Historian(config->s_Nps_Historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"),
+            new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith")
+    };
+//    npsLvL[1].push_back(new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"));
+//    npsLvL[1].push_back(new Historian(config->s_Nps_Historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"));
+//    npsLvL[1].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"));
     // nps lvl 2
-    npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4300, 1620, 50, 50, "Aiden"));
-    npsLvL[2].push_back(new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher"));
-    npsLvL[2].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1200, 1620, 122, 152, "Blacksmith"));
+    npsLvL[2] = {
+            new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4300, 1620, 50, 50, "Aiden"),
+            new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1000, 1620, 50, 152, "Blacksmith"),
+            new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher")
+    };
+//    npsLvL[2].push_back(new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4300, 1620, 50, 50, "Aiden"));
+//    npsLvL[2].push_back(new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher"));
+//    npsLvL[2].push_back(new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher"));
     // nps lvl 3
-    npsLvL[3].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1620, 122, 152, "Blacksmith"));
-    npsLvL[3].push_back(new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"));
-    npsLvL[3].push_back(new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1620, 122, 152, "Soothsayer"));
-    npsLvL[3].push_back(new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps_swordsman, 5280, 1620, 122, 152, "Swordsman"));
+    npsLvL[3] = {
+            new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"),
+            new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1620, 122, 152, "Blacksmith"),
+            new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1620, 122, 152, "Soothsayer"),
+            new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps_swordsman, 5280, 1620, 122, 152, "Swordsman")
+    };
+//    npsLvL[3].push_back(new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1620, 122, 152, "Blacksmith"));
+//    npsLvL[3].push_back(new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"));
+//    npsLvL[3].push_back(new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1620, 122, 152, "Soothsayer"));
+//    npsLvL[3].push_back(new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps_swordsman, 5280, 1620, 122, 152, "Swordsman"));
     // Item
-    itemLvL[1].push_back(new health_item(config->s_Item_Health->s, gameLvL, 4800, 1600, 40, 45, "Health"));
-    itemLvL[1].push_back(new money_item(config->s_Item_Money->s, gameLvL, 300, 1600, 30, 40, "Money"));
-    itemLvL[1].push_back(new money_item(config->s_Item_Diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"));
-    itemLvL[1].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"));
-    itemLvL[1].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"));
+    itemLvL[1] = {
+            new health_item(config->s_Item_Health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
+            new money_item(config->s_Item_Money->s, gameLvL, 300, 1600, 30, 40, "Money"),
+            new money_item(config->s_Item_Diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"),
+            new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"),
+            new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold")
+    };
+//    itemLvL[1].push_back(new health_item(config->s_Item_Health->s, gameLvL, 4800, 1600, 40, 45, "Health"));
+//    itemLvL[1].push_back(new money_item(config->s_Item_Money->s, gameLvL, 300, 1600, 30, 40, "Money"));
+//    itemLvL[1].push_back(new money_item(config->s_Item_Diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"));
+//    itemLvL[1].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"));
+//    itemLvL[1].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"));
     // item lvl 2
+    itemLvL[2] = {
+
+    };
 
     // item lvl 3
+    itemLvL[3] = {
+
+    };
 
     //Fon
-    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
-    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
-    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 0, 1860, 0, 0, " "));
-    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 4900, 1860, 0, 0, " "));
+    fonLvL[1] = {
+            new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10,"Fon"),
+            new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10,"Fon"),
+            new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 0, 1860, 0, 0, "Back"),
+            new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 4900, 1860, 0, 0, "Back")
+    };
+//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL1_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 0, 1860, 0, 0, " "));
+//    fonLvL[1].push_back(new FonGame(config->s_LvL_1_FonBack->s, gameLvL, 4900, 1860, 0, 0, " "));
     //
-    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
-    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
+    fonLvL[2] = {
+//            new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "),
+//            new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," ")
+    };
+//    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 0, 1360, 10, 10," "));
+//    fonLvL[2].push_back(new FonGame(config->s_LvL2_Fon->s, gameLvL, 4900, 1360, 10, 10," "));
     //
+    fonLvL[3] = {
+
+    };
 
 }
 void GameEngine::pollEvents() {
@@ -256,7 +324,7 @@ void GameEngine::TakeChest() {
                         if (!(*itChest)->is_open) {
                             if ((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "KeySilver")); }
                             if ((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_Item_Health->s, gameLvL, (*itChest)->position.x + 20,(*itChest)->position.y, 40, 45, "Health")); }
-                            if ((*itChest)->OpenChest() == 3){}
+                            if ((*itChest)->OpenChest() == 3){ }
                         }
                     }
                     if ((*itChest)->name == "MiddleChest" && player->k_Silver > 0) {

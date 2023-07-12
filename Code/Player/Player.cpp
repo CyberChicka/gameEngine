@@ -8,7 +8,9 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->e_Radius = new CircleShape(120.f);
     this->particles = new ParticleSystem(10);
     this->gameLvL = new GameLvL(*LvL);
-    this->money = 0;
+    this->k_Silver = 10;
+    this->k_Gold = 10;
+    this->money = 10;
     this->lvl_player = 1;
     this->dx = 0; this->dy = 0;
     this->initAnim();
