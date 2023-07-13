@@ -42,7 +42,17 @@ void Enemy_Bat::animation(float time){
 }
 
 void Enemy_Bat::Attack(Player &p) {
-
+    if(p.isBlock){
+        if(p.state == Player::left){this->dx = -0.8;}
+        else if(p.state == Player::right){ this->dx = 0.8; }
+        else this->dx = -0.8;
+    }
+    else{
+        if(this->timeAttack > 2000){
+            p.is_health -= 5;
+            this->timeAttack = 0;
+        }
+    }
 }
 
 void Enemy_Bat::TakingDamage(Player &p) {
@@ -50,6 +60,7 @@ void Enemy_Bat::TakingDamage(Player &p) {
 }
 
 void Enemy_Bat::update(float time, GameLvL *gLvL, Player *p) {
+    this->timeAttack += time;
     this->gameLvL = gLvL;
     this->State();
     this->ControlEnemy(time, p->position.x, p->position.y);

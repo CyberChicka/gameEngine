@@ -8,6 +8,7 @@ Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     if(this->name == "Home"){ this->s->setScale(1.2f, 1.2f); }
     if(this->name == "DarkTreeBig"){ this->s->setScale(2.0f, 2.0f); }
     if(this->name == "DarkTreeSmall"){ this->s->setScale(2.0f, 2.0f); }
+    if(this->name == "BonfireHouse"){ this->s->setScale(0.8f, 0.8f); }
     this->initAnim();
 }
 Object::~Object() {
@@ -31,7 +32,7 @@ void Object::initAnim() {
         this->animations[int(AnimationIndex::Walking)] = Animation(5, 0.008, 106, 0, 95, 80, 0);
     }
     if(this->name == "BonfireHouse"){
-        this->animations[int(AnimationIndex::Walking)] = Animation(4, 0, 0, 807, 1230, 730, 2);
+        this->animations[int(AnimationIndex::Walking)] = Animation(4, 0.008, 0, 807, 1230, 730, 2);
     }
     if(this->name == "BushHouse"){
         this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 500, 300, 0);

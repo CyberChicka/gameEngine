@@ -29,6 +29,7 @@ void Enemy_Ghost::ControlEnemy(float time, float pX, float pY) {
 void Enemy_Ghost::update(float time, GameLvL *gLvL, Player *p) {
     this->gameLvL = gLvL;
     this->State();
+    this->timeAttack += time;
     ControlEnemy(time, p->position.x, p->position.y);
     this->animation(time);
     this->position.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
@@ -63,7 +64,17 @@ void Enemy_Ghost::initAnim(){
 }
 
 void Enemy_Ghost::Attack(Player &p) {
-
+    if(p.isBlock){
+        if(p.state == Player::left){ this->dx = -0.3; }
+        else if(p.state == Player::right){ this->dx = 0.3; }
+        else this->dx = -0.3;
+    }
+    else{
+        if(this->timeAttack > 2000){
+            p.is_health -= 10;
+            this->timeAttack = 0;
+        }
+    }
 }
 void Enemy_Ghost::TakingDamage(Player &p) {
 

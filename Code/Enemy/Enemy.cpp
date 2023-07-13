@@ -4,6 +4,7 @@
 Enemy::Enemy(Sprite *sprite, GameLvL *LvL,  float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
     this->s->setOrigin(this->w/2,this->h/2);
     this->life = true;
+    this->isAttack = false;
     this->dx = 0; this->dy = 0;
     this->gameLvL = new GameLvL(*LvL);
     this->is_health = 100;

@@ -23,7 +23,7 @@ public:
     Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~Player();
     FloatRect getRect()override;
-    void move();
+    void move(float time);
     void ControlMove();
     void update(float time, GameLvL *gLvL);
     View setPlayerCoordinateForView(View &view);

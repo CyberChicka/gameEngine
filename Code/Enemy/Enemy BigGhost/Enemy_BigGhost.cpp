@@ -30,6 +30,7 @@ void Enemy_BigGhost::ControlEnemy(float time, float pX, float pY) {
 
 void Enemy_BigGhost::update(float time, GameLvL *gLvL, Player *p) {
     this->gameLvL = gLvL;
+    this->timeAttack += time;
     this->State();
     ControlEnemy(time, p->position.x, p->position.y);
     this->animation(time);
@@ -65,7 +66,17 @@ void Enemy_BigGhost::initAnim(){
 }
 
 void Enemy_BigGhost::Attack(Player &p) {
-
+    if(p.isBlock){
+        if(p.state == Player::left){ this->dx = -0.3; }
+        else if(p.state == Player::right){ this->dx = 0.3; }
+        else this->dx = -0.3;
+    }
+    else{
+        if(this->timeAttack > 2000){
+            p.is_health -= 30;
+            this->timeAttack = 0;
+        }
+    }
 }
 void Enemy_BigGhost::TakingDamage(Player &p) {
 

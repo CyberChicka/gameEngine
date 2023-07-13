@@ -6,13 +6,13 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->is_health = 120; this->f_health = 120;
     this->life = true;
     this->e_Radius = new CircleShape(120.f);
+    this->e_Radius->setScale(1.0f, 0.5f);
     this->particles = new ParticleSystem(10);
     this->gameLvL = new GameLvL(*LvL);
     this->k_Silver = 10;
     this->k_Gold = 10;
     this->money = 10;
     this->lvl_player = 1;
-    this->dx = 0; this->dy = 0;
     this->initAnim();
 }
 Player::~Player() {
@@ -83,9 +83,6 @@ void Player::initAnim() {
     //Block
     this->animations[int(AnimationIndex::BlockL)] = Animation(8, 0.009, 202, 384, 190,150, 1);
     this->animations[int(AnimationIndex::BlockR)] = Animation(8, 0.009, 202, 384, 190,150, 0);
-    // Jump
-    this->animations[int(AnimationIndex::JumpL)] = Animation(8, 0.009, 155, 200, 155, 150, 1);
-    this->animations[int(AnimationIndex::JumpR)] = Animation(8, 0.009, 155, 200, 155, 150, 0);
     //Dead
     this->animations[int(AnimationIndex::DeadL)] = Animation(8, 0.009, 155, 0, 155, 150, 1);
     this->animations[int(AnimationIndex::DeadR)] = Animation(8, 0.009, 155, 0, 155, 150, 0);
@@ -94,28 +91,39 @@ void Player::initAnim() {
 
 void Player::ControlMove() {
     if(this->life){
-        this->stop = true; this->isBlock = false; this->isRun = false; //this->isJump = false;
-        this->isJump = false; //this->isAttack = false;
-        if(Mouse::isButtonPressed(Mouse::Right)){ this->isBlock = true; this->stop = false; this->speed = 0; }
+        this->stop = true; this->isBlock = false; this->isRun = false;
+        this->isJump = false;
+        if(Mouse::isButtonPressed(Mouse::Right)){ this->isBlock = true;
+            this->stop = false;
+            this->speed = 0;
+        }
         else{
-            if(Mouse::isButtonPressed(Mouse::Left)){ isAttack = true; stop = false; speed = 0; }
+            if(Mouse::isButtonPressed(Mouse::Left)){
+                this->isAttack = true;
+                this->stop = false;
+                this->speed = 0;
+            }
             else{
                 if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::D)) && this->isSprint){
-                    this->state = SRight; this->stop = false; this->SprintTime = 0;
+                    this->state = SRight;
+                    this->SprintTime = 0;
+                    this->stop = false;
                 }
                 else if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::A)) && this->isSprint){
-                    this->state = SLeft;  this->stop = false; this->SprintTime = 0;
+                    this->state = SLeft;
+                    this->SprintTime = 0;
+                    this->stop = false;
                 }
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
                         this->state = left;
-                        this->speed = 0.5; // speed 0.20
+                        this->speed += 0.5; // speed 0.20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
                         this->state = right;
-                        this->speed = 0.5; // speed 20
+                        this->speed += 0.5; // speed 20
                         this->isRun = true;
                         this->stop = false;
                     }
@@ -131,15 +139,14 @@ void Player::ControlMove() {
 
     }
 }
-void Player::move() {
+void Player::move(float time) {
     this->ControlMove();
     if(this->life){
         switch (this->state) {
             case left: this->dx = -this->speed; break;
             case right: this->dx = this->speed; break;
-            case SLeft: this->position.x -= 150; break;
-            case SRight: this->position.x += 150; break;
-            case stay: this->dx = 0; this->dy = 0; this->speed = 0;break;
+            case SLeft: this->position.x -= 14 * time; break;
+            case SRight: this->position.x += 14 * time; break;
         }
         this->speed = 0;
     }
@@ -157,7 +164,7 @@ void Player::update(float time, GameLvL *gLvL){
     this->particles->setEmitter(this->position.x + 28, this->position.y + 30);
     this->gameLvL = gLvL;
     // Move
-    this->move();
+    this->move(time);
     //Anim
     this->animation(time);
     // sprint
@@ -170,13 +177,11 @@ void Player::update(float time, GameLvL *gLvL){
     //position
     this->position.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);
-
     this->position.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
-
     this->dy = this->dy + 0.0015*time; // Притяжение к земле
     if(!this->isAttack)this->s->setPosition(this->position);
-    this->e_Radius->setPosition(this->position);
+    this->e_Radius->setPosition(this->position.x - 95, this->position.y - 50);
     // life
     if(this->is_health <= 0)this->life = false;
 }
@@ -187,6 +192,7 @@ View Player::setPlayerCoordinateForView(sf::View &view) {
 }
 void Player::draw(RenderWindow &window, View view){
     window.draw(*this->particles);
+    //window.draw(*e_Radius);
     window.draw(*this->s);
 }
 void Player::checkCollisionMap(float dX, float dY) {

@@ -20,7 +20,7 @@ void Enemy_Mag::ControlEnemy(float time, float pX, float pY) {
     this->distance = ((this->position.x - pX) * (this->position.x - pX) + (this->position.y - pY) * (this->position.y - pY));
     if(this->name == "Mag"){
         if(this->distance > 10){
-            this->dx += 0.01 * time * (pX - this->position.x) / this->distance;
+            this->dx = 0.80 * time * (pX - this->position.x) / this->distance;
         }
     }
 }
@@ -54,7 +54,8 @@ void Enemy_Mag::animation(float time) {
 }
 
 void Enemy_Mag::update(float time, GameLvL *gLvL, Player *p) {
-    sDamage->update(time, gLvL);
+    this->timeAttack += time;
+    this->sDamage->update(time, gLvL);
     this->gameLvL = gLvL;
     this->State();
     ControlEnemy(time, p->position.x, p->position.y);
@@ -70,7 +71,6 @@ void Enemy_Mag::update(float time, GameLvL *gLvL, Player *p) {
 
 void Enemy_Mag::Attack(Player &p) {
     if(this->name == "Mag"){
-        p.e_Radius->setRadius(360.f);
         if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
             this->isAttack = true;
             this->isStop = true;
@@ -82,9 +82,9 @@ void Enemy_Mag::Attack(Player &p) {
         }
         if(this->isAttack){
             this->randomNumber = rand();
-            if(timeAttack > 1000){
-                sDamage->setPosition(p.GetX(), position.y - 30);
-                if(sDamage->s->getGlobalBounds().intersects(p.getRect()) && !p.isBlock){ p.is_health -= 20; }
+            if(this->timeAttack > 1000){
+                this->sDamage->setPosition(p.GetX(), position.y - 250);
+                if(this->sDamage->s->getGlobalBounds().intersects(p.getRect()) && !p.isBlock){ p.is_health -= 20; }
                 this->timeAttack = 0;
             }
         }
