@@ -46,54 +46,54 @@ void Chest::animation(float time) {
 }
 
 FloatRect Chest::getRect() {
-    return FloatRect(this->position.x, this->position.y, this->w, this->h);
+    return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
 }
 
 void Chest::update(float time, GameLvL *gLvL) {
     this->gameLvL = gLvL;
     this->animation(time);
-    this->position.x += time*this->dx;
+    this->pos.x += time * this->dx;
     this->checkCollisionMap(this->dx, 0.f); // Касание с картой по x
-    this->position.y += time*this->dy;
+    this->pos.y += time * this->dy;
     this->checkCollisionMap(0.f, this->dy); // Касание с картой по y
     this->dy = dy + 0.0015*time; // Притяжение к земле
-    this->s->setPosition(this->position);
+    this->s->setPosition(this->pos);
 }
 
 float Chest::GetX() {
-    return this->position.x;
+    return this->pos.x;
 }
 
 float Chest::GetY() {
-    return this->position.y;
+    return this->pos.y;
 }
 
 void Chest::checkCollisionMap(float dX, float dY) {
-    for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++) // Проходимся по высоте
-        for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++) // Проходимся по ширине
+    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++) // Проходимся по высоте
+        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++) // Проходимся по ширине
         {
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->position.y = i * 32 - h;
+                    this->pos.y = i * 32 - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->position.y = i * 32 + 32;
+                    this->pos.y = i * 32 + 32;
                     this->dy = 0;
                 }
                 if (dX>0){
-                    this->position.x = j * 32 - w;
+                    this->pos.x = j * 32 - w;
                 }
                 if (dX<0){
-                    this->position.x = j * 32 + 32;
+                    this->pos.x = j * 32 + 32;
                 }
             }
             if(this->gameLvL->gameLvL == 1){
-                if(this->position.x < 1){ this->position.x = this->position.x + 1; }
-                if(this->position.y < 1){ this->position.y = this->position.y + 1; }
+                if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
+                if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
             }
         }
 }

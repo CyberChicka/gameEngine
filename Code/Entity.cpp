@@ -4,8 +4,8 @@
 
 #include "Entity.h"
 Entity::Entity(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std::string Name) {
-    position.x = X;
-    position.y = Y;
+    pos.x = X;
+    pos.y = Y;
     dy = 0; dx = 0;
     w = W; h = H;
     s = new Sprite(*sprite);

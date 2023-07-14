@@ -19,11 +19,11 @@ Enemy_BigGhost::~Enemy_BigGhost() {
 }
 
 void Enemy_BigGhost::ControlEnemy(float time, float pX, float pY) {
-    distance = ((position.x - pX) * (position.x - pX) + (position.y - pY) * (position.y - pY));
+    distance = ((pos.x - pX) * (pos.x - pX) + (pos.y - pY) * (pos.y - pY));
     if(this->name == "BigGhost"){
         if(distance > 50){
-            this->dx += 0.04 * time * (pX - this->position.x) / this->distance;
-            this->dx += 0.04 * time * (pX - this->position.x) / this->distance;
+            this->dx += 0.04 * time * (pX - this->pos.x) / this->distance;
+            this->dx += 0.04 * time * (pX - this->pos.x) / this->distance;
         }
     }
 }
@@ -31,13 +31,14 @@ void Enemy_BigGhost::ControlEnemy(float time, float pX, float pY) {
 void Enemy_BigGhost::update(float time, GameLvL *gLvL, Player *p) {
     this->gameLvL = gLvL;
     this->timeAttack += time;
+    this->Attack(*p);
     this->State();
-    ControlEnemy(time, p->position.x, p->position.y);
+    ControlEnemy(time, p->pos.x, p->pos.y);
     this->animation(time);
-    this->position.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time;this->checkCollisionMap(0.f, this->dy);
+    this->pos.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
+    this->pos.y += this->dy * time;this->checkCollisionMap(0.f, this->dy);
     if(!this->onGround)this->dy+=0.0015*time;
-    this->s->setPosition(this->position);
+    this->s->setPosition(this->pos);
     if(this->is_health <= 0)this->life = false;
 }
 void Enemy_BigGhost::animation(float time) {
@@ -66,15 +67,17 @@ void Enemy_BigGhost::initAnim(){
 }
 
 void Enemy_BigGhost::Attack(Player &p) {
-    if(p.isBlock){
-        if(p.state == Player::left){ this->dx = -0.3; }
-        else if(p.state == Player::right){ this->dx = 0.3; }
-        else this->dx = -0.3;
-    }
-    else{
-        if(this->timeAttack > 2000){
-            p.is_health -= 30;
-            this->timeAttack = 0;
+    if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
+        if(p.isBlock){
+            if(p.state == Player::left){ this->dx = -0.3; }
+            else if(p.state == Player::right){ this->dx = 0.3; }
+            else this->dx = -0.3;
+        }
+        else{
+            if(this->timeAttack > 2000){
+                p.is_health -= 30;
+                this->timeAttack = 0;
+            }
         }
     }
 }

@@ -19,11 +19,11 @@ Enemy_Bat::~Enemy_Bat() {
 }
 
 void Enemy_Bat::ControlEnemy(float time, float pX, float pY) {
-    this->distance = ((this->position.x - pX) * (this->position.x - pX) + (this->position.y - pY) * (this->position.y - pY));
+    this->distance = ((this->pos.x - pX) * (this->pos.x - pX) + (this->pos.y - pY) * (this->pos.y - pY));
     if(this->name == "Bat"){
         if(this->distance > 100){
-            this->dx += 0.03 * time * (pX - this->position.x) / this->distance;
-            this->dy += 0.03 * time * (pY - this->position.y) / this->distance;
+            this->dx += 0.03 * time * (pX - this->pos.x) / this->distance;
+            this->dy += 0.03 * time * (pY - this->pos.y) / this->distance;
         }
     }
 }
@@ -42,15 +42,17 @@ void Enemy_Bat::animation(float time){
 }
 
 void Enemy_Bat::Attack(Player &p) {
-    if(p.isBlock){
-        if(p.state == Player::left){this->dx = -0.8;}
-        else if(p.state == Player::right){ this->dx = 0.8; }
-        else this->dx = -0.8;
-    }
-    else{
-        if(this->timeAttack > 2000){
-            p.is_health -= 5;
-            this->timeAttack = 0;
+    if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
+        if(p.isBlock){
+            if(p.state == Player::left){this->dx = -0.8;}
+            else if(p.state == Player::right){ this->dx = 0.8; }
+            else this->dx = -0.8;
+        }
+        else{
+            if(this->timeAttack > 2000){
+                p.is_health -= 5;
+                this->timeAttack = 0;
+            }
         }
     }
 }
@@ -61,30 +63,31 @@ void Enemy_Bat::TakingDamage(Player &p) {
 
 void Enemy_Bat::update(float time, GameLvL *gLvL, Player *p) {
     this->timeAttack += time;
+    this->Attack(*p);
     this->gameLvL = gLvL;
     this->State();
-    this->ControlEnemy(time, p->position.x, p->position.y);
+    this->ControlEnemy(time, p->pos.x, p->pos.y);
     this->animation(time);
-    this->position.x += this->dx * time;
+    this->pos.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time;
+    this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
-    this->s->setPosition(this->position);
+    this->s->setPosition(this->pos);
     if(this->is_health <= 0)this->life = false;
 }
 
 void Enemy_Bat::checkCollisionMap(float dX, float dY) {
-    for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++)
-        for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++){
+    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++)
+        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
-                if (dY>0){ this->position.y -= 1; this->dy = -0.15;  }//по Y вниз=>идем в пол(стоим на месте) или падаем. В этот момент надо вытолкнуть персонажа и поставить его на землю, при этом говорим что мы на земле тем самым снова можем прыгать
-                if (dY<0){ this->position.y += 1; this->dy = 0.15; }//столкновение с верхними краями карты(может и не пригодиться)
-                if (dX>0){ this->position.x -= 1; this->dx = -0.15;  }//с правым краем карты
-                if (dX<0){ this->position.x += 1; this->dx = 0.15; }// с левым краем карты
+                if (dY>0){ this->pos.y -= 1; this->dy = -0.15;  }//по Y вниз=>идем в пол(стоим на месте) или падаем. В этот момент надо вытолкнуть персонажа и поставить его на землю, при этом говорим что мы на земле тем самым снова можем прыгать
+                if (dY<0){ this->pos.y += 1; this->dy = 0.15; }//столкновение с верхними краями карты(может и не пригодиться)
+                if (dX>0){ this->pos.x -= 1; this->dx = -0.15;  }//с правым краем карты
+                if (dX<0){ this->pos.x += 1; this->dx = 0.15; }// с левым краем карты
             }
-            if(this->position.x < 1){ this->position.x = this->position.x + 1; }
-            if(this->position.y < 1){ this->position.y = this->position.y + 1; }
+            if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
+            if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
         }
 }

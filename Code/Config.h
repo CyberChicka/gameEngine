@@ -42,10 +42,9 @@ public:
     // Item
     CreateImage *s_Item_Health, *s_Item_KeySilver, *s_Item_KeyGold, *s_Item_Money, *s_Item_Diamond;
     // LvL
-    CreateImage *s_LvL1, *s_LvL2, *s_LvL3, *s_LvL4, *s_LvL5, *s_LvL6;
+    CreateImage *s_LvL[7];
     // LvL Fon
-    CreateImage *s_LvL1_Fon, *s_LvL2_Fon, *s_LvL3_Fon, *s_LvL4_Fon, *s_LvL5_Fon, *s_LvL6_Fon,
-    *s_LvL_1_FonBack, *s_LvL_2_FonBack, *s_LvL_3_FonBack, *s_LvL_4_FonBack, *s_LvL_5_FonBack, *s_LvL_6_FonBack;
+    CreateImage *s_LvL_Fon[7], *s_LvL_FonBack[7];
     // Object
     CreateImage *s_Object_HomeDrov, *s_Object_BushHouse, *s_Object_BonfireHouse, *s_Object_TableHouse, *s_Object_FlyingObelisk,
     *s_Object_DarkBush, *s_Object_DarkBush2, *s_Object_DarkStone, *s_Object_DarkTreeBig, *s_Object_DarkTreeSmall,
@@ -64,9 +63,7 @@ public:
     CreateText *text_nps_soothsayer;
     CreateText *text_nps_swordsman;
     // Music & sound
-    m_Music *m_lvl1;
-    m_Music *m_lvl2;
-    m_Music *m_lvl3;
+    m_Music *m_lvl[7];
     //player
     s_Sound *so_player_attack;
     //enemy

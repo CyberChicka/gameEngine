@@ -18,10 +18,10 @@ Enemy_Ghost::~Enemy_Ghost() {
 }
 
 void Enemy_Ghost::ControlEnemy(float time, float pX, float pY) {
-    distance = ((position.x - pX) * (position.x - pX) + (position.y - pY) * (position.y - pY));
+    distance = ((pos.x - pX) * (pos.x - pX) + (pos.y - pY) * (pos.y - pY));
     if(this->name == "Ghost"){
         if(distance > 50){
-            dx = 0.80 * time * (pX - position.x) / distance;
+            dx = 0.80 * time * (pX - pos.x) / distance;
         }
     }
 }
@@ -30,12 +30,13 @@ void Enemy_Ghost::update(float time, GameLvL *gLvL, Player *p) {
     this->gameLvL = gLvL;
     this->State();
     this->timeAttack += time;
-    ControlEnemy(time, p->position.x, p->position.y);
+    this->Attack(*p);
+    ControlEnemy(time, p->pos.x, p->pos.y);
     this->animation(time);
-    this->position.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time;this->checkCollisionMap(0.f, this->dy);
+    this->pos.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
+    this->pos.y += this->dy * time;this->checkCollisionMap(0.f, this->dy);
     if(!this->onGround)this->dy+=0.0015*time;
-    this->s->setPosition(this->position);
+    this->s->setPosition(this->pos);
     if(this->is_health <= 0)this->life = false;
 }
 void Enemy_Ghost::animation(float time) {
@@ -64,15 +65,17 @@ void Enemy_Ghost::initAnim(){
 }
 
 void Enemy_Ghost::Attack(Player &p) {
-    if(p.isBlock){
-        if(p.state == Player::left){ this->dx = -0.3; }
-        else if(p.state == Player::right){ this->dx = 0.3; }
-        else this->dx = -0.3;
-    }
-    else{
-        if(this->timeAttack > 2000){
-            p.is_health -= 10;
-            this->timeAttack = 0;
+    if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
+        if(p.isBlock){
+            if(p.state == Player::left){ this->dx = -0.3; }
+            else if(p.state == Player::right){ this->dx = 0.3; }
+            else this->dx = -0.3;
+        }
+        else{
+            if(this->timeAttack > 2000){
+                p.is_health -= 10;
+                this->timeAttack = 0;
+            }
         }
     }
 }

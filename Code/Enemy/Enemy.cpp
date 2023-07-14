@@ -16,7 +16,7 @@ Enemy::~Enemy() {
     delete this->s;
 }
 
-FloatRect Enemy::getRect() { return FloatRect(this->position.x, this->position.y, this->w, this->h); }
+FloatRect Enemy::getRect() { return FloatRect(this->pos.x, this->pos.y, this->w, this->h); }
 
 void Enemy::ControlMove() { }
 
@@ -31,38 +31,38 @@ void Enemy::animation(float time) { }
 
 void Enemy::initAnim() { }
 
-float Enemy::GetX() { return this->position.x; }
-float Enemy::GetY() { return this->position.y; }
+float Enemy::GetX() { return this->pos.x; }
+float Enemy::GetY() { return this->pos.y; }
 
 void Enemy::checkCollisionMap(float dX, float dY){
-    for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++)
-        for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++){
+    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++)
+        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->position.y = i * 32 - h;
+                    this->pos.y = i * 32 - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->position.y = i * 32 + 32;
+                    this->pos.y = i * 32 + 32;
                     this->dy = 0;
                 }
                 if (dX>0){
-                    this->position.x = j * 32 - w;
+                    this->pos.x = j * 32 - w;
                     dx = -0.1;
                 }
                 if (dX<0){
-                    this->position.x = j * 32 + 32; dx = 0.1;
+                    this->pos.x = j * 32 + 32; dx = 0.1;
                 }
             }
             if(cell == '{')
                 if(dY > 0){ dx = 0.1; }
             if(cell == '}')
                 if(dY > 0){ dx = 0.1; }
-            if(this->position.x < 1){ this->position.x = this->position.x + 1; }
-            if(this->position.y < 1){ this->position.y = this->position.y + 1; }
+            if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
+            if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
 //                if(this->position.y > 900){ this->position.y = this->position.y - 0.5;}
 //                if(this->position.x > 10167){ this->position.x = this->position.x - 0.5;}
 

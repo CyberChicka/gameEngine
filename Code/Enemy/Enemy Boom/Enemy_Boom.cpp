@@ -16,10 +16,10 @@ Enemy_Boom::~Enemy_Boom() {
 }
 
 void Enemy_Boom::ControlEnemy(float time, float pX, float pY) {
-    this->distance = ((position.x - pX) * (position.x - pX) + (position.y - pY) * (position.y - pY));
+    this->distance = ((pos.x - pX) * (pos.x - pX) + (pos.y - pY) * (pos.y - pY));
     if(this->name == "Boom"){
         if(this->distance > 10){
-            this->dx += 0.02 * time * (pX - this->position.x) / this->distance;
+            this->dx += 0.02 * time * (pX - this->pos.x) / this->distance;
         }
     }
 }
@@ -49,18 +49,19 @@ void Enemy_Boom::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*s, time);
 }
 void Enemy_Boom::update(float time, GameLvL *gLvL, Player *p) {
+    this->timeAttack += time;
+    this->Attack(*p);
     this->gameLvL = gLvL;
     this->State();
-    this->timeAttack += time;
-    ControlEnemy(time, p->position.x, p->position.y);
+    ControlEnemy(time, p->pos.x, p->pos.y);
     this->animation(time);
-    this->position.x += this->dx * time;
+    this->pos.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time;
+    this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
     if(!this->onGround)this->dy+=0.0015*time;
-    this->s->setPosition(this->position);
-    if(this->isAttack)this->s->setPosition(this->position.x, this->position.y - 92);
+    this->s->setPosition(this->pos);
+    if(this->isAttack)this->s->setPosition(this->pos.x, this->pos.y - 92);
     if(this->is_health <= 0)this->life = false;
 }
 void Enemy_Boom::Attack(Player &p) {

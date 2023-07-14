@@ -7,9 +7,9 @@ using namespace std;
 
 class Animation {
 public:
-    int rect_l, rect_t, w, h, l_r;
+    int l_rect, t_rect, w, h, l_r;
     Vector2f pos;
-    float cur_Frame = 0, speed = 0, frame = 0;
+    float cur_Frame, speed, frame;
     Animation() = default;
     Animation(float Frame, float Speed, int RectLeft, int RectTop, int Width, int Height, int L_R);
     void Update(Sprite &s, float time);

@@ -24,7 +24,7 @@ void Swordsman::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(4, 0.008, 229, 0, 220, 266 , 0);
 }
 void Swordsman::Dialogue(sf::Event event, Player *player) {
-    this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
+    this->t_Nps->text->setPosition(this->pos.x + 25, this->pos.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){

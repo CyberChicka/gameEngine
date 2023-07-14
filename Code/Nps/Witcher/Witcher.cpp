@@ -24,7 +24,7 @@ void Witcher::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(23, 0.008, 347, 0, 320, 300, 0);
 }
 void Witcher::Dialogue(sf::Event event, Player *player) {
-    this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
+    this->t_Nps->text->setPosition(this->pos.x + 25, this->pos.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){

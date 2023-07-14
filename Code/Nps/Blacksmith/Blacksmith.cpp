@@ -23,7 +23,7 @@ void Blacksmith::initAnim() {
     this->animations[int(AnimationIndex::Walking)] = Animation(16, 0.008, 143, 0, 140, 152, 0);
 }
 void Blacksmith::Dialogue(sf::Event event, Player *player) {
-    this->t_Nps->text->setPosition(this->position.x + 25, this->position.y - 60);
+    this->t_Nps->text->setPosition(this->pos.x + 25, this->pos.y - 60);
     ostringstream  d_Nps;
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){

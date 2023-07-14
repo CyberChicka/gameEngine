@@ -32,19 +32,19 @@ void FonGame::initAnim() {
 void FonGame::update(float time, GameLvL *gLvL){
     this->gameLvL = gLvL;
     this->animation(time);
-    this->position.y += time*this->dy;
-    this->position.x += time*this->dx;
-    this->s->setPosition(this->position);
+    this->pos.y += time * this->dy;
+    this->pos.x += time * this->dx;
+    this->s->setPosition(this->pos);
 }
 void FonGame::draw(sf::RenderWindow &window, sf::View view) {
     window.draw(*this->s);
 }
 void FonGame::setPosition(float x, float y) {
-    this->position.x = x;
-    this->position.y = y;
+    this->pos.x = x;
+    this->pos.y = y;
 }
 
 FloatRect FonGame::getRect() {
-    return FloatRect(this->position.x, this->position.y, this->w, this->h);
+    return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
 }
 

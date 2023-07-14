@@ -13,7 +13,7 @@ Bullet::~Bullet() {
 
 }
 FloatRect Bullet::getRect() {
-    return FloatRect(this->position.x, this->position.y, this->w, this->h);
+    return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
 }
 void Bullet::initAnim() {
     this->animations[int(AnimationIndex::ShootL)] = Animation(33, 0.009, 574, 0, 500, 370, 1);
@@ -43,9 +43,9 @@ void Bullet::upadte(float time) {
             case 4: this->dx = -this->speed; this->dy = 0;  break;//интовое значение state = up
         }
     }
-    this->position.x += time*this->dx;
+    this->pos.x += time * this->dx;
     this->checkCollisionMap(this->dx, 0.f); // Касание с картой по x
-    this->s->setPosition(this->position);
+    this->s->setPosition(this->pos);
 }
 
 void Bullet::draw(sf::RenderWindow &window, sf::View view) {
@@ -61,9 +61,9 @@ void Bullet::checkCollisionMap(float dX, float dY) {
 }
 
 float Bullet::GetY() {
-    return this->position.y;
+    return this->pos.y;
 }
 
 float Bullet::GetX() {
-    return this->position.x;
+    return this->pos.x;
 }

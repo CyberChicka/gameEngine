@@ -19,25 +19,16 @@ Config::~Config() {
     delete s_Enemy_BigGhost;
     delete s_Enemy_MagDamage;
     // delete sprite lvl
-    delete s_LvL1;
-    delete s_LvL2;
-    delete s_LvL3;
-    delete s_LvL4;
-    delete s_LvL5;
-    delete s_LvL6;
+    for(int i = 0; i < size(s_LvL); i++){
+        delete s_LvL[i];
+    }
     // delete fon lvl
-    delete s_LvL1_Fon;
-    delete s_LvL2_Fon;
-    delete s_LvL3_Fon;
-    delete s_LvL4_Fon;
-    delete s_LvL5_Fon;
-    delete s_LvL6_Fon;
-    delete s_LvL_1_FonBack;
-    delete s_LvL_2_FonBack;
-    delete s_LvL_3_FonBack;
-    delete s_LvL_4_FonBack;
-    delete s_LvL_5_FonBack;
-    delete s_LvL_6_FonBack;
+    for(int i = 0; i < size(s_LvL_Fon); i++){
+        delete s_LvL_Fon[i];
+    }
+    for(int i = 0; i < size(s_LvL_FonBack); i++){
+        delete s_LvL_FonBack[i];
+    }
     // delete Nps sprite
     delete s_Nps_Witcher;
     delete s_Nps_Swordsman;
@@ -72,9 +63,9 @@ Config::~Config() {
     //delete bullet sprite
     delete s_Bullet;
     //music & sound
-    delete m_lvl1;
-    delete m_lvl2;
-    delete m_lvl3;
+    for(int i = 0; i < size(m_lvl); i++){
+        delete m_lvl[i];
+    }
     // Text
     delete text_nps_knight;
     delete text_nps_swordsman;
@@ -114,25 +105,25 @@ void Config::LoadImage() {
     s_Enemy_Mag = new CreateImage("SpriteEntity/Enemy/EnemyMag.png");
     s_Enemy_MagDamage = new CreateImage("SpriteObject/DamageEnemy/DamageMag.png");
     //Sprite LvL Map
-    s_LvL1 = new CreateImage("MapTexture/LvL1.png");
-    s_LvL2 = new CreateImage("MapTexture/LvL2-up.png");
-    s_LvL3 = new CreateImage("MapTexture/LvL3-up.png");
-    s_LvL4 = new CreateImage("MapTexture/LvL4.png");
-    s_LvL5 = new CreateImage("MapTexture/LvL5.png");
-    s_LvL6 = new CreateImage("MapTexture/LvL6.png");
+    s_LvL[1] = new CreateImage("MapTexture/LvL1.png");
+    s_LvL[2] = new CreateImage("MapTexture/LvL2-up.png");
+    s_LvL[3] = new CreateImage("MapTexture/LvL3-up.png");
+    s_LvL[4] = new CreateImage("MapTexture/LvL4.png");
+    s_LvL[5] = new CreateImage("MapTexture/LvL5.png");
+    s_LvL[6] = new CreateImage("MapTexture/LvL6.png");
     // Sprite LvL Fon
-    s_LvL1_Fon = new CreateImage("SpriteMapObject/FonLvL1_.png");
-    s_LvL2_Fon = new CreateImage("SpriteMapObject/FonLvL2_.png");
-    s_LvL3_Fon = new CreateImage("SpriteMapObject/FonLvL3_.png");
-    s_LvL4_Fon = new CreateImage("SpriteMapObject/FonLvL4_.png");
-    s_LvL5_Fon = new CreateImage("SpriteMapObject/FonLvL5_.png");
-    s_LvL6_Fon = new CreateImage("SpriteMapObject/FonLvL6_.png");
-    s_LvL_1_FonBack = new CreateImage("SpriteMapObject/FonLvL1_Back.png");
-    s_LvL_2_FonBack = new CreateImage("SpriteMapObject/FonLvL2_Back.png");
-    s_LvL_3_FonBack = new CreateImage("SpriteMapObject/FonLvL3_Back.png");
-    s_LvL_4_FonBack = new CreateImage("SpriteMapObject/FonLvL4_Back.png");
-    s_LvL_5_FonBack = new CreateImage("SpriteMapObject/FonLvL5_Back.png");
-    s_LvL_6_FonBack = new CreateImage("SpriteMapObject/FonLvL6_Back.png");
+    s_LvL_Fon[1] = new CreateImage("SpriteMapObject/FonLvL1_.png");
+    s_LvL_Fon[2] = new CreateImage("SpriteMapObject/FonLvL2_.png");
+    s_LvL_Fon[3] = new CreateImage("SpriteMapObject/FonLvL3_.png");
+    s_LvL_Fon[4] = new CreateImage("SpriteMapObject/FonLvL4_.png");
+    s_LvL_Fon[5] = new CreateImage("SpriteMapObject/FonLvL5_.png");
+    s_LvL_Fon[6] = new CreateImage("SpriteMapObject/FonLvL6_.png");
+    s_LvL_FonBack[1] = new CreateImage("SpriteMapObject/FonLvL1_Back.png");
+    s_LvL_FonBack[2] = new CreateImage("SpriteMapObject/FonLvL2_Back.png");
+    s_LvL_FonBack[3] = new CreateImage("SpriteMapObject/FonLvL3_Back.png");
+    s_LvL_FonBack[4] = new CreateImage("SpriteMapObject/FonLvL4_Back.png");
+    s_LvL_FonBack[5] = new CreateImage("SpriteMapObject/FonLvL5_Back.png");
+    s_LvL_FonBack[6] = new CreateImage("SpriteMapObject/FonLvL6_Back.png");
     // Sprite Nps
     s_Nps_Aiden = new CreateImage("SpriteEntity/Nps/Nps_Aiden.png");
     s_Nps_Blacksmith = new CreateImage("SpriteEntity/Nps/Blacksmith.png");
@@ -180,9 +171,12 @@ void Config::LoadText() {
 }
 
 void Config::LoadMusic() {
-    m_lvl1 = new m_Music(" ");
-    m_lvl2 = new m_Music(" ");
-    m_lvl3 = new m_Music(" ");
+    m_lvl[1] = new m_Music(" ");
+    m_lvl[2] = new m_Music(" ");
+    m_lvl[3] = new m_Music(" ");
+    m_lvl[4] = new m_Music(" ");
+    m_lvl[5] = new m_Music(" ");
+    m_lvl[6] = new m_Music(" ");
 }
 
 void Config::LoadSound() {

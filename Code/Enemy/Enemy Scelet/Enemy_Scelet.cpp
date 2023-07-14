@@ -16,7 +16,7 @@ Enemy_Skeleton::~Enemy_Skeleton() {
 }
 
 FloatRect Enemy_Skeleton::getRect() {
-    return FloatRect (this->position.x, this->position.y, this->w, this->h);
+    return FloatRect (this->pos.x, this->pos.y, this->w, this->h);
 }
 
 void Enemy_Skeleton::ControlMove() {
@@ -30,7 +30,7 @@ void Enemy_Skeleton::move() {
 
 void Enemy_Skeleton::update(float time, GameLvL *gLvL, Player *p){
     this->gameLvL = gLvL;
-    this->s->setPosition(position);
+    this->s->setPosition(pos);
     if(this->life){
 
     }
@@ -45,11 +45,11 @@ void Enemy_Skeleton::initAnim() {
 }
 
 float Enemy_Skeleton::GetX() {
-    return this->position.x;
+    return this->pos.x;
 }
 
 float Enemy_Skeleton::GetY() {
-    return this->position.y;
+    return this->pos.y;
 }
 
 void Enemy_Skeleton::checkCollisionMap(float dX, float dY){

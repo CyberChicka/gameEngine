@@ -11,7 +11,7 @@ class Entity {
 public:
     GameLvL *gameLvL;
     int numLvL;
-    Vector2f position;
+    Vector2f pos;
     float dx, dy, CurrentFrame, speed;
     char cell;
     int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist, randomNumber;

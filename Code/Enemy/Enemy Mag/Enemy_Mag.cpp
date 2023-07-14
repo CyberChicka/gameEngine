@@ -17,10 +17,10 @@ Enemy_Mag::~Enemy_Mag() {
 }
 
 void Enemy_Mag::ControlEnemy(float time, float pX, float pY) {
-    this->distance = ((this->position.x - pX) * (this->position.x - pX) + (this->position.y - pY) * (this->position.y - pY));
+    this->distance = ((this->pos.x - pX) * (this->pos.x - pX) + (this->pos.y - pY) * (this->pos.y - pY));
     if(this->name == "Mag"){
         if(this->distance > 10){
-            this->dx = 0.80 * time * (pX - this->position.x) / this->distance;
+            this->dx = 0.80 * time * (pX - this->pos.x) / this->distance;
         }
     }
 }
@@ -55,17 +55,18 @@ void Enemy_Mag::animation(float time) {
 
 void Enemy_Mag::update(float time, GameLvL *gLvL, Player *p) {
     this->timeAttack += time;
+    this->Attack(*p);
     this->sDamage->update(time, gLvL);
     this->gameLvL = gLvL;
     this->State();
-    ControlEnemy(time, p->position.x, p->position.y);
+    ControlEnemy(time, p->pos.x, p->pos.y);
     this->animation(time);
-    this->position.x += this->dx * time;
+    this->pos.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time;
+    this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
     if(!this->onGround)this->dy+=0.0015*time;
-    this->s->setPosition(this->position);
+    this->s->setPosition(this->pos);
     if(this->is_health <= 0)this->life = false;
 }
 
@@ -80,12 +81,19 @@ void Enemy_Mag::Attack(Player &p) {
             this->isAttack = false;
             this->isStop = false;
         }
-        if(this->isAttack){
-            this->randomNumber = rand();
-            if(this->timeAttack > 1000){
-                this->sDamage->setPosition(p.GetX(), position.y - 250);
-                if(this->sDamage->s->getGlobalBounds().intersects(p.getRect()) && !p.isBlock){ p.is_health -= 20; }
-                this->timeAttack = 0;
+        if(p.isBlock){
+            if(p.state == Player::left){this->dx = -0.2;}
+            else if(p.state == Player::right){ this->dx = 0.2; }
+            else this->dx = -0.2;
+        }
+        else{
+            if(this->isAttack){
+                this->randomNumber = rand();
+                if(this->timeAttack > 1000){
+                    this->sDamage->setPosition(p.GetX(), pos.y - 250);
+                    if(this->sDamage->s->getGlobalBounds().intersects(p.getRect())){ p.is_health -= 20; }
+                    this->timeAttack = 0;
+                }
             }
         }
     }

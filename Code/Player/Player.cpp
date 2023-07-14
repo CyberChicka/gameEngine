@@ -12,7 +12,7 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->k_Silver = 10;
     this->k_Gold = 10;
     this->money = 10;
-    this->lvl_player = 1;
+    this->lvl_player = 10;
     this->initAnim();
 }
 Player::~Player() {
@@ -23,20 +23,20 @@ Player::~Player() {
     delete this->e_Radius;
 }
 FloatRect Player::getRect() {
-    return FloatRect(this->position.x, this->position.y, this->w, this->h);
+    return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
 }
 
 void Player::animation(float time) {
     if(this->life){
         if(this->isBlock){
-            this->s->setPosition(position);
+            this->s->setPosition(pos);
             if(this->state == right) this->curAnimation = AnimationIndex::BlockR;
             else if(this->state == left) this->curAnimation = AnimationIndex::BlockL;
             else this->curAnimation = AnimationIndex::BlockR;
         }
         if(this->isAttack && !this->isBlock){
             this->stop = false;
-            this->s->setPosition(position.x, position.y - 40);
+            this->s->setPosition(pos.x, pos.y - 40);
             if(this->state == right){
                 this->curAnimation = AnimationIndex::AttackR;
                 if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){ this->isAttack = false; }
@@ -51,13 +51,13 @@ void Player::animation(float time) {
             }
         }
         if(this->isRun && !this->isAttack){
-            this->s->setPosition(this->position);
+            this->s->setPosition(this->pos);
             if(this->state == right) this->curAnimation = AnimationIndex::RunR;
             else if(this->state == left) this->curAnimation = AnimationIndex::RunL;
             else this->curAnimation = AnimationIndex::RunR;
         }
         if(this->stop && !this->isAttack){
-            this->s->setPosition(this->position);
+            this->s->setPosition(this->pos);
             if(this->state == right) this->curAnimation = AnimationIndex::WalkingR;
             else if(this->state == left) this->curAnimation = AnimationIndex::WalkingL;
             else this->curAnimation = AnimationIndex::WalkingR;
@@ -145,23 +145,23 @@ void Player::move(float time) {
         switch (this->state) {
             case left: this->dx = -this->speed; break;
             case right: this->dx = this->speed; break;
-            case SLeft: this->position.x -= 14 * time; break;
-            case SRight: this->position.x += 14 * time; break;
+            case SLeft: this->pos.x -= 14 * time; break;
+            case SRight: this->pos.x += 14 * time; break;
         }
         this->speed = 0;
     }
 }
 
-float Player::GetX() { return this->position.x; }
-float Player::GetY() { return this->position.y; }
+float Player::GetX() { return this->pos.x; }
+float Player::GetY() { return this->pos.y; }
 
 void Player::setPosition(float x, float y) {
-    this->position.x = x;
-    this->position.y = y;
+    this->pos.x = x;
+    this->pos.y = y;
 }
 
 void Player::update(float time, GameLvL *gLvL){
-    this->particles->setEmitter(this->position.x + 28, this->position.y + 30);
+    this->particles->setEmitter(this->pos.x + 28, this->pos.y + 30);
     this->gameLvL = gLvL;
     // Move
     this->move(time);
@@ -175,19 +175,19 @@ void Player::update(float time, GameLvL *gLvL){
     if(this->BulletTime > 5000)this->isShoot = true;
     else this->isShoot = false;
     //position
-    this->position.x += this->dx * time;
+    this->pos.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);
-    this->position.y += this->dy * time;
+    this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
     this->dy = this->dy + 0.0015*time; // Притяжение к земле
-    if(!this->isAttack)this->s->setPosition(this->position);
-    this->e_Radius->setPosition(this->position.x - 95, this->position.y - 50);
+    if(!this->isAttack)this->s->setPosition(this->pos);
+    this->e_Radius->setPosition(this->pos.x - 95, this->pos.y - 50);
     // life
     if(this->is_health <= 0)this->life = false;
 }
 
 View Player::setPlayerCoordinateForView(sf::View &view) {
-    view.setCenter(this->position.x, this->position.y - 100);
+    view.setCenter(this->pos.x, this->pos.y - 100);
     return view;
 }
 void Player::draw(RenderWindow &window, View view){
@@ -196,30 +196,30 @@ void Player::draw(RenderWindow &window, View view){
     window.draw(*this->s);
 }
 void Player::checkCollisionMap(float dX, float dY) {
-    for(int i = this->position.y / 32; i<(this->position.y + h) / 32; i++)
-        for(int j = this->position.x / 32; j<(this->position.x + w) / 32; j++){
+    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++)
+        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->position.y = i * 32 - h;
+                    this->pos.y = i * 32 - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->position.y = i * 32 + 32;
+                    this->pos.y = i * 32 + 32;
                     this->dy = 0;
                 }
                 if (dX>0){
-                    this->position.x = j * 32 - w;
+                    this->pos.x = j * 32 - w;
                 }
                 if (dX<0){
-                    this->position.x = j * 32 + 32;
+                    this->pos.x = j * 32 + 32;
                 }
             }
             if(this->gameLvL->gameLvL == 1){
-                if(this->position.x < 1){ this->position.x = this->position.x + 1; }
-                if(this->position.y < 1){ this->position.y = this->position.y + 1; }
+                if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
+                if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
             }
 
 //            if(this->position.y > 900){ this->position.y = this->position.y - 0.5;}
