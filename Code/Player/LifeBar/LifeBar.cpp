@@ -13,16 +13,21 @@ LifeBar::~LifeBar() {
 }
 
 void LifeBar::update(Player *player) {
-    this->s->setPosition(player->pos.x - 600, player->pos.y - 450);
-    this->bar.setPosition(player->pos.x - 548, player->pos.y - 418);
     if(player->is_health >= 0){
         if(player->is_health <= player->f_health){
-            this->bar.setSize(Vector2f((player->f_health - player->is_health) * 10 / player->f_health, 10));
+
+            this->bar.setSize(Vector2f((player->f_health - player->is_health) * 317 / player->f_health, 26));
         }
     }
 }
 
-void LifeBar::draw(sf::RenderWindow &window) {
+void LifeBar::position(sf::View view) {
+    this->s->setPosition(view.getCenter().x - 600, view.getCenter().y - 320);
+    this->bar.setPosition(view.getCenter().x - 548, view.getCenter().y - 288);
+}
+
+void LifeBar::draw(sf::RenderWindow &window, View view) {
+    position(view);
     window.draw(*this->s);
     window.draw(this->bar);
 }

@@ -16,8 +16,9 @@ public:
     Sprite *s;
     LifeBar(Sprite *sprite);
     ~LifeBar();
+    void position(View view);
     void update(Player *player);
-    void draw(RenderWindow &window);
+    void draw(RenderWindow &window, View view);
 };
 
 

@@ -88,6 +88,7 @@ private:
     void TakeEnemy();
     void TakeEquipment();
     void TakeNps();
+    void TakeInventory();
     void ShootBullet();
     
     //

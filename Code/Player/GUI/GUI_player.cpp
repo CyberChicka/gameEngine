@@ -26,9 +26,9 @@ void GUI_player::GUI_update(Player *player){
     this->GUI_life->update(player);
 }
 
-void GUI_player::GUI_draw(sf::RenderWindow &window){
+void GUI_player::GUI_draw(sf::RenderWindow &window, View view){
     if(this->GUI_visible){
-        this->GUI_invent->draw(window);
-        this->GUI_life->draw(window);
+        this->GUI_invent->draw(window, view);
+        this->GUI_life->draw(window, view);
     }
 }

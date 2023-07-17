@@ -43,24 +43,24 @@ void Inventory::update(Player *player){
     this->t_silver_key->setString(os_silver_key.str());
     this->t_gold_key->setString(os_gold_key.str());
     this->t_money->setString(os_money.str());
-    this->position(player);
 }
 
-void Inventory::position(Player *p){
-    this->s->setPosition(p->pos);
+void Inventory::position(View view){
+    this->s->setPosition(view.getCenter().x - 600, view.getCenter().y - 200);
     //sprite
-    this->inBackpackInventory->s->setPosition(p->pos.x - 100, p->pos.y - 100);
-    this->inMoney->s->setPosition(p->pos.x - 172, p->pos.y - 65);
-    this->inSilverKey->s->setPosition(p->pos.x - 172, p->pos.y - 15);
-    this->inGoldKey->s->setPosition(p->pos.x - 172, p->pos.y + 38);
+    this->inBackpackInventory->s->setPosition(view.getCenter().x - 420, view.getCenter().y + 200);
+    this->inMoney->s->setPosition(view.getCenter().x - 174, view.getCenter().y - 65);
+    this->inSilverKey->s->setPosition(view.getCenter().x - 174, view.getCenter().y - 15);
+    this->inGoldKey->s->setPosition(view.getCenter().x - 174, view.getCenter().y + 38);
     //text
-    this->t_silver_key->text->setPosition(p->pos.x - 134, p->pos.y + 12);
-    this->t_gold_key->text->setPosition(p->pos.x - 134, p->pos.y + 65);
-    this->t_money->text->setPosition(p->pos.x - 134, p->pos.y - 42);
-    this->t_lvl->text->setPosition(p->pos.x - 426, p->pos.y - 92);
-    this->t_health->text->setPosition(p->pos.x - 375, p->pos.y - 122);
+    this->t_money->text->setPosition(view.getCenter().x - 138, view.getCenter().y - 38);
+    this->t_silver_key->text->setPosition(view.getCenter().x - 138, view.getCenter().y + 16);
+    this->t_gold_key->text->setPosition(view.getCenter().x - 138, view.getCenter().y + 68);
+    this->t_lvl->text->setPosition(view.getCenter().x - 426, view.getCenter().y - 92);
+    this->t_health->text->setPosition(view.getCenter().x - 375, view.getCenter().y - 122);
 }
-void Inventory::draw(sf::RenderWindow &window){
+void Inventory::draw(sf::RenderWindow &window, View view){
+    this->position(view);
     if(this->isInvent){
         this->inBackpackInventory->s->setTextureRect(IntRect(64, 0, 64, 64));
         window.draw(*this->s);

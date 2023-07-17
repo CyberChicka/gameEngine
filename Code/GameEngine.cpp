@@ -27,7 +27,6 @@ void GameEngine::update() {
     this->elapsed = this->clock.restart();
     this->game_time = this->game_time / 800;
     // View
-    this->config->getPlayerCoordinateForView(this->player->GetX(), this->player->GetY());
     // Fon update
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
         (*itFon)->update(this->game_time, this->gameLvL);
@@ -98,17 +97,18 @@ void GameEngine::render(){ // Рендер изображения
     for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
         (*itBullet)->draw(*this->window, this->config->view);
     }
-    this->GUI->GUI_draw(*this->window);
-    this->window->setView(this->config->view); // привязываем окно к камере
+    this->GUI->GUI_draw(*this->window, this->config->view);
     this->window->display(); // создаём дисплей
+    this->config->getPlayerCoordinateForView(this->player->GetX(), this->player->GetY());
+    this->window->setView(this->config->view); //  привязываем окно к камере
 }
 
 void GameEngine::initWindow() {
     // для начало используем это способ, потом через настройки будем изменять размер
-//    this->config->window_size.x = VideoMode::getDesktopMode().width / 2; // ширину монитора делим на 2
-//    this->config->window_size.y = VideoMode::getDesktopMode().height / 2;// высоту монитора делим на 2
-    this->config->window_size.x = 1280; // ширину монитора делим на 2
-    this->config->window_size.y = 720;// высоту монитора делим на 2
+    this->config->window_size.x = VideoMode::getDesktopMode().width / 2; // ширину монитора делим на 2
+    this->config->window_size.y = VideoMode::getDesktopMode().height / 2;// высоту монитора делим на 2
+//    this->config->window_size.x = 1280; // ширину монитора делим на 2
+//    this->config->window_size.y = 720;// высоту монитора делим на 2
     this->config->view_size.x = this->config->window_size.x;
     this->config->view_size.y = this->config->window_size.y;
     const VideoMode videoMode = VideoMode(this->config->window_size.x, this->config->window_size.y);
@@ -253,6 +253,12 @@ void GameEngine::pollEvents() {
                 this->config->view.zoom(0.9f);
         }
         if(game_event.type == Event::KeyPressed){
+            if(game_event.key.code == sf::Keyboard::I){
+                switch (this->GUI->GUI_visible) {
+                    case true: this->GUI->GUI_visible = false; break;
+                    case false: this->GUI->GUI_visible = true; break;
+                }
+            }
             if(game_event.key.code == Keyboard::P){
                 if(player->is_health > 0)
                     this->player->is_health -= 20;
@@ -300,6 +306,7 @@ void GameEngine::pollEvents() {
 }
 
 void GameEngine::EventFunc() {
+    this->TakeInventory();
     this->ShootBullet();
     this->TakeItems();
     this->TakeEquipment();
@@ -370,9 +377,7 @@ void GameEngine::TakeDoor() {
 }
 void GameEngine::TakeEnemy() {
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
-        if(!(*itEnemy)->life){
-            this->enemyLvL[gameLvL->gameLvL].erase(itEnemy);
-        }
+
     }
 }
 
@@ -382,6 +387,17 @@ void GameEngine::ShootBullet() {
             if(player->life && player->isShoot){
                 this->bulletLvL.push_back(new Bullet(config->s_Bullet->s, gameLvL, player->pos.x, player->pos.y, 500, 370, "Bullet", player->state));
                 this->player->BulletTime = 0;
+            }
+        }
+    }
+}
+
+void GameEngine::TakeInventory() {
+    if(game_event.type == Event::KeyPressed){
+        if(game_event.key.code == Keyboard::E){
+            switch (this->player->isInventory) {
+                case true: this->player->isInventory = false; break;
+                case false: this->player->isInventory = true; break;
             }
         }
     }

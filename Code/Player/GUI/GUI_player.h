@@ -13,7 +13,7 @@ public:
     GUI_player(Sprite *S_Health, Sprite *S_Inventory, Sprite *S_Features);
     ~GUI_player();
     void GUI_update(Player *player);
-    void GUI_draw(RenderWindow &window);
+    void GUI_draw(RenderWindow &window, View view);
 };
 
 

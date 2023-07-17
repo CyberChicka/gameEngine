@@ -21,8 +21,8 @@ public:
     Inventory(Sprite *sprite);
     ~Inventory();
     void update(Player *player);
-    void position(Player *player);
-    void draw(RenderWindow &window);
+    void position(View view);
+    void draw(RenderWindow &window, View view);
 };
 
 
