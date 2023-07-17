@@ -4,8 +4,9 @@
 #include "GameEngine.h"
 
 GameEngine::GameEngine() {
-    this->initWindow();
     this->initClass();
+    this->m_Menu.show();
+    this->initWindow();
 }
 GameEngine::~GameEngine() {
     cout << "========== removed from memory ========" << endl;
@@ -105,8 +106,8 @@ void GameEngine::render(){ // Рендер изображения
 
 void GameEngine::initWindow() {
     // для начало используем это способ, потом через настройки будем изменять размер
-    this->config->window_size.x = VideoMode::getDesktopMode().width / 2; // ширину монитора делим на 2
-    this->config->window_size.y = VideoMode::getDesktopMode().height / 2;// высоту монитора делим на 2
+    this->config->window_size.x = VideoMode::getDesktopMode().width; // ширину монитора делим на 2
+    this->config->window_size.y = VideoMode::getDesktopMode().height;// высоту монитора делим на 2
 //    this->config->window_size.x = 1280; // ширину монитора делим на 2
 //    this->config->window_size.y = 720;// высоту монитора делим на 2
     this->config->view_size.x = this->config->window_size.x;
@@ -125,7 +126,7 @@ void GameEngine::initClass() {
     this->gameLvL = new GameLvL(config->s_LvL[1]->s, 1);
     //Player
     this->player = new Player(config->s_player->s, gameLvL,1000, 1800, 56, 60, "player");
-    this->GUI = new GUI_player(config->s_player_health->s, config->s_player_inventory->s, config->s_player_features->s);
+    this->GUI = new GUI_player;
     // Attack Enemy
     this->enemyMagDamage = new FonGame(config->s_Enemy_MagDamage->s, gameLvL, 0, 0, 0, 0,"MagDamage");
     //Enemy
@@ -142,6 +143,18 @@ void GameEngine::initClass() {
     };
     // enemy lvl 3
     this->enemyLvL[3] = {
+
+    };
+    // enemy lvl 4
+    this->enemyLvL[4] = {
+
+    };
+    // enemy lvl 5
+    this->enemyLvL[5] = {
+
+    };
+    // enemy lvl 6
+    this->enemyLvL[6] = {
 
     };
     // Object LvL 1
@@ -167,6 +180,18 @@ void GameEngine::initClass() {
             new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3500, 1600, 95, 72, "RemainsSkeleton"),
             new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3700, 1600, 95, 72, "RemainsSkeleton"),
     };
+    // Object LvL 4
+    this->objLvL[4] = {
+
+    };
+    // Object LvL 5
+    this->objLvL[5] = {
+
+    };
+    // Object LvL 6
+    this->objLvL[6] = {
+
+    };
     //Chest
     this->chestLvL[1] = {
             new Chest(config->s_Chest_Small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
@@ -178,11 +203,25 @@ void GameEngine::initClass() {
             new Chest(config->s_Chest_Middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
             new Chest(config->s_Chest_Big->s, gameLvL, 3026, 1180, 65, 90, "BigChest")
     };
+    //Chest lvl 2
     this->chestLvL[2] = {
             new Chest(config->s_Chest_Small->s, gameLvL, 3410, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_Chest_Big->s, gameLvL, 2250, 1600, 65, 90, "BigChest"),
     };
+    //Chest lvl 3
     this->chestLvL[3] = {
+
+    };
+    //Chest lvl 4
+    this->chestLvL[4] = {
+
+    };
+    //Chest lvl 5
+    this->chestLvL[5] = {
+
+    };
+    //Chest lvl 6
+    this->chestLvL[6] = {
 
     };
     //Nps
@@ -204,6 +243,18 @@ void GameEngine::initClass() {
             new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1620, 122, 152, "Soothsayer"),
             new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps_swordsman, 5280, 1620, 122, 152, "Swordsman")
     };
+    // nps lvl 4
+    this->npsLvL[4] = {
+
+    };
+    // nps lvl 5
+    this->npsLvL[5] = {
+
+    };
+    // nps lvl 6
+    this->npsLvL[6] = {
+
+    };
     // Item
     this->itemLvL[1] = {
             new health_item(config->s_Item_Health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
@@ -218,6 +269,18 @@ void GameEngine::initClass() {
     };
     // item lvl 3
     this->itemLvL[3] = {
+
+    };
+    // item lvl 4
+    this->itemLvL[4] = {
+
+    };
+    // item lvl 5
+    this->itemLvL[5] = {
+
+    };
+    // item lvl 6
+    this->itemLvL[6] = {
 
     };
     //Fon
@@ -236,7 +299,18 @@ void GameEngine::initClass() {
     this->fonLvL[3] = {
 
     };
+    // Fon lvl 4
+    this->fonLvL[4] = {
 
+    };
+    // Fon lvl 5
+    this->fonLvL[5] = {
+
+    };
+    // Fon lvl 6
+    this->fonLvL[6] = {
+
+    };
 }
 void GameEngine::pollEvents() {
     while (this->window->pollEvent(this->game_event)){
@@ -304,7 +378,6 @@ void GameEngine::pollEvents() {
         }
     }
 }
-
 void GameEngine::EventFunc() {
     this->TakeInventory();
     this->ShootBullet();
@@ -314,7 +387,6 @@ void GameEngine::EventFunc() {
     this->TakeDoor();
     this->TakeNps();
 }
-
 void GameEngine::TakeItems() {
     if (game_event.type == Event::KeyPressed){
         if (game_event.key.code == Keyboard::F){
@@ -385,7 +457,7 @@ void GameEngine::ShootBullet() {
     if(game_event.type == Event::KeyPressed){
         if(game_event.key.code == Keyboard::LControl){
             if(player->life && player->isShoot){
-                this->bulletLvL.push_back(new Bullet(config->s_Bullet->s, gameLvL, player->pos.x, player->pos.y, 500, 370, "Bullet", player->state));
+                this->bulletLvL.push_back(new Bullet(config->s_Bullet->s, gameLvL, player->GetX(), player->GetY()-40, 200, 50, "Bullet", player->state));
                 this->player->BulletTime = 0;
             }
         }

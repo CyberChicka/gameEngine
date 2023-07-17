@@ -41,6 +41,7 @@ public:
 
     void run();
 private:
+    MainMenu m_Menu;
     Config *config = Config::getInstance();
     // render
     RenderWindow *window;

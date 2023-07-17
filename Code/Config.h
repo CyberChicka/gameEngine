@@ -54,8 +54,6 @@ public:
     CreateImage *s_Chest_Small, *s_Chest_Middle, *s_Chest_Big;
     // Bullet
     CreateImage *s_Bullet;
-    //GUI player
-    CreateImage *s_player_health, *s_player_inventory, *s_player_features;
     // Text
     CreateText *text_nps_blacksmith;
     CreateText *text_nps_historian;

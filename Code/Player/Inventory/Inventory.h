@@ -14,7 +14,7 @@
 
 class Inventory {
 public:
-    CreateImage *inSilverKey, *inGoldKey, *inMoney, *inBackpackInventory;
+    CreateImage *s_inSilverKey, *s_inGoldKey, *s_inMoney, *s_inBackpackInventory;
     CreateText *t_health, *t_lvl, *t_money, *t_gold_key, *t_silver_key;
     bool isInvent;
     Sprite *s;

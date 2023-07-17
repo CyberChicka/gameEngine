@@ -13,6 +13,7 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->k_Silver = 10;
     this->k_Gold = 10;
     this->money = 10;
+    this->w_sprint = 210;
     this->lvl_player = 1;
     this->initAnim();
 }
@@ -118,19 +119,19 @@ void Player::ControlMove() {
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
                         this->state = left;
-                        this->speed = 0.2; // speed 0.20
+                        this->speed = 0.22; // speed 0.20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
                         this->state = right;
-                        this->speed = 0.2; // speed 20
+                        this->speed = 0.22; // speed 20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
                         this->isJump = true;
-                        this->dy -= 0.65; // jump 0.65
+                        this->dy -= 0.66; // jump 0.65
                         this->onGround = false;
                         this->stop = false;
                     }
@@ -145,8 +146,8 @@ void Player::move(float time) {
         switch (this->state) {
             case left: this->dx = -this->speed; break;
             case right: this->dx = this->speed; break;
-            case SLeft: this->pos.x -= 14 * time; break;
-            case SRight: this->pos.x += 14 * time; break;
+            case SLeft: this->pos.x -= this->w_sprint; break;
+            case SRight: this->pos.x += this->w_sprint; break;
         }
         this->speed = 0;
     }

@@ -5,19 +5,16 @@
 #include "../ Animation/Animation.h"
 #include "../Particle/ParticleSystem.h"
 
-
 class Player: public Entity{
 public:
-    bool isAttack, isBlock, isSprint, isShoot, isRun, isJump;
-    bool isInventory;
-    int lvl_player;
-    int SprintTime, BulletTime;
+    bool isAttack, isBlock, isSprint, isShoot, isRun, isJump, isInventory;
+    int lvl_player, SprintTime, BulletTime;
+    int w_sprint;
     ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,
             AttackL, AttackR,
             BlockL, BlockR,
-            JumpL, JumpR,
             DeadL, DeadR,
             Count};
     CircleShape *e_Radius;//e_Radius -> entity radius

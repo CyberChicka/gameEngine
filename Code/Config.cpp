@@ -156,10 +156,6 @@ void Config::LoadImage() {
     this->s_Chest_Big = new CreateImage("SpriteObject/Chest/BigChest.png");
     // class bullet
     this->s_Bullet = new CreateImage("SpriteEntity/Player/AttacPlaz1.png");
-    // GUI player
-    this->s_player_features = new CreateImage("SpriteEntity/Player/iconMenuGame/features.png");
-    this->s_player_health = new CreateImage("SpriteEntity/Player/iconMenuGame/HealthBar.png");
-    this->s_player_inventory = new CreateImage("SpriteEntity/Player/iconMenuGame/OpenInventory.png");
 }
 
 void Config::LoadShader() {

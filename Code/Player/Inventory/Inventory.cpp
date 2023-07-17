@@ -6,10 +6,10 @@
 
 Inventory::Inventory(Sprite *sprite) {
     this->s = sprite;
-    this->inGoldKey = new CreateImage("SpriteObject/inGoldKey.png");
-    this->inSilverKey = new CreateImage("SpriteObject/inSilverKey.png");
-    this->inMoney = new CreateImage("SpriteObject/inMoney.png");
-    this->inBackpackInventory = new CreateImage("SpriteObject/inInventory.png");
+    this->s_inGoldKey = new CreateImage("SpriteObject/inGoldKey.png");
+    this->s_inSilverKey = new CreateImage("SpriteObject/inSilverKey.png");
+    this->s_inMoney = new CreateImage("SpriteObject/inMoney.png");
+    this->s_inBackpackInventory = new CreateImage("SpriteObject/inInventory.png");
     this->t_health = new CreateText("MaredivRegular.ttf", 20, " ", Color(10, 10, 10));
     this->t_lvl = new CreateText("MaredivRegular.ttf", 20, " ", Color(10, 10, 10));
     this->t_silver_key = new CreateText("MaredivRegular.ttf", 15, " ", Color(10, 10, 10));
@@ -17,9 +17,9 @@ Inventory::Inventory(Sprite *sprite) {
     this->t_money = new CreateText("MaredivRegular.ttf", 15, " ", Color(10, 10, 10));
 }
 Inventory::~Inventory() {
-    delete this->inGoldKey;
-    delete this->inSilverKey;
-    delete this->inMoney;
+    delete this->s_inGoldKey;
+    delete this->s_inSilverKey;
+    delete this->s_inMoney;
     delete this->t_gold_key;
     delete this->t_money;
     delete this->t_lvl;
@@ -48,33 +48,31 @@ void Inventory::update(Player *player){
 void Inventory::position(View view){
     this->s->setPosition(view.getCenter().x - 600, view.getCenter().y - 200);
     //sprite
-    this->inBackpackInventory->s->setPosition(view.getCenter().x - 420, view.getCenter().y + 200);
-    this->inMoney->s->setPosition(view.getCenter().x - 174, view.getCenter().y - 65);
-    this->inSilverKey->s->setPosition(view.getCenter().x - 174, view.getCenter().y - 15);
-    this->inGoldKey->s->setPosition(view.getCenter().x - 174, view.getCenter().y + 38);
+    this->s_inBackpackInventory->s->setPosition(view.getCenter().x - 480, view.getCenter().y + 240);
+    this->s_inMoney->s->setPosition(view.getCenter().x - 175, view.getCenter().y - 65);
+    this->s_inSilverKey->s->setPosition(view.getCenter().x - 175, view.getCenter().y - 15);
+    this->s_inGoldKey->s->setPosition(view.getCenter().x - 175, view.getCenter().y + 38);
     //text
-    this->t_money->text->setPosition(view.getCenter().x - 138, view.getCenter().y - 38);
-    this->t_silver_key->text->setPosition(view.getCenter().x - 138, view.getCenter().y + 16);
-    this->t_gold_key->text->setPosition(view.getCenter().x - 138, view.getCenter().y + 68);
+    this->t_money->text->setPosition(view.getCenter().x - 140, view.getCenter().y - 38);
+    this->t_silver_key->text->setPosition(view.getCenter().x - 140, view.getCenter().y + 16);
+    this->t_gold_key->text->setPosition(view.getCenter().x - 140, view.getCenter().y + 68);
     this->t_lvl->text->setPosition(view.getCenter().x - 426, view.getCenter().y - 92);
     this->t_health->text->setPosition(view.getCenter().x - 375, view.getCenter().y - 122);
 }
 void Inventory::draw(sf::RenderWindow &window, View view){
     this->position(view);
     if(this->isInvent){
-        this->inBackpackInventory->s->setTextureRect(IntRect(64, 0, 64, 64));
+        this->s_inBackpackInventory->s->setTextureRect(IntRect(68, 0, 64, 64));
         window.draw(*this->s);
-        window.draw(*this->inGoldKey->s);
-        window.draw(*this->inSilverKey->s);
-        window.draw(*this->inMoney->s);
+        window.draw(*this->s_inGoldKey->s);
+        window.draw(*this->s_inSilverKey->s);
+        window.draw(*this->s_inMoney->s);
         window.draw(*this->t_health->text);
         window.draw(*this->t_lvl->text);
         window.draw(*this->t_money->text);
         window.draw(*this->t_gold_key->text);
         window.draw(*this->t_silver_key->text);
     }
-    else{
-        this->inBackpackInventory->s->setTextureRect(IntRect(0, 0, 64, 64));
-    }
-    window.draw(*this->inBackpackInventory->s);
+    else{ this->s_inBackpackInventory->s->setTextureRect(IntRect(0, 0, 64, 64)); }
+    window.draw(*this->s_inBackpackInventory->s);
 }
