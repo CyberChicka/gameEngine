@@ -9,6 +9,7 @@
 class Player: public Entity{
 public:
     bool isAttack, isBlock, isSprint, isShoot, isRun, isJump;
+    bool isInventory;
     int lvl_player;
     int SprintTime, BulletTime;
     ParticleSystem *particles;

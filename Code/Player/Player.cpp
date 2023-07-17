@@ -4,15 +4,16 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->s->setScale(0.5f, 0.5f);
     this->s->setOrigin(this->w/2,this->h/2);
     this->is_health = 120; this->f_health = 120;
-    this->life = true;
     this->e_Radius = new CircleShape(120.f);
     this->e_Radius->setScale(1.0f, 0.5f);
     this->particles = new ParticleSystem(10);
     this->gameLvL = new GameLvL(*LvL);
+    this->life = true;
+    this->isInventory = true;
     this->k_Silver = 10;
     this->k_Gold = 10;
     this->money = 10;
-    this->lvl_player = 10;
+    this->lvl_player = 1;
     this->initAnim();
 }
 Player::~Player() {
@@ -91,17 +92,17 @@ void Player::initAnim() {
 
 void Player::ControlMove() {
     if(this->life){
-        this->stop = true; this->isBlock = false; this->isRun = false;
+        this->stop = true;
+        this->isBlock = false;
+        this->isRun = false;
         this->isJump = false;
         if(Mouse::isButtonPressed(Mouse::Right)){ this->isBlock = true;
             this->stop = false;
-            this->speed = 0;
         }
         else{
             if(Mouse::isButtonPressed(Mouse::Left)){
                 this->isAttack = true;
                 this->stop = false;
-                this->speed = 0;
             }
             else{
                 if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::D)) && this->isSprint){
@@ -117,26 +118,25 @@ void Player::ControlMove() {
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
                         this->state = left;
-                        this->speed += 0.5; // speed 0.20
+                        this->speed = 0.2; // speed 0.20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
                         this->state = right;
-                        this->speed += 0.5; // speed 20
+                        this->speed = 0.2; // speed 20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
                         this->isJump = true;
-                        this->dy -= 0.8; // jump 0.65
+                        this->dy -= 0.65; // jump 0.65
                         this->onGround = false;
                         this->stop = false;
                     }
                 }
             }
         }
-
     }
 }
 void Player::move(float time) {

@@ -29,6 +29,7 @@
 #include "Items/Money/money_item.h"
 #include "Chest/Chest.h"
 #include "Player/Bullet/Bullet.h"
+#include "Player/GUI/GUI_player.h"
 
 using namespace sf;
 using namespace std;
@@ -50,6 +51,7 @@ private:
     Event game_event; // создаём переменную типа Event
     // Class player
     Player *player;
+    GUI_player *GUI;
     // Class Enemy
     list<Enemy*>::iterator itEnemy;
     list<Enemy*> enemyLvL[7];

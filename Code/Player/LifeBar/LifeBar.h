@@ -11,12 +11,13 @@
 using namespace sf;
 using namespace std;
 class LifeBar {
+public:
     RectangleShape bar;
     Sprite *s;
     LifeBar(Sprite *sprite);
     ~LifeBar();
-    void update(Player player);
-    void draw(RenderWindow window);
+    void update(Player *player);
+    void draw(RenderWindow &window);
 };
 
 

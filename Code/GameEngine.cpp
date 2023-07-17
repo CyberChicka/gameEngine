@@ -12,6 +12,7 @@ GameEngine::~GameEngine() {
     if(this->window != nullptr){ delete this->window; }
     delete Config::getInstance(); // очищаем память
     delete this->player; // очищаем память
+    delete this->GUI;
     delete this->gameLvL; // очищаем память
     delete this->enemyMagDamage;
 }
@@ -29,35 +30,36 @@ void GameEngine::update() {
     this->config->getPlayerCoordinateForView(this->player->GetX(), this->player->GetY());
     // Fon update
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
-        (*itFon)->update(game_time, gameLvL);
+        (*itFon)->update(this->game_time, this->gameLvL);
     }
     // player update
-    this->player->update(game_time, gameLvL);
-    this->player->particles->update(elapsed);
+    this->player->update(this->game_time, this->gameLvL);
+    this->GUI->GUI_update(this->player);
+    this->player->particles->update(this->elapsed);
     // Object update
     for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
-        (*itObject)->update(game_time, gameLvL);
+        (*itObject)->update(this->game_time, this->gameLvL);
     }
     // Enemy update
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
         if(!(*itEnemy)->life)this->enemyLvL[gameLvL->gameLvL].erase(itEnemy);
-        (*itEnemy)->update(game_time, gameLvL,  player);
+        (*itEnemy)->update(this->game_time, this->gameLvL,  this->player);
         //cout << size(enemyLvL[gameLvL->gameLvL]) << endl;
     }
     for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
-        (*itChest)->update(game_time, gameLvL);
+        (*itChest)->update(this->game_time, this->gameLvL);
     }
     // Nps update
     for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
-        (*itNps)->update(game_time, gameLvL);
+        (*itNps)->update(this->game_time, this->gameLvL);
     }
     // Item update
     for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
-        (*itItem)->update(game_time, gameLvL);
+        (*itItem)->update(this->game_time, this->gameLvL);
     }
     // Bullet update
     for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
-        (*itBullet)->upadte(game_time);
+        (*itBullet)->upadte(this->game_time);
     }
     // Evnet
     this->pollEvents();
@@ -67,50 +69,53 @@ void GameEngine::render(){ // Рендер изображения
     this->renderClear();
     // render fon
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
-        (*itFon)->draw(*window, config->view);
+        (*itFon)->draw(*this->window, this->config->view);
     }
-    gameLvL->RenderDraw(*window, config->view); // Рисуем карту
+    gameLvL->RenderDraw(*this->window, this->config->view); // Рисуем карту
     // Object render
     for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
-        (*itObject)->draw(*window, config->view);
+        (*itObject)->draw(*this->window, this->config->view);
     }
     // Nps render
     for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
-        (*itNps)->draw(*window, config->view);
+        (*itNps)->draw(*this->window, this->config->view);
     }
     // Chest render
     for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
-        (*itChest)->draw(*window, config->view);
+        (*itChest)->draw(*this->window, this->config->view);
     }
     // Item render
     for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
-        (*itItem)->draw(*window, config->view);
+        (*itItem)->draw(*this->window, this->config->view);
     }
     // render player
-    this->player->draw(*window, config->view);
+    this->player->draw(*this->window, this->config->view);
     // Enemy render
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
-        (*itEnemy)->draw(*window, config->view);
+        (*itEnemy)->draw(*this->window, this->config->view);
     }
     // Bullet Render
     for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
-        (*itBullet)->draw(*window, config->view);
+        (*itBullet)->draw(*this->window, this->config->view);
     }
-    this->window->setView(config->view); // привязываем окно к камере
+    this->GUI->GUI_draw(*this->window);
+    this->window->setView(this->config->view); // привязываем окно к камере
     this->window->display(); // создаём дисплей
 }
 
 void GameEngine::initWindow() {
     // для начало используем это способ, потом через настройки будем изменять размер
-    this->config->window_size.x = VideoMode::getDesktopMode().width / 2; // ширину монитора делим на 2
-    this->config->window_size.y = VideoMode::getDesktopMode().height / 2;// высоту монитора делим на 2
+//    this->config->window_size.x = VideoMode::getDesktopMode().width / 2; // ширину монитора делим на 2
+//    this->config->window_size.y = VideoMode::getDesktopMode().height / 2;// высоту монитора делим на 2
+    this->config->window_size.x = 1280; // ширину монитора делим на 2
+    this->config->window_size.y = 720;// высоту монитора делим на 2
     this->config->view_size.x = this->config->window_size.x;
     this->config->view_size.y = this->config->window_size.y;
-    const VideoMode videoMode = VideoMode(config->window_size.x, config->window_size.y);
+    const VideoMode videoMode = VideoMode(this->config->window_size.x, this->config->window_size.y);
     const Uint32 style = sf::Style::Close| sf::Style::Titlebar;
     // Создание окна и камеру, вертикальное синхронизация
-    this->window = new sf::RenderWindow(videoMode, config->window_title, style);
-    this->config->view.reset(FloatRect(0, 0, config->view_size.x, config->view_size.y));
+    this->window = new sf::RenderWindow(videoMode, this->config->window_title, style);
+    this->config->view.reset(FloatRect(0, 0, this->config->view_size.x, this->config->view_size.y));
     this->window->setFramerateLimit(config->window_frame);
     this->window->setVerticalSyncEnabled(true);
 }
@@ -119,7 +124,8 @@ void GameEngine::initClass() {
     // gameLvL
     this->gameLvL = new GameLvL(config->s_LvL[1]->s, 1);
     //Player
-    this->player = new Player(config->s_player->s, gameLvL ,1000, 1800, 56, 60, "player");
+    this->player = new Player(config->s_player->s, gameLvL,1000, 1800, 56, 60, "player");
+    this->GUI = new GUI_player(config->s_player_health->s, config->s_player_inventory->s, config->s_player_features->s);
     // Attack Enemy
     this->enemyMagDamage = new FonGame(config->s_Enemy_MagDamage->s, gameLvL, 0, 0, 0, 0,"MagDamage");
     //Enemy
@@ -170,7 +176,7 @@ void GameEngine::initClass() {
             new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_Chest_Middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
-            new Chest(config->s_Chest_Big->s, gameLvL, 3390, 1310, 65, 90, "BigChest")
+            new Chest(config->s_Chest_Big->s, gameLvL, 3026, 1180, 65, 90, "BigChest")
     };
     this->chestLvL[2] = {
             new Chest(config->s_Chest_Small->s, gameLvL, 3410, 1600, 65, 70, "SmallChest"),

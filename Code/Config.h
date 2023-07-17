@@ -12,6 +12,7 @@ using namespace std;
 
 #include "Image/CreateImage.h"
 #include "Text/CreateText.h"
+#include "Shader/CreateShader.h"
 #include "Enemy/Enemy.h"
 
 #include "Melody/m_Music.h"
@@ -53,6 +54,8 @@ public:
     CreateImage *s_Chest_Small, *s_Chest_Middle, *s_Chest_Big;
     // Bullet
     CreateImage *s_Bullet;
+    //GUI player
+    CreateImage *s_player_health, *s_player_inventory, *s_player_features;
     // Text
     CreateText *text_nps_blacksmith;
     CreateText *text_nps_historian;
@@ -69,10 +72,12 @@ public:
     //enemy
     s_Sound *so_enemy_Ghost_attack;
     s_Sound *so_enemy_Scelet_attack;
-    //
+    // Shader
+    //CreateShader *shader;
     Config();
     static Config *instance;
 private:
+    void LoadShader();
     void LoadImage();
     void LoadText();
     void LoadSound();
