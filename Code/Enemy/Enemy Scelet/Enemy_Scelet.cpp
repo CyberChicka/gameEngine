@@ -67,7 +67,5 @@ void Enemy_Skeleton::Attack(Player &p) {
 
 }
 
-void Enemy_Skeleton::TakingDamage(Player &p) {
-
-}
+//void Enemy_Skeleton::TakingDamage(Player &p) { }
 

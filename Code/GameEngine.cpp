@@ -4,8 +4,8 @@
 #include "GameEngine.h"
 
 GameEngine::GameEngine() {
-    this->initClass();
     this->m_Menu.show();
+    this->initClass();
     this->initWindow();
 }
 GameEngine::~GameEngine() {
@@ -106,8 +106,8 @@ void GameEngine::render(){ // Рендер изображения
 
 void GameEngine::initWindow() {
     // для начало используем это способ, потом через настройки будем изменять размер
-    this->config->window_size.x = VideoMode::getDesktopMode().width; // ширину монитора делим на 2
-    this->config->window_size.y = VideoMode::getDesktopMode().height;// высоту монитора делим на 2
+    this->config->window_size.x = VideoMode::getDesktopMode().width/2; // ширину монитора делим на 2
+    this->config->window_size.y = VideoMode::getDesktopMode().height/2;// высоту монитора делим на 2
 //    this->config->window_size.x = 1280; // ширину монитора делим на 2
 //    this->config->window_size.y = 720;// высоту монитора делим на 2
     this->config->view_size.x = this->config->window_size.x;
@@ -117,8 +117,8 @@ void GameEngine::initWindow() {
     // Создание окна и камеру, вертикальное синхронизация
     this->window = new sf::RenderWindow(videoMode, this->config->window_title, style);
     this->config->view.reset(FloatRect(0, 0, this->config->view_size.x, this->config->view_size.y));
-    this->window->setFramerateLimit(config->window_frame);
-    this->window->setVerticalSyncEnabled(true);
+    //this->window->setFramerateLimit(config->window_frame);
+    //this->window->setVerticalSyncEnabled(true);
 }
 
 void GameEngine::initClass() {
@@ -128,22 +128,30 @@ void GameEngine::initClass() {
     this->player = new Player(config->s_player->s, gameLvL,1000, 1800, 56, 60, "player");
     this->GUI = new GUI_player;
     // Attack Enemy
-    this->enemyMagDamage = new FonGame(config->s_Enemy_MagDamage->s, gameLvL, 0, 0, 0, 0,"MagDamage");
+    this->enemyMagDamage = new FonGame(config->s_enemy_MagDamage->s, gameLvL, 0, 0, 0, 0, "MagDamage");
     //Enemy
     this->enemyLvL[1] = {
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 2200, 1236, 65, 55, "Bat"),
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 2250, 1236, 65, 55, "Bat"),
 //            new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1236, 40, 88, "Ghost"),
-//            new Enemy_Bat(config->s_Enemy_Bat->s, gameLvL, 800, 1236, 65, 55, "Bat"),
-                new Enemy_Boom(config->s_Enemy_Boom->s, gameLvL, 800, 1236, 50, 50, "Boom"),
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 9800, 1236, 65, 55, "Bat"),
+            new Enemy_Boom(config->s_enemy_boom->s, gameLvL, 9000, 1800, 50, 50, "Boom"),
 //            new Enemy_BigGhost(config->s_Enemy_BigGhost->s, gameLvL, 800, 1236, 65, 125, "BigGhost"),
 //            new Enemy_Mag(config->s_Enemy_Mag->s,enemyMagDamage, gameLvL, 800, 1236, 40, 110, "Mag"),
     };
     //enemy lvl 2
     this->enemyLvL[2] = {
-            new Enemy_Ghost(config->s_EnemyGhost->s, gameLvL, 800, 1636, 40, 88, "Ghost"),
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 7500, 1236, 65, 55, "Bat"),
+            new Enemy_Ghost(config->s_enemy_ghost->s, gameLvL, 7800, 1236, 40, 88, "Ghost"),
+            new Enemy_Mag(config->s_enemy_mag->s, enemyMagDamage, gameLvL, 8000, 1236, 40, 110, "Mag"),
+            new Enemy_Boom(config->s_enemy_boom->s, gameLvL, 7800, 1236, 50, 50, "Boom"),
     };
     // enemy lvl 3
     this->enemyLvL[3] = {
-
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 11250, 1236, 65, 55, "Bat"),
+            new Enemy_Ghost(config->s_enemy_ghost->s, gameLvL, 11250, 1636, 40, 88, "Ghost"),
+            new Enemy_BigGhost(config->s_enemy_BigGhost->s, gameLvL, 7767, 1236, 65, 125, "BigGhost"),
+            new Enemy_Boom(config->s_enemy_boom->s, gameLvL, 7767, 1800, 50, 50, "Boom"),
     };
     // enemy lvl 4
     this->enemyLvL[4] = {
@@ -159,26 +167,27 @@ void GameEngine::initClass() {
     };
     // Object LvL 1
     this->objLvL[1] = {
-            new Object(config->s_Object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298,"Home"),
-            new Object(config->s_Object_TableHouse->s, gameLvL, 9520, 1600, 400, 300, "TableHouse"),
+            new Object(config->s_object_stove->s, gameLvL, 5650, 1600, 92, 108, "Stove"),
+            new Object(config->s_object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298, "Home"),
+            new Object(config->s_object_TableHouse->s, gameLvL, 9520, 1600, 400, 300, "TableHouse"),
     };
     // Object LvL 2
     this->objLvL[2] = {
-            new Object(config->s_Object_BushHouse->s, gameLvL, 3400, 1600, 500, 300, "BushHouse"),
-            new Object(config->s_Object_BonfireHouse->s, gameLvL, 4100, 1600, 1230, 574, "BonfireHouse"),
+            new Object(config->s_object_BushHouse->s, gameLvL, 3400, 1600, 500, 300, "BushHouse"),
+            new Object(config->s_object_BonfireHouse->s, gameLvL, 4100, 1600, 1230, 574, "BonfireHouse"),
     };
     // Object LvL 3
     this->objLvL[3] = {
-            new Object(config->s_Object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390,"FlyingObelisk"),
-            new Object(config->s_Object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeBig"),
-            new Object(config->s_Object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265,"DarkTreeSmall"),
+            new Object(config->s_object_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390, "FlyingObelisk"),
+            new Object(config->s_object_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265, "DarkTreeBig"),
+            new Object(config->s_object_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265, "DarkTreeSmall"),
             //RemainsSkeleton
-            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 500, 1600, 95, 72, "RemainsSkeleton"),
-            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 1500, 1600, 95, 72, "RemainsSkeleton"),
-            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 2400, 1600, 95, 72, "RemainsSkeleton"),
-            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3300, 1600, 95, 72, "RemainsSkeleton"),
-            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3500, 1600, 95, 72, "RemainsSkeleton"),
-            new Object(config->s_Object_RemainsSkeleton->s, gameLvL, 3700, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 500, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 1500, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 2400, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 3300, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 3500, 1600, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 3700, 1600, 95, 72, "RemainsSkeleton"),
     };
     // Object LvL 4
     this->objLvL[4] = {
@@ -194,19 +203,19 @@ void GameEngine::initClass() {
     };
     //Chest
     this->chestLvL[1] = {
-            new Chest(config->s_Chest_Small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_Chest_Middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
-            new Chest(config->s_Chest_Big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
+            new Chest(config->s_chest_small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
+            new Chest(config->s_chest_big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
             //
-            new Chest(config->s_Chest_Small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_Chest_Small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_Chest_Middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
-            new Chest(config->s_Chest_Big->s, gameLvL, 3026, 1180, 65, 90, "BigChest")
+            new Chest(config->s_chest_small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
+            new Chest(config->s_chest_big->s, gameLvL, 3026, 1180, 65, 90, "BigChest")
     };
     //Chest lvl 2
     this->chestLvL[2] = {
-            new Chest(config->s_Chest_Small->s, gameLvL, 3410, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_Chest_Big->s, gameLvL, 2250, 1600, 65, 90, "BigChest"),
+            new Chest(config->s_chest_small->s, gameLvL, 3410, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_big->s, gameLvL, 2250, 1600, 65, 90, "BigChest"),
     };
     //Chest lvl 3
     this->chestLvL[3] = {
@@ -226,22 +235,22 @@ void GameEngine::initClass() {
     };
     //Nps
     this->npsLvL[1] = {
-            new Knight(config->s_Nps_Knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"),
-            new Historian(config->s_Nps_Historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"),
-            new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"),
+            new Knight(config->s_nps_knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"),
+            new Historian(config->s_nps_historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"),
+            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"),
     };
     // nps lvl 2
     this->npsLvL[2] = {
-            new Aiden(config->s_Nps_Aiden->s, gameLvL, config->text_nps_aiden,4550, 1620, 50, 105, "Aiden"),
-            new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1000, 1620, 50, 152, "Blacksmith"),
-            new Witcher(config->s_Nps_Witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher")
+            new Aiden(config->s_nps_aiden->s, gameLvL, config->text_nps_aiden, 4550, 1620, 50, 105, "Aiden"),
+            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 1000, 1620, 50, 152, "Blacksmith"),
+            new Witcher(config->s_nps_witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher")
     };
     // nps lvl 3
     this->npsLvL[3] = {
-            new Supreme_Wizard(config->s_Nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"),
-            new Blacksmith(config->s_Nps_Blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1620, 122, 152, "Blacksmith"),
-            new Soothsayer(config->s_Nps_Soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1620, 122, 152, "Soothsayer"),
-            new Swordsman(config->s_Nps_Swordsman->s, gameLvL, config->text_nps_swordsman, 5280, 1620, 122, 152, "Swordsman")
+            new Supreme_Wizard(config->s_nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"),
+            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1250, 122, 152, "Blacksmith"),
+            new Soothsayer(config->s_nps_soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1250, 122, 152, "Soothsayer"),
+            new Swordsman(config->s_nps_swordsman->s, gameLvL, config->text_nps_swordsman, 5280, 1250, 122, 152, "Swordsman")
     };
     // nps lvl 4
     this->npsLvL[4] = {
@@ -257,15 +266,18 @@ void GameEngine::initClass() {
     };
     // Item
     this->itemLvL[1] = {
-            new health_item(config->s_Item_Health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
-            new money_item(config->s_Item_Money->s, gameLvL, 300, 1600, 30, 40, "Money"),
-            new money_item(config->s_Item_Diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"),
-            new key_item(config->s_Item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"),
-            new key_item(config->s_Item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold")
+            new health_item(config->s_item_health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
+            new money_item(config->s_item_money->s, gameLvL, 300, 1600, 30, 40, "Money"),
+            new money_item(config->s_item_diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"),
+            new key_item(config->s_item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"),
+            new key_item(config->s_item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"),
     };
     // item lvl 2
     this->itemLvL[2] = {
-
+            new money_item(config->s_item_money->s, gameLvL, 4000, 1200, 30, 40, "Money"),
+            new health_item(config->s_item_health->s, gameLvL, 2000, 1200, 40, 45, "Health"),
+            new key_item(config->s_item_KeySilver->s, gameLvL, 550, 1200, 40, 45, "KeySilver"),
+            new key_item(config->s_item_KeyGold->s, gameLvL, 4550, 1200, 40, 45, "KeyGold"),
     };
     // item lvl 3
     this->itemLvL[3] = {
@@ -385,6 +397,7 @@ void GameEngine::EventFunc() {
     this->TakeEquipment();
     this->TakeChest();
     this->TakeDoor();
+    this->TakeEnemy();
     this->TakeNps();
 }
 void GameEngine::TakeItems() {
@@ -410,24 +423,24 @@ void GameEngine::TakeChest() {
                 if (player->e_Radius->getGlobalBounds().intersects((*itChest)->getRect())) {
                     if ((*itChest)->name == "SmallChest") {
                         if (!(*itChest)->is_open) {
-                            if ((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->pos.x + 18, (*itChest)->pos.y, 40, 45, "KeySilver")); }
-                            if ((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_Item_Health->s, gameLvL, (*itChest)->pos.x + 18, (*itChest)->pos.y, 40, 45, "Health")); }
+                            if ((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeySilver->s, gameLvL, (*itChest)->pos.x + 18, (*itChest)->pos.y, 40, 45, "KeySilver")); }
+                            if ((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_item_health->s, gameLvL, (*itChest)->pos.x + 18, (*itChest)->pos.y, 40, 45, "Health")); }
                             if ((*itChest)->OpenChest() == 3){ }
                         }
                     }
                     if ((*itChest)->name == "MiddleChest" && player->k_Silver > 0) {
                         if ((!(*itChest)->is_open)) {
-                            if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "KeyGold"));}
-                            if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_Item_Money->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Money"));}
-                            if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_Item_Health->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Health"));}
+                            if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeyGold->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "KeyGold"));}
+                            if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_item_money->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Money"));}
+                            if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_item_health->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Health"));}
                             this->player->k_Silver--;
                         }
                     }
                     if ((*itChest)->name == "BigChest" && player->k_Gold > 0) {
                         if ((!(*itChest)->is_open)) {
-                            if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_Item_Diamond->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "Diamond"));}
-                            if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeyGold->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeyGold"));}
-                            if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_Item_KeySilver->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeySilver"));}
+                            if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_item_diamond->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "Diamond"));}
+                            if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeyGold->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeyGold"));}
+                            if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeySilver->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeySilver"));}
                             this->player->k_Gold--;
                         }
                     }
@@ -448,8 +461,12 @@ void GameEngine::TakeDoor() {
 
 }
 void GameEngine::TakeEnemy() {
-    for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
-
+    if (game_event.type == Event::MouseButtonPressed){
+        if (game_event.key.code == Mouse::Left){
+            for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
+                (*itEnemy)->TakingDamage(*this->player);
+            }
+        }
     }
 }
 
@@ -457,7 +474,7 @@ void GameEngine::ShootBullet() {
     if(game_event.type == Event::KeyPressed){
         if(game_event.key.code == Keyboard::LControl){
             if(player->life && player->isShoot){
-                this->bulletLvL.push_back(new Bullet(config->s_Bullet->s, gameLvL, player->GetX(), player->GetY()-40, 200, 50, "Bullet", player->state));
+                this->bulletLvL.push_back(new Bullet(config->s_bullet->s, gameLvL, player->GetX(), player->GetY() - 40, 200, 50, "Bullet", player->state));
                 this->player->BulletTime = 0;
             }
         }

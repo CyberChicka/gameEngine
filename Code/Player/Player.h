@@ -8,7 +8,7 @@
 class Player: public Entity{
 public:
     bool isAttack, isBlock, isSprint, isShoot, isRun, isJump, isInventory;
-    int lvl_player, SprintTime, BulletTime;
+    int lvl_player, SprintTime, BulletTime, AttackTime;
     int w_sprint;
     ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,
@@ -21,7 +21,7 @@ public:
     Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name);
     ~Player();
     FloatRect getRect()override;
-    void move(float time);
+    void move();
     void ControlMove();
     void update(float time, GameLvL *gLvL);
     View setPlayerCoordinateForView(View &view);

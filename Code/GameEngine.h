@@ -1,5 +1,6 @@
 #ifndef GAMEENGINE_GAMEENGINE_H
 #define GAMEENGINE_GAMEENGINE_H
+#include <unistd.h>
 #include "Config.h"
 
 #include "MainMenu.h"
@@ -62,11 +63,11 @@ private:
     //Class Object
     list<Object*>::iterator itObject;
     list<Object*> objLvL[7];
-//    //Class Fon
+    //Class Fon
     list<FonGame*>::iterator itFon;
     list<FonGame*>fonLvL[7];
     FonGame *enemyMagDamage;
-//    //Class Nps
+    //Class Nps
     list<Nps*>::iterator itNps;
     list<Nps*> npsLvL[7];
     // Class Chest

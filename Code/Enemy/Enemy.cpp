@@ -78,7 +78,14 @@ void Enemy::draw(RenderWindow &window, View view) {
 
 void Enemy::Attack(Player &p) { }
 
-void Enemy::TakingDamage(Player &p) {}
+void Enemy::TakingDamage(Player &p) {
+    if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
+        if(p.AttackTime > 1000){
+            this->is_health -= 20;
+            p.AttackTime = 0;
+        }
+    }
+}
 
 void Enemy::State() {
     if(this->dx > 0){

@@ -79,6 +79,4 @@ void Enemy_Ghost::Attack(Player &p) {
         }
     }
 }
-void Enemy_Ghost::TakingDamage(Player &p) {
-
-}
+//void Enemy_Ghost::TakingDamage(Player &p) {}

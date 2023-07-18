@@ -17,7 +17,7 @@ public:
     void animation(float time)override;
     void initAnim()override;
     void Attack(Player &p)override;
-    void TakingDamage(Player &p)override;
+    //void TakingDamage(Player &p)override;
 };
 
 

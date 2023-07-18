@@ -5,6 +5,7 @@
 #include "../Map/GameLvL.h"
 #include "../ Animation/Animation.h"
 #include "../Player/Player.h"
+#include "windows.h"
 
 class Enemy: public Entity{
 public:
@@ -26,7 +27,7 @@ public:
     void animation(float time)override;
     void initAnim()override;
     virtual void Attack(Player &p) = 0;
-    virtual void TakingDamage(Player &p) = 0;
+    void TakingDamage(Player &p);
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     void State();

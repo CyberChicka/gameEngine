@@ -88,6 +88,4 @@ void Enemy_Boom::Attack(Player &p) {
         }
     }
 }
-void Enemy_Boom::TakingDamage(Player &p) {
-
-}
+//void Enemy_Boom::TakingDamage(Player &p) {}

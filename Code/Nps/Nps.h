@@ -16,6 +16,7 @@
 class Nps: public Entity{
 public:
     int ClickNps;
+
     CreateText *t_Nps;
     enum class AnimationIndex{ Walking, Count };
     Nps(Sprite *sprite, GameLvL *LvL, CreateText *T_NPS, float X, float Y, int W, int H, string Name);

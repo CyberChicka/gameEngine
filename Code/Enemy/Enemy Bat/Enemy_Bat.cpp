@@ -57,9 +57,7 @@ void Enemy_Bat::Attack(Player &p) {
     }
 }
 
-void Enemy_Bat::TakingDamage(Player &p) {
-
-}
+//void Enemy_Bat::TakingDamage(Player &p) { }
 
 void Enemy_Bat::update(float time, GameLvL *gLvL, Player *p) {
     this->timeAttack += time;

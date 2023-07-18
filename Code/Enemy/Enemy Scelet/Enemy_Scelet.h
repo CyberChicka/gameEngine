@@ -14,7 +14,7 @@ public:
     void update(float time, GameLvL *gLvL, Player *p)override;
     void animation(float time)override;
     void Attack(Player &p)override;
-    void TakingDamage(Player &p)override;
+    //void TakingDamage(Player &p)override;
     void initAnim()override;
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;

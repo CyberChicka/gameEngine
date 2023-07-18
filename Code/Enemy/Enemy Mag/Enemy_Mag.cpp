@@ -106,6 +106,4 @@ void Enemy_Mag::draw(RenderWindow &window, View view) {
     }
 }
 
-void Enemy_Mag::TakingDamage(Player &p) {
-
-}
+//void Enemy_Mag::TakingDamage(Player &p) {}

@@ -2,7 +2,7 @@
 
 Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
     this->s->setScale(0.5f, 0.5f);
-    this->s->setOrigin(this->w/2,this->h/2);
+    this->s->setOrigin(this->w,this->h/2);
     this->is_health = 120; this->f_health = 120;
     this->e_Radius = new CircleShape(120.f);
     this->e_Radius->setScale(1.0f, 0.5f);
@@ -31,14 +31,12 @@ FloatRect Player::getRect() {
 void Player::animation(float time) {
     if(this->life){
         if(this->isBlock){
-            this->s->setPosition(pos);
             if(this->state == right) this->curAnimation = AnimationIndex::BlockR;
             else if(this->state == left) this->curAnimation = AnimationIndex::BlockL;
             else this->curAnimation = AnimationIndex::BlockR;
         }
         if(this->isAttack && !this->isBlock){
             this->stop = false;
-            this->s->setPosition(pos.x, pos.y - 40);
             if(this->state == right){
                 this->curAnimation = AnimationIndex::AttackR;
                 if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){ this->isAttack = false; }
@@ -53,16 +51,14 @@ void Player::animation(float time) {
             }
         }
         if(this->isRun && !this->isAttack){
-            this->s->setPosition(this->pos);
-            if(this->state == right) this->curAnimation = AnimationIndex::RunR;
-            else if(this->state == left) this->curAnimation = AnimationIndex::RunL;
-            else this->curAnimation = AnimationIndex::RunR;
+            if(this->state == right){this->curAnimation = AnimationIndex::RunR;}
+            else if(this->state == left){this->curAnimation = AnimationIndex::RunL;}
+            else{this->curAnimation = AnimationIndex::RunR;}
         }
         if(this->stop && !this->isAttack){
-            this->s->setPosition(this->pos);
-            if(this->state == right) this->curAnimation = AnimationIndex::WalkingR;
-            else if(this->state == left) this->curAnimation = AnimationIndex::WalkingL;
-            else this->curAnimation = AnimationIndex::WalkingR;
+            if(this->state == right){this->curAnimation = AnimationIndex::WalkingR;}
+            else if(this->state == left) {this->curAnimation = AnimationIndex::WalkingL;}
+            else{this->curAnimation = AnimationIndex::WalkingR;}
         }
     }
     else{
@@ -74,20 +70,20 @@ void Player::animation(float time) {
 }
 void Player::initAnim() {
     // Idle
-    this->animations[int(AnimationIndex::WalkingL)] = Animation(8, 0.009, 194, 0, 160, 150, 1);
-    this->animations[int(AnimationIndex::WalkingR)] = Animation(8, 0.009, 194, 0, 160, 150, 0);
+    this->animations[int(AnimationIndex::WalkingR)] = Animation(8, 0.009, 300, 0, 292, 282, 0);
+    this->animations[int(AnimationIndex::WalkingL)] = Animation(8, 0.009, 300, 290, 292, 282, 0);
     // Run
-    this->animations[int(AnimationIndex::RunL)] = Animation(8, 0.009, 155, 200, 155, 150, 1);
-    this->animations[int(AnimationIndex::RunR)] = Animation(8, 0.009, 155, 200, 155, 150, 0);
+    this->animations[int(AnimationIndex::RunR)] = Animation(8, 0.009, 300, 580, 292, 282, 0);
+    this->animations[int(AnimationIndex::RunL)] = Animation(8, 0.009, 300, 870, 292, 282, 0);
     // Attack
-    this->animations[int(AnimationIndex::AttackL)] = Animation(7, 0.011, 288, 630, 280,300, 1);
-    this->animations[int(AnimationIndex::AttackR)] = Animation(7, 0.011, 288, 630, 280,300, 0);
+    this->animations[int(AnimationIndex::AttackR)] = Animation(7, 0.011, 302, 1740, 292,282, 0);
+    this->animations[int(AnimationIndex::AttackL)] = Animation(7, 0.011, 302, 2030, 292,282, 0);
     //Block
-    this->animations[int(AnimationIndex::BlockL)] = Animation(8, 0.009, 202, 384, 190,150, 1);
-    this->animations[int(AnimationIndex::BlockR)] = Animation(8, 0.009, 202, 384, 190,150, 0);
+    this->animations[int(AnimationIndex::BlockR)] = Animation(8, 0.009, 300, 1160, 292,282, 0);
+    this->animations[int(AnimationIndex::BlockL)] = Animation(8, 0.009, 300, 1450, 292,282, 0);
     //Dead
-    this->animations[int(AnimationIndex::DeadL)] = Animation(8, 0.009, 155, 0, 155, 150, 1);
-    this->animations[int(AnimationIndex::DeadR)] = Animation(8, 0.009, 155, 0, 155, 150, 0);
+    this->animations[int(AnimationIndex::DeadR)] = Animation(1, 0.009, 300, 2320, 292, 282, 0);
+    this->animations[int(AnimationIndex::DeadL)] = Animation(1, 0.009, 300, 2320, 292, 282, 1);
 
 }
 
@@ -97,7 +93,8 @@ void Player::ControlMove() {
         this->isBlock = false;
         this->isRun = false;
         this->isJump = false;
-        if(Mouse::isButtonPressed(Mouse::Right)){ this->isBlock = true;
+        if(Mouse::isButtonPressed(Mouse::Right)){
+            this->isBlock = true;
             this->stop = false;
         }
         else{
@@ -108,13 +105,13 @@ void Player::ControlMove() {
             else{
                 if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::D)) && this->isSprint){
                     this->state = SRight;
-                    this->SprintTime = 0;
                     this->stop = false;
+                    this->SprintTime = 0;
                 }
                 else if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::A)) && this->isSprint){
                     this->state = SLeft;
-                    this->SprintTime = 0;
                     this->stop = false;
+                    this->SprintTime = 0;
                 }
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
@@ -140,14 +137,22 @@ void Player::ControlMove() {
         }
     }
 }
-void Player::move(float time) {
+void Player::move() {
     this->ControlMove();
     if(this->life){
         switch (this->state) {
-            case left: this->dx = -this->speed; break;
-            case right: this->dx = this->speed; break;
-            case SLeft: this->pos.x -= this->w_sprint; break;
-            case SRight: this->pos.x += this->w_sprint; break;
+            case left:
+                this->dx = -this->speed;
+                break;
+            case right:
+                this->dx = this->speed;
+                break;
+            case SLeft:
+                this->pos.x -= this->w_sprint;
+                break;
+            case SRight:
+                this->pos.x += this->w_sprint;
+                break;
         }
         this->speed = 0;
     }
@@ -165,10 +170,11 @@ void Player::update(float time, GameLvL *gLvL){
     this->particles->setEmitter(this->pos.x + 28, this->pos.y + 30);
     this->gameLvL = gLvL;
     // Move
-    this->move(time);
+    this->move();
     //Anim
     this->animation(time);
     // sprint
+    this->AttackTime += time;
     this->SprintTime += time;
     this->BulletTime += time;
     if(this->SprintTime > 3500)this->isSprint = true;
@@ -181,7 +187,7 @@ void Player::update(float time, GameLvL *gLvL){
     this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
     this->dy = this->dy + 0.0015*time; // Притяжение к земле
-    if(!this->isAttack)this->s->setPosition(this->pos);
+    this->s->setPosition(this->pos.x + 30, this->pos.y - 62);
     this->e_Radius->setPosition(this->pos.x - 95, this->pos.y - 50);
     // life
     if(this->is_health <= 0)this->life = false;
@@ -211,12 +217,8 @@ void Player::checkCollisionMap(float dX, float dY) {
                     this->pos.y = i * 32 + 32;
                     this->dy = 0;
                 }
-                if (dX>0){
-                    this->pos.x = j * 32 - w;
-                }
-                if (dX<0){
-                    this->pos.x = j * 32 + 32;
-                }
+                if (dX>0){ this->pos.x = j * 32 - w; }
+                if (dX<0){ this->pos.x = j * 32 + 32; }
             }
             if(this->gameLvL->gameLvL == 1){
                 if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
