@@ -4,7 +4,7 @@
 #include "GameEngine.h"
 
 GameEngine::GameEngine() {
-    this->m_Menu.show();
+    //this->m_Menu.show();
     this->initClass();
     this->initWindow();
 }
@@ -98,7 +98,7 @@ void GameEngine::render(){ // Рендер изображения
     for(itBullet = bulletLvL.begin(); itBullet != bulletLvL.end(); itBullet++){
         (*itBullet)->draw(*this->window, this->config->view);
     }
-    this->GUI->GUI_draw(*this->window, this->config->view);
+    this->GUI->GUI_draw(*this->window, this->player, this->config->view);
     this->window->display(); // создаём дисплей
     this->config->getPlayerCoordinateForView(this->player->GetX(), this->player->GetY());
     this->window->setView(this->config->view); //  привязываем окно к камере
@@ -210,7 +210,7 @@ void GameEngine::initClass() {
             new Chest(config->s_chest_small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_chest_small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_chest_middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
-            new Chest(config->s_chest_big->s, gameLvL, 3026, 1180, 65, 90, "BigChest")
+            new Chest(config->s_chest_big->s, gameLvL, 3026, 1100, 65, 90, "BigChest")
     };
     //Chest lvl 2
     this->chestLvL[2] = {
@@ -266,6 +266,16 @@ void GameEngine::initClass() {
     };
     // Item
     this->itemLvL[1] = {
+            new equipment_item(config->s_item_sword[1]->s, gameLvL, 1000, 1600, 30, 25, "SwordBlue"),
+            new equipment_item(config->s_item_sword[2]->s, gameLvL, 1050, 1600, 30, 25, "SwordRed"),
+            new equipment_item(config->s_item_sword[3]->s, gameLvL, 1100, 1600, 30, 25, "SwordGreen"),
+            new equipment_item(config->s_item_sword[4]->s, gameLvL, 1150, 1600, 30, 25, "SwordBrow"),
+
+            new equipment_item(config->s_item_shield[1]->s, gameLvL, 1200, 1600, 30, 65, "ShieldBlue"),
+            new equipment_item(config->s_item_shield[2]->s, gameLvL, 1250, 1600, 30, 65, "ShieldRed"),
+            new equipment_item(config->s_item_shield[3]->s, gameLvL, 1300, 1600, 30, 65, "ShieldGreen"),
+            new equipment_item(config->s_item_shield[4]->s, gameLvL, 1350, 1600, 30, 65, "ShieldBrow"),
+
             new health_item(config->s_item_health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
             new money_item(config->s_item_money->s, gameLvL, 300, 1600, 30, 40, "Money"),
             new money_item(config->s_item_diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"),
@@ -422,14 +432,14 @@ void GameEngine::TakeChest() {
             for (itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++) {
                 if (player->e_Radius->getGlobalBounds().intersects((*itChest)->getRect())) {
                     if ((*itChest)->name == "SmallChest") {
-                        if (!(*itChest)->is_open) {
+                        if ((*itChest)->is_open) {
                             if ((*itChest)->OpenChest() == 1){ itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeySilver->s, gameLvL, (*itChest)->pos.x + 18, (*itChest)->pos.y, 40, 45, "KeySilver")); }
                             if ((*itChest)->OpenChest() == 2){ itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_item_health->s, gameLvL, (*itChest)->pos.x + 18, (*itChest)->pos.y, 40, 45, "Health")); }
                             if ((*itChest)->OpenChest() == 3){ }
                         }
                     }
                     if ((*itChest)->name == "MiddleChest" && player->k_Silver > 0) {
-                        if ((!(*itChest)->is_open)) {
+                        if (((*itChest)->is_open)) {
                             if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeyGold->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "KeyGold"));}
                             if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_item_money->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Money"));}
                             if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_item_health->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Health"));}
@@ -437,7 +447,7 @@ void GameEngine::TakeChest() {
                         }
                     }
                     if ((*itChest)->name == "BigChest" && player->k_Gold > 0) {
-                        if ((!(*itChest)->is_open)) {
+                        if (((*itChest)->is_open)) {
                             if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_item_diamond->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "Diamond"));}
                             if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeyGold->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeyGold"));}
                             if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeySilver->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeySilver"));}
@@ -461,13 +471,10 @@ void GameEngine::TakeDoor() {
 
 }
 void GameEngine::TakeEnemy() {
-    if (game_event.type == Event::MouseButtonPressed){
-        if (game_event.key.code == Mouse::Left){
-            for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
-                (*itEnemy)->TakingDamage(*this->player);
-            }
-        }
+    for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
+        (*itEnemy)->TakingDamage(*this->player, bulletLvL, game_event);
     }
+
 }
 
 void GameEngine::ShootBullet() {
@@ -475,7 +482,7 @@ void GameEngine::ShootBullet() {
         if(game_event.key.code == Keyboard::LControl){
             if(player->life && player->isShoot){
                 this->bulletLvL.push_back(new Bullet(config->s_bullet->s, gameLvL, player->GetX(), player->GetY() - 40, 200, 50, "Bullet", player->state));
-                this->player->BulletTime = 0;
+                this->player->bullet_time = 0;
             }
         }
     }

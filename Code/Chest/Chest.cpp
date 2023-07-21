@@ -5,7 +5,7 @@
 #include "Chest.h"
 
 Chest::Chest(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Entity(sprite, LvL, X, Y, W, H, Name){
-    this->is_open = false;
+    this->is_open = true;
     this->initAnim();
 }
 Chest::~Chest() {
@@ -33,7 +33,7 @@ void Chest::initAnim() {
 }
 
 void Chest::animation(float time) {
-    if(is_open){
+    if(!is_open){
         if(this->animations[int(AnimationIndex::WalkingOpening)].cur_Frame < 8)
             this->curAnimation = AnimationIndex::WalkingOpening;
         else
@@ -110,6 +110,6 @@ int Chest::OpenChest() {
     int random_num;
     srand(time(NULL));
     random_num = rand() % 3 + 1;
-    this->is_open = true;
+    this->is_open = false;
     return random_num;
 }

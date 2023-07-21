@@ -1,11 +1,13 @@
 #ifndef GAMEENGINE_ENEMY_H
 #define GAMEENGINE_ENEMY_H
 
+#include <list>
 #include "../Entity.h"
 #include "../Map/GameLvL.h"
 #include "../ Animation/Animation.h"
 #include "../Player/Player.h"
 #include "windows.h"
+#include "../Player/Bullet/Bullet.h"
 
 class Enemy: public Entity{
 public:
@@ -27,7 +29,7 @@ public:
     void animation(float time)override;
     void initAnim()override;
     virtual void Attack(Player &p) = 0;
-    void TakingDamage(Player &p);
+    void TakingDamage(Player &p, list<Bullet*> &bulletLvL, Event event);
     void draw(RenderWindow &window, View view)override;
     void checkCollisionMap(float dX, float dY)override;
     void State();

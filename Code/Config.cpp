@@ -44,6 +44,12 @@ Config::~Config() {
     delete this->s_item_KeyGold;
     delete this->s_item_diamond;
     delete this->s_item_health;
+    for(int i = 0; i < size(this->s_item_sword); i++){
+        delete this->s_item_sword[i];
+    }
+    for(int i = 0; i < size(this->s_item_shield); i++){
+        delete this->s_item_shield[i];
+    }
     // delete object
     delete this->s_object_stove;
     delete this->s_object_HomeDrov;
@@ -139,6 +145,14 @@ void Config::LoadImage() {
     this->s_item_KeyGold = new CreateImage("SpriteItems/KeyGold.png");
     this->s_item_money = new CreateImage("SpriteItems/Money.png");
     this->s_item_diamond = new CreateImage("SpriteItems/Diamond.png");
+    this->s_item_sword[1] = new CreateImage("SpriteItems/sword_shield/SwordBlue.png");
+    this->s_item_sword[2] = new CreateImage("SpriteItems/sword_shield/SwordRed.png");
+    this->s_item_sword[3] = new CreateImage("SpriteItems/sword_shield/SwordGreen.png");
+    this->s_item_sword[4] = new CreateImage("SpriteItems/sword_shield/SwordBrow.png");
+    this->s_item_shield[1] = new CreateImage("SpriteItems/sword_shield/ShieldBlue.png");
+    this->s_item_shield[2] = new CreateImage("SpriteItems/sword_shield/ShieldRed.png");
+    this->s_item_shield[3] = new CreateImage("SpriteItems/sword_shield/ShieldGreen.png");
+    this->s_item_shield[4] = new CreateImage("SpriteItems/sword_shield/ShieldBrow.png");
     // Sprite Object
     this->s_object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
     this->s_object_BushHouse = new CreateImage("SpriteMapObject/House/Bush_House.png");

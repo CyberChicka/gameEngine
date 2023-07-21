@@ -42,6 +42,7 @@ public:
     *s_nps_soothsayer, *s_nps_SupremeWizard, *s_nps_swordsman, *s_nps_witcher;
     // Item
     CreateImage *s_item_health, *s_item_KeySilver, *s_item_KeyGold, *s_item_money, *s_item_diamond;
+    CreateImage *s_item_sword[5], *s_item_shield[5];
     // LvL
     CreateImage *s_LvL[7];
     // LvL Fon

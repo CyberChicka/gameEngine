@@ -15,7 +15,7 @@ public:
     GUI_player();
     ~GUI_player();
     void GUI_update(Player *player);
-    void GUI_draw(RenderWindow &window, View view);
+    void GUI_draw(RenderWindow &window,Player *player, View view);
 };
 
 

@@ -1,6 +1,10 @@
 #include "Player.h"
 
 Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
+    this->s_player[1] = new CreateImage("SpriteEntity/Player/Player-Blue.png");
+    this->s_player[2] = new CreateImage("SpriteEntity/Player/Player-Red.png");
+    this->s_player[3] = new CreateImage("SpriteEntity/Player/Player-Green.png");
+    this->s_player[4] = new CreateImage("SpriteEntity/Player/Player-Brow.png");
     this->s->setScale(0.5f, 0.5f);
     this->s->setOrigin(this->w,this->h/2);
     this->is_health = 120; this->f_health = 120;
@@ -23,6 +27,9 @@ Player::~Player() {
     delete this->s;
     delete this->particles;
     delete this->e_Radius;
+    for(int i = 0; i < size(s_player); i++){
+        delete this->s_player[i];
+    }
 }
 FloatRect Player::getRect() {
     return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
@@ -30,6 +37,9 @@ FloatRect Player::getRect() {
 
 void Player::animation(float time) {
     if(this->life){
+        for(int i = 0; i < size(equipment); i++){
+            if(equipment[i])s->setTexture(*s_player[i]->t);
+        }
         if(this->isBlock){
             if(this->state == right) this->curAnimation = AnimationIndex::BlockR;
             else if(this->state == left) this->curAnimation = AnimationIndex::BlockL;
@@ -106,12 +116,12 @@ void Player::ControlMove() {
                 if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::D)) && this->isSprint){
                     this->state = SRight;
                     this->stop = false;
-                    this->SprintTime = 0;
+                    this->sprint_time = 0;
                 }
                 else if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::A)) && this->isSprint){
                     this->state = SLeft;
                     this->stop = false;
-                    this->SprintTime = 0;
+                    this->sprint_time = 0;
                 }
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
@@ -174,12 +184,12 @@ void Player::update(float time, GameLvL *gLvL){
     //Anim
     this->animation(time);
     // sprint
-    this->AttackTime += time;
-    this->SprintTime += time;
-    this->BulletTime += time;
-    if(this->SprintTime > 3500)this->isSprint = true;
+    this->attack_time += time;
+    this->sprint_time += time;
+    this->bullet_time += time;
+    if(this->sprint_time > 3500)this->isSprint = true;
     else this->isSprint = false;
-    if(this->BulletTime > 5000)this->isShoot = true;
+    if(this->bullet_time > 5000)this->isShoot = true;
     else this->isShoot = false;
     //position
     this->pos.x += this->dx * time;

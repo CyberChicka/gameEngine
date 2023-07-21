@@ -78,11 +78,21 @@ void Enemy::draw(RenderWindow &window, View view) {
 
 void Enemy::Attack(Player &p) { }
 
-void Enemy::TakingDamage(Player &p) {
-    if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
-        if(p.AttackTime > 1000){
+void Enemy::TakingDamage(Player &p, list<Bullet*> &bulletLvL, Event event) {
+    if (event.type == Event::MouseButtonPressed){
+        if (event.key.code == Mouse::Left){
+            if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
+                if(p.attack_time > 1000){
+                    this->is_health -= 20;
+                    p.attack_time = 0;
+                }
+            }
+        }
+    }
+    for(auto it = bulletLvL.begin(); it != bulletLvL.end(); it++){
+        if((*it)->s->getGlobalBounds().intersects(this->getRect())){
             this->is_health -= 20;
-            p.AttackTime = 0;
+            bulletLvL.erase(it);
         }
     }
 }

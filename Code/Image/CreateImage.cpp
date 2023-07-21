@@ -30,3 +30,8 @@ bool CreateImage::isToch(float X, float Y) const{
     if(this->s->getGlobalBounds().contains(X, Y))return true;
     return false;
 }
+
+bool CreateImage::isToch(Vector2f pos) const {
+    if(this->s->getGlobalBounds().contains(pos))return true;
+    return false;
+}

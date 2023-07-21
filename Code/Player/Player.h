@@ -4,11 +4,16 @@
 #include "../Map/GameLvL.h"
 #include "../ Animation/Animation.h"
 #include "../Particle/ParticleSystem.h"
+#include "../Image/CreateImage.h"
 
 class Player: public Entity{
 public:
+    CreateImage *s_player[5];
     bool isAttack, isBlock, isSprint, isShoot, isRun, isJump, isInventory;
-    int lvl_player, SprintTime, BulletTime, AttackTime;
+    bool sword[5] = {false, true, false, false, false};
+    bool shield[5] = {false, true, false, false, false};
+    bool equipment[5] = {false, true, false, false, false};
+    int lvl_player, sprint_time, bullet_time, attack_time;
     int w_sprint;
     ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,

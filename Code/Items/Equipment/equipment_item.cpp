@@ -5,15 +5,15 @@
 #include "equipment_item.h"
 
 equipment_item::equipment_item(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std::string Name): Item(sprite, LvL, X, Y, W, H, Name) {
-    if(this->name == "SwordBlue"){ this->s->setScale(1.0f, 1.0f);  }
-    if(this->name == "SwordRed"){ this->s->setScale(1.0f, 1.0f);   }
-    if(this->name == "SwordGreen"){ this->s->setScale(1.0f, 1.0f); }
-    if(this->name == "SwordBrow"){ this->s->setScale(1.0f, 1.0f);  }
-    if(this->name == "ShieldBlue"){ this->s->setScale(1.0f, 1.0f); }
-    if(this->name == "ShieldRed"){ this->s->setScale(1.0f, 1.0f);  }
-    if(this->name == "ShieldGreen"){ this->s->setScale(1.0f, 1.0f);}
-    if(this->name == "ShieldBrow"){ this->s->setScale(1.0f, 1.0f); }
-
+    if(this->name == "SwordBlue"){ this->s->setScale(0.8f, 0.8f);  }
+    if(this->name == "SwordRed"){ this->s->setScale(0.8f, 0.8f);   }
+    if(this->name == "SwordGreen"){ this->s->setScale(0.8f, 0.8f); }
+    if(this->name == "SwordBrow"){ this->s->setScale(0.8f, 0.8f);  }
+    if(this->name == "ShieldBlue"){ this->s->setScale(0.7f, 0.7f); }
+    if(this->name == "ShieldRed"){ this->s->setScale(0.7f, 0.7f);  }
+    if(this->name == "ShieldGreen"){ this->s->setScale(0.7f, 0.7f);}
+    if(this->name == "ShieldBrow"){ this->s->setScale(0.7f, 0.7f); }
+    this->initAnim();
 }
 equipment_item::~equipment_item() {
     cout << "============== removed from item equipment ============" << endl;
@@ -23,27 +23,27 @@ equipment_item::~equipment_item() {
 
 bool equipment_item::isTake(Player &player) {
     if(player.e_Radius->getGlobalBounds().intersects(this->getRect())){
-        if(this->name == "SwordBlue"){ }
-        if(this->name == "SwordRed"){ }
-        if(this->name == "SwordGreen"){ }
-        if(this->name == "SwordBrow"){ }
-        if(this->name == "ShieldBlue"){ }
-        if(this->name == "ShieldRed"){ }
-        if(this->name == "ShieldGreen"){ }
-        if(this->name == "ShieldBrow"){ }
-
+        if(this->name == "SwordBlue"){ player.sword[1] = true; return true;}
+        if(this->name == "SwordRed"){ player.sword[2] = true; return true;}
+        if(this->name == "SwordGreen"){ player.sword[3] = true; return true;}
+        if(this->name == "SwordBrow"){ player.sword[4] = true; return true;}
+        if(this->name == "ShieldBlue"){ player.shield[1] = true; return true;}
+        if(this->name == "ShieldRed"){ player.shield[2] = true; return true;}
+        if(this->name == "ShieldGreen"){ player.shield[3] = true; return true;}
+        if(this->name == "ShieldBrow"){ player.shield[4] = true; return true;}
     }
+    return false;
 }
 
 void equipment_item::initAnim() {
-    if(this->name == "SwordBlue"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "SwordRed"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "SwordGreen"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "SwordBrow"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "ShieldBlue"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "ShieldRed"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "ShieldGreen"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
-    if(this->name == "ShieldBrow"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 0, 0, 0);}
+    if(this->name == "SwordBlue"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "SwordRed"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "SwordGreen"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "SwordBrow"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "ShieldBlue"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "ShieldRed"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "ShieldGreen"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
+    if(this->name == "ShieldBrow"){ this->animations[int(AnimationIndex::Walking)] = Animation(1, 0, 0, 0, 64, 100, 0);}
 }
 
 void equipment_item::animation(float time) {

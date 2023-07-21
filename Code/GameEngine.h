@@ -31,6 +31,7 @@
 #include "Chest/Chest.h"
 #include "Player/Bullet/Bullet.h"
 #include "Player/GUI/GUI_player.h"
+#include "Items/Equipment/equipment_item.h"
 
 using namespace sf;
 using namespace std;
@@ -42,7 +43,7 @@ public:
 
     void run();
 private:
-    MainMenu m_Menu;
+    //MainMenu m_Menu;
     Config *config = Config::getInstance();
     // render
     RenderWindow *window;

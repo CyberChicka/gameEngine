@@ -17,6 +17,7 @@ public:
     ~CreateImage();
     void Load();
     bool isToch(float X, float  Y) const;
+    bool isToch(Vector2f) const;
 };
 
 
