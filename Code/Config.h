@@ -38,7 +38,8 @@ public:
     // Particle_of_Strength
     CreateImage *s_particle_of_strength_shoot, *s_particle_of_strength_sprint;
     // Enemy
-    CreateImage *s_enemy_ghost, *s_enemy_skeleton, *s_enemy_bat, *s_enemy_BigGhost, *s_enemy_boom, *s_enemy_mag, *s_enemy_MagDamage;
+    CreateImage *s_enemy_ghost, *s_enemy_ghost_heavenly, *s_enemy_skeleton, *s_enemy_bat, *s_enemy_bat_heavenly,
+    *s_enemy_BigGhost, *s_enemy_BigGhost_heavenly, *s_enemy_boom, *s_enemy_mag, *s_enemy_MagDamage;
     // Nps
     CreateImage *s_nps_aiden, *s_nps_blacksmith, *s_nps_historian, *s_nps_knight,
     *s_nps_soothsayer, *s_nps_SupremeWizard, *s_nps_swordsman, *s_nps_witcher;

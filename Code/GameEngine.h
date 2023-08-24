@@ -98,6 +98,12 @@ private:
     bool isRunning();
     // initialization the RenderWindow.
     void initClass();
+    void initClassEnemy();
+    void initClassItem();
+    void initClassNps();
+    void initClassObject();
+    void initClassFon();
+    void initClassChest();
     void initWindow();
     void renderClear();
     //

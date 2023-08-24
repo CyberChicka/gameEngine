@@ -128,9 +128,23 @@ void GameEngine::initClass() {
     //Player
     this->player = new Player(config->s_player->s, gameLvL,1000, 1800, 56, 60, "player");
     this->GUI = new GUI_player;
-    // Attack Enemy
+    // Attack Enemy Mag
     this->enemyMagDamage = new FonGame(config->s_enemy_MagDamage->s, gameLvL, 0, 0, 0, 0, "MagDamage");
     //Enemy
+    this->initClassEnemy();
+    // Object
+    this->initClassObject();
+    //Chest
+    this->initClassChest();
+    //Nps
+    this->initClassNps();
+    // Item
+    this->initClassItem();
+    //Fon
+    this->initClassFon();
+}
+
+void GameEngine::initClassEnemy() {
     this->enemyLvL[1] = {
             new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 2200, 1236, 65, 55, "Bat"),
             new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 2250, 1236, 65, 55, "Bat"),
@@ -158,7 +172,9 @@ void GameEngine::initClass() {
     };
     // enemy lvl 4
     this->enemyLvL[4] = {
-
+            new Enemy_Bat(config->s_enemy_bat_heavenly->s, gameLvL, 1200, 1236, 65, 55, "Bat"),
+            new Enemy_Ghost(config->s_enemy_ghost_heavenly->s, gameLvL, 1161, 1230, 40, 88, "Ghost"),
+            new Enemy_BigGhost(config->s_enemy_BigGhost_heavenly->s, gameLvL, 1010, 1218, 65, 125, "BigGhost"),
     };
     // enemy lvl 5
     this->enemyLvL[5] = {
@@ -168,7 +184,73 @@ void GameEngine::initClass() {
     this->enemyLvL[6] = {
 
     };
-    // Object LvL 1
+}
+void GameEngine::initClassNps() {
+    this->npsLvL[1] = {
+            new Knight(config->s_nps_knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"),
+            new Historian(config->s_nps_historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"),
+            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"),
+    };
+    // nps lvl 2
+    this->npsLvL[2] = {
+            new Aiden(config->s_nps_aiden->s, gameLvL, config->text_nps_aiden, 4550, 1620, 50, 105, "Aiden"),
+            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 1000, 1620, 50, 152, "Blacksmith"),
+            new Witcher(config->s_nps_witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher"),
+    };
+    // nps lvl 3
+    this->npsLvL[3] = {
+            new Supreme_Wizard(config->s_nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"),
+            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1250, 122, 152, "Blacksmith"),
+            new Soothsayer(config->s_nps_soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1250, 122, 152, "Soothsayer"),
+            new Swordsman(config->s_nps_swordsman->s, gameLvL, config->text_nps_swordsman, 1727, 2460, 122, 152, "Swordsman"),
+    };
+    // nps lvl 4
+    this->npsLvL[4] = {
+
+    };
+    // nps lvl 5
+    this->npsLvL[5] = {
+
+    };
+    // nps lvl 6
+    this->npsLvL[6] = {
+
+    };
+}
+void GameEngine::initClassChest() {
+    this->chestLvL[1] = {
+            new Chest(config->s_chest_small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
+            new Chest(config->s_chest_big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
+            //
+            new Chest(config->s_chest_small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
+            new Chest(config->s_chest_big->s, gameLvL, 3026, 1100, 65, 90, "BigChest"),
+    };
+    //Chest lvl 2
+    this->chestLvL[2] = {
+            new Chest(config->s_chest_small->s, gameLvL, 3410, 1500, 65, 70, "SmallChest"),
+            new Chest(config->s_chest_big->s, gameLvL, 2250, 1500, 65, 90, "BigChest"),
+    };
+    //Chest lvl 3
+    this->chestLvL[3] = {
+            new Chest(config->s_chest_big->s, gameLvL, 8142, 2562, 65, 90, "BigChest"),
+    };
+    //Chest lvl 4
+    this->chestLvL[4] = {
+
+    };
+    //Chest lvl 5
+    this->chestLvL[5] = {
+
+    };
+    //Chest lvl 6
+    this->chestLvL[6] = {
+
+    };
+}
+void GameEngine::initClassObject() {
     this->objLvL[1] = {
             new Object(config->s_object_stove->s, gameLvL, 5650, 1600, 92, 108, "Stove"),
             new Object(config->s_object_HomeDrov->s, gameLvL, 1200, 1600, 100, 298, "Home"),
@@ -196,6 +278,10 @@ void GameEngine::initClass() {
             new Object(config->s_object_RemainsSkeleton->s, gameLvL, 5400, 1600, 95, 72, "RemainsSkeleton"),
             new Object(config->s_object_RemainsSkeleton->s, gameLvL, 5700, 1600, 95, 72, "RemainsSkeleton"),
             new Object(config->s_object_RemainsSkeleton->s, gameLvL, 6200, 1600, 95, 72, "RemainsSkeleton"),
+
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 7761, 1890, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 8805, 1890, 95, 72, "RemainsSkeleton"),
+            new Object(config->s_object_RemainsSkeleton->s, gameLvL, 5010, 2418, 95, 72, "RemainsSkeleton"),
     };
     // Object LvL 4
     this->objLvL[4] = {
@@ -209,70 +295,8 @@ void GameEngine::initClass() {
     this->objLvL[6] = {
 
     };
-    //Chest
-    this->chestLvL[1] = {
-            new Chest(config->s_chest_small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_chest_middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
-            new Chest(config->s_chest_big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
-            //
-            new Chest(config->s_chest_small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_chest_small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_chest_middle->s, gameLvL, 570, 1248, 65, 82, "MiddleChest"),
-            new Chest(config->s_chest_big->s, gameLvL, 3026, 1100, 65, 90, "BigChest")
-    };
-    //Chest lvl 2
-    this->chestLvL[2] = {
-            new Chest(config->s_chest_small->s, gameLvL, 3410, 1500, 65, 70, "SmallChest"),
-            new Chest(config->s_chest_big->s, gameLvL, 2250, 1500, 65, 90, "BigChest"),
-    };
-    //Chest lvl 3
-    this->chestLvL[3] = {
-            new Chest(config->s_chest_big->s, gameLvL, 8142, 2562, 65, 90, "BigChest"),
-    };
-    //Chest lvl 4
-    this->chestLvL[4] = {
-
-    };
-    //Chest lvl 5
-    this->chestLvL[5] = {
-
-    };
-    //Chest lvl 6
-    this->chestLvL[6] = {
-
-    };
-    //Nps
-    this->npsLvL[1] = {
-            new Knight(config->s_nps_knight->s, gameLvL, config->text_nps_knight, 9500, 586, 56, 138, "Knight"),
-            new Historian(config->s_nps_historian->s, gameLvL, config->text_nps_historian, 1100, 1520, 156, 150, "Historian"),
-            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 5750, 1620, 122, 152, "Blacksmith"),
-    };
-    // nps lvl 2
-    this->npsLvL[2] = {
-            new Aiden(config->s_nps_aiden->s, gameLvL, config->text_nps_aiden, 4550, 1620, 50, 105, "Aiden"),
-            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 1000, 1620, 50, 152, "Blacksmith"),
-            new Witcher(config->s_nps_witcher->s, gameLvL, config->text_nps_witcher, 800, 1620, 50, 190, "Witcher")
-    };
-    // nps lvl 3
-    this->npsLvL[3] = {
-            new Supreme_Wizard(config->s_nps_SupremeWizard->s, gameLvL, config->text_nps_supreme_wizard, 1250, 1620, 122, 152, "Supreme_Wizard"),
-            new Blacksmith(config->s_nps_blacksmith->s, gameLvL, config->text_nps_blacksmith, 1100, 1250, 122, 152, "Blacksmith"),
-            new Soothsayer(config->s_nps_soothsayer->s, gameLvL, config->text_nps_soothsayer, 2000, 1250, 122, 152, "Soothsayer"),
-            new Swordsman(config->s_nps_swordsman->s, gameLvL, config->text_nps_swordsman, 1727, 2460, 122, 152, "Swordsman")
-    };
-    // nps lvl 4
-    this->npsLvL[4] = {
-
-    };
-    // nps lvl 5
-    this->npsLvL[5] = {
-
-    };
-    // nps lvl 6
-    this->npsLvL[6] = {
-
-    };
-    // Item
+}
+void GameEngine::initClassItem() {
     this->itemLvL[1] = {
             new equipment_item(config->s_item_sword[1]->s, gameLvL, 1000, 1600, 30, 25, "SwordBlue"),
             new equipment_item(config->s_item_sword[2]->s, gameLvL, 1050, 1600, 30, 25, "SwordRed"),
@@ -318,7 +342,8 @@ void GameEngine::initClass() {
     this->itemLvL[6] = {
 
     };
-    //Fon
+}
+void GameEngine::initClassFon() {
     this->fonLvL[1] = {
             new FonGame(config->s_LvL_Fon[1]->s, gameLvL, 0, 1360, 10, 10,"Fon"),
             new FonGame(config->s_LvL_Fon[1]->s, gameLvL, 4900, 1360, 10, 10,"Fon"),
@@ -347,6 +372,7 @@ void GameEngine::initClass() {
 
     };
 }
+
 void GameEngine::pollEvents() {
     while (this->window->pollEvent(this->game_event)){
         EventFunc();

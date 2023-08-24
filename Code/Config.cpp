@@ -35,6 +35,9 @@ Config::~Config() {
 
 void Config::DeleteEnemy()const{
     // Delete enemy sprite
+    delete this->s_enemy_ghost_heavenly;
+    delete this->s_enemy_BigGhost_heavenly;
+    delete this->s_enemy_bat_heavenly;
     delete this->s_enemy_ghost;
     delete this->s_enemy_skeleton;
     delete this->s_enemy_bat;
@@ -139,10 +142,13 @@ void Config::ImagePlayer() {
 void Config::ImageEnemy(){
     //Sprite Enemy
     this->s_enemy_ghost = new CreateImage("SpriteEntity/Enemy/EnemyGhost.png");
+    this->s_enemy_ghost_heavenly = new CreateImage("SpriteEntity/Enemy/EnemyGhost_Heavenly.png");
     this->s_enemy_skeleton = new CreateImage("SpriteEntity/Enemy/");
     this->s_enemy_BigGhost = new CreateImage("SpriteEntity/Enemy/EnemyBigGhost.png");
+    this->s_enemy_BigGhost_heavenly = new CreateImage("SpriteEntity/Enemy/EnemyBigGhost_Heavenly.png");
     this->s_enemy_boom = new CreateImage("SpriteEntity/Enemy/EnemyBoom.png");
     this->s_enemy_bat = new CreateImage("SpriteEntity/Enemy/EnemyBat.png");
+    this->s_enemy_bat_heavenly = new CreateImage("SpriteEntity/Enemy/EnemyBat_Heavenly.png ");
     this->s_enemy_mag = new CreateImage("SpriteEntity/Enemy/EnemyMag.png");
     this->s_enemy_MagDamage = new CreateImage("SpriteObject/DamageEnemy/DamageMag.png");
 }

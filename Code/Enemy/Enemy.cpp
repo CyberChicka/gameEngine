@@ -57,10 +57,10 @@ void Enemy::checkCollisionMap(float dX, float dY){
                     this->pos.x = j * 32 + 32; dx = 0.1;
                 }
             }
-            if(cell == '{')
-                if(dY > 0){ dx = 0.1; }
-            if(cell == '}')
-                if(dY > 0){ dx = -0.1; }
+            if(cell == '{' || cell == '<')
+                if(dY > 0){ dx = 0.2; }
+            if(cell == '}' || cell == '>')
+                if(dY > 0){ dx = -0.2; }
             if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
             if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
 //                if(this->position.y > 900){ this->position.y = this->position.y - 0.5;}
@@ -83,7 +83,9 @@ void Enemy::TakingDamage(Player &p, list<Bullet*> &bulletLvL, Event event) {
         if (event.key.code == Mouse::Left){
             if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
                 if(p.attack_time > 1000){
-                    this->is_health -= 20;
+                    for(int i = 0; i < p.lvl_player; i++){
+                        this->is_health -= (20 + (i*2));
+                    }
                     p.attack_time = 0;
                 }
             }
