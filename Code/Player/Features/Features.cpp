@@ -16,6 +16,8 @@ Features::~Features() {
 }
 
 void Features::update(Player *player) {
+    this->isSprint = player->particle_of_strength_sprint;
+    this->isShoot = player->particle_of_strength_shoot;
     if(player->isShoot){
         this->s_features_shoot->s->setTextureRect(IntRect(0, 0, 200, 200));
     }
@@ -36,6 +38,8 @@ void Features::position(sf::View view) {
 }
 void Features::draw(sf::RenderWindow &window, View view) {
     position(view);
-    window.draw(*this->s_features_sprint->s);
-    window.draw(*this->s_features_shoot->s);
+    if(this->isSprint)
+        window.draw(*this->s_features_sprint->s);
+    if(this->isShoot)
+        window.draw(*this->s_features_shoot->s);
 }

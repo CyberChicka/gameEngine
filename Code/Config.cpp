@@ -10,6 +10,30 @@ Config::Config() {
 }
 Config::~Config() {
     delete this->s_player;
+    // particle of strength
+    delete this->s_particle_of_strength_shoot;
+    delete this->s_particle_of_strength_sprint;
+    // delete sprite lvl
+    delete []*this->s_LvL;
+    //delete bullet sprite
+    delete this->s_bullet;
+    //music & sound
+    delete []*this->m_lvl;
+    //
+    delete this->so_player_attack;
+    delete this->so_enemy_Ghost_attack;
+    delete this->so_enemy_Scelet_attack;
+    this->DeleteChest();
+    this->DeleteText();
+    this->DeleteObject();
+    this->DeleteNps();
+    this->DeleteLvL();
+    this->DeleteItem();
+    this->DeleteEnemy();
+    cout << "============== removed from config ============"<< endl;
+}
+
+void Config::DeleteEnemy()const{
     // Delete enemy sprite
     delete this->s_enemy_ghost;
     delete this->s_enemy_skeleton;
@@ -18,17 +42,26 @@ Config::~Config() {
     delete this->s_enemy_mag;
     delete this->s_enemy_BigGhost;
     delete this->s_enemy_MagDamage;
-    // delete sprite lvl
-    for(int i = 0; i < size(this->s_LvL); i++){
-        delete this->s_LvL[i];
-    }
+}
+
+void Config::DeleteItem()const{
+    // delete item sprite
+    delete this->s_item_money;
+    delete this->s_item_KeySilver;
+    delete this->s_item_KeyGold;
+    delete this->s_item_diamond;
+    delete this->s_item_health;
+    delete []*this->s_item_sword;
+    delete []*this->s_item_shield;
+}
+
+void Config::DeleteLvL()const{
     // delete fon lvl
-    for(int i = 0; i < size(this->s_LvL_Fon); i++){
-        delete this->s_LvL_Fon[i];
-    }
-    for(int i = 0; i < size(this->s_LvL_FonBack); i++){
-        delete this->s_LvL_FonBack[i];
-    }
+    delete []*this->s_LvL_Fon;
+    delete []*this->s_LvL_FonBack;
+}
+
+void Config::DeleteNps()const{
     // delete Nps sprite
     delete this->s_nps_witcher;
     delete this->s_nps_swordsman;
@@ -38,18 +71,9 @@ Config::~Config() {
     delete this->s_nps_historian;
     delete this->s_nps_blacksmith;
     delete this->s_nps_aiden;
-    // delete item sprite
-    delete this->s_item_money;
-    delete this->s_item_KeySilver;
-    delete this->s_item_KeyGold;
-    delete this->s_item_diamond;
-    delete this->s_item_health;
-    for(int i = 0; i < size(this->s_item_sword); i++){
-        delete this->s_item_sword[i];
-    }
-    for(int i = 0; i < size(this->s_item_shield); i++){
-        delete this->s_item_shield[i];
-    }
+}
+
+void Config::DeleteObject()const{
     // delete object
     delete this->s_object_stove;
     delete this->s_object_HomeDrov;
@@ -63,16 +87,9 @@ Config::~Config() {
     delete this->s_object_RemainsSkeleton;
     delete this->s_object_BonfireHouse;
     delete this->s_object_TableHouse;
-    // delete chest sprite
-    delete this->s_chest_small;
-    delete this->s_chest_middle;
-    delete this->s_chest_big;
-    //delete bullet sprite
-    delete this->s_bullet;
-    //music & sound
-    for(int i = 0; i < size(m_lvl); i++){
-        delete this->m_lvl[i];
-    }
+}
+
+void Config::DeleteText()const{
     // Text
     delete this->text_nps_knight;
     delete this->text_nps_swordsman;
@@ -81,13 +98,14 @@ Config::~Config() {
     delete this->text_nps_historian;
     delete this->text_nps_aiden;
     delete this->text_nps_witcher;
-    //
-    delete this->so_player_attack;
-    delete this->so_enemy_Ghost_attack;
-    delete this->so_enemy_Scelet_attack;
-    cout << "============== removed from config ============"<< endl;
 }
 
+void Config::DeleteChest() const {
+    // delete chest sprite
+    delete this->s_chest_small;
+    delete this->s_chest_middle;
+    delete this->s_chest_big;
+}
 Config *Config::getInstance() {
     if (instance == nullptr) instance = new Config();
     return instance;
@@ -100,8 +118,25 @@ View Config::getPlayerCoordinateForView(float x, float y) {
 }
 
 void Config::LoadImage() {
+    this->ImagePlayer();
+    this->ImageEnemy();
+    this->ImageLvL();
+    this->ImageNps();
+    this->ImageItem();
+    this->ImageObject();
+    this->ImageChest();
+}
+
+void Config::ImagePlayer() {
     //Sprite Player
     this->s_player = new CreateImage("SpriteEntity/Player/Player-Blue.png");
+    // class bullet
+    this->s_bullet = new CreateImage("SpriteEntity/Player/AttacPlaz1.png");
+    //particle of strength
+    this->s_particle_of_strength_shoot = new CreateImage("SpriteItems/Item_LvL.png");
+    this->s_particle_of_strength_sprint = new CreateImage("SpriteItems/Item_LvL.png");
+}
+void Config::ImageEnemy(){
     //Sprite Enemy
     this->s_enemy_ghost = new CreateImage("SpriteEntity/Enemy/EnemyGhost.png");
     this->s_enemy_skeleton = new CreateImage("SpriteEntity/Enemy/");
@@ -110,6 +145,33 @@ void Config::LoadImage() {
     this->s_enemy_bat = new CreateImage("SpriteEntity/Enemy/EnemyBat.png");
     this->s_enemy_mag = new CreateImage("SpriteEntity/Enemy/EnemyMag.png");
     this->s_enemy_MagDamage = new CreateImage("SpriteObject/DamageEnemy/DamageMag.png");
+}
+
+void Config::ImageChest(){
+    // class chest
+    this->s_chest_small = new CreateImage("SpriteObject/Chest/SmallChest.png");
+    this->s_chest_middle = new CreateImage("SpriteObject/Chest/MiddleChest.png");
+    this->s_chest_big = new CreateImage("SpriteObject/Chest/BigChest.png");
+}
+
+void Config::ImageItem(){
+    // Sprite Item
+    this->s_item_health = new CreateImage("SpriteItems/HealthLife.png");
+    this->s_item_KeySilver = new CreateImage("SpriteItems/KeySilver.png");
+    this->s_item_KeyGold = new CreateImage("SpriteItems/KeyGold.png");
+    this->s_item_money = new CreateImage("SpriteItems/Money.png");
+    this->s_item_diamond = new CreateImage("SpriteItems/Diamond.png");
+    this->s_item_sword[1] = new CreateImage("SpriteItems/sword_shield/SwordBlue.png");
+    this->s_item_sword[2] = new CreateImage("SpriteItems/sword_shield/SwordRed.png");
+    this->s_item_sword[3] = new CreateImage("SpriteItems/sword_shield/SwordGreen.png");
+    this->s_item_sword[4] = new CreateImage("SpriteItems/sword_shield/SwordBrow.png");
+    this->s_item_shield[1] = new CreateImage("SpriteItems/sword_shield/ShieldBlue.png");
+    this->s_item_shield[2] = new CreateImage("SpriteItems/sword_shield/ShieldRed.png");
+    this->s_item_shield[3] = new CreateImage("SpriteItems/sword_shield/ShieldGreen.png");
+    this->s_item_shield[4] = new CreateImage("SpriteItems/sword_shield/ShieldBrow.png");
+}
+
+void Config::ImageLvL(){
     //Sprite LvL Map
     this->s_LvL[1] = new CreateImage("MapTexture/LvL1-up.png");
     this->s_LvL[2] = new CreateImage("MapTexture/LvL2-up.png");
@@ -130,6 +192,9 @@ void Config::LoadImage() {
     this->s_LvL_FonBack[4] = new CreateImage("SpriteMapObject/FonLvL4_Back.png");
     this->s_LvL_FonBack[5] = new CreateImage("SpriteMapObject/FonLvL5_Back.png");
     this->s_LvL_FonBack[6] = new CreateImage("SpriteMapObject/FonLvL6_Back.png");
+}
+
+void Config::ImageNps(){
     // Sprite Nps
     this->s_nps_aiden = new CreateImage("SpriteEntity/Nps/Nps_Aiden.png");
     this->s_nps_blacksmith = new CreateImage("SpriteEntity/Nps/Blacksmith.png");
@@ -139,20 +204,9 @@ void Config::LoadImage() {
     this->s_nps_SupremeWizard = new CreateImage("SpriteEntity/Nps/Supreme_Wizard.png");
     this->s_nps_swordsman = new CreateImage("SpriteEntity/Nps/Nps_Swordsman.png");
     this->s_nps_witcher = new CreateImage("SpriteEntity/Nps/Witcher.png");
-    // Sprite Item
-    this->s_item_health = new CreateImage("SpriteItems/HealthLife.png");
-    this->s_item_KeySilver = new CreateImage("SpriteItems/KeySilver.png");
-    this->s_item_KeyGold = new CreateImage("SpriteItems/KeyGold.png");
-    this->s_item_money = new CreateImage("SpriteItems/Money.png");
-    this->s_item_diamond = new CreateImage("SpriteItems/Diamond.png");
-    this->s_item_sword[1] = new CreateImage("SpriteItems/sword_shield/SwordBlue.png");
-    this->s_item_sword[2] = new CreateImage("SpriteItems/sword_shield/SwordRed.png");
-    this->s_item_sword[3] = new CreateImage("SpriteItems/sword_shield/SwordGreen.png");
-    this->s_item_sword[4] = new CreateImage("SpriteItems/sword_shield/SwordBrow.png");
-    this->s_item_shield[1] = new CreateImage("SpriteItems/sword_shield/ShieldBlue.png");
-    this->s_item_shield[2] = new CreateImage("SpriteItems/sword_shield/ShieldRed.png");
-    this->s_item_shield[3] = new CreateImage("SpriteItems/sword_shield/ShieldGreen.png");
-    this->s_item_shield[4] = new CreateImage("SpriteItems/sword_shield/ShieldBrow.png");
+}
+
+void Config::ImageObject(){
     // Sprite Object
     this->s_object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
     this->s_object_BushHouse = new CreateImage("SpriteMapObject/House/Bush_House.png");
@@ -166,13 +220,8 @@ void Config::LoadImage() {
     this->s_object_RemainsSkeleton = new CreateImage("SpriteMapObject/miniObject/RemainsSkeleton.png");
     this->s_object_TableHouse = new CreateImage("SpriteMapObject/House/Table_House.png");
     this->s_object_stove = new CreateImage("SpriteObject/Stove.png");
-    // class chest
-    this->s_chest_small = new CreateImage("SpriteObject/Chest/SmallChest.png");
-    this->s_chest_middle = new CreateImage("SpriteObject/Chest/MiddleChest.png");
-    this->s_chest_big = new CreateImage("SpriteObject/Chest/BigChest.png");
-    // class bullet
-    this->s_bullet = new CreateImage("SpriteEntity/Player/AttacPlaz1.png");
 }
+
 
 void Config::LoadShader() {
     //this->shader = new CreateShader("Shader.glsl");

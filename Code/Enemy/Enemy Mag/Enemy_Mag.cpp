@@ -82,9 +82,11 @@ void Enemy_Mag::Attack(Player &p) {
             this->isStop = false;
         }
         if(p.isBlock){
-            if(p.state == Player::left){this->dx = -0.2;}
-            else if(p.state == Player::right){ this->dx = 0.2; }
-            else this->dx = -0.2;
+            if(p.particle_of_strength_repulsion){
+                if(p.state == Player::left){this->dx = -0.2;}
+                else if(p.state == Player::right){ this->dx = 0.2; }
+                else this->dx = -0.2;
+            }
         }
         else{
             if(this->isAttack){

@@ -9,6 +9,7 @@
 
 class Features {
 public:
+    bool isShoot, isSprint;
     CreateImage *s_features_sprint, *s_features_shoot;
     Features();
     ~Features();

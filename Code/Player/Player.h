@@ -9,12 +9,16 @@
 class Player: public Entity{
 public:
     CreateImage *s_player[5];
-    bool isAttack, isBlock, isSprint, isShoot, isRun, isJump, isInventory;
+    bool isAttack, isBlock, isSprint, isShoot, isRun, isInventory;
     bool sword[5] = {false, true, false, false, false};
     bool shield[5] = {false, true, false, false, false};
     bool equipment[5] = {false, true, false, false, false};
     int lvl_player, sprint_time, bullet_time, attack_time;
     int w_sprint;
+    bool particle_of_strength_sprint,
+    particle_of_strength_shoot,
+    particle_of_strength_repulsion,
+    particle_of_strength_speed;
     ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,

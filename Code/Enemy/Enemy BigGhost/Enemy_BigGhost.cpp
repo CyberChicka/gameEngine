@@ -69,9 +69,11 @@ void Enemy_BigGhost::initAnim(){
 void Enemy_BigGhost::Attack(Player &p) {
     if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
         if(p.isBlock){
-            if(p.state == Player::left){ this->dx = -0.3; }
-            else if(p.state == Player::right){ this->dx = 0.3; }
-            else this->dx = -0.3;
+            if(p.particle_of_strength_repulsion){
+                if(p.state == Player::left){ this->dx = -0.3; }
+                else if(p.state == Player::right){ this->dx = 0.3; }
+                else this->dx = -0.3;
+            }
         }
         else{
             if(this->timeAttack > 2000){

@@ -10,7 +10,8 @@ Bullet::Bullet(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H,
     initAnim();
 }
 Bullet::~Bullet() {
-
+    delete this->s;
+    delete this->gameLvL;
 }
 FloatRect Bullet::getRect() {
     return FloatRect(this->pos.x, this->pos.y, this->w, this->h);

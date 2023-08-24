@@ -18,7 +18,11 @@ add_executable(GameEngine_Brought main.cpp Code/GameEngine.cpp Code/GameEngine.h
         Code/Nps/Soothsayer/Soothsayer.cpp Code/Nps/Soothsayer/Soothsayer.h Code/Nps/Supreme_Wizard/Supreme_Wizard.cpp Code/Nps/Supreme_Wizard/Supreme_Wizard.h
         Code/Nps/Swordsman/Swordsman.cpp Code/Nps/Swordsman/Swordsman.h Code/Nps/Witcher/Witcher.cpp Code/Nps/Witcher/Witcher.h
         Code/Nps/NpsMessage/getNpsMessage.cpp Code/Nps/NpsMessage/getNpsMessage.h Code/Player/LifeBar/LifeBar.cpp Code/Player/LifeBar/LifeBar.h
-        Code/Particle/ParticleSystem.h Code/Chest/Chest.cpp Code/Chest/Chest.h Code/Player/Bullet/Bullet.cpp Code/Player/Bullet/Bullet.h "Code/Enemy/Enemy Bat/Enemy_Bat.cpp" "Code/Enemy/Enemy Bat/Enemy_Bat.h" "Code/Enemy/Enemy BigGhost/Enemy_BigGhost.cpp" "Code/Enemy/Enemy BigGhost/Enemy_BigGhost.h" "Code/Enemy/Enemy Boom/Enemy_Boom.cpp" "Code/Enemy/Enemy Boom/Enemy_Boom.h" "Code/Enemy/Enemy Mag/Enemy_Mag.cpp" "Code/Enemy/Enemy Mag/Enemy_Mag.h" Code/Shader/CreateShader.cpp Code/Shader/CreateShader.h Code/Player/GUI/GUI_player.cpp Code/Player/GUI/GUI_player.h Code/Player/Inventory/Inventory.cpp Code/Player/Inventory/Inventory.h Code/Player/Features/Features.cpp Code/Player/Features/Features.h)
+        Code/Particle/ParticleSystem.h Code/Chest/Chest.cpp Code/Chest/Chest.h Code/Player/Bullet/Bullet.cpp Code/Player/Bullet/Bullet.h "Code/Enemy/Enemy Bat/Enemy_Bat.cpp"
+        "Code/Enemy/Enemy Bat/Enemy_Bat.h" "Code/Enemy/Enemy BigGhost/Enemy_BigGhost.cpp" "Code/Enemy/Enemy BigGhost/Enemy_BigGhost.h"
+        "Code/Enemy/Enemy Boom/Enemy_Boom.cpp" "Code/Enemy/Enemy Boom/Enemy_Boom.h" "Code/Enemy/Enemy Mag/Enemy_Mag.cpp" "Code/Enemy/Enemy Mag/Enemy_Mag.h"
+        Code/Shader/CreateShader.cpp Code/Shader/CreateShader.h Code/Player/GUI/GUI_player.cpp Code/Player/GUI/GUI_player.h Code/Player/Inventory/Inventory.cpp
+        Code/Player/Inventory/Inventory.h Code/Player/Features/Features.cpp Code/Player/Features/Features.h Code/Items/Particle_Strength/Particle_of_Strength_item.cpp Code/Items/Particle_Strength/Particle_of_Strength_item.h)
 
 set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc ")
 

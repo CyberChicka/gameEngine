@@ -32,6 +32,7 @@
 #include "Player/Bullet/Bullet.h"
 #include "Player/GUI/GUI_player.h"
 #include "Items/Equipment/equipment_item.h"
+#include "Items/Particle_Strength/Particle_of_Strength_item.h"
 
 using namespace sf;
 using namespace std;
@@ -89,14 +90,13 @@ private:
     void TakeChest();
     void TakeDoor();
     void TakeEnemy();
-    void TakeEquipment();
     void TakeNps();
     void TakeInventory();
     void ShootBullet();
     
     //
     bool isRunning();
-    // intialize the RenderWindow.
+    // initialization the RenderWindow.
     void initClass();
     void initWindow();
     void renderClear();

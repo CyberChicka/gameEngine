@@ -44,9 +44,11 @@ void Enemy_Bat::animation(float time){
 void Enemy_Bat::Attack(Player &p) {
     if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
         if(p.isBlock){
-            if(p.state == Player::left){this->dx = -0.8;}
-            else if(p.state == Player::right){ this->dx = 0.8; }
-            else this->dx = -0.8;
+            if(p.particle_of_strength_repulsion){
+                if(p.state == Player::left){this->dx = -0.8;}
+                else if(p.state == Player::right){ this->dx = 0.8; }
+                else this->dx = -0.8;
+            }
         }
         else{
             if(this->timeAttack > 2000){

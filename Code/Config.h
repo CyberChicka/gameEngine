@@ -35,6 +35,8 @@ public:
     // Sprite
     //SmartPointer<CreateImage>*s_player;
     CreateImage *s_player;
+    // Particle_of_Strength
+    CreateImage *s_particle_of_strength_shoot, *s_particle_of_strength_sprint;
     // Enemy
     CreateImage *s_enemy_ghost, *s_enemy_skeleton, *s_enemy_bat, *s_enemy_BigGhost, *s_enemy_boom, *s_enemy_mag, *s_enemy_MagDamage;
     // Nps
@@ -76,6 +78,23 @@ public:
     Config();
     static Config *instance;
 private:
+    // Delete
+    void DeleteEnemy()const;
+    void DeleteNps()const;
+    void DeleteItem()const;
+    void DeleteObject()const;
+    void DeleteText()const;
+    void DeleteLvL()const;
+    void DeleteChest()const;
+    // LoadImage
+    void ImagePlayer();
+    void ImageEnemy();
+    void ImageNps();
+    void ImageItem();
+    void ImageObject();
+    void ImageLvL();
+    void ImageChest();
+    // Load
     void LoadShader();
     void LoadImage();
     void LoadText();

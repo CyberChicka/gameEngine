@@ -1,6 +1,7 @@
 #include "Player.h"
 
 Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name):Entity(sprite, LvL, X, Y, W, H, Name){
+    this->initAnim();
     this->s_player[1] = new CreateImage("SpriteEntity/Player/Player-Blue.png");
     this->s_player[2] = new CreateImage("SpriteEntity/Player/Player-Red.png");
     this->s_player[3] = new CreateImage("SpriteEntity/Player/Player-Green.png");
@@ -19,7 +20,10 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->money = 10;
     this->w_sprint = 210;
     this->lvl_player = 1;
-    this->initAnim();
+    this->particle_of_strength_shoot = false;
+    this->particle_of_strength_sprint = false;
+    this->particle_of_strength_repulsion = false;
+    this->particle_of_strength_speed = false;
 }
 Player::~Player() {
     cout << "============== removed from player ============"<< endl;
@@ -27,14 +31,11 @@ Player::~Player() {
     delete this->s;
     delete this->particles;
     delete this->e_Radius;
-    for(int i = 0; i < size(s_player); i++){
-        delete this->s_player[i];
-    }
+    delete []*this->s_player;
 }
 FloatRect Player::getRect() {
     return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
 }
-
 void Player::animation(float time) {
     if(this->life){
         for(int i = 0; i < size(equipment); i++){
@@ -96,13 +97,11 @@ void Player::initAnim() {
     this->animations[int(AnimationIndex::DeadL)] = Animation(1, 0.009, 300, 2320, 292, 282, 1);
 
 }
-
 void Player::ControlMove() {
     if(this->life){
         this->stop = true;
         this->isBlock = false;
         this->isRun = false;
-        this->isJump = false;
         if(Mouse::isButtonPressed(Mouse::Right)){
             this->isBlock = true;
             this->stop = false;
@@ -126,18 +125,19 @@ void Player::ControlMove() {
                 else{
                     if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
                         this->state = left;
-                        this->speed = 0.22; // speed 0.20
+                        if(this->particle_of_strength_speed)this->speed = 0.25;
+                        else this->speed = 0.20; // speed 0.20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
                         this->state = right;
-                        this->speed = 0.22; // speed 20
+                        if(this->particle_of_strength_speed)this->speed = 0.25;
+                        else this->speed = 0.20; // speed 0.20
                         this->isRun = true;
                         this->stop = false;
                     }
                     if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
-                        this->isJump = true;
                         this->dy -= 0.66; // jump 0.65
                         this->onGround = false;
                         this->stop = false;
@@ -158,24 +158,23 @@ void Player::move() {
                 this->dx = this->speed;
                 break;
             case SLeft:
-                this->pos.x -= this->w_sprint;
+                if(this->particle_of_strength_sprint)
+                    this->pos.x -= this->w_sprint;
                 break;
             case SRight:
-                this->pos.x += this->w_sprint;
+                if(particle_of_strength_sprint)
+                    this->pos.x += this->w_sprint;
                 break;
         }
         this->speed = 0;
     }
 }
-
 float Player::GetX() { return this->pos.x; }
 float Player::GetY() { return this->pos.y; }
-
 void Player::setPosition(float x, float y) {
     this->pos.x = x;
     this->pos.y = y;
 }
-
 void Player::update(float time, GameLvL *gLvL){
     this->particles->setEmitter(this->pos.x + 28, this->pos.y + 30);
     this->gameLvL = gLvL;
@@ -187,6 +186,7 @@ void Player::update(float time, GameLvL *gLvL){
     this->attack_time += time;
     this->sprint_time += time;
     this->bullet_time += time;
+    //
     if(this->sprint_time > 3500)this->isSprint = true;
     else this->isSprint = false;
     if(this->bullet_time > 5000)this->isShoot = true;
@@ -202,7 +202,6 @@ void Player::update(float time, GameLvL *gLvL){
     // life
     if(this->is_health <= 0)this->life = false;
 }
-
 View Player::setPlayerCoordinateForView(sf::View &view) {
     view.setCenter(this->pos.x, this->pos.y - 100);
     return view;

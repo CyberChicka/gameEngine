@@ -40,10 +40,8 @@ Inventory::~Inventory() {
     delete this->t_silver_key;
     delete this->t_health;
     delete this->s;
-    for(int i = 0; i < size(s_sword); i++){
-        delete this->s_sword[i];
-        delete this->s_shield[i];
-    }
+    delete []*this->s_sword;
+    delete []*this->s_shield;
 }
 
 void Inventory::update(Player *player){

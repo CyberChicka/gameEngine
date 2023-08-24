@@ -60,7 +60,7 @@ void Enemy::checkCollisionMap(float dX, float dY){
             if(cell == '{')
                 if(dY > 0){ dx = 0.1; }
             if(cell == '}')
-                if(dY > 0){ dx = 0.1; }
+                if(dY > 0){ dx = -0.1; }
             if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
             if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
 //                if(this->position.y > 900){ this->position.y = this->position.y - 0.5;}
