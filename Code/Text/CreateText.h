@@ -13,12 +13,12 @@ using namespace sf;
 class CreateText {
 public:
     int size_text;
-    string name_text;
+    string is_text;
     string file;
     Color color;
     Text *text;
     Font *font;
-    CreateText(string File, int Size_Text, string Name_text, Color Color);
+    CreateText(string File, int Size_Text, string Is_Text, Color Color);
     CreateText operator+(const CreateText &other);
     ~CreateText();
     void setString(string Name_Text);

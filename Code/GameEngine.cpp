@@ -16,6 +16,8 @@ GameEngine::~GameEngine() {
     delete this->GUI;
     delete this->gameLvL; // очищаем память
     delete this->enemyMagDamage;
+    cout << "Game Exit!" << endl;
+    sleep(10);
 }
 bool GameEngine::isRunning(){
     if (this->window == nullptr){ cout << "\n Error Windows \n"; return false; }
@@ -30,7 +32,7 @@ void GameEngine::update() {
     // View
     // Fon update
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
-        (*itFon)->update(this->game_time, this->gameLvL);
+        (*itFon)->update(this->game_time,this->gameLvL);
     }
     // player update
     this->player->update(this->game_time, this->gameLvL);
@@ -44,7 +46,6 @@ void GameEngine::update() {
     for(itEnemy = enemyLvL[gameLvL->gameLvL].begin(); itEnemy != enemyLvL[gameLvL->gameLvL].end(); itEnemy++){
         if(!(*itEnemy)->life)this->enemyLvL[gameLvL->gameLvL].erase(itEnemy);
         (*itEnemy)->update(this->game_time, this->gameLvL,  this->player);
-        //cout << size(enemyLvL[gameLvL->gameLvL]) << endl;
     }
     for(itChest = chestLvL[gameLvL->gameLvL].begin(); itChest != chestLvL[gameLvL->gameLvL].end(); itChest++){
         (*itChest)->update(this->game_time, this->gameLvL);
@@ -301,23 +302,26 @@ void GameEngine::initClassItem() {
             new equipment_item(config->s_item_sword[1]->s, gameLvL, 1000, 1600, 30, 25, "SwordBlue"),
             new equipment_item(config->s_item_sword[2]->s, gameLvL, 1050, 1600, 30, 25, "SwordRed"),
             new equipment_item(config->s_item_sword[3]->s, gameLvL, 1100, 1600, 30, 25, "SwordGreen"),
-            new equipment_item(config->s_item_sword[4]->s, gameLvL, 1150, 1600, 30, 25, "SwordBrow"),
+            new equipment_item(config->s_item_sword[4]->s, gameLvL, 6850, 244, 30, 25, "SwordBrow"),
 
             new equipment_item(config->s_item_shield[1]->s, gameLvL, 1200, 1600, 30, 65, "ShieldBlue"),
             new equipment_item(config->s_item_shield[2]->s, gameLvL, 1250, 1600, 30, 65, "ShieldRed"),
             new equipment_item(config->s_item_shield[3]->s, gameLvL, 1300, 1600, 30, 65, "ShieldGreen"),
-            new equipment_item(config->s_item_shield[4]->s, gameLvL, 1350, 1600, 30, 65, "ShieldBrow"),
+            new equipment_item(config->s_item_shield[4]->s, gameLvL, 6820, 244, 30, 65, "ShieldBrow"),
 
             new health_item(config->s_item_health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
             new money_item(config->s_item_money->s, gameLvL, 300, 1600, 30, 40, "Money"),
             new money_item(config->s_item_diamond->s, gameLvL, 9400, 1600, 40, 60, "Diamond"),
+            new money_item(config->s_item_diamond->s, gameLvL, 6820, 244, 40, 60, "Diamond"),
             new key_item(config->s_item_KeySilver->s, gameLvL, 8, 1600, 40, 45, "KeySilver"),
             new key_item(config->s_item_KeyGold->s, gameLvL, 9300, 1600, 40, 45, "KeyGold"),
+            new key_item(config->s_item_KeyGold->s, gameLvL, 6830, 244, 40, 45, "KeyGold"),
 
             new Particle_of_Strength_item(config->s_particle_of_strength_sprint->s, gameLvL, 2000, 1600, 40, 40, "Sprint"),
             new Particle_of_Strength_item(config->s_particle_of_strength_shoot->s, gameLvL, 2100, 1600, 40, 40, "Shoot"),
             new Particle_of_Strength_item(config->s_particle_of_strength_shoot->s, gameLvL, 2200, 1600, 40, 40, "Repulsion"),
             new Particle_of_Strength_item(config->s_particle_of_strength_shoot->s, gameLvL, 2300, 1600, 40, 40, "Speed"),
+            new Particle_of_Strength_item(config->s_particle_of_strength_shoot->s, gameLvL, 2400, 1600, 40, 40, "Jump"),
     };
     // item lvl 2
     this->itemLvL[2] = {
@@ -448,19 +452,17 @@ void GameEngine::EventFunc() {
     this->TakeEnemy();
     this->TakeNps();
 }
+
 void GameEngine::TakeItems() {
     if (game_event.type == Event::KeyPressed){
         if (game_event.key.code == Keyboard::F){
             for(itItem = itemLvL[gameLvL->gameLvL].begin(); itItem != itemLvL[gameLvL->gameLvL].end(); itItem++){
-                if ((*itItem)->isTake(*player)) {
+                if ((*itItem)->isTake(*player))
                     this->itemLvL[gameLvL->gameLvL].erase(itItem);
-                }
             }
         }
     }
 }
-
-
 void GameEngine::TakeChest() {
     if (game_event.type == Event::KeyPressed) {
         if (game_event.key.code == Keyboard::F) {
@@ -494,14 +496,12 @@ void GameEngine::TakeChest() {
         }
     }
 }
-
 void GameEngine::TakeNps() {
     for(itNps = npsLvL[gameLvL->gameLvL].begin(); itNps != npsLvL[gameLvL->gameLvL].end(); itNps++){
         (*itNps)->Dialogue(game_event, player);
         (*itNps)->Interaction(game_event, *player);
     }
 }
-
 void GameEngine::TakeDoor() {
 
 }
@@ -510,7 +510,6 @@ void GameEngine::TakeEnemy() {
         (*itEnemy)->TakingDamage(*this->player, bulletLvL, game_event);
     }
 }
-
 void GameEngine::ShootBullet() {
     if(game_event.type == Event::KeyPressed){
         if(game_event.key.code == Keyboard::LControl){
@@ -521,7 +520,6 @@ void GameEngine::ShootBullet() {
         }
     }
 }
-
 void GameEngine::TakeInventory() {
     if(game_event.type == Event::KeyPressed){
         if(game_event.key.code == Keyboard::E){
@@ -534,27 +532,15 @@ void GameEngine::TakeInventory() {
 }
 // clear color
 void GameEngine::renderClear(){
-    if(gameLvL->gameLvL == 1){
-        this->window->clear(Color(173, 208, 207));
+    switch (gameLvL->gameLvL) {
+        case 1:this->window->clear(Color(173, 208, 207));break;
+        case 2:this->window->clear(Color(173, 208, 207)); break;
+        case 3:this->window->clear(Color(40, 40, 40)); break;
+        case 4:this->window->clear(Color(173, 208, 207)); break;
+        case 5:this->window->clear(Color(173, 208, 207)); break;
+        case 6:this->window->clear(Color(173, 208, 207)); break;
     }
-    else if(gameLvL->gameLvL == 2){
-        this->window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 3){
-        this->window->clear(Color(40, 40, 40));
-    }
-    else if(gameLvL->gameLvL == 4){
-        this->window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 5){
-        this->window->clear(Color(173, 208, 207));
-    }
-    else if(gameLvL->gameLvL == 6){
-        this->window->clear(Color(173, 208, 207));
-    }
-    else{
 
-    }
 }
 
 void GameEngine::run(){

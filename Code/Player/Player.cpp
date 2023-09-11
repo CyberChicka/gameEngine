@@ -24,6 +24,7 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->particle_of_strength_sprint = false;
     this->particle_of_strength_repulsion = false;
     this->particle_of_strength_speed = false;
+    this->particle_of_strength_jump = false;
 }
 Player::~Player() {
     cout << "============== removed from player ============"<< endl;
@@ -138,7 +139,8 @@ void Player::ControlMove() {
                         this->stop = false;
                     }
                     if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
-                        this->dy -= 0.66; // jump 0.65
+                        if(this->particle_of_strength_jump)this->dy -= 0.72;
+                        else this->dy -= 0.66; // jump 0.65
                         this->onGround = false;
                         this->stop = false;
                     }
@@ -212,22 +214,22 @@ void Player::draw(RenderWindow &window, View view){
     window.draw(*this->s);
 }
 void Player::checkCollisionMap(float dX, float dY) {
-    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++)
-        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++){
+    for(int i = this->pos.y / h_Block; i < (this->pos.y + h) / h_Block; i++)
+        for(int j = this->pos.x / w_Block; j < (this->pos.x + w) / w_Block; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->pos.y = i * 32 - h;
+                    this->pos.y = i * h_Block - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->pos.y = i * 32 + 32;
+                    this->pos.y = i * h_Block + h_Block;
                     this->dy = 0;
                 }
-                if (dX>0){ this->pos.x = j * 32 - w; }
-                if (dX<0){ this->pos.x = j * 32 + 32; }
+                if (dX>0) this->pos.x = j * w_Block - w;
+                if (dX<0) this->pos.x = j * w_Block + w_Block;
             }
             if(this->gameLvL->gameLvL == 1){
                 if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }

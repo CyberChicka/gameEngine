@@ -16,6 +16,8 @@ public:
     char cell;
     int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist, randomNumber;
     bool life, onGround, isMove, stop, isNpsDialogue, is_open;
+    static const int h_Block = 32;
+    static const int w_Block = 32;
     string name;
     Sprite *s;
     enum {left, right, up, down, jump, stay, SLeft, SRight} state;

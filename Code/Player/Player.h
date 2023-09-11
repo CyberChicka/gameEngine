@@ -18,7 +18,8 @@ public:
     bool particle_of_strength_sprint,
     particle_of_strength_shoot,
     particle_of_strength_repulsion,
-    particle_of_strength_speed;
+    particle_of_strength_speed,
+    particle_of_strength_jump;
     ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,

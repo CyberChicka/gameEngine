@@ -35,7 +35,7 @@ void Enemy_Ghost::update(float time, GameLvL *gLvL, Player *p) {
     this->animation(time);
     this->pos.x += this->dx * time; this->checkCollisionMap(this->dx, 0.f);
     this->pos.y += this->dy * time;this->checkCollisionMap(0.f, this->dy);
-    if(!this->onGround)this->dy+=0.0015*time;
+    this->dy+=0.0015*time;
     this->s->setPosition(this->pos);
     if(this->is_health <= 0)this->life = false;
 }

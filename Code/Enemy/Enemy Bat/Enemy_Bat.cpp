@@ -77,17 +77,29 @@ void Enemy_Bat::update(float time, GameLvL *gLvL, Player *p) {
 }
 
 void Enemy_Bat::checkCollisionMap(float dX, float dY) {
-    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++)
-        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++){
+    for(int i = this->pos.y / h_Block; i < (this->pos.y + h) / h_Block; i++)
+        for(int j = this->pos.x / w_Block; j < (this->pos.x + w) / w_Block; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
-                if (dY>0){ this->pos.y -= 1; this->dy = -0.15;  }//по Y вниз=>идем в пол(стоим на месте) или падаем. В этот момент надо вытолкнуть персонажа и поставить его на землю, при этом говорим что мы на земле тем самым снова можем прыгать
-                if (dY<0){ this->pos.y += 1; this->dy = 0.15; }//столкновение с верхними краями карты(может и не пригодиться)
-                if (dX>0){ this->pos.x -= 1; this->dx = -0.15;  }//с правым краем карты
-                if (dX<0){ this->pos.x += 1; this->dx = 0.15; }// с левым краем карты
+                if (dY>0){
+                    this->pos.y -= 1;
+                    this->dy = -0.15;
+                }//по Y вниз=>идем в пол(стоим на месте) или падаем. В этот момент надо вытолкнуть персонажа и поставить его на землю, при этом говорим что мы на земле тем самым снова можем прыгать
+                if (dY<0){
+                    this->pos.y += 1;
+                    this->dy = 0.15;
+                }//столкновение с верхними краями карты(может и не пригодиться)
+                if (dX>0){
+                    this->pos.x -= 1;
+                    this->dx = -0.15;
+                }//с правым краем карты
+                if (dX<0){
+                    this->pos.x += 1;
+                    this->dx = 0.15;
+                }// с левым краем карты
             }
-            if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
-            if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
+            if(this->pos.x < 1) this->pos.x = this->pos.x + 1;
+            if(this->pos.y < 1) this->pos.y = this->pos.y + 1;
         }
 }

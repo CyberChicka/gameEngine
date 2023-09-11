@@ -46,24 +46,21 @@ void Config::DeleteEnemy()const{
     delete this->s_enemy_BigGhost;
     delete this->s_enemy_MagDamage;
 }
-
-void Config::DeleteItem()const{
+void Config::DeleteItem()const {
     // delete item sprite
     delete this->s_item_money;
     delete this->s_item_KeySilver;
     delete this->s_item_KeyGold;
     delete this->s_item_diamond;
     delete this->s_item_health;
-    delete []*this->s_item_sword;
-    delete []*this->s_item_shield;
+    delete[]*this->s_item_sword;
+    delete[]*this->s_item_shield;
 }
-
 void Config::DeleteLvL()const{
     // delete fon lvl
     delete []*this->s_LvL_Fon;
     delete []*this->s_LvL_FonBack;
 }
-
 void Config::DeleteNps()const{
     // delete Nps sprite
     delete this->s_nps_witcher;
@@ -75,7 +72,6 @@ void Config::DeleteNps()const{
     delete this->s_nps_blacksmith;
     delete this->s_nps_aiden;
 }
-
 void Config::DeleteObject()const{
     // delete object
     delete this->s_object_stove;
@@ -91,7 +87,6 @@ void Config::DeleteObject()const{
     delete this->s_object_BonfireHouse;
     delete this->s_object_TableHouse;
 }
-
 void Config::DeleteText()const{
     // Text
     delete this->text_nps_knight;
@@ -102,13 +97,13 @@ void Config::DeleteText()const{
     delete this->text_nps_aiden;
     delete this->text_nps_witcher;
 }
-
 void Config::DeleteChest() const {
     // delete chest sprite
     delete this->s_chest_small;
     delete this->s_chest_middle;
     delete this->s_chest_big;
 }
+
 Config *Config::getInstance() {
     if (instance == nullptr) instance = new Config();
     return instance;
@@ -143,7 +138,7 @@ void Config::ImageEnemy(){
     //Sprite Enemy
     this->s_enemy_ghost = new CreateImage("SpriteEntity/Enemy/EnemyGhost.png");
     this->s_enemy_ghost_heavenly = new CreateImage("SpriteEntity/Enemy/EnemyGhost_Heavenly.png");
-    this->s_enemy_skeleton = new CreateImage("SpriteEntity/Enemy/");
+    this->s_enemy_skeleton = new CreateImage("SpriteEntity/Enemy/EnemyGhost.png");
     this->s_enemy_BigGhost = new CreateImage("SpriteEntity/Enemy/EnemyBigGhost.png");
     this->s_enemy_BigGhost_heavenly = new CreateImage("SpriteEntity/Enemy/EnemyBigGhost_Heavenly.png");
     this->s_enemy_boom = new CreateImage("SpriteEntity/Enemy/EnemyBoom.png");
@@ -152,14 +147,12 @@ void Config::ImageEnemy(){
     this->s_enemy_mag = new CreateImage("SpriteEntity/Enemy/EnemyMag.png");
     this->s_enemy_MagDamage = new CreateImage("SpriteObject/DamageEnemy/DamageMag.png");
 }
-
 void Config::ImageChest(){
     // class chest
     this->s_chest_small = new CreateImage("SpriteObject/Chest/SmallChest.png");
     this->s_chest_middle = new CreateImage("SpriteObject/Chest/MiddleChest.png");
     this->s_chest_big = new CreateImage("SpriteObject/Chest/BigChest.png");
 }
-
 void Config::ImageItem(){
     // Sprite Item
     this->s_item_health = new CreateImage("SpriteItems/HealthLife.png");
@@ -176,7 +169,6 @@ void Config::ImageItem(){
     this->s_item_shield[3] = new CreateImage("SpriteItems/sword_shield/ShieldGreen.png");
     this->s_item_shield[4] = new CreateImage("SpriteItems/sword_shield/ShieldBrow.png");
 }
-
 void Config::ImageLvL(){
     //Sprite LvL Map
     this->s_LvL[1] = new CreateImage("MapTexture/LvL1-up.png");
@@ -199,7 +191,6 @@ void Config::ImageLvL(){
     this->s_LvL_FonBack[5] = new CreateImage("SpriteMapObject/FonLvL5_Back.png");
     this->s_LvL_FonBack[6] = new CreateImage("SpriteMapObject/FonLvL6_Back.png");
 }
-
 void Config::ImageNps(){
     // Sprite Nps
     this->s_nps_aiden = new CreateImage("SpriteEntity/Nps/Nps_Aiden.png");
@@ -211,7 +202,6 @@ void Config::ImageNps(){
     this->s_nps_swordsman = new CreateImage("SpriteEntity/Nps/Nps_Swordsman.png");
     this->s_nps_witcher = new CreateImage("SpriteEntity/Nps/Witcher.png");
 }
-
 void Config::ImageObject(){
     // Sprite Object
     this->s_object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
@@ -227,8 +217,6 @@ void Config::ImageObject(){
     this->s_object_TableHouse = new CreateImage("SpriteMapObject/House/Table_House.png");
     this->s_object_stove = new CreateImage("SpriteObject/Stove.png");
 }
-
-
 void Config::LoadShader() {
     //this->shader = new CreateShader("Shader.glsl");
 }
@@ -242,7 +230,6 @@ void Config::LoadText() {
     this->text_nps_knight = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
     this->text_nps_witcher = new CreateText("MaredivRegular.ttf", 25, " ", Color::Black);
 }
-
 void Config::LoadMusic() {
     this->m_lvl[1] = new m_Music(" ");
     this->m_lvl[2] = new m_Music(" ");
@@ -251,7 +238,6 @@ void Config::LoadMusic() {
     this->m_lvl[5] = new m_Music(" ");
     this->m_lvl[6] = new m_Music(" ");
 }
-
 void Config::LoadSound() {
     this->so_player_attack = new s_Sound(" ");
     this->so_enemy_Ghost_attack = new s_Sound(" ");
