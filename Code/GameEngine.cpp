@@ -70,7 +70,7 @@ void GameEngine::render(){ // Рендер изображения
     this->renderClear();
     // render fon
     for(itFon = fonLvL[gameLvL->gameLvL].begin(); itFon != fonLvL[gameLvL->gameLvL].end(); itFon++){
-        (*itFon)->draw(*this->window, this->config->view);
+         (*itFon)->draw(*this->window, this->config->view);
     }
     gameLvL->RenderDraw(*this->window, this->config->view); // Рисуем карту
     // Object render
@@ -127,22 +127,22 @@ void GameEngine::initClass() {
     // gameLvL
     this->gameLvL = new GameLvL(config->s_LvL[1]->s, 1);
     //Player
-    this->player = new Player(config->s_player->s, gameLvL,1000, 1800, 56, 60, "player");
+    this->player = new Player(config->s_player->s, gameLvL,8000, 1800, 56, 60, "god");
     this->GUI = new GUI_player;
     // Attack Enemy Mag
     this->enemyMagDamage = new FonGame(config->s_enemy_MagDamage->s, gameLvL, 0, 0, 0, 0, "MagDamage");
-    //Enemy
-    this->initClassEnemy();
-    // Object
-    this->initClassObject();
-    //Chest
-    this->initClassChest();
-    //Nps
-    this->initClassNps();
-    // Item
-    this->initClassItem();
-    //Fon
-    this->initClassFon();
+//    //Enemy
+//    this->initClassEnemy();
+//    // Object
+      this->initClassObject();
+//    //Chest
+//    this->initClassChest();
+//    //Nps
+//    this->initClassNps();
+//    // Item
+//    this->initClassItem();
+//    //Fon
+      this->initClassFon();
 }
 
 void GameEngine::initClassEnemy() {
@@ -404,10 +404,10 @@ void GameEngine::pollEvents() {
             }
             if(game_event.key.code == sf::Keyboard::Tab){
                 cout << "X - " << player->pos.x << "\n" << "Y - " << player->pos.y << "\n"
-                     << "Health: " <<  player->is_health << " / " << player->f_health << "\n"
-                     << "level: " << player->lvl_player<<"\n"
-                     << "k_silver: " << player->k_Silver << "\n"
-                     << "k_gold: " << player->k_Gold << "\n"
+                     << "Health: " << player->is_health << " / " << player->f_health << "\n"
+                     << "level: " << player->lvl_player << "\n"
+                     << "k_silver: " << player->k_silver << "\n"
+                     << "k_gold: " << player->k_gold << "\n"
                      << "money: " << player->money << "\n" << endl;
             }
             if(game_event.key.code == Keyboard::F1){
@@ -475,20 +475,20 @@ void GameEngine::TakeChest() {
                             if ((*itChest)->OpenChest() == 3){ }
                         }
                     }
-                    if ((*itChest)->name == "MiddleChest" && player->k_Silver > 0) {
+                    if ((*itChest)->name == "MiddleChest" && player->k_silver > 0) {
                         if (((*itChest)->is_open)) {
                             if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeyGold->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "KeyGold"));}
                             if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_item_money->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Money"));}
                             if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new health_item(config->s_item_health->s, gameLvL, (*itChest)->pos.x + 22, (*itChest)->pos.y, 40, 45, "Health"));}
-                            this->player->k_Silver--;
+                            this->player->k_silver--;
                         }
                     }
-                    if ((*itChest)->name == "BigChest" && player->k_Gold > 0) {
+                    if ((*itChest)->name == "BigChest" && player->k_gold > 0) {
                         if (((*itChest)->is_open)) {
                             if ((*itChest)->OpenChest() == 1){this->itemLvL[gameLvL->gameLvL].push_back(new money_item(config->s_item_diamond->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "Diamond"));}
                             if ((*itChest)->OpenChest() == 2){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeyGold->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeyGold"));}
                             if ((*itChest)->OpenChest() == 3){this->itemLvL[gameLvL->gameLvL].push_back(new key_item(config->s_item_KeySilver->s, gameLvL, (*itChest)->pos.x + 25, (*itChest)->pos.y, 40, 45, "KeySilver"));}
-                            this->player->k_Gold--;
+                            this->player->k_gold--;
                         }
                     }
                 }

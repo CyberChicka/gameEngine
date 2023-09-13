@@ -28,7 +28,7 @@ void Blacksmith::Dialogue(sf::Event event, Player *player) {
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
             if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
-                switch (this->isNpsDialogue){
+                switch (this->is_nps_dialogue){
                     case true:
                         if(this->gameLvL->gameLvL == 1){
                             if(this->ClickNps<=7) this->ClickNps++;
@@ -38,13 +38,13 @@ void Blacksmith::Dialogue(sf::Event event, Player *player) {
                             if(this->ClickNps<=3) this->ClickNps++;
                             if(this->ClickNps==4)this->ClickNps--;
                         }
-                        this->isNpsDialogue = false;
+                        this->is_nps_dialogue = false;
                         d_Nps << getNpsMessage(this->ClickNps, this->gameLvL->gameLvL, this->name);
                         this->t_Nps->text->setString(d_Nps.str());
                         break;
                     case false:
                         this->t_Nps->text->setString(" ");
-                        this->isNpsDialogue = true;
+                        this->is_nps_dialogue = true;
                         break;
                     }
 
@@ -57,7 +57,7 @@ void Blacksmith::Interaction(sf::Event event, Player &player) {
         if(this->ClickNps == 7){
             if(event.type == Event::KeyPressed){
                 if(event.key.code == Keyboard::Num1){
-                    if(player.money > 9 && player.lvl_player < 10 && !this->isNpsDialogue){
+                    if(player.money > 9 && player.lvl_player < 10 && !this->is_nps_dialogue){
                         player.lvl_player += 1;
                         player.is_health += 30;
                         player.f_health += 30;
@@ -65,7 +65,7 @@ void Blacksmith::Interaction(sf::Event event, Player &player) {
                     }
                 }
                 if(event.key.code == Keyboard::Num2){
-                    this->isNpsDialogue = true;
+                    this->is_nps_dialogue = true;
                 }
             }
         }

@@ -8,23 +8,42 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->s_player[4] = new CreateImage("SpriteEntity/Player/Player-Brow.png");
     this->s->setScale(0.5f, 0.5f);
     this->s->setOrigin(this->w,this->h/2);
-    this->is_health = 120; this->f_health = 120;
     this->e_Radius = new CircleShape(120.f);
     this->e_Radius->setScale(1.0f, 0.5f);
     this->particles = new ParticleSystem(10);
     this->gameLvL = new GameLvL(*LvL);
     this->life = true;
     this->isInventory = true;
-    this->k_Silver = 10;
-    this->k_Gold = 10;
-    this->money = 10;
-    this->w_sprint = 210;
-    this->lvl_player = 1;
-    this->particle_of_strength_shoot = false;
-    this->particle_of_strength_sprint = false;
-    this->particle_of_strength_repulsion = false;
-    this->particle_of_strength_speed = false;
-    this->particle_of_strength_jump = false;
+    if(this->name == "player"){
+        this->is_health = 120; this->f_health = 120;
+        this->k_silver = 10;
+        this->k_gold = 10;
+        this->money = 10;
+        this->w_sprint = 210;
+        this->lvl_player = 1;
+        this->particle_of_strength_shoot = false;
+        this->particle_of_strength_sprint = false;
+        this->particle_of_strength_repulsion = false;
+        this->particle_of_strength_speed = false;
+        this->particle_of_strength_jump = false;
+    }
+    if(this->name == "god"){
+        for(int i = 0; i < size(sword); i++){
+            sword[i] = true;
+            shield[i] = true;
+        }
+        this->is_health = 9999999; this->f_health = 9999999;
+        this->k_silver = 100;
+        this->k_gold = 100;
+        this->money = 100;
+        this->w_sprint = 250;
+        this->lvl_player = 1;
+        this->particle_of_strength_shoot = true;
+        this->particle_of_strength_sprint = true;
+        this->particle_of_strength_repulsion = true;
+        this->particle_of_strength_speed = true;
+        this->particle_of_strength_jump = true;
+    }
 }
 Player::~Player() {
     cout << "============== removed from player ============"<< endl;
@@ -47,30 +66,38 @@ void Player::animation(float time) {
             else if(this->state == left) this->curAnimation = AnimationIndex::BlockL;
             else this->curAnimation = AnimationIndex::BlockR;
         }
-        if(this->isAttack && !this->isBlock){
-            this->stop = false;
-            if(this->state == right){
-                this->curAnimation = AnimationIndex::AttackR;
-                if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){ this->isAttack = false; }
-            }
-            else if(this->state == left){
-                this->curAnimation = AnimationIndex::AttackL;
-                if(this->animations[int(AnimationIndex::AttackL)].cur_Frame > 6){ this->isAttack = false; }
-            }
-            else{
-                this->curAnimation = AnimationIndex::AttackR;
-                if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){ this->isAttack = false; }
-            }
+        else if(this->isAttack){
+                this->stop = false;
+                if(this->state == right){
+                    this->curAnimation = AnimationIndex::AttackR;
+                    if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){
+                        this->isAttack = false;
+                    }
+                }
+                else if(this->state == left){
+                    this->curAnimation = AnimationIndex::AttackL;
+                    if(this->animations[int(AnimationIndex::AttackL)].cur_Frame > 6){
+                        this->isAttack = false;
+                    }
+                }
+                else{
+                    this->curAnimation = AnimationIndex::AttackR;
+                    if(this->animations[int(AnimationIndex::AttackR)].cur_Frame > 6){
+                        this->isAttack = false;
+                    }
+                }
         }
-        if(this->isRun && !this->isAttack){
-            if(this->state == right){this->curAnimation = AnimationIndex::RunR;}
-            else if(this->state == left){this->curAnimation = AnimationIndex::RunL;}
-            else{this->curAnimation = AnimationIndex::RunR;}
-        }
-        if(this->stop && !this->isAttack){
-            if(this->state == right){this->curAnimation = AnimationIndex::WalkingR;}
-            else if(this->state == left) {this->curAnimation = AnimationIndex::WalkingL;}
-            else{this->curAnimation = AnimationIndex::WalkingR;}
+        else{
+            if(this->isRun){
+                if(this->state == right){this->curAnimation = AnimationIndex::RunR;}
+                else if(this->state == left){this->curAnimation = AnimationIndex::RunL;}
+                else{ this->curAnimation = AnimationIndex::RunR;}
+            }
+            if(this->stop){
+                if(this->state == right){this->curAnimation = AnimationIndex::WalkingR;}
+                else if(this->state == left) {this->curAnimation = AnimationIndex::WalkingL;}
+                else{ this->curAnimation = AnimationIndex::WalkingR; }
+            }
         }
     }
     else{
@@ -103,46 +130,55 @@ void Player::ControlMove() {
         this->stop = true;
         this->isBlock = false;
         this->isRun = false;
-        if(Mouse::isButtonPressed(Mouse::Right)){
+        if(this->name == "god"){ onGround = true; }
+        if(mouse.isButtonPressed(mouse.Right)){
             this->isBlock = true;
             this->stop = false;
         }
+        else if(mouse.isButtonPressed(mouse.Left)){
+            this->isAttack = true;
+            this->stop = false;
+        }
         else{
-            if(Mouse::isButtonPressed(Mouse::Left)){
-                this->isAttack = true;
+            if((key.isKeyPressed(key.LShift) && key.isKeyPressed(key.D)) && this->isSprint){
+                this->state = SRight;
                 this->stop = false;
+                this->sprint_time = 0;
+            }
+            else if((key.isKeyPressed(key.LShift) && key.isKeyPressed(key.A)) && this->isSprint){
+                this->state = SLeft;
+                this->stop = false;
+                this->sprint_time = 0;
             }
             else{
-                if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::D)) && this->isSprint){
-                    this->state = SRight;
+                if(key.isKeyPressed(key.A) || key.isKeyPressed(key.Left)){
+                    this->state = left;
+                    if(this->particle_of_strength_speed)this->speed = 0.25;
+                    else this->speed = 0.20; // speed 0.20
+                    this->isRun = true;
                     this->stop = false;
-                    this->sprint_time = 0;
                 }
-                else if((Keyboard::isKeyPressed(Keyboard::LShift) && Keyboard::isKeyPressed(Keyboard::A)) && this->isSprint){
-                    this->state = SLeft;
+                if(key.isKeyPressed(key.D) || key.isKeyPressed(key.Right)){
+                    this->state = right;
+                    if(this->particle_of_strength_speed)this->speed = 0.25;
+                    else this->speed = 0.20; // speed 0.20
+                    this->isRun = true;
                     this->stop = false;
-                    this->sprint_time = 0;
                 }
-                else{
-                    if(Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)){
-                        this->state = left;
-                        if(this->particle_of_strength_speed)this->speed = 0.25;
-                        else this->speed = 0.20; // speed 0.20
-                        this->isRun = true;
-                        this->stop = false;
-                    }
-                    if(Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                        this->state = right;
-                        if(this->particle_of_strength_speed)this->speed = 0.25;
-                        else this->speed = 0.20; // speed 0.20
-                        this->isRun = true;
-                        this->stop = false;
-                    }
-                    if((Keyboard::isKeyPressed(sf::Keyboard::Space) || Keyboard::isKeyPressed(sf::Keyboard::Up)) && this->onGround){
+                if((key.isKeyPressed(key.Space) || key.isKeyPressed(key.Up)) && this->onGround){
+                    if(this->name == "player") {
+                        this->onGround = false;
                         if(this->particle_of_strength_jump)this->dy -= 0.72;
                         else this->dy -= 0.66; // jump 0.65
-                        this->onGround = false;
-                        this->stop = false;
+                    }
+                    if(this->name == "god"){
+                        this->dy -= 0.02;
+                    }
+                    this->stop = false;
+                }
+                if(key.isKeyPressed(key.S)){
+                    if(this->name == "god"){
+                        this->dy += 0.02;
                     }
                 }
             }
@@ -159,6 +195,7 @@ void Player::move() {
             case right:
                 this->dx = this->speed;
                 break;
+            // /////////// sprint ////////////
             case SLeft:
                 if(this->particle_of_strength_sprint)
                     this->pos.x -= this->w_sprint;
@@ -167,6 +204,7 @@ void Player::move() {
                 if(particle_of_strength_sprint)
                     this->pos.x += this->w_sprint;
                 break;
+            // //////////////////////////////
         }
         this->speed = 0;
     }
@@ -177,66 +215,71 @@ void Player::setPosition(float x, float y) {
     this->pos.x = x;
     this->pos.y = y;
 }
-void Player::update(float time, GameLvL *gLvL){
+void Player::s_position() {
+    if(!this->isRun && this->state == right){
+        this->s->setPosition(this->pos.x, this->pos.y - 62);
+    }
+    else if(this->isAttack && this->state == left){
+            this->s->setPosition(this->pos.x - 30, this->pos.y - 62);
+    }
+    else{
+        this->s->setPosition(this->pos.x + 30, this->pos.y - 62);
+    }
+    // ///////////////////////// radius /////////////////////////
+    this->e_Radius->setPosition(this->pos.x - 95, this->pos.y - 50);
+    // ///////////////////////// Particle /////////////////////////
     this->particles->setEmitter(this->pos.x + 28, this->pos.y + 30);
-    this->gameLvL = gLvL;
-    // Move
-    this->move();
-    //Anim
-    this->animation(time);
-    // sprint
+}
+void Player::update(float time, GameLvL *gLvL){
+    this->gameLvL = gLvL; // Game LvL
+    this->move(); // Move
+    this->animation(time); // Anim
+    // ////////////// strength ///////////////
     this->attack_time += time;
     this->sprint_time += time;
     this->bullet_time += time;
-    //
+    // ////////////////// sprint & bullet ////////////////
     if(this->sprint_time > 3500)this->isSprint = true;
     else this->isSprint = false;
     if(this->bullet_time > 5000)this->isShoot = true;
     else this->isShoot = false;
-    //position
+    // //////////////// position ////////////////////
     this->pos.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);
     this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
-    this->dy = this->dy + 0.0015*time; // Притяжение к земле
-    this->s->setPosition(this->pos.x + 30, this->pos.y - 62);
-    this->e_Radius->setPosition(this->pos.x - 95, this->pos.y - 50);
-    // life
+    if(this->name == "player")this->dy = this->dy + 0.0015*time; // Притяжение к земле
+    this->s_position();
+    // //////////////////// life /////////////////////////
     if(this->is_health <= 0)this->life = false;
 }
-View Player::setPlayerCoordinateForView(sf::View &view) {
-    view.setCenter(this->pos.x, this->pos.y - 100);
-    return view;
-}
+
 void Player::draw(RenderWindow &window, View view){
     window.draw(*this->particles);
     //window.draw(*e_Radius);
     window.draw(*this->s);
 }
 void Player::checkCollisionMap(float dX, float dY) {
-    for(int i = this->pos.y / h_Block; i < (this->pos.y + h) / h_Block; i++)
-        for(int j = this->pos.x / w_Block; j < (this->pos.x + w) / w_Block; j++){
+    for(int i = this->pos.y / h_block; i < (this->pos.y + h) / h_block; i++)
+        for(int j = this->pos.x / w_block; j < (this->pos.x + w) / w_block; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->pos.y = i * h_Block - h;
+                    this->pos.y = i * h_block - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->pos.y = i * h_Block + h_Block;
+                    this->pos.y = i * h_block + h_block;
                     this->dy = 0;
                 }
-                if (dX>0) this->pos.x = j * w_Block - w;
-                if (dX<0) this->pos.x = j * w_Block + w_Block;
+                if (dX>0) this->pos.x = j * w_block - w;
+                if (dX<0) this->pos.x = j * w_block + w_block;
             }
             if(this->gameLvL->gameLvL == 1){
                 if(this->pos.x < 1){ this->pos.x = this->pos.x + 1; }
                 if(this->pos.y < 1){ this->pos.y = this->pos.y + 1; }
             }
-
-//            if(this->position.y > 900){ this->position.y = this->position.y - 0.5;}
-//            if(this->position.x > 10167){ this->position.x = this->position.x - 0.5;}
         }
 }

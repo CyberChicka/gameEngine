@@ -20,6 +20,8 @@ public:
     particle_of_strength_repulsion,
     particle_of_strength_speed,
     particle_of_strength_jump;
+    Keyboard key;
+    Mouse mouse;
     ParticleSystem *particles;
     enum class AnimationIndex{RunL, RunR,
             WalkingL, WalkingR,
@@ -32,9 +34,9 @@ public:
     ~Player();
     FloatRect getRect()override;
     void move();
+    void s_position(); // sprite position
     void ControlMove();
     void update(float time, GameLvL *gLvL);
-    View setPlayerCoordinateForView(View &view);
     void draw(RenderWindow &window, View view)override;
     void animation(float time)override;
     void initAnim()override;

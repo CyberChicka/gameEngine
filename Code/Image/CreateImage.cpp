@@ -18,7 +18,6 @@ void CreateImage::Load() {
     this->t = new Texture;
     this->s = new Sprite;
     if(this->t->loadFromFile("File/Image/"+ this->file)){
-        //this->t->setSmooth(true);
         this->s->setTexture(*this->t);
         cout << "Is Load Image :)" << endl;
     } else{

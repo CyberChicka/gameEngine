@@ -29,10 +29,10 @@ void Swordsman::Dialogue(sf::Event event, Player *player) {
     if(event.type == Event::KeyPressed){
         if(event.key.code == Keyboard::F){
             if(player->e_Radius->getGlobalBounds().intersects(this->getRect())){
-                switch (this->isNpsDialogue){
+                switch (this->is_nps_dialogue){
                     case true:
                         this->ClickNps++;
-                        this->isNpsDialogue = false;
+                        this->is_nps_dialogue = false;
                         d_Nps << getNpsMessage(this->ClickNps, this->gameLvL->gameLvL, this->name);
                         this->t_Nps->text->setString(d_Nps.str());
                         if(this->gameLvL->gameLvL == 1){
@@ -46,7 +46,7 @@ void Swordsman::Dialogue(sf::Event event, Player *player) {
                         break;
                     case false:
                         this->t_Nps->text->setString(" ");
-                        this->isNpsDialogue = true;
+                        this->is_nps_dialogue = true;
                         break;
                 }
 

@@ -48,8 +48,12 @@ void Inventory::update(Player *player){
     if(Mouse::isButtonPressed(sf::Mouse::Right)){
         for(int i = 0; i < size(s_sword); i++){
             if(player->sword[i] && player->shield[i]){
-                if(s_sword[i]->isToch(p_mouse)){
+                if(s_sword[i]->isToch(p_mouse) || s_shield[i]->isToch(p_mouse)){
                     player->equipment[i] = true;
+                    player->equipment[i + 1] = false;
+                    player->equipment[i + 2] = false;
+                    player->equipment[i + 3] = false;
+
                 }
             }
         }
@@ -59,8 +63,8 @@ void Inventory::update(Player *player){
     os_isHealth << player->is_health;
     os_fHealth << player->f_health;
     os_LvL << player->lvl_player;
-    os_gold_key << player->k_Gold;
-    os_silver_key << player->k_Silver;
+    os_gold_key << player->k_gold;
+    os_silver_key << player->k_silver;
     os_money << player->money;
 
     this->t_health->setString(os_isHealth.str() + " / " + os_fHealth.str());

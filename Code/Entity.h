@@ -14,10 +14,10 @@ public:
     Vector2f pos;
     float dx, dy, CurrentFrame, speed;
     char cell;
-    int w, h, is_health, f_health, isLvLMap, money, k_Silver, k_Gold, dist, randomNumber;
-    bool life, onGround, isMove, stop, isNpsDialogue, is_open;
-    static const int h_Block = 32;
-    static const int w_Block = 32;
+    int w, h, is_health, f_health, is_lvl_map, money, k_silver, k_gold, dist, randomNumber;
+    bool life, onGround, is_move, stop, is_nps_dialogue, is_open;
+    static const int h_block = 32;
+    static const int w_block = 32;
     string name;
     Sprite *s;
     enum {left, right, up, down, jump, stay, SLeft, SRight} state;

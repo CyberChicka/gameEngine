@@ -77,8 +77,8 @@ void Enemy_Bat::update(float time, GameLvL *gLvL, Player *p) {
 }
 
 void Enemy_Bat::checkCollisionMap(float dX, float dY) {
-    for(int i = this->pos.y / h_Block; i < (this->pos.y + h) / h_Block; i++)
-        for(int j = this->pos.x / w_Block; j < (this->pos.x + w) / w_Block; j++){
+    for(int i = this->pos.y / h_block; i < (this->pos.y + h) / h_block; i++)
+        for(int j = this->pos.x / w_block; j < (this->pos.x + w) / w_block; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {

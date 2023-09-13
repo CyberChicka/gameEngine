@@ -34,7 +34,7 @@ void Nps::draw(sf::RenderWindow &window, sf::View view) {
                       (this->s->getPosition().y - view.getCenter().y)*(this->s->getPosition().y - view.getCenter().y));
     if(this->dist < window.getSize().x){
         window.draw(*this->s);
-        if(!this->isNpsDialogue){
+        if(!this->is_nps_dialogue){
             window.draw(*this->t_Nps->text);
         }
     }

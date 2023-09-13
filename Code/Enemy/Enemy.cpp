@@ -35,26 +35,26 @@ float Enemy::GetX() { return this->pos.x; }
 float Enemy::GetY() { return this->pos.y; }
 
 void Enemy::checkCollisionMap(float dX, float dY){
-    for(int i = this->pos.y / h_Block; i < (this->pos.y + h) / h_Block; i++)
-        for(int j = this->pos.x / w_Block; j < (this->pos.x + w) / w_Block; j++){
+    for(int i = this->pos.y / h_block; i < (this->pos.y + h) / h_block; i++)
+        for(int j = this->pos.x / w_block; j < (this->pos.x + w) / w_block; j++){
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->pos.y = i * h_Block - h;
+                    this->pos.y = i * h_block - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->pos.y = i * h_Block + h_Block;
+                    this->pos.y = i * h_block + h_block;
                     this->dy = 0;
                 }
                 if (dX>0){
-                    this->pos.x = j * w_Block - w;
+                    this->pos.x = j * w_block - w;
                     this->dx = -0.1;
                 }
                 if (dX<0){
-                    this->pos.x = j * w_Block + w_Block;
+                    this->pos.x = j * w_block + w_block;
                     this->dx = 0.1;
                 }
             }
