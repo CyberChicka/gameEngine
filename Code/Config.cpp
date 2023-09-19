@@ -15,6 +15,7 @@ Config::~Config() {
     delete this->s_particle_of_strength_sprint;
     //delete bullet sprite
     delete this->s_bullet;
+    delete []*this->s_shuriken;
     //music & sound
     delete []*this->m_lvl;
     //
@@ -135,6 +136,10 @@ void Config::ImagePlayer() {
     this->s_player = new CreateImage("SpriteEntity/Player/Player-Blue.png");
     // class bullet
     this->s_bullet = new CreateImage("SpriteEntity/Player/AttacPlaz1.png");
+    this->s_shuriken[1] = new CreateImage("SpriteEntity/Player/shuriken-Blue.png");
+    this->s_shuriken[2] = new CreateImage("SpriteEntity/Player/shuriken-Red.png");
+    this->s_shuriken[3] = new CreateImage("SpriteEntity/Player/shuriken-Green.png");
+    this->s_shuriken[4] = new CreateImage("SpriteEntity/Player/shuriken-Brow.png");
     //particle of strength
     this->s_particle_of_strength_shoot = new CreateImage("SpriteItems/Item_LvL.png");
     this->s_particle_of_strength_sprint = new CreateImage("SpriteItems/Item_LvL.png");

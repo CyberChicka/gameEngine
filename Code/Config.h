@@ -59,6 +59,7 @@ public:
     CreateImage *s_chest_small, *s_chest_middle, *s_chest_big;
     // /////////////////////// Bullet ///////////////////////
     CreateImage *s_bullet;
+    CreateImage *s_shuriken[5];
     // /////////////////////// Text ///////////////////////
     CreateText *text_nps_blacksmith;
     CreateText *text_nps_historian;

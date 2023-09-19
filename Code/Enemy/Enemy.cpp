@@ -15,25 +15,15 @@ Enemy::~Enemy() {
     delete this->gameLvL;
     delete this->s;
 }
-
 FloatRect Enemy::getRect() { return FloatRect(this->pos.x, this->pos.y, this->w, this->h); }
-
 void Enemy::ControlMove() { }
-
-void Enemy::ControlEnemy(float pX, float pY, float time) {
-
-}
+void Enemy::ControlEnemy(float pX, float pY, float time) { }
 void Enemy::move() { }
-
 void Enemy::update(float time, GameLvL *gLvL, Player *p) {}
-
 void Enemy::animation(float time) { }
-
 void Enemy::initAnim() { }
-
 float Enemy::GetX() { return this->pos.x; }
 float Enemy::GetY() { return this->pos.y; }
-
 void Enemy::checkCollisionMap(float dX, float dY){
     for(int i = this->pos.y / h_block; i < (this->pos.y + h) / h_block; i++)
         for(int j = this->pos.x / w_block; j < (this->pos.x + w) / w_block; j++){
@@ -66,23 +56,31 @@ void Enemy::checkCollisionMap(float dX, float dY){
             if(this->pos.y < 1) this->pos.y = this->pos.y + 1;
         }
 }
-
 void Enemy::draw(RenderWindow &window, View view) {
     this->dist = sqrt((s->getPosition().x - view.getCenter().x)*(s->getPosition().x - view.getCenter().x) + (s->getPosition().y - view.getCenter().y)*(s->getPosition().y - view.getCenter().y));
     if(dist < window.getSize().x){
         window.draw(*this->s);
     }
 }
-
 void Enemy::Attack(Player &p) { }
-
 void Enemy::TakingDamage(Player &p, list<Bullet*> &bulletLvL, Event event) {
     if (event.type == Event::MouseButtonPressed){
         if (event.key.code == Mouse::Left){
             if(p.e_Radius->getGlobalBounds().intersects(this->getRect())){
                 if(p.attack_time > 1000){
                     for(int i = 0; i < p.lvl_player; i++){
-                        this->is_health -= (20 + (i*2));
+                        if(p.equipment[1])this->is_health -= (20 + (i*2)); // classic
+                        if(p.equipment[2]) this->is_health -= (22 + (i*2)); // up damage
+                        if(p.equipment[3]){
+                            this->is_health -= (18 + (i*2));
+                            if(p.f_health - p.is_health < i*2)p.is_health += i*2; // up health
+                        }
+                        if(p.equipment[4]){
+                            this->is_health -= (20 + (i*2));
+                            if(p.state == Player::left){ this->dx = -0.4; } // push
+                            else if(p.state == Player::right){ this->dx = 0.4; }
+                            else this->dx = -0.4;
+                        }
                     }
                     p.attack_time = 0;
                 }
@@ -96,7 +94,6 @@ void Enemy::TakingDamage(Player &p, list<Bullet*> &bulletLvL, Event event) {
         }
     }
 }
-
 void Enemy::State() {
     if(this->dx > 0){
         this->state = this->right;

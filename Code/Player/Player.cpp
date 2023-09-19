@@ -16,9 +16,9 @@ Player::Player(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     this->isInventory = true;
     if(this->name == "player"){
         this->is_health = 120; this->f_health = 120;
-        this->k_silver = 10;
-        this->k_gold = 10;
-        this->money = 10;
+        this->k_silver = 0;
+        this->k_gold = 0;
+        this->money = 0;
         this->w_sprint = 210;
         this->lvl_player = 1;
         this->particle_of_strength_shoot = false;

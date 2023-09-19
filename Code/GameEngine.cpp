@@ -129,19 +129,19 @@ void GameEngine::initClass() {
     // gameLvL
     this->gameLvL = new GameLvL(config->s_LvL[1]->s, 1);
     //Player
-    this->player = new Player(config->s_player->s, gameLvL,8000, 1600, 56, 60, "god");
+    this->player = new Player(config->s_player->s, gameLvL,8000, 1500, 56, 60, "player");
     this->enemyMagDamage = new FonGame(config->s_enemy_MagDamage->s, gameLvL, 0, 0, 0, 0, "MagDamage");
     this->GUI = new GUI_player;
 //    //Enemy
 //    this->initClassEnemy();
 //    // Object
     this->initClassObject();
-//    //Chest
-//    this->initClassChest();
-//    //Nps
-//    this->initClassNps();
-//    // Item
-//    this->initClassItem();
+    //Chest
+    this->initClassChest();
+    //Nps
+    this->initClassNps();
+    // Item
+    this->initClassItem();
 //    //Fon
     this->initClassFon();
     // Cloud
@@ -229,7 +229,7 @@ void GameEngine::renderClear(){
     switch (gameLvL->gameLvL) {
         case 1:this->window->clear(Color(173, 208, 207));break;
         case 2:this->window->clear(Color(173, 208, 207)); break;
-        case 3:this->window->clear(Color(40, 40, 40)); break;
+        case 3:this->window->clear(Color(30, 30, 30)); break;
         case 4:this->window->clear(Color(173, 208, 207)); break;
         case 5:this->window->clear(Color(173, 208, 207)); break;
         case 6:this->window->clear(Color(173, 208, 207)); break;

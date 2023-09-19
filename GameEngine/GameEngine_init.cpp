@@ -76,8 +76,8 @@ void GameEngine::initClassNps() {
 void GameEngine::initClassChest() {
     this->chestLvL[1] = {
             new Chest(config->s_chest_small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
-            new Chest(config->s_chest_middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
-            new Chest(config->s_chest_big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
+//            new Chest(config->s_chest_middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
+//            new Chest(config->s_chest_big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
             //
             new Chest(config->s_chest_small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_chest_small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
@@ -154,15 +154,13 @@ void GameEngine::initClassObject() {
 }
 void GameEngine::initClassItem() {
     this->itemLvL[1] = {
-            new equipment_item(config->s_item_sword[1]->s, gameLvL, 1000, 1600, 30, 25, "SwordBlue"),
-            new equipment_item(config->s_item_sword[2]->s, gameLvL, 1050, 1600, 30, 25, "SwordRed"),
-            new equipment_item(config->s_item_sword[3]->s, gameLvL, 1100, 1600, 30, 25, "SwordGreen"),
-            new equipment_item(config->s_item_sword[4]->s, gameLvL, 6850, 244, 30, 25, "SwordBrow"),
+            new equipment_item(config->s_item_sword[2]->s, gameLvL, 6858, 1900, 30, 25, "SwordRed"),
+            new equipment_item(config->s_item_shield[2]->s, gameLvL, 11473, 1800, 30, 65, "ShieldRed"),
+//            new equipment_item(config->s_item_sword[3]->s, gameLvL, 1100, 1600, 30, 25, "SwordGreen"),
+//            new equipment_item(config->s_item_sword[4]->s, gameLvL, 6850, 244, 30, 25, "SwordBrow"),
 
-            new equipment_item(config->s_item_shield[1]->s, gameLvL, 1200, 1600, 30, 65, "ShieldBlue"),
-            new equipment_item(config->s_item_shield[2]->s, gameLvL, 1250, 1600, 30, 65, "ShieldRed"),
-            new equipment_item(config->s_item_shield[3]->s, gameLvL, 1300, 1600, 30, 65, "ShieldGreen"),
-            new equipment_item(config->s_item_shield[4]->s, gameLvL, 6820, 244, 30, 65, "ShieldBrow"),
+//            new equipment_item(config->s_item_shield[3]->s, gameLvL, 1300, 1600, 30, 65, "ShieldGreen"),
+//            new equipment_item(config->s_item_shield[4]->s, gameLvL, 6820, 244, 30, 65, "ShieldBrow"),
 
             new health_item(config->s_item_health->s, gameLvL, 4800, 1600, 40, 45, "Health"),
             new money_item(config->s_item_money->s, gameLvL, 300, 1600, 30, 40, "Money"),

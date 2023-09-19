@@ -58,11 +58,15 @@ void GameEngine::TakeEnemy() {
     }
 }
 void GameEngine::ShootBullet() {
-    if(game_event.type == Event::KeyPressed){
-        if(game_event.key.code == Keyboard::LControl){
-            if(player->life && player->isShoot && player->particle_of_strength_shoot){
-                this->bulletLvL.push_back(new Bullet(config->s_bullet->s, gameLvL, player->GetX(), player->GetY() - 40, 200, 50, "Bullet", player->state));
-                this->player->bullet_time = 0;
+    if(player->life){
+        if(game_event.type == Event::KeyPressed){
+            if(game_event.key.code == Keyboard::LControl){
+                if(player->isShoot && player->particle_of_strength_shoot){
+                    for(int i = 0; i < size(player->equipment); i++)
+                        if(player->equipment[i])
+                            this->bulletLvL.push_back(new Bullet(config->s_shuriken[i]->s, gameLvL, player->GetX(), player->GetY() - 40, 130, 90, "Shuriken", player->state));
+                    this->player->bullet_time = 0;
+                }
             }
         }
     }

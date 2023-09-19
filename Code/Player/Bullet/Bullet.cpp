@@ -6,7 +6,8 @@
 
 Bullet::Bullet(sf::Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, std::string Name, int Dir) :Entity(sprite, LvL, X, Y, W, H, Name) {
     this->direction = Dir; this->speed = 0.3;
-    this->s->setScale(0.3f, 0.3f);
+    if(this->name == "Bullet")this->s->setScale(0.3f, 0.3f);
+    if(this->name == "Shuriken")this->s->setScale(1.0f, 1.0f);
     initAnim();
 }
 Bullet::~Bullet() {
@@ -17,8 +18,14 @@ FloatRect Bullet::getRect() {
     return FloatRect(this->pos.x, this->pos.y, this->w, this->h);
 }
 void Bullet::initAnim() {
-    this->animations[int(AnimationIndex::ShootL)] = Animation(33, 0.009, 574, 0, 500, 370, 1);
-    this->animations[int(AnimationIndex::ShootR)] = Animation(33, 0.009, 574, 0, 500, 370, 0);
+    if(this->name == "Bullet"){
+        this->animations[int(AnimationIndex::ShootL)] = Animation(33, 0.009, 574, 0, 500, 370, 1);
+        this->animations[int(AnimationIndex::ShootR)] = Animation(33, 0.009, 574, 0, 500, 370, 0);
+    }
+    if(this->name == "Shuriken"){
+        this->animations[int(AnimationIndex::ShootR)] = Animation(6, 0.008, 134, 0, 130, 90, 1);
+        this->animations[int(AnimationIndex::ShootL)] = Animation(6, 0.008, 134, 0, 130, 90, 0);
+    }
 }
 void Bullet::animation(float time) {
     if(this->direction == 1 || this->direction == 3){
