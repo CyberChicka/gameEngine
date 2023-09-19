@@ -8,7 +8,7 @@ Object::Object(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, str
     if(this->name == "Home"){ this->s->setScale(1.2f, 1.2f); }
     if(this->name == "DarkTreeBig"){ this->s->setScale(2.0f, 2.0f); }
     if(this->name == "DarkTreeSmall"){ this->s->setScale(2.0f, 2.0f); }
-    if(this->name == "BonfireHouse"){ this->s->setScale(0.8f, 0.8f); }
+    if(this->name == "BonfireHouse"){ this->s->setScale(0.8f, 0.8f); this->s->setOrigin(w/2, h/2);}
     if(this->name == "Stove"){ this->s->setScale(1.0f, 1.0f); }
     this->initAnim();
 }
@@ -83,26 +83,26 @@ void Object::update(float time, GameLvL *gLvL){
 
 void Object::checkCollisionMap(float dX, float dY) // Работа с картой
 {
-    for(int i = this->pos.y / 32; i < (this->pos.y + h) / 32; i++) // Проходимся по высоте
-        for(int j = this->pos.x / 32; j < (this->pos.x + w) / 32; j++) // Проходимся по ширине
+    for(int i = this->pos.y / w_block; i < (this->pos.y + h) / h_block; i++) // Проходимся по высоте
+        for(int j = this->pos.x / h_block; j < (this->pos.x + w) / w_block; j++) // Проходимся по ширине
         {
             this->cell = this->gameLvL->MapLvL[i][j];
             if(cell == '=' || cell == '.' || cell == '-' || cell == '<' || cell == '>' || cell == '{' || cell == '}')
             {
                 if (dY>0){
-                    this->pos.y = i * 32 - h;
+                    this->pos.y = i * h_block - h;
                     this->dy = 0;
                     this->onGround = true;
                 }
                 if (dY<0){
-                    this->pos.y = i * 32 + 32;
+                    this->pos.y = i * h_block + h_block;
                     this->dy = 0;
                 }
                 if (dX>0){
-                    this->pos.x = j * 32 - w;
+                    this->pos.x = j * w_block - w;
                 }
                 if (dX<0){
-                    this->pos.x = j * 32 + 32;
+                    this->pos.x = j * w_block + w_block;
                 }
             }
             if(this->gameLvL->gameLvL == 1){

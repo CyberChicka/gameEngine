@@ -3,7 +3,6 @@
 //
 
 #include "FonGame.h"
-
 #include <utility>
 
 FonGame::FonGame(Sprite *sprite, GameLvL *LvL, float X, float Y, int W, int H, string Name): Object(sprite, LvL, X, Y, W, H, Name){

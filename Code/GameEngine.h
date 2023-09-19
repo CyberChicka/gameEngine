@@ -33,6 +33,7 @@
 #include "Player/GUI/GUI_player.h"
 #include "Items/Equipment/equipment_item.h"
 #include "Items/Particle_Strength/Particle_of_Strength_item.h"
+#include "Object/Cloud/Cloud.h"
 
 using namespace sf;
 using namespace std;
@@ -69,6 +70,9 @@ private:
     list<FonGame*>::iterator itFon;
     list<FonGame*>fonLvL[7];
     FonGame *enemyMagDamage;
+    // Class Cloud
+    list<Cloud*>::iterator itCloud;
+    list<Cloud*> cloudLvL[7];
     //Class Nps
     list<Nps*>::iterator itNps;
     list<Nps*> npsLvL[7];
@@ -103,6 +107,7 @@ private:
     void initClassNps();
     void initClassObject();
     void initClassFon();
+    void initClassCloud();
     void initClassChest();
     void initWindow();
     void renderClear();

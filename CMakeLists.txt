@@ -22,7 +22,7 @@ add_executable(GameEngine_Brought main.cpp Code/GameEngine.cpp Code/GameEngine.h
         "Code/Enemy/Enemy Bat/Enemy_Bat.h" "Code/Enemy/Enemy BigGhost/Enemy_BigGhost.cpp" "Code/Enemy/Enemy BigGhost/Enemy_BigGhost.h"
         "Code/Enemy/Enemy Boom/Enemy_Boom.cpp" "Code/Enemy/Enemy Boom/Enemy_Boom.h" "Code/Enemy/Enemy Mag/Enemy_Mag.cpp" "Code/Enemy/Enemy Mag/Enemy_Mag.h"
         Code/Shader/CreateShader.cpp Code/Shader/CreateShader.h Code/Player/GUI/GUI_player.cpp Code/Player/GUI/GUI_player.h Code/Player/Inventory/Inventory.cpp
-        Code/Player/Inventory/Inventory.h Code/Player/Features/Features.cpp Code/Player/Features/Features.h Code/Items/Particle_Strength/Particle_of_Strength_item.cpp Code/Items/Particle_Strength/Particle_of_Strength_item.h Code/Object/Door/Door.cpp Code/Object/Door/Door.h)
+        Code/Player/Inventory/Inventory.h Code/Player/Features/Features.cpp Code/Player/Features/Features.h Code/Items/Particle_Strength/Particle_of_Strength_item.cpp Code/Items/Particle_Strength/Particle_of_Strength_item.h Code/Object/Door/Door.cpp Code/Object/Door/Door.h Code/Object/Cloud/Cloud.cpp Code/Object/Cloud/Cloud.h GameEngine/GameEngineTake.cpp GameEngine/GameEngine_init.cpp)
 
 set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc ")
 

@@ -13,8 +13,6 @@ Config::~Config() {
     // particle of strength
     delete this->s_particle_of_strength_shoot;
     delete this->s_particle_of_strength_sprint;
-    // delete sprite lvl
-    delete []*this->s_LvL;
     //delete bullet sprite
     delete this->s_bullet;
     //music & sound
@@ -30,6 +28,8 @@ Config::~Config() {
     this->DeleteLvL();
     this->DeleteItem();
     this->DeleteEnemy();
+    // delete sprite lvl
+    delete []*this->s_LvL;
     cout << "============== removed from config ============"<< endl;
 }
 
@@ -60,6 +60,11 @@ void Config::DeleteLvL()const{
     // delete fon lvl
     delete []*this->s_LvL_Fon;
     delete []*this->s_LvL_FonBack;
+    // delete fon cloud lvl
+    delete this->s_Cloud_ainm;
+    delete this->s_Cloud_big;
+    delete this->s_Cloud_middle;
+    delete this->s_Cloud_small;
 }
 void Config::DeleteNps()const{
     // delete Nps sprite
@@ -74,18 +79,18 @@ void Config::DeleteNps()const{
 }
 void Config::DeleteObject()const{
     // delete object
-    delete this->s_object_stove;
-    delete this->s_object_HomeDrov;
-    delete this->s_object_FlyingObelisk;
-    delete this->s_object_DarkBush;
-    delete this->s_object_DarkBush2;
-    delete this->s_object_DarkStone;
-    delete this->s_object_DarkTreeBig;
-    delete this->s_object_DarkTreeSmall;
-    delete this->s_object_BushHouse;
-    delete this->s_object_RemainsSkeleton;
-    delete this->s_object_BonfireHouse;
-    delete this->s_object_TableHouse;
+    delete this->s_obj_stove;
+    delete this->s_obj_HomeDrov;
+    delete this->s_obj_FlyingObelisk;
+    delete this->s_obj_DarkBush;
+    delete this->s_obj_DarkBush2;
+    delete this->s_obj_DarkStone;
+    delete this->s_obj_DarkTreeBig;
+    delete this->s_obj_DarkTreeSmall;
+    delete this->s_obj_BushHouse;
+    delete this->s_obj_RemainsSkeleton;
+    delete this->s_obj_BonfireHouse;
+    delete this->s_obj_TableHouse;
 }
 void Config::DeleteText()const{
     // Text
@@ -190,6 +195,11 @@ void Config::ImageLvL(){
     this->s_LvL_FonBack[4] = new CreateImage("SpriteMapObject/FonLvL4_Back.png");
     this->s_LvL_FonBack[5] = new CreateImage("SpriteMapObject/FonLvL5_Back.png");
     this->s_LvL_FonBack[6] = new CreateImage("SpriteMapObject/FonLvL6_Back.png");
+    // sprite cloud
+    this->s_Cloud_ainm = new CreateImage("SpriteMapObject/FonGame/Cloud_anim.png");
+    this->s_Cloud_big = new CreateImage("SpriteMapObject/FonGame/Cloud-Big.png");
+    this->s_Cloud_middle = new CreateImage("SpriteMapObject/FonGame/Cloud-Middle.png");
+    this->s_Cloud_small = new CreateImage("SpriteMapObject/FonGame/Cloud-Small.png");
 }
 void Config::ImageNps(){
     // Sprite Nps
@@ -204,18 +214,18 @@ void Config::ImageNps(){
 }
 void Config::ImageObject(){
     // Sprite Object
-    this->s_object_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
-    this->s_object_BushHouse = new CreateImage("SpriteMapObject/House/Bush_House.png");
-    this->s_object_BonfireHouse = new CreateImage("SpriteMapObject/House/Bonfire_House.png");
-    this->s_object_FlyingObelisk = new CreateImage("SpriteMapObject/Object/FlyingObelisk.png");
-    this->s_object_DarkBush = new CreateImage("SpriteMapObject/Object/Dark-bush.png");
-    this->s_object_DarkBush2 = new CreateImage("SpriteMapObject/Object/Dark-bush-2.png");
-    this->s_object_DarkStone = new CreateImage("SpriteMapObject/Object/Dark-stone.png");
-    this->s_object_DarkTreeBig = new CreateImage("SpriteMapObject/Object/Dark-tree-Big.png");
-    this->s_object_DarkTreeSmall = new CreateImage("SpriteMapObject/Object/Dark-tree-Small.png");
-    this->s_object_RemainsSkeleton = new CreateImage("SpriteMapObject/miniObject/RemainsSkeleton.png");
-    this->s_object_TableHouse = new CreateImage("SpriteMapObject/House/Table_House.png");
-    this->s_object_stove = new CreateImage("SpriteObject/Stove.png");
+    this->s_obj_HomeDrov = new CreateImage("SpriteMapObject/House/HouseDrov.png");
+    this->s_obj_BushHouse = new CreateImage("SpriteMapObject/House/Bush_House.png");
+    this->s_obj_BonfireHouse = new CreateImage("SpriteMapObject/House/Bonfire_House.png");
+    this->s_obj_FlyingObelisk = new CreateImage("SpriteMapObject/Object/FlyingObelisk.png");
+    this->s_obj_DarkBush = new CreateImage("SpriteMapObject/Object/Dark-bush.png");
+    this->s_obj_DarkBush2 = new CreateImage("SpriteMapObject/Object/Dark-bush-2.png");
+    this->s_obj_DarkStone = new CreateImage("SpriteMapObject/Object/Dark-stone.png");
+    this->s_obj_DarkTreeBig = new CreateImage("SpriteMapObject/Object/Dark-tree-Big.png");
+    this->s_obj_DarkTreeSmall = new CreateImage("SpriteMapObject/Object/Dark-tree-Small.png");
+    this->s_obj_RemainsSkeleton = new CreateImage("SpriteMapObject/miniObject/RemainsSkeleton.png");
+    this->s_obj_TableHouse = new CreateImage("SpriteMapObject/House/Table_House.png");
+    this->s_obj_stove = new CreateImage("SpriteObject/Stove.png");
 }
 void Config::LoadShader() {
     //this->shader = new CreateShader("Shader.glsl");

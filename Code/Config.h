@@ -29,36 +29,37 @@ public:
     Vector2i view_size = { 0, 0};
     const int window_frame = 120; // Кадров в секунду
     const string window_title = "GameEngine";
-    // Камера
+    // /////////////////////// Камера ///////////////////////
     View view;
     View getPlayerCoordinateForView(float x, float y);
-    // Sprite
+    // /////////////////////// Sprite ///////////////////////
     //SmartPointer<CreateImage>*s_player;
     CreateImage *s_player;
-    // Particle_of_Strength
+    // /////////////////////// Particle_of_Strength ///////////////////////
     CreateImage *s_particle_of_strength_shoot, *s_particle_of_strength_sprint;
-    // Enemy
+    // /////////////////////// Enemy ///////////////////////
     CreateImage *s_enemy_ghost, *s_enemy_ghost_heavenly, *s_enemy_skeleton, *s_enemy_bat, *s_enemy_bat_heavenly,
     *s_enemy_BigGhost, *s_enemy_BigGhost_heavenly, *s_enemy_boom, *s_enemy_mag, *s_enemy_MagDamage;
-    // Nps
+    // /////////////////////// Nps ///////////////////////
     CreateImage *s_nps_aiden, *s_nps_blacksmith, *s_nps_historian, *s_nps_knight,
     *s_nps_soothsayer, *s_nps_SupremeWizard, *s_nps_swordsman, *s_nps_witcher;
-    // Item
+    // /////////////////////// Item ///////////////////////
     CreateImage *s_item_health, *s_item_KeySilver, *s_item_KeyGold, *s_item_money, *s_item_diamond;
     CreateImage *s_item_sword[5], *s_item_shield[5];
-    // LvL
+    // /////////////////////// LvL ///////////////////////
     CreateImage *s_LvL[7];
-    // LvL Fon
+    // /////////////////////// LvL Fon ///////////////////////
     CreateImage *s_LvL_Fon[7], *s_LvL_FonBack[7];
-    // Object
-    CreateImage *s_object_HomeDrov, *s_object_BushHouse, *s_object_BonfireHouse, *s_object_TableHouse, *s_object_FlyingObelisk,
-    *s_object_DarkBush, *s_object_DarkBush2, *s_object_DarkStone, *s_object_DarkTreeBig, *s_object_DarkTreeSmall,
-    *s_object_RemainsSkeleton, *s_object_stove;
-    // Chest
+    CreateImage *s_Cloud_ainm, *s_Cloud_big, *s_Cloud_middle, *s_Cloud_small;
+    // /////////////////////// Object ///////////////////////
+    CreateImage *s_obj_HomeDrov, *s_obj_BushHouse, *s_obj_BonfireHouse, *s_obj_TableHouse, *s_obj_FlyingObelisk,
+    *s_obj_DarkBush, *s_obj_DarkBush2, *s_obj_DarkStone, *s_obj_DarkTreeBig, *s_obj_DarkTreeSmall,
+    *s_obj_RemainsSkeleton, *s_obj_stove;
+    // /////////////////////// Chest ///////////////////////
     CreateImage *s_chest_small, *s_chest_middle, *s_chest_big;
-    // Bullet
+    // /////////////////////// Bullet ///////////////////////
     CreateImage *s_bullet;
-    // Text
+    // /////////////////////// Text ///////////////////////
     CreateText *text_nps_blacksmith;
     CreateText *text_nps_historian;
     CreateText *text_nps_knight;
@@ -67,11 +68,11 @@ public:
     CreateText *text_nps_supreme_wizard;
     CreateText *text_nps_soothsayer;
     CreateText *text_nps_swordsman;
-    // Music & sound
+    // /////////////////////// Music & sound ///////////////////////
     m_Music *m_lvl[7];
-    //player
+    // /////////////////////// player ///////////////////////
     s_Sound *so_player_attack;
-    //enemy
+    // /////////////////////// enemy ///////////////////////
     s_Sound *so_enemy_Ghost_attack;
     s_Sound *so_enemy_Scelet_attack;
     // Shader
@@ -79,7 +80,7 @@ public:
     Config();
     static Config *instance;
 private:
-    // Delete
+    // /////////////////////// Delete ///////////////////////
     void DeleteEnemy()const;
     void DeleteNps()const;
     void DeleteItem()const;
@@ -87,7 +88,7 @@ private:
     void DeleteText()const;
     void DeleteLvL()const;
     void DeleteChest()const;
-    // LoadImage
+    // /////////////////////// LoadImage ///////////////////////
     void ImagePlayer();
     void ImageEnemy();
     void ImageNps();
@@ -95,7 +96,7 @@ private:
     void ImageObject();
     void ImageLvL();
     void ImageChest();
-    // Load
+    // /////////////////////// Load ///////////////////////
     void LoadShader();
     void LoadImage();
     void LoadText();
