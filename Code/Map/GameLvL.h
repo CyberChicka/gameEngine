@@ -17,7 +17,7 @@ public:
     void initMap();
     static const int h_Block = 32;
     static const int w_Block = 32;
-    constexpr static const int WitchMap[] = {0, 476, 320, 500, 320, 320, 320};
+    constexpr static const int WitchMap[] = {0, 476, 450, 500, 320, 320, 320};
     constexpr static const int HeightMap[] = {0, 80, 80, 100, 200, 80, 80};
     String *MapLvL;
 };

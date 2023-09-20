@@ -153,15 +153,25 @@ void Player::ControlMove() {
             else{
                 if(key.isKeyPressed(key.A) || key.isKeyPressed(key.Left)){
                     this->state = left;
-                    if(this->particle_of_strength_speed)this->speed = 0.25;
-                    else this->speed = 0.20; // speed 0.20
+                    if(this->name == "player"){
+                        if(this->particle_of_strength_speed)this->speed = 0.25;
+                        else this->speed = 0.20; // speed 0.20
+                    }
+                    if(this->name == "god"){
+                        this->speed = 0.50;
+                    }
                     this->isRun = true;
                     this->stop = false;
                 }
                 if(key.isKeyPressed(key.D) || key.isKeyPressed(key.Right)){
                     this->state = right;
-                    if(this->particle_of_strength_speed)this->speed = 0.25;
-                    else this->speed = 0.20; // speed 0.20
+                    if(this->name == "player"){
+                        if(this->particle_of_strength_speed)this->speed = 0.25;
+                        else this->speed = 0.20; // speed 0.20
+                    }
+                    if(this->name == "god"){
+                        this->speed = 0.50;
+                    }
                     this->isRun = true;
                     this->stop = false;
                 }
@@ -239,10 +249,16 @@ void Player::update(float time, GameLvL *gLvL){
     this->sprint_time += time;
     this->bullet_time += time;
     // ////////////////// sprint & bullet ////////////////
-    if(this->sprint_time > 3500)this->isSprint = true;
-    else this->isSprint = false;
-    if(this->bullet_time > 5000)this->isShoot = true;
-    else this->isShoot = false;
+    if(this->name == "player"){
+        if(this->sprint_time > 3500)this->isSprint = true;
+        else this->isSprint = false;
+        if(this->bullet_time > 5000)this->isShoot = true;
+        else this->isShoot = false;
+    }
+    if(this->name == "god"){
+        this->isSprint = true;
+        this->isShoot = true;
+    }
     // //////////////// position ////////////////////
     this->pos.x += this->dx * time;
     this->checkCollisionMap(this->dx, 0.f);

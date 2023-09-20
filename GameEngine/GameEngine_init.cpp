@@ -16,6 +16,10 @@ void GameEngine::initClassEnemy() {
             new Enemy_Ghost(config->s_enemy_ghost->s, gameLvL, 7800, 1236, 40, 88, "Ghost"),
             new Enemy_Mag(config->s_enemy_mag->s, enemyMagDamage, gameLvL, 8000, 1236, 40, 110, "Mag"),
             new Enemy_Boom(config->s_enemy_boom->s, gameLvL, 7800, 1236, 50, 50, "Boom"),
+
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 7920, 322, 65, 55, "Bat"),
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 7900, 320, 65, 55, "Bat"),
+            new Enemy_Bat(config->s_enemy_bat->s, gameLvL, 7950, 325, 65, 55, "Bat"),
     };
     // enemy lvl 3
     this->enemyLvL[3] = {
@@ -76,8 +80,6 @@ void GameEngine::initClassNps() {
 void GameEngine::initClassChest() {
     this->chestLvL[1] = {
             new Chest(config->s_chest_small->s, gameLvL, 1000, 1600, 65, 70, "SmallChest"),
-//            new Chest(config->s_chest_middle->s, gameLvL, 1200, 1600, 65, 82, "MiddleChest"),
-//            new Chest(config->s_chest_big->s, gameLvL, 1400, 1600, 65, 90, "BigChest"),
             //
             new Chest(config->s_chest_small->s, gameLvL, 9790, 1600, 65, 70, "SmallChest"),
             new Chest(config->s_chest_small->s, gameLvL, 5903, 1600, 65, 70, "SmallChest"),
@@ -108,17 +110,21 @@ void GameEngine::initClassChest() {
 }
 void GameEngine::initClassObject() {
     this->objLvL[1] = {
+            new Object(config->s_Fire_LvL[1]->s, gameLvL, 4850, 1600, 48, 94, "Fire-Green"),
             new Object(config->s_obj_stove->s, gameLvL, 5650, 1600, 92, 108, "Stove"),
             new Object(config->s_obj_HomeDrov->s, gameLvL, 1200, 1600, 100, 298, "Home"),
             new Object(config->s_obj_TableHouse->s, gameLvL, 9520, 1600, 400, 296, "TableHouse"),
     };
     // Object LvL 2
     this->objLvL[2] = {
+            new Object(config->s_Fire_LvL[2]->s, gameLvL, 3795, 1680, 48, 94, "Fire-Red"),
             new Object(config->s_obj_BushHouse->s, gameLvL, 4500, 1600, 500, 300, "BushHouse"),
             new Object(config->s_obj_BonfireHouse->s, gameLvL, 2800, 1600, 1250, 410, "BonfireHouse"),
     };
     // Object LvL 3
     this->objLvL[3] = {
+            new Object(config->s_Fire_LvL[3]->s, gameLvL, 2588, 1300, 48, 94, "Fire-Purple"),
+
             new Object(config->s_obj_FlyingObelisk->s, gameLvL, 1400, 1600, 145, 390, "FlyingObelisk"),
             new Object(config->s_obj_DarkTreeBig->s, gameLvL, 1450, 1600, 125, 265, "DarkTreeBig"),
             new Object(config->s_obj_DarkTreeSmall->s, gameLvL, 1450, 1600, 125, 265, "DarkTreeSmall"),
@@ -141,7 +147,7 @@ void GameEngine::initClassObject() {
     };
     // Object LvL 4
     this->objLvL[4] = {
-
+            new Object(config->s_Fire_LvL[4]->s, gameLvL, 7000, 1590, 48, 94, "Fire-White"),
     };
     // Object LvL 5
     this->objLvL[5] = {

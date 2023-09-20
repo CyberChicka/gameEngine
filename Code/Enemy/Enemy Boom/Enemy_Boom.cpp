@@ -59,7 +59,7 @@ void Enemy_Boom::update(float time, GameLvL *gLvL, Player *p) {
     this->checkCollisionMap(this->dx, 0.f);
     this->pos.y += this->dy * time;
     this->checkCollisionMap(0.f, this->dy);
-    if(!this->onGround)this->dy+=0.0015*time;
+    this->dy+=0.0015*time;
    // this->dy+=0.0015*time;
     this->s->setPosition(this->pos);
     if(this->isAttack)this->s->setPosition(this->pos.x, this->pos.y - 92);

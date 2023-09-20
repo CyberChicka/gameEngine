@@ -31,6 +31,7 @@ Config::~Config() {
     this->DeleteEnemy();
     // delete sprite lvl
     delete []*this->s_LvL;
+    delete []*this->s_Fire_LvL;
     cout << "============== removed from config ============"<< endl;
 }
 
@@ -205,6 +206,12 @@ void Config::ImageLvL(){
     this->s_Cloud_big = new CreateImage("SpriteMapObject/FonGame/Cloud-Big.png");
     this->s_Cloud_middle = new CreateImage("SpriteMapObject/FonGame/Cloud-Middle.png");
     this->s_Cloud_small = new CreateImage("SpriteMapObject/FonGame/Cloud-Small.png");
+    // sprite fire lvl
+    this->s_Fire_LvL[1] = new CreateImage("SpriteObject/Fire/Fire_3.png");
+    this->s_Fire_LvL[2] = new CreateImage("SpriteObject/Fire/Fire_1.png");
+    this->s_Fire_LvL[3] = new CreateImage("SpriteObject/Fire/Fire_4.png");
+    this->s_Fire_LvL[4] = new CreateImage("SpriteObject/Fire/Fire_5.png");
+
 }
 void Config::ImageNps(){
     // Sprite Nps

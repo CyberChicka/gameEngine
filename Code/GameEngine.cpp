@@ -129,11 +129,11 @@ void GameEngine::initClass() {
     // gameLvL
     this->gameLvL = new GameLvL(config->s_LvL[1]->s, 1);
     //Player
-    this->player = new Player(config->s_player->s, gameLvL,8000, 1500, 56, 60, "player");
+    this->player = new Player(config->s_player->s, gameLvL,8000, 1500, 56, 60, "god");
     this->enemyMagDamage = new FonGame(config->s_enemy_MagDamage->s, gameLvL, 0, 0, 0, 0, "MagDamage");
     this->GUI = new GUI_player;
-//    //Enemy
-//    this->initClassEnemy();
+    //Enemy
+    this->initClassEnemy();
 //    // Object
     this->initClassObject();
     //Chest

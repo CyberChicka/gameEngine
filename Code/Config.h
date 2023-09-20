@@ -48,6 +48,7 @@ public:
     CreateImage *s_item_sword[5], *s_item_shield[5];
     // /////////////////////// LvL ///////////////////////
     CreateImage *s_LvL[7];
+    CreateImage *s_Fire_LvL[5];
     // /////////////////////// LvL Fon ///////////////////////
     CreateImage *s_LvL_Fon[7], *s_LvL_FonBack[7];
     CreateImage *s_Cloud_ainm, *s_Cloud_big, *s_Cloud_middle, *s_Cloud_small;

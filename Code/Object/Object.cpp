@@ -26,6 +26,9 @@ void Object::animation(float time) {
     this->animations[int(this->curAnimation)].Update(*this->s, time);
 }
 void Object::initAnim() {
+    if(this->name == "Fire-Green" || "Fire-Red" || "Fire-Purple" || "Fire-White"){
+        this->animations[int(AnimationIndex::Walking)] = Animation(8, 0.008, 56, 0, 48, 96, 0);
+    }
     if(this->name == "Stove"){
         this->animations[int(AnimationIndex::Walking)] = Animation(7, 0.008, 101, 0, 92, 110, 0);
     }

@@ -64,7 +64,9 @@ void GameEngine::ShootBullet() {
                 if(player->isShoot && player->particle_of_strength_shoot){
                     for(int i = 0; i < size(player->equipment); i++)
                         if(player->equipment[i])
-                            this->bulletLvL.push_back(new Bullet(config->s_shuriken[i]->s, gameLvL, player->GetX(), player->GetY() - 40, 130, 90, "Shuriken", player->state));
+                            this->bulletLvL.push_back(new Bullet(config->s_shuriken[i]->s, gameLvL,
+                                                                 player->GetX(), player->GetY() - 40, 130, 90,
+                                                                 "Shuriken", player->state));
                     this->player->bullet_time = 0;
                 }
             }
