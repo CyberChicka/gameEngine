@@ -83,3 +83,13 @@ void GameEngine::TakeInventory() {
         }
     }
 }
+
+void GameEngine::TakeObject() {
+    if (game_event.type == Event::KeyPressed){
+        if (game_event.key.code == Keyboard::F){
+            for(itObject = objLvL[gameLvL->gameLvL].begin(); itObject != objLvL[gameLvL->gameLvL].end(); itObject++){
+                (*itObject)->isTouch(*this->player);
+            }
+        }
+    }
+}

@@ -208,10 +208,14 @@ void GameEngine::initClassItem() {
 }
 void GameEngine::initClassFon() {
     this->fonLvL[1] = {
-            new FonGame(config->s_LvL_Fon[1]->s, gameLvL, 0, 1360, 10, 10,"Fon"),
-            new FonGame(config->s_LvL_Fon[1]->s, gameLvL, 4900, 1360, 10, 10,"Fon"),
             new FonGame(config->s_LvL_FonBack[1]->s, gameLvL, 0, 1860, 0, 0, "Back"),
-            new FonGame(config->s_LvL_FonBack[1]->s, gameLvL, 4900, 1860, 0, 0, "Back")
+            new FonGame(config->s_LvL_FonBack[1]->s, gameLvL, 4900, 1860, 0, 0, "Back"),
+
+            new FonGame(config->s_LvL_Fon_2[1]->s, gameLvL, -20, 1280, 6500, 600,"Fon_2"),
+            new FonGame(config->s_LvL_Fon_2[1]->s, gameLvL, 4900, 1280, 6500, 600,"Fon_2"),
+
+            new FonGame(config->s_LvL_Fon[1]->s, gameLvL, 0, 1360, 5000, 500,"Fon"),
+            new FonGame(config->s_LvL_Fon[1]->s, gameLvL, 4900, 1360, 5000, 500,"Fon"),
     };
     // Fon lvl 2
     this->fonLvL[2] = {
